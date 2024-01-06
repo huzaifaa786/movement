@@ -1,4 +1,4 @@
-// ignore_for_file: use_full_hex_values_for_flutter_colors
+// ignore_for_file: use_full_hex_values_for_flutter_colors, unused_import
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
@@ -74,11 +74,15 @@ class _LanguageViewState extends State<LanguageView> {
                         ),
                         Gap(20),
                         MainInput(
-                          hintText: "Email",prefixIcon: Icon(Icons.email_outlined),type: TextInputType.emailAddress,
+                          hintText: "Email",
+                          prefixIcon: Icon(Icons.email_outlined),
+                          type: TextInputType.emailAddress,
                         ),
                         Gap(20),
                         MainInput(
-                          hintText: "User name",prefixIcon: Icon(Icons.person_outline),type: TextInputType.text,
+                          hintText: "User name",
+                          prefixIcon: Icon(Icons.person_outline),
+                          type: TextInputType.text,
                         ),
                       ],
                     ),

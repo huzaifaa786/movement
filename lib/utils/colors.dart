@@ -2,8 +2,6 @@
 
 import 'package:flutter/material.dart';
 
-
-
 // Noobz Colors
 
 const mainColor = Color(4281352142);
