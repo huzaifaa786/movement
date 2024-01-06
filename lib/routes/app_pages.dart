@@ -4,6 +4,8 @@ import 'package:noobz/views/individual/individual_profile.dart/individual_profil
 import 'package:noobz/views/individual/individual_profile.dart/individual_profile_view.dart';
 import 'package:noobz/views/language/language_binding.dart';
 import 'package:noobz/views/language/language_view.dart';
+import 'package:noobz/views/membership/membership_binding.dart';
+import 'package:noobz/views/membership/membership_view.dart';
 import 'package:noobz/views/splash/splash_binding.dart';
 import 'package:noobz/views/splash/splash_view.dart';
 
@@ -23,6 +25,11 @@ class AppPages {
       name: AppRoutes.profile,
       page: () => const IndividualProfileView(),
       binding: IndividualProfileBinding(),
+ 
     ),
+
+    GetPage(     name: AppRoutes.membershipType,
+      page: () => const MembershipView(),
+      binding: MemberShipBinding(),)
   ];
 }
