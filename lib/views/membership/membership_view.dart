@@ -5,35 +5,26 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:noobz/components/language_card.dart';
 import 'package:noobz/components/main_button.dart';
-import 'package:noobz/components/main_input.dart';
-import 'package:noobz/routes/app_routes.dart';
+import 'package:noobz/components/membership_card.dart';
+import 'package:noobz/utils/colors.dart';
 import 'package:noobz/utils/controller_initlization.dart';
-import 'package:noobz/views/language/language_controller.dart';
+import 'package:noobz/views/membership/membership_controller.dart';
 
-class LanguageView extends StatefulWidget {
-  const LanguageView({super.key});
+class MembershipView extends StatefulWidget {
+  const MembershipView({super.key});
 
   @override
-  State<LanguageView> createState() => _LanguageViewState();
+  State<MembershipView> createState() => _MembershipViewState();
 }
 
-class _LanguageViewState extends State<LanguageView> {
-  @override
-  void initState() {
-    splashController.initscreen();
-    super.initState();
-  }
-
+class _MembershipViewState extends State<MembershipView> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LanguageController>(
+    return GetBuilder<MembershipController>(
         builder: (controller) => Scaffold(
               bottomNavigationBar: Padding(
                 padding: EdgeInsets.only(bottom: 40, right: 18, left: 18),
                 child: MainButton(
-                  onTap: () {
-                    Get.toNamed(AppRoutes.membershipType);
-                  },
                   title: "Next",
                   isSelected: true,
                 ),
@@ -51,29 +42,33 @@ class _LanguageViewState extends State<LanguageView> {
                         SvgPicture.asset('assets/images/appLogo.svg'),
                         Gap(40),
                         Text(
-                          'Choose language',
+                          'Choose membership type',
                           style: TextStyle(
                               color: Colors.grey.shade700, fontSize: 16),
                         ),
                         Gap(40),
-                        LanguageCard(
+                        MembershipCard(
+                          iconAsset:  'assets/images/building.svg',
                           onTap: () {
-                            controller.language = 'english';
+                            controller.membership_type = 'company';
                             controller.update();
                           },
-                          title: "English",
-                          isSelected:
-                              controller.language == 'english' ? true : false,
+                          title: "Company",
+                          isSelected: controller.membership_type == 'company'
+                              ? true
+                              : false,
                         ),
                         Gap(40),
-                        LanguageCard(
+                        MembershipCard(
+                          iconAsset: 'assets/images/user.svg',
                           onTap: () {
-                            controller.language = 'Arabic';
+                            controller.membership_type = 'individual';
                             controller.update();
                           },
-                          title: "عربي",
-                          isSelected:
-                              controller.language == 'Arabic' ? true : false,
+                          title: "Individual",
+                          isSelected: controller.membership_type == 'individual'
+                              ? true
+                              : false,
                         ),
                         Gap(20),
                       ],

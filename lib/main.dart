@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noobz/routes/app_pages.dart';
-import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/splash/splash_binding.dart';
 import 'package:noobz/views/splash/splash_view.dart';
 
@@ -14,7 +13,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
