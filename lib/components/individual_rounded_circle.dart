@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:noobz/utils/colors.dart';
 
 class IndividualRoundedCircle extends StatelessWidget {
-  const IndividualRoundedCircle({super.key});
+  const IndividualRoundedCircle(
+      {super.key, this.colorinside, this.coloroutside});
+
+  final colorinside;
+  final coloroutside;
 
   @override
   Widget build(BuildContext context) {
@@ -10,8 +14,14 @@ class IndividualRoundedCircle extends StatelessWidget {
       width: 30,
       height: 30,
       decoration: BoxDecoration(
-          color: white,
-          border: Border.all(width: 2, color: mainColor),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 5,
+              offset: Offset(0, 2),
+            )
+          ],
+          color: colorinside,
+          border: Border.all(width: 2, color: coloroutside),
           borderRadius: BorderRadius.all(
             Radius.circular(20),
           )),

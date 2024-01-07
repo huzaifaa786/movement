@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 
 class ChangePasswordCard extends StatelessWidget {
@@ -23,13 +26,18 @@ class ChangePasswordCard extends StatelessWidget {
               SvgPicture.asset('assets/images/lock.svg'),
               Padding(
                 padding: const EdgeInsets.only(right: 70),
-                child: Text(
-                  'Change password',
-                  style: TextStyle(
-                    color: mainColor,
-                    fontSize: 14,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
+                child: InkWell(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.profile);
+                  },
+                  child: Text(
+                    'Change password',
+                    style: TextStyle(
+                      color: mainColor,
+                      fontSize: 14,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),

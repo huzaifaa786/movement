@@ -6,6 +6,8 @@ import 'package:gap/gap.dart';
 import 'package:noobz/components/change_password_card.dart';
 import 'package:noobz/components/individual_profile_appbar.dart';
 import 'package:noobz/components/individual_profile_card.dart';
+import 'package:noobz/components/individual_rounded_circle.dart';
+import 'package:noobz/components/whites_blacks_card.dart';
 import 'package:noobz/utils/colors.dart';
 
 class IndividualProfileView extends StatefulWidget {
@@ -43,32 +45,7 @@ class _IndividualProfileViewState extends State<IndividualProfileView> {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-              child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.13,
-                  decoration: BoxDecoration(
-                      color: lightGrey,
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: Column(children: [
-                    Row(children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15, top: 10),
-                        child: Text(
-                          'Whites',
-                          style: TextStyle(
-                            color: darkGrey,
-                            fontSize: 16,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ]),
-                  
-                  ])),
-            )
+            WhiteBlackCard(),
           ],
         ),
       ),
