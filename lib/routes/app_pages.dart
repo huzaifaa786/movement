@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:noobz/routes/app_routes.dart';
+import 'package:noobz/views/individual/change_password/change_password_binding.dart';
+import 'package:noobz/views/individual/change_password/change_password_view.dart';
 import 'package:noobz/views/individual/home/Individual_home_binding.dart';
 import 'package:noobz/views/individual/home/Individual_home_view.dart';
 import 'package:noobz/views/individual/individual_profile.dart/individual_profile_binding.dart';
@@ -32,6 +34,12 @@ class AppPages {
       name: AppRoutes.profile,
       page: () => const IndividualProfileView(),
       binding: IndividualProfileBinding(),
+ 
+    ),
+     GetPage(
+      name: AppRoutes.changePassword,
+      page: () => const ChangePasswordView(),
+      binding: ChangePasswordBinding(),
  
     ),
 

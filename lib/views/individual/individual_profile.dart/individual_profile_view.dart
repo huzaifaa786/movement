@@ -24,8 +24,7 @@ class _IndividualProfileViewState extends State<IndividualProfileView> {
       body: SafeArea(
         child: Column(
           children: [
-            IndividualProfileAppBar(
-                picture: 'assets/images/arrow_left.svg', name: 'Profile'),
+            IndividualProfileAppBar(name: 'Profile'),
             IndividualProfileCard(),
             ChangePasswordCard(),
             Padding(
