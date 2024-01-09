@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noobz/routes/app_pages.dart';
 import 'package:noobz/utils/colors.dart';
+import 'package:noobz/views/auth/entercode/entercode_binding.dart';
+import 'package:noobz/views/auth/entercode/entercode_view.dart';
 import 'package:noobz/views/auth/forgetpassword/forget_password_binding.dart';
 import 'package:noobz/views/auth/forgetpassword/forget_password_view.dart';
 import 'package:noobz/views/auth/sigin/signin_binding.dart';
 import 'package:noobz/views/auth/sigin/signin_view.dart';
 import 'package:noobz/views/auth/signup/signup_view.dart';
 import 'package:noobz/views/auth/signup/sigup_binding.dart';
+import 'package:noobz/views/auth/withotp/withotp_binding.dart';
+import 'package:noobz/views/auth/withotp/withotp_view.dart';
 import 'package:noobz/views/individual/change_password/change_password_binding.dart';
 import 'package:noobz/views/individual/change_password/change_password_view.dart';
 import 'package:noobz/views/individual/individual_profile.dart/individual_profile_binding.dart';
@@ -38,8 +42,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: "Noobz",
-      initialBinding: ChangePasswordBinding(),
-      home: ChangePasswordView(),
+      initialBinding: EnterCodeBinding(),
+      home: EnterCodeView(),
       getPages: AppPages.pages,
     );
   }
