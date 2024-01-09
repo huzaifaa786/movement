@@ -4,6 +4,7 @@ class AppRoutes {
  static const individualHome = '/individualHome';
 
   static const profile = '/profile';
-  
+  static const addclient = '/addclient';
   static const membershipType = '/membershipType';
+  static const allclient = '/allclient';
 }
