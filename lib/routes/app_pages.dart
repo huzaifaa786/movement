@@ -1,5 +1,14 @@
 import 'package:get/get.dart';
 import 'package:noobz/routes/app_routes.dart';
+import 'package:noobz/views/auth/forgetpassword/forget_password_binding.dart';
+import 'package:noobz/views/auth/forgetpassword/forget_password_view.dart';
+import 'package:noobz/views/auth/sigin/signin_binding.dart';
+import 'package:noobz/views/auth/sigin/signin_view.dart';
+import 'package:noobz/views/auth/signup/signup_view.dart';
+import 'package:noobz/views/auth/signup/sigup_binding.dart';
+import 'package:noobz/views/company/client/addclient/addclient_view.dart';
+import 'package:noobz/views/company/client/allclient/allclient_binding.dart';
+import 'package:noobz/views/company/client/allclient/allclient_view.dart';
 import 'package:noobz/views/individual/home/Individual_home_binding.dart';
 import 'package:noobz/views/individual/home/Individual_home_view.dart';
 import 'package:noobz/views/individual/individual_profile.dart/individual_profile_binding.dart';
@@ -26,6 +35,21 @@ class AppPages {
       binding: LanguageBinding(),
     ),
     GetPage(
+      name: AppRoutes.signUp,
+      page: () => const SignUpView(),
+      binding: SignUpBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.signIn,
+      page: () => const SignInView(),
+      binding: SignInBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.forgetPassword,
+      page: () => const ForgetPasswordView(),
+      binding: ForgetPasswordBinding(),
+    ),
+    GetPage(
       name: AppRoutes.individualHome,
       page: () => const IndividualHomeView(),
       binding: IndividualHomeBinding(),
@@ -44,6 +68,16 @@ class AppPages {
       name: AppRoutes.individualnotification,
       page: () => const IndividualNoficationView(),
       binding: IndividualNotificationBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.addclient,
+      page: () => const AddClientView(),
+      binding: MemberShipBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.allclient,
+      page: () => const AllclientView(),
+      binding: AllClientBinding(),
     )
   ];
 }

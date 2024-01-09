@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class IndividualProfileAppBar extends StatelessWidget {
-  const IndividualProfileAppBar({super.key, this.name, this.picture});
+  const IndividualProfileAppBar({
+    super.key,
+    this.name,
+  });
 
   final name;
-  final picture;
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +17,16 @@ class IndividualProfileAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: SvgPicture.asset(
-             picture,
-              fit: BoxFit.scaleDown,
+          InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: SvgPicture.asset(
+                'assets/images/arrow_left.svg',
+                fit: BoxFit.scaleDown,
+              ),
             ),
           ),
           Padding(
