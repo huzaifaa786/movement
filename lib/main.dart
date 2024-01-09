@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noobz/routes/app_pages.dart';
 import 'package:noobz/utils/colors.dart';
+import 'package:noobz/views/auth/forgetpassword/forget_password_binding.dart';
+import 'package:noobz/views/auth/forgetpassword/forget_password_view.dart';
+import 'package:noobz/views/auth/sigin/signin_binding.dart';
+import 'package:noobz/views/auth/sigin/signin_view.dart';
+import 'package:noobz/views/auth/signup/signup_view.dart';
+import 'package:noobz/views/auth/signup/sigup_binding.dart';
 import 'package:noobz/views/splash/splash_binding.dart';
 import 'package:noobz/views/splash/splash_view.dart';
 
@@ -28,9 +34,16 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: "Noobz",
-      initialBinding: SplashBinding(),
-      home: SplashView(),
+      initialBinding: ForgetPasswordBinding(),
+      home:ForgetPasswordView(),
       getPages: AppPages.pages,
     );
   }
 }
+
+
+//  title: "Noobz",
+//       initialBinding: SplashBinding(),
+//       home: SplashView(),
+//       getPages: AppPages.pages,
+//     );
