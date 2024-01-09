@@ -12,10 +12,15 @@ import 'package:noobz/views/auth/withotp/withotp_binding.dart';
 import 'package:noobz/views/auth/withotp/withotp_view.dart';
 import 'package:noobz/views/individual/change_password/change_password_binding.dart';
 import 'package:noobz/views/individual/change_password/change_password_view.dart';
+import 'package:noobz/views/company/client/addclient/addclient_view.dart';
+import 'package:noobz/views/company/client/allclient/allclient_binding.dart';
+import 'package:noobz/views/company/client/allclient/allclient_view.dart';
 import 'package:noobz/views/individual/home/Individual_home_binding.dart';
 import 'package:noobz/views/individual/home/Individual_home_view.dart';
 import 'package:noobz/views/individual/individual_profile.dart/individual_profile_binding.dart';
 import 'package:noobz/views/individual/individual_profile.dart/individual_profile_view.dart';
+import 'package:noobz/views/individual/notification/individual_notification_binding.dart';
+import 'package:noobz/views/individual/notification/individual_notification_view.dart';
 import 'package:noobz/views/language/language_binding.dart';
 import 'package:noobz/views/language/language_view.dart';
 import 'package:noobz/views/membership/membership_binding.dart';
@@ -35,18 +40,17 @@ class AppPages {
       page: () => const LanguageView(),
       binding: LanguageBinding(),
     ),
-    
     GetPage(
       name: AppRoutes.signUp,
       page: () => const SignUpView(),
       binding: SignUpBinding(),
     ),
-     GetPage(
+    GetPage(
       name: AppRoutes.signIn,
       page: () => const SignInView(),
       binding: SignInBinding(),
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.forgetPassword,
       page: () => const ForgetPasswordView(),
       binding: ForgetPasswordBinding(),
@@ -70,17 +74,26 @@ class AppPages {
       name: AppRoutes.profile,
       page: () => const IndividualProfileView(),
       binding: IndividualProfileBinding(),
- 
     ),
-     GetPage(
-      name: AppRoutes.changePassword,
-      page: () => const ChangePasswordView(),
-      binding: ChangePasswordBinding(),
- 
-    ),
-
-    GetPage(     name: AppRoutes.membershipType,
+    GetPage(
+      name: AppRoutes.membershipType,
       page: () => const MembershipView(),
-      binding: MemberShipBinding(),)
+      binding: MemberShipBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.individualnotification,
+      page: () => const IndividualNoficationView(),
+      binding: IndividualNotificationBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.addclient,
+      page: () => const AddClientView(),
+      binding: MemberShipBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.allclient,
+      page: () => const AllclientView(),
+      binding: AllClientBinding(),
+    )
   ];
 }

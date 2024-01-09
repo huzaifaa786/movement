@@ -17,25 +17,29 @@ class MainInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: controller,
-      keyboardType: type,
-      decoration: InputDecoration(
-        filled: true,
-        hintText: hintText,
-        hintStyle: TextStyle(color: darkGrey),
-        fillColor: lightGrey,
-        prefixIcon: prefixIcon,
-        prefixIconColor: darkGrey,
-        border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(width: 2, color: borderGrey)),
-        enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(width: 2, color: borderGrey)),
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(width: 2, color: borderGrey)),
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: TextField(
+        controller: controller,
+        keyboardType: type,
+        decoration: InputDecoration(
+          filled: true,
+          hintText: hintText,
+          hintStyle: TextStyle(
+              color: darkGrey, fontSize: 14, fontWeight: FontWeight.w500),
+          fillColor: lightGrey,
+          prefixIcon: prefixIcon,
+          prefixIconColor: darkGrey,
+          border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(width: 2, color: borderGrey)),
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(width: 2, color: borderGrey)),
+          focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide(width: 2, color: borderGrey)),
+        ),
       ),
     );
   }

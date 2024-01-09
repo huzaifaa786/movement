@@ -18,17 +18,20 @@ import 'package:noobz/views/individual/individual_profile.dart/individual_profil
 import 'package:noobz/views/individual/individual_profile.dart/individual_profile_view.dart';
 import 'package:noobz/views/splash/splash_binding.dart';
 import 'package:noobz/views/splash/splash_view.dart';
+import 'package:noobz/views/company/client/allclient/allclient_binding.dart';
+import 'package:noobz/views/company/client/allclient/allclient_view.dart';
+import 'package:noobz/views/company/client/clientinfo/clientinfo_binding.dart';
+import 'package:noobz/views/company/client/clientinfo/clientinfo_view.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
