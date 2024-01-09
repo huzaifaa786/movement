@@ -8,4 +8,8 @@ class AppRoutes {
   static const forgetPassword = '/forgetPassword';
 
   
+  static const individualHome = '/individualHome';
+  static const profile = '/profile';
+  static const changePassword = '/changePassword';
+  static const membershipType = '/membershipType';
 }

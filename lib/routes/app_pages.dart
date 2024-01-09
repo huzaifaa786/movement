@@ -6,8 +6,16 @@ import 'package:noobz/views/auth/sigin/signin_binding.dart';
 import 'package:noobz/views/auth/sigin/signin_view.dart';
 import 'package:noobz/views/auth/signup/signup_view.dart';
 import 'package:noobz/views/auth/signup/sigup_binding.dart';
+import 'package:noobz/views/individual/change_password/change_password_binding.dart';
+import 'package:noobz/views/individual/change_password/change_password_view.dart';
+import 'package:noobz/views/individual/home/Individual_home_binding.dart';
+import 'package:noobz/views/individual/home/Individual_home_view.dart';
+import 'package:noobz/views/individual/individual_profile.dart/individual_profile_binding.dart';
+import 'package:noobz/views/individual/individual_profile.dart/individual_profile_view.dart';
 import 'package:noobz/views/language/language_binding.dart';
 import 'package:noobz/views/language/language_view.dart';
+import 'package:noobz/views/membership/membership_binding.dart';
+import 'package:noobz/views/membership/membership_view.dart';
 import 'package:noobz/views/splash/splash_binding.dart';
 import 'package:noobz/views/splash/splash_view.dart';
 
@@ -39,5 +47,26 @@ class AppPages {
       page: () => const ForgetPasswordView(),
       binding: ForgetPasswordBinding(),
     ),
+    GetPage(
+      name: AppRoutes.individualHome,
+      page: () => const IndividualHomeView(),
+      binding: IndividualHomeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.profile,
+      page: () => const IndividualProfileView(),
+      binding: IndividualProfileBinding(),
+ 
+    ),
+     GetPage(
+      name: AppRoutes.changePassword,
+      page: () => const ChangePasswordView(),
+      binding: ChangePasswordBinding(),
+ 
+    ),
+
+    GetPage(     name: AppRoutes.membershipType,
+      page: () => const MembershipView(),
+      binding: MemberShipBinding(),)
   ];
 }
