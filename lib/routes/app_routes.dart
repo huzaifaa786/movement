@@ -5,4 +5,5 @@ class AppRoutes {
 
   static const profile = '/profile';
   static const membershipType = '/membershipType';
+  static const individualnotification = '/individualnotification';
 }

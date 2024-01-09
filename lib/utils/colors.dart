@@ -12,3 +12,4 @@ const darkGrey = Color.fromRGBO(32, 36, 47, 0.4);
 const white = Colors.white;
 const individualhomeviewcalender = Color(4281352142);
 const individualduedate = Color(4282996965);
+const dividercolorduredate = Color(4293322470);
