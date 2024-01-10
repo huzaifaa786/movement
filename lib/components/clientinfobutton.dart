@@ -26,7 +26,7 @@ class ClientinfoButton extends StatelessWidget {
                   children: [
                     SvgPicture.asset('assets/images/add.svg'),
                     Text(
-                      ' Add payment',
+                      '  Add payment',
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,
@@ -51,7 +51,7 @@ class ClientinfoButton extends StatelessWidget {
                   children: [
                     SvgPicture.asset('assets/images/bell.svg'),
                     Text(
-                      '  Add a notification',
+                      ' Add a notification',
                       style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,

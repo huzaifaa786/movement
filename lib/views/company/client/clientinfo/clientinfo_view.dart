@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:noobz/components/clientinfo.dart';
 import 'package:noobz/components/clientinfobutton.dart';
 import 'package:noobz/components/detail.dart';
+import 'package:noobz/components/main_input.dart';
 import 'package:noobz/components/topbbar.dart';
 import 'package:noobz/utils/colors.dart';
 
@@ -47,7 +48,11 @@ class _ClientInfoState extends State<ClientInfo> {
                       ),
                     ],
                   ),
-                  Gap(10),
+                  MainInput(
+                    hintText: 'search by tracking number',
+                    prefixIcon: Icon(Icons.search),
+                  ),
+                  Gap(8),
                   Container(
                     padding: const EdgeInsets.all(6.0),
                     width: MediaQuery.of(context).size.width,
@@ -59,38 +64,49 @@ class _ClientInfoState extends State<ClientInfo> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
+                          'Tracking\n number',
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: mainColor),
+                        ),
+                        Text(
                           'Due type',
                           style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: Colors.grey),
+                              color: mainColor),
                         ),
                         Text(
-                          'Due Type',
+                          'Due Date',
                           style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: Colors.grey),
+                              color: mainColor),
                         ),
                         Text(
                           'Amount',
                           style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: Colors.grey),
+                              color: mainColor),
                         ),
                         Text(
-                          'view',
+                          'status',
                           style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
-                              color: Colors.grey),
+                              color: mainColor),
                         ),
-                        Text('')
                       ],
                     ),
                   ),
-                  DetailCard()
+                  DetailCard(
+                    trackingId: '35444',
+                    price: '343',
+                    type: 'Petrol Payment',
+                    date: '23 dec23',
+                  )
                 ]))));
   }
 }
