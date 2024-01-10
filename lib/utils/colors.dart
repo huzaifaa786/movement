@@ -14,4 +14,5 @@ const black = Colors.black;
 const blackgrey = Color(4284440415);
 const individualhomeviewcalender = Color(4281352142);
 const individualduedate = Color(4282996965);
+const dividercolorduredate = Color(4293322470);
 const red = Color(0xFFFF1E00);

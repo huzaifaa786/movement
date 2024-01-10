@@ -1,4 +1,4 @@
-import 'package:noobz/views/auth/signup/signup_view.dart';
+import 'package:noobz/views/individual/auth/signup/signup_view.dart';
 
 class AppRoutes {
   static const splash = '/splash';
@@ -6,6 +6,9 @@ class AppRoutes {
   static const signUp = '/signup';
   static const signIn = '/signIn';
   static const forgetPassword = '/forgetPassword';
+  static const withOtp = '/withOtp';
+  static const companySignUp = '/companySignUp';
+
 
   static const profile = '/profile';
   static const addclient = '/addclient';
@@ -13,5 +16,9 @@ class AppRoutes {
   static const individualHome = '/individualHome';
   static const changePassword = '/changePassword';
   static const membershipType = '/membershipType';
+  static const enterCode = '/enterCode';
+  
+  static const individualnotification = '/individualnotification';
   static const allclient = '/allclient';
+  static const companyProfile=  '/companyProfile';
 }
