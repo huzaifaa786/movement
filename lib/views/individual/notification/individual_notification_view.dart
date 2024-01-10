@@ -28,7 +28,7 @@ class _IndividualNoficationViewState extends State<IndividualNoficationView> {
                           children: [
                             IndividualProfileAppBar(
                               name: 'Notification',
-                            
+
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 60),
@@ -76,8 +76,7 @@ class _IndividualNoficationViewState extends State<IndividualNoficationView> {
                               ),
                             ),
                             NotificationContainer(
-                              image:
-                                  'assets/images/notification_missed.png',
+                              image: 'assets/images/notification_missed.png',
                               notificationtext:
                                   'You missed a payment on 22/dec /2023 to Adnoc',
                             ),

@@ -141,27 +141,79 @@ class CalenderEventRemainderContainer extends StatelessWidget {
       );
     } else if (calendereventremainder == 2) {
       return Container(
-        height: 428,
+        height: 128,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             color: Color(4293322470),
             border: Border.all(color: Colors.grey.shade400)),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('2'),
+            Padding(
+              padding: const EdgeInsets.only(left: 12, right: 25),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Image.asset(
+                          'assets/images/notification_rental_payment.png'),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 14),
+                        child: Text(
+                          'Dental date',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    '3500 AED',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Color(4281352142),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       );
     } else {
       return Container(
-        height: 428,
+        height: 128,
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
             color: Color(4293322470),
             border: Border.all(color: Colors.grey.shade400)),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('2'),
+            Padding(
+              padding: const EdgeInsets.only(left: 12),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/notification_rental_payment.png'),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 14),
+                    child: Text(
+                      'My football exercise',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       );

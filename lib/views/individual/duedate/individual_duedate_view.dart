@@ -25,7 +25,6 @@ class _IndividualDuedateViewState extends State<IndividualDuedateView> {
                 children: [
                   IndividualProfileAppBar(
                     name: 'Due dates',
-                    
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 80),

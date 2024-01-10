@@ -23,4 +23,5 @@ class AppRoutes {
 
 
   
+  static const Companyprofile=  '/Companyprofile';
 }
