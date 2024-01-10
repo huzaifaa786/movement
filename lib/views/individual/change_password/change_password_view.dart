@@ -4,6 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:noobz/components/individual_profile_appbar.dart';
 import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/main_input.dart';
+import 'package:noobz/components/topbbar.dart';
 import 'package:noobz/routes/app_routes.dart';
 
 class ChangePasswordView extends StatefulWidget {
@@ -29,6 +30,16 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        forceMaterialTransparency: true,
+        title: TitleTopBar(
+          name: 'Change password',
+          ontap: () {
+            Get.back();
+          },
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

@@ -3,7 +3,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:noobz/utils/colors.dart';
 
 class IndividualProfileCard extends StatelessWidget {
-  const IndividualProfileCard({super.key});
+  const IndividualProfileCard(
+      {super.key, this.userpic, this.name, this.nick, this.icon, this.email});
+
+  final userpic;
+  final name;
+  final nick;
+  final icon;
+  final email;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +29,7 @@ class IndividualProfileCard extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    child: SvgPicture.asset('assets/images/user_profile.svg'),
+                    child: userpic,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 12),
@@ -32,7 +39,7 @@ class IndividualProfileCard extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              'Mohammed Yusif',
+                              name,
                               style: TextStyle(
                                   fontSize: 14,
                                   fontFamily: 'Poppins',
@@ -43,7 +50,7 @@ class IndividualProfileCard extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              'mo7Y0',
+                              nick,
                               style: TextStyle(
                                 color: darkGrey,
                                 fontSize: 14,
@@ -63,13 +70,13 @@ class IndividualProfileCard extends StatelessWidget {
               padding: const EdgeInsets.only(left: 29, top: 12),
               child: Row(
                 children: [
-                  SvgPicture.asset('assets/images/email.svg'),
+                  icon,
                   Padding(
                     padding: const EdgeInsets.only(left: 26),
                     child: Row(
                       children: [
                         Text(
-                          'mohammed3@gmail.com',
+                          email,
                           style: TextStyle(
                             color: darkGrey,
                             fontSize: 12,

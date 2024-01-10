@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:noobz/components/event_name_container.dart';
-import 'package:noobz/components/individual_profile_appbar.dart';
 import 'package:noobz/components/main_input.dart';
+import 'package:noobz/components/topbbar.dart';
 import 'package:noobz/utils/colors.dart';
 
 enum Day { day }
@@ -19,10 +21,19 @@ class _AddEventDueViewState extends State<AddEventDueView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        forceMaterialTransparency: true,
+        title: TitleTopBar(
+          name: 'Add Client',
+          ontap: () {
+            Get.back();
+          },
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            IndividualProfileAppBar(name: 'Add event'),
             Column(
               children: [
                 EventNameContainer(),
@@ -46,15 +57,34 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                     ],
                   ),
                 ),
-                // Use a proper Radio widget with the correct types
-                Radio<Day>(
-                  value: Day.day,
-                  groupValue: _day,
-                  onChanged: (Day? value) {
+                InkWell(
+                  onTap: () {
                     setState(() {
-                      _day = value;
+                      _day = _day == Day.day ? null : Day.day;
                     });
                   },
+                  child: Row(
+                    children: [
+                      Radio<Day>(
+                        value: Day.day,
+                        groupValue: _day,
+                        onChanged: (Day? value) {
+                          setState(() {
+                            _day = value;
+                          });
+                        },
+                      ),
+                      Text(
+                        'Day',
+                        style: TextStyle(
+                          color: darkGrey,
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             )
