@@ -26,7 +26,6 @@ class _CalenderEventRemainderViewState
               children: [
                 IndividualProfileAppBar(
                   name: 'Calendar',
-                  picture: 'assets/images/arrow_left.svg',
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
@@ -36,83 +35,44 @@ class _CalenderEventRemainderViewState
                     right: 10,
                   ),
                   child: Container(
-                    decoration: BoxDecoration(border: Border.all()),
+                    // decoration: BoxDecoration(border: Border.all()),
                     child: TableCalendar(
                       selectedDayPredicate: (day) =>
                           isSameDay(day, controller.today),
-                      firstDay: DateTime.utc(2024, 1, 1),
+                      firstDay: DateTime.utc(2023, 1, 1),
                       lastDay: DateTime.now(),
                       focusedDay: controller.today,
-                      rangeStartDay: controller.rangeStart,
-                      rangeEndDay: controller.rangeEnd,
-                      rangeSelectionMode: RangeSelectionMode.enforced,
                       onDaySelected: controller.onDaySelected,
-                      onRangeSelected: controller.onRangeSelected,
-                      headerStyle: const HeaderStyle(
-                        formatButtonVisible: false,
-                        titleCentered: true,
-                        titleTextStyle: TextStyle(
-                            color: Color.fromARGB(255, 56, 125, 181),
-                            fontSize: 23),
-                      ),
                       calendarStyle: CalendarStyle(
-                        defaultTextStyle: const TextStyle(color: Colors.black),
                         todayDecoration: BoxDecoration(
                             color: mainColor.withOpacity(0.5),
                             shape: BoxShape.circle),
-                        selectedDecoration: const BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                              mainColor,
-                              secondaryColor,
-                            ]),
-                            shape: BoxShape.circle),
+                        selectedDecoration: BoxDecoration(
+                            color: mainColor, shape: BoxShape.circle),
                         markerDecoration: BoxDecoration(
-                          color: Colors.black,
+                          color: Colors.grey.shade600,
                           borderRadius: BorderRadius.circular(10),
                         ),
                         rangeStartDecoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                              mainColor,
-                              secondaryColor,
-                            ]),
-                            shape: BoxShape.circle),
+                            color: mainColor, shape: BoxShape.circle),
                         rangeEndDecoration: BoxDecoration(
-                            gradient: LinearGradient(colors: [
-                              mainColor,
-                              secondaryColor,
-                            ]),
-                            shape: BoxShape.circle),
-                        rangeHighlightColor: secondaryColor.withOpacity(0.2),
+                            color: mainColor, shape: BoxShape.circle),
+                        rangeHighlightColor: mainColor.withOpacity(0.5),
                         isTodayHighlighted: true,
                         outsideDaysVisible: false,
                       ),
                       availableCalendarFormats: const {
                         CalendarFormat.month: 'Month',
-                        // CalendarFormat.week: 'Week',
                       },
                       onPageChanged: controller.onFormatChanged,
                       calendarFormat: controller.format,
-                      onFormatChanged: (CalendarFormat format) {
-                        setState(() {
-                          format == CalendarFormat.week
-                              ? controller.format1 = 'week'
-                              : controller.format1 = 'month';
-                          controller.format = format;
-                        });
-                      },
                       startingDayOfWeek: StartingDayOfWeek.monday,
                       daysOfWeekVisible: true,
-                      daysOfWeekStyle: DaysOfWeekStyle(
-                        weekdayStyle: TextStyle(
-                            color: Colors.white, fontStyle: FontStyle.italic),
-                        weekendStyle: TextStyle(
-                            color: Colors.white, fontStyle: FontStyle.italic),
-                      ),
                     ),
                   ),
                 ),
                 CalenderEventRemainderContainer(
-                  calendereventremainder: 1,
+                  calendereventremainder: 3,
                 ),
               ],
             )))));

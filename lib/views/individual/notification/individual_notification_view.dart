@@ -28,7 +28,7 @@ class _IndividualNoficationViewState extends State<IndividualNoficationView> {
                           children: [
                             IndividualProfileAppBar(
                               name: 'Notification',
-                              picture: 'assets/images/arrow_left.svg',
+                              // picture: 'assets/images/arrow_left.svg',
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 60),
