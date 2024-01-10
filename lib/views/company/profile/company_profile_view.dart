@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:noobz/components/individual_profile_appbar.dart';
 import 'package:noobz/views/company/profile/company_profile_controller.dart';
 
 class CompanyProfileView extends StatefulWidget {
@@ -17,7 +18,10 @@ class _CompanyProfileViewState extends State<CompanyProfileView> {
                 body: SafeArea(
                     child: SingleChildScrollView(
                         child: Column(
-              children: [],
+              children: [
+                IndividualProfileAppBar(name: '',)
+                
+                ],
             )))));
   }
 }

@@ -10,6 +10,8 @@ import 'package:noobz/views/auth/signup/signup_view.dart';
 import 'package:noobz/views/auth/signup/sigup_binding.dart';
 import 'package:noobz/views/auth/withotp/withotp_binding.dart';
 import 'package:noobz/views/auth/withotp/withotp_view.dart';
+import 'package:noobz/views/company/profile/company_profile_binding.dart';
+import 'package:noobz/views/company/profile/company_profile_view.dart';
 import 'package:noobz/views/individual/change_password/change_password_binding.dart';
 import 'package:noobz/views/individual/change_password/change_password_view.dart';
 import 'package:noobz/views/company/client/addclient/addclient_view.dart';
@@ -96,9 +98,9 @@ class AppPages {
       binding: AllClientBinding(),
     ),
     GetPage(
-      name: AppRoutes.Companyprofile,
-      page: () => const AllclientView(),
-      binding: AllClientBinding(),
+      name: AppRoutes.companyProfile,
+      page: () => const CompanyProfileView(),
+      binding: CompanyProfileBinding(),
     )
   ];
 }

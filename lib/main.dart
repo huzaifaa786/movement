@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noobz/routes/app_pages.dart';
@@ -45,8 +47,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: "Noobz",
-      initialBinding: EnterCodeBinding(),
-      home: EnterCodeView(),
+      initialBinding: SplashBinding(),
+      home: SplashView(),
       getPages: AppPages.pages,
     );
   }
