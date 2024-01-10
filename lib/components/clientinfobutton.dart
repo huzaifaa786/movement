@@ -7,48 +7,67 @@ class ClientinfoButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(6.0),
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-          color: lightGrey,
-          borderRadius: BorderRadius.all(Radius.circular(19))),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SvgPicture.asset('assets/images/add.svg'),
-                  Text('Add payment')
-                ],
-              ),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: mainColor,
-              )
-            ],
-          ),
-          new Divider(
-            color: Colors.red,
-          ),
-             Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                children: [
-                  SvgPicture.asset('assets/images/bell.svg'),
-                  Text('Add a notification')
-                ],
-              ),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: mainColor,
-              )
-            ],
-          ),
-        ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 12),
+      child: Container(
+        padding: const EdgeInsets.all(6.0),
+        width: MediaQuery.of(context).size.width,
+        height: 129,
+        decoration: BoxDecoration(
+            color: lightGrey,
+            borderRadius: BorderRadius.all(Radius.circular(19))),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset('assets/images/add.svg'),
+                    Text(
+                      '  Add payment',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: mainColor),
+                    )
+                  ],
+                ),
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: mainColor,
+                  size: 18,
+                )
+              ],
+            ),
+            new Divider(
+              color: const Color.fromARGB(255, 215, 213, 213),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    SvgPicture.asset('assets/images/bell.svg'),
+                    Text(
+                      ' Add a notification',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: mainColor),
+                    )
+                  ],
+                ),
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: mainColor,
+                  size: 18,
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
