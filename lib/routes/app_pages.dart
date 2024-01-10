@@ -94,6 +94,11 @@ class AppPages {
       name: AppRoutes.allclient,
       page: () => const AllclientView(),
       binding: AllClientBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.Companyprofile,
+      page: () => const AllclientView(),
+      binding: AllClientBinding(),
     )
   ];
 }
