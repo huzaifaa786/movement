@@ -1,11 +1,17 @@
 import 'package:get/get.dart';
 import 'package:noobz/routes/app_routes.dart';
+import 'package:noobz/views/auth/entercode/entercode_binding.dart';
+import 'package:noobz/views/auth/entercode/entercode_view.dart';
 import 'package:noobz/views/auth/forgetpassword/forget_password_binding.dart';
 import 'package:noobz/views/auth/forgetpassword/forget_password_view.dart';
 import 'package:noobz/views/auth/sigin/signin_binding.dart';
 import 'package:noobz/views/auth/sigin/signin_view.dart';
 import 'package:noobz/views/auth/signup/signup_view.dart';
 import 'package:noobz/views/auth/signup/sigup_binding.dart';
+import 'package:noobz/views/auth/withotp/withotp_binding.dart';
+import 'package:noobz/views/auth/withotp/withotp_view.dart';
+import 'package:noobz/views/individual/change_password/change_password_binding.dart';
+import 'package:noobz/views/individual/change_password/change_password_view.dart';
 import 'package:noobz/views/company/client/addclient/addclient_view.dart';
 import 'package:noobz/views/company/client/allclient/allclient_binding.dart';
 import 'package:noobz/views/company/client/allclient/allclient_view.dart';
@@ -48,6 +54,16 @@ class AppPages {
       name: AppRoutes.forgetPassword,
       page: () => const ForgetPasswordView(),
       binding: ForgetPasswordBinding(),
+    ),
+      GetPage(
+      name: AppRoutes.enterCode,
+      page: () => const EnterCodeView(),
+      binding: EnterCodeBinding(),
+    ),
+      GetPage(
+      name: AppRoutes.withOtp,
+      page: () => const WithOtpView(),
+      binding: WithOtpBinding(),
     ),
     GetPage(
       name: AppRoutes.individualHome,
