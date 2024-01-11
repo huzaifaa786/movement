@@ -21,4 +21,6 @@ class AppRoutes {
   static const individualnotification = '/individualnotification';
   static const allclient = '/allclient';
   static const companyProfile=  '/companyProfile';
+  static const companyProfileChangelogo=  '/companyProfileChangelogo';
+
 }

@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:noobz/routes/app_routes.dart';
+import 'package:noobz/views/company/change_logo/company_profile_change_logo_binding.dart';
+import 'package:noobz/views/company/change_logo/company_profile_change_logo_view.dart';
 
 import 'package:noobz/views/company/profile/company_profile_binding.dart';
 import 'package:noobz/views/company/profile/company_profile_view.dart';
@@ -109,6 +111,12 @@ class AppPages {
       name: AppRoutes.companyProfile,
       page: () => const CompanyProfileView(),
       binding: CompanyProfileBinding(),
+    ),
+   
+     GetPage(
+      name: AppRoutes. companyProfileChangelogo,
+      page: () => const CompanyProfileChangelogoView(),
+      binding: CompanyProfileChangelogoBinding(),
     )
   ];
 }
