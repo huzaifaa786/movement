@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noobz/components/individual_profile_appbar.dart';
 import 'package:noobz/components/notification_container.dart';
+import 'package:noobz/components/topbbar.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/individual/duedate/individual_duedate_controller.dart';
 import 'package:noobz/views/individual/notification/individual_notification_controller.dart';
@@ -19,6 +20,16 @@ class _IndividualNoficationViewState extends State<IndividualNoficationView> {
   Widget build(BuildContext context) {
     return GetBuilder<IndividualNotificationController>(
         builder: (controller) => Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              forceMaterialTransparency: true,
+              title: TitleTopBar(
+                name: 'Add Client',
+                ontap: () {
+                  Get.back();
+                },
+              ),
+            ),
             body: SafeArea(
                 child: SingleChildScrollView(
                     child: Padding(
@@ -26,18 +37,11 @@ class _IndividualNoficationViewState extends State<IndividualNoficationView> {
                             const EdgeInsets.only(left: 20, right: 20, top: 15),
                         child: Column(
                           children: [
-                            IndividualProfileAppBar(
-                              name: 'Notification',
-
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 60),
-                              child: NotificationContainer(
-                                image:
-                                    'assets/images/notification_upcoming_payment.png',
-                                notificationtext:
-                                    'You have an upcoming payment to Adnoc on 27/Dec/2023',
-                              ),
+                            NotificationContainer(
+                              image:
+                                  'assets/images/notification_upcoming_payment.png',
+                              notificationtext:
+                                  'You have an upcoming payment to Adnoc on 27/Dec/2023',
                             ),
                             Padding(
                               padding:

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noobz/components/duedatecontainer.dart';
 import 'package:noobz/components/individual_profile_appbar.dart';
+import 'package:noobz/components/topbbar.dart';
+import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/individual/duedate/individual_duedate_controller.dart';
 
@@ -17,21 +19,28 @@ class _IndividualDuedateViewState extends State<IndividualDuedateView> {
   Widget build(BuildContext context) {
     return GetBuilder<IndividualDuedateController>(
         builder: (controller) => Scaffold(
-                body: SafeArea(
-                    child: SingleChildScrollView(
-                        child: Padding(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              forceMaterialTransparency: true,
+              title: TitleTopBar(
+                name: 'Due dates',
+                ontap: () {
+                  Get.back();
+                },
+              ),
+            ),
+            body: SafeArea(
+                child: SingleChildScrollView(
+                    child: Padding(
               padding: const EdgeInsets.only(left: 10, right: 10, top: 15),
               child: Column(
                 children: [
-                  IndividualProfileAppBar(
-                    name: 'Due dates',
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 80),
-                    child: DuedateContainer(
-                        image: 'assets/images/Profile Image.png',
-                        name: 'Adnoc'),
-                  ),
+                  DuedateContainer(
+                      onTap: () {
+                        Get.offNamed(AppRoutes.individualduadatedetail);
+                      },
+                      image: 'assets/images/Profile Image.png',
+                      name: 'Adnoc'),
                   Padding(
                     padding: const EdgeInsets.only(top: 15, bottom: 20),
                     child: Divider(

@@ -6,8 +6,11 @@ import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 
 class ChangePasswordCard extends StatelessWidget {
-  const ChangePasswordCard({Key? key});
-
+  const ChangePasswordCard({
+    Key? key,
+    this.ontap,
+  }) : super(key: key);
+  final ontap;
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -15,9 +18,7 @@ class ChangePasswordCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
       child: GestureDetector(
-        onTap: () {
-          Get.toNamed(AppRoutes.changePassword);
-        },
+        onTap: ontap,
         child: Container(
           width: mediaQuery.size.width,
           height: mediaQuery.size.height * 0.08,

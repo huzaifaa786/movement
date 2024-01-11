@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:noobz/components/language_card.dart';
 import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/membership_card.dart';
+import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:noobz/utils/controller_initlization.dart';
 import 'package:noobz/views/membership/membership_controller.dart';
@@ -25,6 +26,9 @@ class _MembershipViewState extends State<MembershipView> {
               bottomNavigationBar: Padding(
                 padding: EdgeInsets.only(bottom: 40, right: 18, left: 18),
                 child: MainButton(
+                  onTap: () {
+                    Get.toNamed(AppRoutes.signUp);
+                  },
                   title: "Next",
                   isSelected: true,
                 ),
@@ -48,7 +52,7 @@ class _MembershipViewState extends State<MembershipView> {
                         ),
                         Gap(40),
                         MembershipCard(
-                          iconAsset:  'assets/images/building.svg',
+                          iconAsset: 'assets/images/building.svg',
                           onTap: () {
                             controller.membership_type = 'company';
                             controller.update();
@@ -57,6 +61,19 @@ class _MembershipViewState extends State<MembershipView> {
                           isSelected: controller.membership_type == 'company'
                               ? true
                               : false,
+                        ),
+                         Gap(40),
+                        MembershipCard(
+                          iconAsset: 'assets/images/owner.svg',
+                          onTap: () {
+                            controller.membership_type = 'Property owner';
+                            controller.update();
+                          },
+                          title: "Property owner",
+                          isSelected:
+                              controller.membership_type == 'Property owner'
+                                  ? true
+                                  : false,
                         ),
                         Gap(40),
                         MembershipCard(

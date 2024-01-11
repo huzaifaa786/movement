@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/main_input.dart';
 import 'package:noobz/components/password_input.dart';
+import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 
@@ -42,10 +44,13 @@ class EnterCodeView extends StatelessWidget {
               //runs when every textfield is filled
               onSubmit: (String verificationCode) {},
             ),
-            
             Gap(150),
             MainButton(
               title: 'Submit',
+              isSelected: true,
+              onTap: () {
+                Get.toNamed(AppRoutes.individualHome);
+              },
             ),
           ],
         ),
