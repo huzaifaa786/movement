@@ -47,8 +47,8 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: "Noobz",
-      initialBinding: ClientInfoBinding(),
-      home: ClientInfo(),
+      initialBinding: SplashBinding(),
+      home: SplashView(),
       getPages: AppPages.pages,
     );
   }

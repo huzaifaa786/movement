@@ -6,9 +6,11 @@ class DuedateContainer extends StatelessWidget {
     Key? key,
     this.image,
     this.name,
+    this.onTap
   }) : super(key: key);
   final image;
   final name;
+  final onTap;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -110,32 +112,35 @@ class DuedateContainer extends StatelessWidget {
                 )
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 0),
-              child: Container(
-                height: 90,
-                decoration: BoxDecoration(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'View datailes',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
+            InkWell(
+              onTap: onTap,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 0),
+                child: Container(
+                  height: 90,
+                  decoration: BoxDecoration(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'View datailes',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: individualduedate,
+                            ),
+                          ),
+                          Icon(
+                            Icons.keyboard_arrow_right_outlined,
                             color: individualduedate,
                           ),
-                        ),
-                        Icon(
-                          Icons.keyboard_arrow_right_outlined,
-                          color: individualduedate,
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             )

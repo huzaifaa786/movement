@@ -28,7 +28,7 @@ class NotificationContainer extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 10),
-              child: SizedBox(width: MediaQuery.of(context).size.width * 0.75,
+              child: SizedBox(width: MediaQuery.of(context).size.width * 0.85,
                 child: Column(
                   children: [
                     Row(

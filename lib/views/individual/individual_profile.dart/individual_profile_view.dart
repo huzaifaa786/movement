@@ -3,11 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:noobz/components/change_password_card.dart';
 import 'package:noobz/components/individual_profile_appbar.dart';
 import 'package:noobz/components/individual_profile_card.dart';
 import 'package:noobz/components/individual_rounded_circle.dart';
 import 'package:noobz/components/whites_blacks_card.dart';
+import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 
 class IndividualProfileView extends StatefulWidget {
@@ -26,7 +28,9 @@ class _IndividualProfileViewState extends State<IndividualProfileView> {
           children: [
             IndividualProfileAppBar(name: 'Profile'),
             IndividualProfileCard(),
-            ChangePasswordCard(),
+            ChangePasswordCard(ontap:  () {
+          Get.toNamed(AppRoutes.changePassword);
+        },),
             Padding(
               padding: const EdgeInsets.only(left: 35, top: 50),
               child: Row(
