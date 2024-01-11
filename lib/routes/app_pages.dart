@@ -89,11 +89,11 @@ class AppPages {
       page: () => const IndividualProfileView(),
       binding: IndividualProfileBinding(),
     ),
-    GetPage(
-      name: AppRoutes.addEventDue,
-      page: () => const AddEventDueView(),
-      binding: AddEventDueBinding(),
-    ),
+    // GetPage(
+    //   name: AppRoutes.addEventDue,
+    //   page: () => const AddEventDueView(),
+    //   binding: AddEventDueBinding(),
+    // ),
     GetPage(
       name: AppRoutes.membershipType,
       page: () => const MembershipView(),
