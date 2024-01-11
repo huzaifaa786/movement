@@ -28,7 +28,7 @@ class _IndividualProfileViewState extends State<IndividualProfileView> {
         automaticallyImplyLeading: false,
         forceMaterialTransparency: true,
         title: TitleTopBar(
-          name: 'Add Client',
+          name: 'Profile',
           ontap: () {
             Get.back();
           },
@@ -45,7 +45,7 @@ class _IndividualProfileViewState extends State<IndividualProfileView> {
                 icon: SvgPicture.asset('assets/images/email.svg')),
             ChangePasswordCard(),
             Padding(
-              padding: const EdgeInsets.only(left: 35, top: 50),
+              padding: const EdgeInsets.only(left: 20, top: 50, right: 20),
               child: Row(
                 children: [
                   SvgPicture.asset('assets/images/menu-grid-blue.svg'),

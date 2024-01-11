@@ -40,29 +40,34 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
           },
         ),
       ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(20),
+        child: MainButton(
+          // buttonWidth: 0.9/,
+          title: 'submit',
+          isSelected: true,
+        ),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              IndividualProfileAppBar(
-                name: 'Change password',
-              ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.9,
                 child: Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(
-                          left: 20, right: 20, top: 60, bottom: 22),
+                          left: 20, right: 20, top: 60, bottom: 8),
                       child: MainInput(
                         controller: _currentPasswordController,
                         hintText: 'Old Password',
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20, right: 20, bottom: 22),
+                      padding:
+                          const EdgeInsets.only(left: 20, right: 20, bottom: 8),
                       child: MainInput(
                         controller: _newPasswordController,
                         hintText: 'New Password',
@@ -70,22 +75,12 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
-                          left: 20, right: 20, bottom: 22),
+                          left: 20, right: 20, bottom: 15),
                       child: MainInput(
                         controller: _confirmPasswordController,
                         hintText: 'Confirm New Password',
                       ),
                     ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        MainButton(
-                          buttonWidth: 0.9,
-                          title: 'submit',
-                          isSelected: true,
-                        ),
-                      ],
-                    )
                   ],
                 ),
               ),
