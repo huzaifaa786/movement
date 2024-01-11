@@ -158,7 +158,7 @@ class DueDetailsColumnCard extends StatelessWidget {
                   SvgPicture.asset('assets/images/payment_cancel.svg'),
                   Gap(8),
                   Text(
-                    'Unpaid',
+                    '',
                     style: TextStyle(
                       color: red,
                       fontSize: 16,

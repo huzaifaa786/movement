@@ -69,7 +69,8 @@ class HomeIndividualRemainderContainer extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: CircleAvatar(
-                        backgroundImage: AssetImage(
+                        backgroundImage:
+                         AssetImage(
                           'assets/images/Profile Image.png',
                         ),
                         radius: 20,

@@ -23,7 +23,7 @@ class _IndividualNoficationViewState extends State<IndividualNoficationView> {
                 child: SingleChildScrollView(
                     child: Padding(
                         padding:
-                            const EdgeInsets.only(left: 21, right: 41, top: 15),
+                            const EdgeInsets.only(left: 20, right: 20, top: 15),
                         child: Column(
                           children: [
                             IndividualProfileAppBar(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:noobz/utils/colors.dart';
 
@@ -48,7 +49,8 @@ final text;
               children: [
                 Row(
                   children: [
-                    Image.asset(image),
+                    // Image.asset(image),
+                    SvgPicture.asset(image),
                     Padding(
                       padding: const EdgeInsets.only(left: 14),
                       child: Text(

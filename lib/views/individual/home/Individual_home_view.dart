@@ -91,24 +91,24 @@ class _IndividualHomeViewState extends State<IndividualHomeView> {
                       ),
                       HomeEventContainer(
                         text: 'Add event',
-                        image: 'assets/images/add_event_home.png',
+                        image: 'assets/images/homeevent.svg',
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 17, bottom: 17),
                         child: HomeEventContainer(
                           text: 'My calendar',
-                          image: 'assets/images/my calender home container.png',
+                          image: 'assets/images/calenderhomeevent.svg',
                         ),
                       ),
                       HomeEventContainer(
                         text: 'Due dates',
-                        image: 'assets/images/due dates home container.png',
+                        image: 'assets/images/duedtaehomeevent.svg',
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 17, bottom: 17),
                         child: HomeEventContainer(
                           text: 'Profile',
-                          image: 'assets/images/profile home container.png',
+                          image: 'assets/images/profilehomeevent.svg',
                         ),
                       ),
                     ],
