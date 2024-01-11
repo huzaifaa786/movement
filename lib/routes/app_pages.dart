@@ -7,6 +7,8 @@ import 'package:noobz/views/company/profile/company_profile_binding.dart';
 import 'package:noobz/views/company/profile/company_profile_view.dart';
 import 'package:noobz/views/company/auth/signup/company_signup_binding.dart';
 import 'package:noobz/views/company/auth/signup/company_signup_view.dart';
+import 'package:noobz/views/company/proofdetail/proof_detail_binding.dart';
+import 'package:noobz/views/company/proofdetail/proof_detail_view.dart';
 import 'package:noobz/views/individual/add_event_due/add_event_due_binding.dart';
 import 'package:noobz/views/individual/add_event_due/add_event_due_view.dart';
 import 'package:noobz/views/individual/auth/entercode/entercode_binding.dart';
@@ -78,6 +80,11 @@ class AppPages {
       name: AppRoutes.companySignUp,
       page: () => const CompanySignUpView(),
       binding: CompanySignUpBinding(),
+    ),
+       GetPage(
+      name: AppRoutes.proofDetail,
+      page: () => const ProofDetailView(),
+      binding: ProofDetailBinding(),
     ),
     GetPage(
       name: AppRoutes.individualHome,

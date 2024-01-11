@@ -8,6 +8,8 @@ class AppRoutes {
   static const forgetPassword = '/forgetPassword';
   static const withOtp = '/withOtp';
   static const companySignUp = '/companySignUp';
+  static const proofDetail = '/proofDetail';
+  
   static const individualProfile = '/individualProfile';
   static const addEventDue = '/addEventDue';
   static const addclient = '/addclient';
