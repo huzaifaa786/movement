@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/main_input.dart';
+import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 
 class ForgetPasswordView extends StatelessWidget {
@@ -19,7 +21,8 @@ class ForgetPasswordView extends StatelessWidget {
             Row(
               children: [
                 Text("Forgot password",
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w700)),
+                    style:
+                        TextStyle(fontSize: 24, fontWeight: FontWeight.w700)),
               ],
             ),
             Gap(50),
@@ -30,9 +33,14 @@ class ForgetPasswordView extends StatelessWidget {
               ),
               hintText: 'Email address',
             ),
-          
             Gap(200),
-            MainButton(title: 'Send code',isSelected: true,)
+            MainButton(
+              title: 'Send code',
+              isSelected: true,
+              onTap: () {
+                Get.toNamed(AppRoutes.enterCode);
+              },
+            )
           ],
         ),
       )),
