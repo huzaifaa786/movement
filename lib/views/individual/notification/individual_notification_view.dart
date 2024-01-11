@@ -34,7 +34,7 @@ class _IndividualNoficationViewState extends State<IndividualNoficationView> {
                 child: SingleChildScrollView(
                     child: Padding(
                         padding:
-                            const EdgeInsets.all(10),
+                            const EdgeInsets.only(left: 20, right: 20, top: 15),
                         child: Column(
                           children: [
                             NotificationContainer(

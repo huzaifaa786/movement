@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:noobz/utils/colors.dart';
 

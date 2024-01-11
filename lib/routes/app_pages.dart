@@ -1,10 +1,14 @@
 import 'package:get/get.dart';
 import 'package:noobz/routes/app_routes.dart';
+import 'package:noobz/views/company/change_logo/company_profile_change_logo_binding.dart';
+import 'package:noobz/views/company/change_logo/company_profile_change_logo_view.dart';
 
 import 'package:noobz/views/company/profile/company_profile_binding.dart';
 import 'package:noobz/views/company/profile/company_profile_view.dart';
 import 'package:noobz/views/company/auth/signup/company_signup_binding.dart';
 import 'package:noobz/views/company/auth/signup/company_signup_view.dart';
+import 'package:noobz/views/individual/add_event_due/add_event_due_binding.dart';
+import 'package:noobz/views/individual/add_event_due/add_event_due_view.dart';
 import 'package:noobz/views/individual/auth/entercode/entercode_binding.dart';
 import 'package:noobz/views/individual/auth/entercode/entercode_view.dart';
 import 'package:noobz/views/individual/auth/forgetpassword/forget_password_binding.dart';
@@ -86,17 +90,17 @@ class AppPages {
       page: () => const ForgetPasswordView(),
       binding: ForgetPasswordBinding(),
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.enterCode,
       page: () => const EnterCodeView(),
       binding: EnterCodeBinding(),
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.withOtp,
       page: () => const WithOtpView(),
       binding: WithOtpBinding(),
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.companySignUp,
       page: () => const CompanySignUpView(),
       binding: CompanySignUpBinding(),
@@ -107,9 +111,14 @@ class AppPages {
       binding: IndividualHomeBinding(),
     ),
     GetPage(
-      name: AppRoutes.profile,
+      name: AppRoutes.individualProfile,
       page: () => const IndividualProfileView(),
       binding: IndividualProfileBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.addEventDue,
+      page: () => const AddEventDueView(),
+      binding: AddEventDueBinding(),
     ),
     GetPage(
       name: AppRoutes.membershipType,
@@ -135,6 +144,12 @@ class AppPages {
       name: AppRoutes.companyProfile,
       page: () => const CompanyProfileView(),
       binding: CompanyProfileBinding(),
+    ),
+   
+     GetPage(
+      name: AppRoutes. companyProfileChangelogo,
+      page: () => const CompanyProfileChangelogoView(),
+      binding: CompanyProfileChangelogoBinding(),
     )
   ];
 }

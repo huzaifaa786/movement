@@ -13,13 +13,16 @@ class AppRoutes {
   static const individualduadatedetail = '/individualduadatedetail';
   static const profile = '/profile';
   static const addclient = '/addclient';
-
+  static const individualProfile = '/individualProfile';
+  static const addEventDue = '/addEventDue';
   static const individualHome = '/individualHome';
   static const changePassword = '/changePassword';
   static const membershipType = '/membershipType';
   static const enterCode = '/enterCode';
-
   static const individualnotification = '/individualnotification';
   static const allclient = '/allclient';
   static const companyProfile = '/companyProfile';
+  static const companyProfileChangelogo=  '/companyProfileChangelogo';
+
+  // static const companyProfile = '/companyProfile';
 }

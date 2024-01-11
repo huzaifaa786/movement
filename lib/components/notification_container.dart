@@ -21,14 +21,14 @@ class NotificationContainer extends StatelessWidget {
               height: 30,
               child: Column(
                 children: [
-                  Image.asset(
-                     image),
+                  Image.asset(image),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: SizedBox(width: MediaQuery.of(context).size.width * 0.85,
+              padding: const EdgeInsets.only(left: 12),
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
                 child: Column(
                   children: [
                     Row(
@@ -45,25 +45,21 @@ class NotificationContainer extends StatelessWidget {
                         )
                       ],
                     ),
-                    Row(mainAxisAlignment: MainAxisAlignment.end,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Text(
-                                'View',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: individualduedate,
-                                ),
-                              ),
-                              Icon(
-                                Icons.keyboard_arrow_right_outlined,
-                                color: individualduedate,
-                              ),
-                            ],
+                        Text(
+                          'View',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            color: individualduedate,
                           ),
+                        ),
+                        Icon(
+                          Icons.keyboard_arrow_right_outlined,
+                          color: individualduedate,
+                        ),
                       ],
                     ),
                   ],
