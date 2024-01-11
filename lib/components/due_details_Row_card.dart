@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:noobz/utils/colors.dart';
@@ -33,8 +34,12 @@ class DueDetailsRowCard extends StatelessWidget {
                   width: 60,
                   decoration: BoxDecoration(
                       color: white, borderRadius: BorderRadius.circular(40)),
-                  child:
-                      Image.asset('assets/images/viewcalender profileimg.png')),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: CachedNetworkImage(
+                        imageUrl: 'https://dummyimage.com/600x400/000/fff',
+                        fit: BoxFit.cover),
+                  )),
             ),
             Text(
               'Adnoc',
