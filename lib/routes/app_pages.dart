@@ -2,13 +2,19 @@ import 'package:get/get.dart';
 import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/views/company/auth/signin/signin_binding.dart';
 import 'package:noobz/views/company/auth/signin/signin_view.dart';
+import 'package:noobz/views/company/add_payment/company_add_payment_binding.dart';
+import 'package:noobz/views/company/add_payment/company_add_payment_view.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_binding.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_view.dart';
+import 'package:noobz/views/company/home/company_home_binding.dart';
+import 'package:noobz/views/company/home/company_home_view.dart';
 
 import 'package:noobz/views/company/profile/company_profile_binding.dart';
 import 'package:noobz/views/company/profile/company_profile_view.dart';
 import 'package:noobz/views/company/auth/signup/company_signup_binding.dart';
 import 'package:noobz/views/company/auth/signup/company_signup_view.dart';
+import 'package:noobz/views/company/proofdetail/proof_detail_binding.dart';
+import 'package:noobz/views/company/proofdetail/proof_detail_view.dart';
 import 'package:noobz/views/individual/add_event_due/add_event_due_binding.dart';
 import 'package:noobz/views/individual/add_event_due/add_event_due_view.dart';
 import 'package:noobz/views/individual/auth/entercode/entercode_binding.dart';
@@ -112,6 +118,11 @@ class AppPages {
       page: () => const CompanySignUpView(),
       binding: CompanySignUpBinding(),
     ),
+       GetPage(
+      name: AppRoutes.proofDetail,
+      page: () => const ProofDetailView(),
+      binding: ProofDetailBinding(),
+    ),
     GetPage(
       name: AppRoutes.individualHome,
       page: () => const IndividualHomeView(),
@@ -156,6 +167,16 @@ class AppPages {
       name: AppRoutes.companyProfileChangelogo,
       page: () => const CompanyProfileChangelogoView(),
       binding: CompanyProfileChangelogoBinding(),
+    ),
+     GetPage(
+      name: AppRoutes. companyhome,
+      page: () => const CompanyHomeView(),
+      binding: CompanyHomeBinding(),
+    ),
+     GetPage(
+      name: AppRoutes. companyaddpayment,
+      page: () => const CompanyAddPaymentView(),
+      binding: CompanyAddPaymentBinding(),
     )
   ];
 }
