@@ -19,6 +19,8 @@ class AppRoutes {
   static const allclient = '/allclient';
   static const companyProfile=  '/companyProfile';
   static const companyProfileChangelogo=  '/companyProfileChangelogo';
+  static const companyhome=  '/companyhome';
+  static const companyaddpayment=  '/companyaddpayment';
 
   // static const companyProfile = '/companyProfile';
 }
