@@ -2,15 +2,23 @@ import 'package:get/get.dart';
 import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/views/company/add_event/add_event_binding.dart';
 import 'package:noobz/views/company/add_event/add_event_view.dart';
+import 'package:noobz/views/company/addnotification/addnotification_binding.dart';
+import 'package:noobz/views/company/addnotification/addnotification_view.dart';
 import 'package:noobz/views/company/auth/signin/signin_binding.dart';
 import 'package:noobz/views/company/auth/signin/signin_view.dart';
 import 'package:noobz/views/company/add_payment/company_add_payment_binding.dart';
 import 'package:noobz/views/company/add_payment/company_add_payment_view.dart';
+import 'package:noobz/views/company/calendar/calendar_event_remainder/company_calendar_event_remainder_binding.dart';
+import 'package:noobz/views/company/calendar/calendar_event_remainder/company_calendar_event_remainder_view.dart';
+import 'package:noobz/views/company/calendar/company_calendar_binding.dart';
+import 'package:noobz/views/company/calendar/company_calendar_view.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_binding.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_view.dart';
 import 'package:noobz/views/company/client/addclient/addclient_binding.dart';
 import 'package:noobz/views/company/home/company_home_binding.dart';
 import 'package:noobz/views/company/home/company_home_view.dart';
+import 'package:noobz/views/company/notification/company_notification_binding.dart';
+import 'package:noobz/views/company/notification/company_notification_view.dart';
 
 import 'package:noobz/views/company/profile/company_profile_binding.dart';
 import 'package:noobz/views/company/profile/company_profile_view.dart';
@@ -18,6 +26,8 @@ import 'package:noobz/views/company/auth/signup/company_signup_binding.dart';
 import 'package:noobz/views/company/auth/signup/company_signup_view.dart';
 import 'package:noobz/views/company/proofdetail/proof_detail_binding.dart';
 import 'package:noobz/views/company/proofdetail/proof_detail_view.dart';
+import 'package:noobz/views/company/sale/sale_binding.dart';
+import 'package:noobz/views/company/sale/sale_view.dart';
 import 'package:noobz/views/individual/add_event_due/add_event_due_binding.dart';
 import 'package:noobz/views/individual/add_event_due/add_event_due_view.dart';
 import 'package:noobz/views/individual/auth/entercode/entercode_binding.dart';
@@ -121,7 +131,7 @@ class AppPages {
       page: () => const CompanySignUpView(),
       binding: CompanySignUpBinding(),
     ),
-       GetPage(
+    GetPage(
       name: AppRoutes.proofDetail,
       page: () => const ProofDetailView(),
       binding: ProofDetailBinding(),
@@ -151,6 +161,21 @@ class AppPages {
       page: () => const IndividualNoficationView(),
       binding: IndividualNotificationBinding(),
     ),
+     GetPage(
+      name: AppRoutes.companyNotification,
+      page: () => const CompanyNotificationView(),
+      binding: CompanyNotificationBinding(),
+    ),
+     GetPage(
+      name: AppRoutes.companyCalendar,
+      page: () => const CompanyCalendarView(),
+      binding: CompanyCalendarBinding(),
+    ),
+     GetPage(
+      name: AppRoutes.companyCalendarEventRemainder,
+      page: () => const CompanyCalendarEventRemainderView(),
+      binding: CompanyCalendarEventRemainderBinding(),
+    ),
     GetPage(
       name: AppRoutes.addclient,
       page: () => const AddClientView(),
@@ -171,20 +196,29 @@ class AppPages {
       page: () => const CompanyProfileChangelogoView(),
       binding: CompanyProfileChangelogoBinding(),
     ),
-     GetPage(
-      name: AppRoutes. companyhome,
+    GetPage(
+      name: AppRoutes.companyhome,
       page: () => const CompanyHomeView(),
       binding: CompanyHomeBinding(),
     ),
-     GetPage(
-      name: AppRoutes. companyaddpayment,
+    GetPage(
+      name: AppRoutes.companyaddpayment,
       page: () => const CompanyAddPaymentView(),
       binding: CompanyAddPaymentBinding(),
     ),
      GetPage(
       name: AppRoutes. companyaddevent,
       page: () => const CompanyAddEventView(),
-      binding: CompanyAddEventBinding(),
+      binding: CompanyAddEventBinding(),),
+    GetPage(
+      name: AppRoutes.sale,
+      page: () => const SaleScreen(),
+      binding: SaleBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.addnotification,
+      page: () => const AddnotificationView(),
+      binding: AddNotificationBinding(),
     )
   ];
 }

@@ -125,7 +125,7 @@ class _IndividualHomeViewState extends State<IndividualHomeView> {
                         padding: const EdgeInsets.only(top: 17, bottom: 17),
                         child: HomeEventContainer(
                           ontap: () {
-                            Get.toNamed(AppRoutes.profile);
+                            Get.toNamed(AppRoutes.individualProfile);
                           },
                           text: 'Profile',
                           image: 'assets/images/profilehomeevent.svg',

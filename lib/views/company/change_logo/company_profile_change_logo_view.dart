@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:noobz/components/individual_profile_appbar.dart';
 import 'package:noobz/components/main_button.dart';
+import 'package:noobz/components/topbbar.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_controller.dart';
 
@@ -20,10 +21,20 @@ class _CompanyProfileChangelogoViewState
   Widget build(BuildContext context) {
     return GetBuilder<CompanyProfileChangelogocontroller>(
         builder: (controller) => Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              forceMaterialTransparency: true,
+              title: TitleTopBar(
+                name: 'Change logo',
+                ontap: () {
+                  Get.back();
+                },
+              ),
+            ),
             body: SafeArea(
                 child: Padding(
-                    padding: const EdgeInsets.only(
-                        top: 15, bottom: 15, left: 15, right: 15),
+                    padding: const EdgeInsets.all(
+                        15),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -34,12 +45,9 @@ class _CompanyProfileChangelogoViewState
                               ),
                           child: Column(
                             children: [
-                              IndividualProfileAppBar(
-                                name: 'Change logo',
-                              ),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(top: 45, bottom: 55),
+                                    const EdgeInsets.only(top: 30, bottom: 55),
                                 child: Container(
                                   // padding: EdgeInsets.only(top: 2),
                                   decoration: BoxDecoration(
@@ -55,8 +63,8 @@ class _CompanyProfileChangelogoViewState
                                     borderRadius: BorderRadius.circular(60),
                                   ),
                                   child:
-                                  //  SvgPicture.asset('assets/images/Profile Image.png')
-                                  CircleAvatar(
+                                      //  SvgPicture.asset('assets/images/Profile Image.png')
+                                      CircleAvatar(
                                     backgroundImage: AssetImage(
                                       'assets/images/Profile Image.png',
                                     ),

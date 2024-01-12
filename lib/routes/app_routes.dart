@@ -29,6 +29,13 @@ class AppRoutes {
   static const companyhome=  '/companyhome';
   static const companyaddpayment=  '/companyaddpayment';
   static const companyaddevent=  '/companyaddevent';
+  static const sale=  '/sale';
+  static const addnotification=  '/addnotification';
 
   // static const companyProfile = '/companyProfile';
+  static const companyNotification=  '/companyNotification';
+  static const companyCalendar=  '/companyCalendar';
+  static const companyCalendarEventRemainder=  '/companyCalendarEventRemainder';
+  
+  
 }
