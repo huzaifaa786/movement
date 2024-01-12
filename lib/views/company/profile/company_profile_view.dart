@@ -4,6 +4,7 @@ import 'package:gradient_borders/gradient_borders.dart';
 import 'package:noobz/components/company_profile_action_container.dart';
 import 'package:noobz/components/company_profile_main_container.dart';
 import 'package:noobz/components/individual_profile_appbar.dart';
+import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/company/profile/company_profile_controller.dart';
 
@@ -44,10 +45,16 @@ class _CompanyProfileViewState extends State<CompanyProfileView> {
                     padding: const EdgeInsets.only(top: 15, bottom: 15),
                     child: CompanyProfileActionContainer(
                       text: 'Change logo',
+                      ontap: () {
+                        Get.offNamed(AppRoutes.companyProfileChangelogo);
+                      },
                       image: 'assets/images/companyprofilechangelogo.png',
                     ),
                   ),
                   CompanyProfileActionContainer(
+                       ontap: () {
+                        Get.offNamed(AppRoutes.language);
+                      },
                     text: 'Change language',
                     image: 'assets/images/companyprofilechangelang.png',
                   ),

@@ -53,7 +53,7 @@ class HomeEventContainer extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Image.asset(image),
+                      SvgPicture.asset(image),
                       Padding(
                         padding: const EdgeInsets.only(left: 14),
                         child: Text(

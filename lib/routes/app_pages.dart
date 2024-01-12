@@ -10,6 +10,7 @@ import 'package:noobz/views/company/calendar/company_calendar_binding.dart';
 import 'package:noobz/views/company/calendar/company_calendar_view.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_binding.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_view.dart';
+import 'package:noobz/views/company/client/addclient/addclient_binding.dart';
 import 'package:noobz/views/company/home/company_home_binding.dart';
 import 'package:noobz/views/company/home/company_home_view.dart';
 import 'package:noobz/views/company/notification/company_notification_binding.dart';
@@ -172,7 +173,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.addclient,
       page: () => const AddClientView(),
-      binding: MemberShipBinding(),
+      binding: AddClientBinding(),
     ),
     GetPage(
       name: AppRoutes.allclient,
