@@ -28,6 +28,9 @@ class AppRoutes {
   static const companysignin = '/companysignin';
   static const companyhome=  '/companyhome';
   static const companyaddpayment=  '/companyaddpayment';
-
-  // static const companyProfile = '/companyProfile';
+  static const companyNotification=  '/companyNotification';
+  static const companyCalendar=  '/companyCalendar';
+  static const companyCalendarEventRemainder=  '/companyCalendarEventRemainder';
+  
+  
 }
