@@ -39,7 +39,14 @@ class _AddnotificationViewState extends State<AddnotificationView> {
                 hintText: 'Type the notify',
               ),
               Gap(30),
-              Row(children: [Text('Select Date',style: TextStyle(color: darkGrey),)],),
+              Row(
+                children: [
+                  Text(
+                    'Select Date',
+                    style: TextStyle(color: darkGrey),
+                  )
+                ],
+              ),
               Gap(10),
               Container(
                 // decoration: BoxDecoration(border: Border.all()),
@@ -50,17 +57,16 @@ class _AddnotificationViewState extends State<AddnotificationView> {
                   lastDay: DateTime.now(),
                   focusedDay: controller.today,
                   onDaySelected: controller.onDaySelected,
-                     headerStyle: const HeaderStyle(
-                          formatButtonVisible: false,
-                          titleCentered: true,
-                          titleTextStyle: TextStyle(
-                              fontFamily: "Poppins",
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: black),
-                        ),
+                  headerStyle: const HeaderStyle(
+                    formatButtonVisible: false,
+                    titleCentered: true,
+                    titleTextStyle: TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                        color: black),
+                  ),
                   calendarStyle: CalendarStyle(
-                    
                     todayDecoration: BoxDecoration(
                         color: mainColor.withOpacity(0.5),
                         shape: BoxShape.circle),
@@ -87,8 +93,29 @@ class _AddnotificationViewState extends State<AddnotificationView> {
                   daysOfWeekVisible: true,
                 ),
               ),
-              Gap(20),
-               MainButton(title: 'Send notification',isSelected: true,),
+              Container(
+                height: 56,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color(4294375158)),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        '24 Dec 2023',
+                        style: TextStyle(
+                            color: individualduedate,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600),
+                      )
+                    ]),
+              ),
+              Gap(90),
+              MainButton(
+                title: 'Send notification',
+                isSelected: true,
+              ),
             ],
           ),
         )),

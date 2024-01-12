@@ -16,7 +16,7 @@ class PaymentDateContainer extends StatelessWidget {
   Widget build(BuildContext context) {
 Color borderColor = selectedOption == 2 ? mainColor : borderGrey;
     return Container(
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: MediaQuery.of(context).size.height * 0.26,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade300),

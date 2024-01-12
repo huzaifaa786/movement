@@ -51,7 +51,7 @@ class _CompanyAddPaymentViewState extends State<CompanyAddPaymentView> {
                             const EdgeInsets.only(left: 20, right: 20, top: 15),
                         child: Column(
                           children: [
-                            Gap(40),
+                            
                             MainInput(
                               hintText: 'Payment name',
                             ),
