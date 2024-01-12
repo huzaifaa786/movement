@@ -6,6 +6,7 @@ import 'package:noobz/views/company/add_payment/company_add_payment_binding.dart
 import 'package:noobz/views/company/add_payment/company_add_payment_view.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_binding.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_view.dart';
+import 'package:noobz/views/company/client/addclient/addclient_binding.dart';
 import 'package:noobz/views/company/home/company_home_binding.dart';
 import 'package:noobz/views/company/home/company_home_view.dart';
 
@@ -151,7 +152,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.addclient,
       page: () => const AddClientView(),
-      binding: MemberShipBinding(),
+      binding: AddClientBinding(),
     ),
     GetPage(
       name: AppRoutes.allclient,
