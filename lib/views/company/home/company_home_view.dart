@@ -160,7 +160,7 @@ class _CompanyHomeViewState extends State<CompanyHomeView> {
                             ),
                             Gap(17),
                             HomeEventContainer(
-                                ontap: () {
+                              ontap: () {
                                 Get.offNamed(AppRoutes.allclient);
                               },
                               text: 'Existing clients',
@@ -168,12 +168,14 @@ class _CompanyHomeViewState extends State<CompanyHomeView> {
                             ),
                             Gap(17),
                             HomeEventContainer(
-                             
                               text: 'Add event',
                               image: 'assets/images/homeevent.svg',
                             ),
                             Gap(17),
                             HomeEventContainer(
+                              ontap: () {
+                                Get.offNamed(AppRoutes.sale);
+                              },
                               text: 'Sales',
                               image: 'assets/images/duedtaehomeevent.svg',
                             ),
@@ -184,7 +186,7 @@ class _CompanyHomeViewState extends State<CompanyHomeView> {
                             ),
                             Gap(17),
                             HomeEventContainer(
-                                 ontap: () {
+                              ontap: () {
                                 Get.offNamed(AppRoutes.companyProfile);
                               },
                               text: 'Profile',

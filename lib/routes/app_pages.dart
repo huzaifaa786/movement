@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:noobz/routes/app_routes.dart';
+import 'package:noobz/views/company/addnotification/addnotification_binding.dart';
+import 'package:noobz/views/company/addnotification/addnotification_view.dart';
 import 'package:noobz/views/company/auth/signin/signin_binding.dart';
 import 'package:noobz/views/company/auth/signin/signin_view.dart';
 import 'package:noobz/views/company/add_payment/company_add_payment_binding.dart';
@@ -16,6 +18,8 @@ import 'package:noobz/views/company/auth/signup/company_signup_binding.dart';
 import 'package:noobz/views/company/auth/signup/company_signup_view.dart';
 import 'package:noobz/views/company/proofdetail/proof_detail_binding.dart';
 import 'package:noobz/views/company/proofdetail/proof_detail_view.dart';
+import 'package:noobz/views/company/sale/sale_binding.dart';
+import 'package:noobz/views/company/sale/sale_view.dart';
 import 'package:noobz/views/individual/add_event_due/add_event_due_binding.dart';
 import 'package:noobz/views/individual/add_event_due/add_event_due_view.dart';
 import 'package:noobz/views/individual/auth/entercode/entercode_binding.dart';
@@ -119,7 +123,7 @@ class AppPages {
       page: () => const CompanySignUpView(),
       binding: CompanySignUpBinding(),
     ),
-       GetPage(
+    GetPage(
       name: AppRoutes.proofDetail,
       page: () => const ProofDetailView(),
       binding: ProofDetailBinding(),
@@ -169,15 +173,25 @@ class AppPages {
       page: () => const CompanyProfileChangelogoView(),
       binding: CompanyProfileChangelogoBinding(),
     ),
-     GetPage(
-      name: AppRoutes. companyhome,
+    GetPage(
+      name: AppRoutes.companyhome,
       page: () => const CompanyHomeView(),
       binding: CompanyHomeBinding(),
     ),
-     GetPage(
-      name: AppRoutes. companyaddpayment,
+    GetPage(
+      name: AppRoutes.companyaddpayment,
       page: () => const CompanyAddPaymentView(),
       binding: CompanyAddPaymentBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.sale,
+      page: () => const SaleScreen(),
+      binding: SaleBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.addnotification,
+      page: () => const AddnotificationView(),
+      binding: AddNotificationBinding(),
     )
   ];
 }

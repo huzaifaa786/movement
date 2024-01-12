@@ -28,6 +28,8 @@ class AppRoutes {
   static const companysignin = '/companysignin';
   static const companyhome=  '/companyhome';
   static const companyaddpayment=  '/companyaddpayment';
+  static const sale=  '/sale';
+  static const addnotification=  '/addnotification';
 
   // static const companyProfile = '/companyProfile';
 }
