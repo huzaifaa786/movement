@@ -27,7 +27,13 @@ class _MembershipViewState extends State<MembershipView> {
                 padding: EdgeInsets.only(bottom: 40, right: 18, left: 18),
                 child: MainButton(
                   onTap: () {
-                    Get.toNamed(AppRoutes.signUp);
+                    if (controller.membership_type == 'individual') {
+                      Get.toNamed(AppRoutes.signUp);
+                    } else if (controller.membership_type == 'company') {
+                      Get.toNamed(AppRoutes.companySignUp);
+                    } else if (controller.membership_type == 'Property owner') {
+                      Get.toNamed(AppRoutes.companySignUp);
+                    }
                   },
                   title: "Next",
                   isSelected: true,
@@ -62,7 +68,7 @@ class _MembershipViewState extends State<MembershipView> {
                               ? true
                               : false,
                         ),
-                         Gap(40),
+                        Gap(40),
                         MembershipCard(
                           iconAsset: 'assets/images/owner.svg',
                           onTap: () {

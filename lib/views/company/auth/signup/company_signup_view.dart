@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:noobz/components/company_card.dart';
 import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/main_input.dart';
 import 'package:noobz/components/password_input.dart';
+import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 
 class CompanySignUpView extends StatefulWidget {
@@ -132,6 +134,9 @@ class _CompanySignUpViewState extends State<CompanySignUpView> {
                 MainButton(
                   title: 'Submit',
                   isSelected: true,
+                   onTap: () {
+                  Get.toNamed(AppRoutes.companyhome);
+                },
                 ),
               ],
             ),

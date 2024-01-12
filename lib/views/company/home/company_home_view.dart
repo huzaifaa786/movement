@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:noobz/components/home_events_container.dart';
+import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/views/company/home/company_home_controller.dart';
 
 class CompanyHomeView extends StatefulWidget {
@@ -151,30 +152,45 @@ class _CompanyHomeViewState extends State<CompanyHomeView> {
                             ),
                             Gap(40),
                             HomeEventContainer(
+                              ontap: () {
+                                Get.offNamed(AppRoutes.addclient);
+                              },
                               text: 'Add client',
                               image: 'assets/images/homeevent.svg',
                             ),
                             Gap(17),
                             HomeEventContainer(
+                                ontap: () {
+                                Get.offNamed(AppRoutes.allclient);
+                              },
                               text: 'Existing clients',
                               image: 'assets/images/existing_client.svg',
-                            ), Gap(17),
+                            ),
+                            Gap(17),
                             HomeEventContainer(
+                             
                               text: 'Add event',
                               image: 'assets/images/homeevent.svg',
-                            ), Gap(17),
+                            ),
+                            Gap(17),
                             HomeEventContainer(
                               text: 'Sales',
                               image: 'assets/images/duedtaehomeevent.svg',
-                            ), Gap(17),
+                            ),
+                            Gap(17),
                             HomeEventContainer(
                               text: 'My calendar',
                               image: 'assets/images/calenderhomeevent.svg',
-                            ), Gap(17),
+                            ),
+                            Gap(17),
                             HomeEventContainer(
+                                 ontap: () {
+                                Get.offNamed(AppRoutes.companyProfile);
+                              },
                               text: 'Profile',
                               image: 'assets/images/profilehomeevent.svg',
-                            ),Gap(17),
+                            ),
+                            Gap(17),
                           ],
                         ))))));
   }

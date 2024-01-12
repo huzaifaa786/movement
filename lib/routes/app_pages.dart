@@ -1,9 +1,12 @@
 import 'package:get/get.dart';
 import 'package:noobz/routes/app_routes.dart';
+import 'package:noobz/views/company/auth/signin/signin_binding.dart';
+import 'package:noobz/views/company/auth/signin/signin_view.dart';
 import 'package:noobz/views/company/add_payment/company_add_payment_binding.dart';
 import 'package:noobz/views/company/add_payment/company_add_payment_view.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_binding.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_view.dart';
+import 'package:noobz/views/company/client/addclient/addclient_binding.dart';
 import 'package:noobz/views/company/home/company_home_binding.dart';
 import 'package:noobz/views/company/home/company_home_view.dart';
 
@@ -66,28 +69,33 @@ class AppPages {
       page: () => const SignUpView(),
       binding: SignUpBinding(),
     ),
-     GetPage(
+    GetPage(
       name: AppRoutes.calenderscreen,
-      page: () => const CalenderEventRemainderView (),
+      page: () => const CalenderEventRemainderView(),
       binding: CalenderEventRemainderBinding(),
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.individualduadatedetail,
-      page: () => const DueDetailsView (),
+      page: () => const DueDetailsView(),
       binding: DueDetailsBinding(),
     ),
-     GetPage(
+    GetPage(
       name: AppRoutes.individualduadate,
-      page: () => const IndividualDuedateView (),
+      page: () => const IndividualDuedateView(),
       binding: IndividualDuedateBinding(),
     ),
-      GetPage(
+    GetPage(
       name: AppRoutes.changePassword,
       page: () => const ChangePasswordView(),
       binding: ChangePasswordBinding(),
     ),
     GetPage(
       name: AppRoutes.signIn,
+      page: () => const CompanySignInView(),
+      binding: CompanySignInBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.companysignin,
       page: () => const SignInView(),
       binding: SignInBinding(),
     ),
@@ -144,7 +152,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.addclient,
       page: () => const AddClientView(),
-      binding: MemberShipBinding(),
+      binding: AddClientBinding(),
     ),
     GetPage(
       name: AppRoutes.allclient,
@@ -156,9 +164,8 @@ class AppPages {
       page: () => const CompanyProfileView(),
       binding: CompanyProfileBinding(),
     ),
-   
-     GetPage(
-      name: AppRoutes. companyProfileChangelogo,
+    GetPage(
+      name: AppRoutes.companyProfileChangelogo,
       page: () => const CompanyProfileChangelogoView(),
       binding: CompanyProfileChangelogoBinding(),
     ),
