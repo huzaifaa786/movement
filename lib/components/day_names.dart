@@ -33,7 +33,7 @@ class _DayNamesState extends State<DayNames> {
         child: Text(
           widget.name,
           style: TextStyle(
-            color: widget.isSelected ? Colors.white : darkGrey,
+            color: widget.isSelected ? mainColor : darkGrey,
             fontSize: 16,
             fontFamily: 'Montserrat',
             fontWeight: FontWeight.w500,
