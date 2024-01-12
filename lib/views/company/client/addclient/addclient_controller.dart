@@ -41,4 +41,10 @@ class AddClientController extends GetxController {
 
     update();
   }
+    RxInt selectedOption = 1.obs;
+
+  void setSelectedOption(int? value) {
+    selectedOption.value = value ?? 1;
+    update();
+  }
 }

@@ -173,6 +173,9 @@ class _CompanyHomeViewState extends State<CompanyHomeView> {
                             ),
                             Gap(17),
                             HomeEventContainer(
+                                 ontap: () {
+                                Get.offNamed(AppRoutes.companyaddevent);
+                              },
                               text: 'Add event',
                               image: 'assets/images/homeevent.svg',
                             ),
@@ -186,6 +189,9 @@ class _CompanyHomeViewState extends State<CompanyHomeView> {
                             ),
                             Gap(17),
                             HomeEventContainer(
+                                 ontap: () {
+                                Get.offNamed(AppRoutes.companyCalendar);
+                              },
                               text: 'My calendar',
                               image: 'assets/images/calenderhomeevent.svg',
                             ),

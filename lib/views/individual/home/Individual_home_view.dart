@@ -100,7 +100,7 @@ class _IndividualHomeViewState extends State<IndividualHomeView> {
                         ),
                       ),
                       HomeEventContainer(
-                        // ontap: (){Get.toNamed(AppRoutes.);},
+                        ontap: (){Get.toNamed(AppRoutes.addEventDue);},
                         text: 'Add event',
                         image: 'assets/images/homeevent.svg',
                       ),

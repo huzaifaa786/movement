@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/main_input.dart';
 import 'package:noobz/components/password_input.dart';
+import 'package:noobz/components/payment_date.dart';
 import 'package:noobz/components/priceinput.dart';
 import 'package:noobz/components/topbbar.dart';
 import 'package:noobz/utils/colors.dart';
@@ -81,6 +82,13 @@ class _AddClientViewState extends State<AddClientView> {
                 priceInput(
                   hintText: 'Price',
                 ),
+                Gap(12),
+                PaymentDateContainer(
+                  selectedOption: controller.selectedOption.value,
+                  onOptionChanged: (int? value) =>
+                      controller.setSelectedOption(value),
+                ),
+                Gap(15),
                 TableCalendar(
                   selectedDayPredicate: (day) =>
                       isSameDay(day, controller.today),
@@ -88,6 +96,15 @@ class _AddClientViewState extends State<AddClientView> {
                   lastDay: DateTime.now(),
                   focusedDay: controller.today,
                   onDaySelected: controller.onDaySelected,
+                  headerStyle: const HeaderStyle(
+                    formatButtonVisible: false,
+                    titleCentered: true,
+                    titleTextStyle: TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
+                        color: black),
+                  ),
                   calendarStyle: CalendarStyle(
                     todayDecoration: BoxDecoration(
                         color: mainColor.withOpacity(0.5),

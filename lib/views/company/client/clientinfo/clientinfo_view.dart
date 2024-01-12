@@ -6,6 +6,7 @@ import 'package:noobz/components/clientinfobutton.dart';
 import 'package:noobz/components/detail.dart';
 import 'package:noobz/components/main_input.dart';
 import 'package:noobz/components/topbbar.dart';
+import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 
 class ClientInfo extends StatefulWidget {
@@ -37,7 +38,11 @@ class _ClientInfoState extends State<ClientInfo> {
                     name: 'Ali Raza',
                     type: 'Petrol Payment',
                   ),
-                  ClientinfoButton(),
+                  ClientinfoButton(
+                    aaddnotification:(){Get.offNamed(AppRoutes.addnotification);},
+                    addpayment: (){Get.offNamed(AppRoutes.companyaddpayment);
+                  
+                  }),
                   Gap(12),
                   Row(
                     children: [
