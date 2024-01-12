@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
+import 'package:noobz/components/logintype.dart';
 import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/main_input.dart';
+import 'package:noobz/components/password_input.dart';
+import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
+import 'package:noobz/views/individual/auth/signup/sigup_controller.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        return Scaffold(
+    return Builder(builder: (context) {
+      return GetBuilder<SigUpController>(
+        builder: (controller) => Scaffold(
           body: SafeArea(
               child: Container(
             padding: EdgeInsets.only(right: 10, left: 10, top: 30, bottom: 30),
@@ -32,7 +37,7 @@ class SignUpView extends StatelessWidget {
                     ),
                     hintText: 'Email address',
                   ),
-                  Gap(10),
+                  Gap(2),
                   MainInput(
                     prefixIcon: SvgPicture.asset(
                       'assets/images/person.svg',
@@ -40,7 +45,21 @@ class SignUpView extends StatelessWidget {
                     ),
                     hintText: 'User name',
                   ),
-                  Gap(20),
+                  PasswordInput(
+                    prefixIcon: Icon(Icons.lock_outline_rounded),
+                    hintText: 'Password',
+                    toggle: controller.toggle,
+                    obscure: controller.obscureTextPassword,
+                    controller: controller.passwordController,
+                  ),
+                  PasswordInput(
+                    prefixIcon: Icon(Icons.lock_outline_rounded),
+                    hintText: 'Confirm Password',
+                    toggle: controller.toggle1,
+                    obscure: controller.obscureTextPassword1,
+                    controller: controller.confirmPasswordController,
+                  ),
+                  Gap(10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -51,15 +70,14 @@ class SignUpView extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                           )),
                       Gap(10),
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border(
-                                bottom: BorderSide(
-                          color: mainColor,
-                          width: 1.0,
-                        ))),
+                      InkWell(
+                        onTap: () {
+                          Get.toNamed(AppRoutes.signIn);
+                        },
                         child: Text("Sign in",
                             style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              decorationColor: mainColor,
                               color: mainColor,
                               fontSize: 12,
                               fontWeight: FontWeight.w700,
@@ -81,42 +99,18 @@ class SignUpView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            color: lightGrey,
-                            border: Border.all(color: Colors.grey.withOpacity(0.3)),
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
-                        child: SvgPicture.asset(
-                          'assets/images/apple.svg',
-                          fit: BoxFit.none,
-                        ),
+                      googleloginbox(
+                        icon: 'assets/images/apple.svg',
+                        ontap: () {},
                       ),
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            color: lightGrey,
-                            border: Border.all(color: Colors.grey.withOpacity(0.3)),
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
-                        child: SvgPicture.asset(
-                          'assets/images/google.svg',height: 10,width: 10,
-                          fit: BoxFit.contain,
-                        ),
+                      googleloginbox(
+                        icon: 'assets/images/google.svg',
+                        ontap: () {},
                       ),
-                      Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            color: lightGrey,
-                            border: Border.all(color: Colors.grey.withOpacity(0.3)),
-                            borderRadius: BorderRadius.all(Radius.circular(5))),
-                        child: SvgPicture.asset(
-                          'assets/images/mobile.svg',
-                          fit: BoxFit.none,
-                        ),
-                      )
+                      googleloginbox(
+                        icon: 'assets/images/mobile.svg',
+                        ontap: () { Get.toNamed(AppRoutes.withOtp);},
+                      ),
                     ],
                   ),
                   Gap(30),
@@ -159,13 +153,16 @@ class SignUpView extends StatelessWidget {
                   MainButton(
                     title: 'Next',
                     isSelected: true,
+                    onTap: () {
+                      Get.toNamed(AppRoutes.individualHome);
+                    },
                   ),
                 ],
               ),
             ),
           )),
-        );
-      }
-    );
+        ),
+      );
+    });
   }
 }

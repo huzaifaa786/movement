@@ -9,8 +9,8 @@ import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/individual/auth/sigin/signin_controller.dart';
 
-class SignInView extends StatelessWidget {
-  const SignInView({super.key});
+class CompanySignInView extends StatelessWidget {
+  const CompanySignInView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,10 +1,21 @@
 import 'package:get/get.dart';
 import 'package:noobz/routes/app_routes.dart';
+import 'package:noobz/views/company/auth/signin/signin_binding.dart';
+import 'package:noobz/views/company/auth/signin/signin_view.dart';
+import 'package:noobz/views/company/add_payment/company_add_payment_binding.dart';
+import 'package:noobz/views/company/add_payment/company_add_payment_view.dart';
+import 'package:noobz/views/company/change_logo/company_profile_change_logo_binding.dart';
+import 'package:noobz/views/company/change_logo/company_profile_change_logo_view.dart';
+import 'package:noobz/views/company/client/addclient/addclient_binding.dart';
+import 'package:noobz/views/company/home/company_home_binding.dart';
+import 'package:noobz/views/company/home/company_home_view.dart';
 
 import 'package:noobz/views/company/profile/company_profile_binding.dart';
 import 'package:noobz/views/company/profile/company_profile_view.dart';
 import 'package:noobz/views/company/auth/signup/company_signup_binding.dart';
 import 'package:noobz/views/company/auth/signup/company_signup_view.dart';
+import 'package:noobz/views/company/proofdetail/proof_detail_binding.dart';
+import 'package:noobz/views/company/proofdetail/proof_detail_view.dart';
 import 'package:noobz/views/individual/add_event_due/add_event_due_binding.dart';
 import 'package:noobz/views/individual/add_event_due/add_event_due_view.dart';
 import 'package:noobz/views/individual/auth/entercode/entercode_binding.dart';
@@ -17,11 +28,17 @@ import 'package:noobz/views/individual/auth/signup/signup_view.dart';
 import 'package:noobz/views/individual/auth/signup/sigup_binding.dart';
 import 'package:noobz/views/individual/auth/withotp/withotp_binding.dart';
 import 'package:noobz/views/individual/auth/withotp/withotp_view.dart';
+import 'package:noobz/views/individual/calender_event_remainder/calender_event_remainder_binding.dart';
+import 'package:noobz/views/individual/calender_event_remainder/calender_event_remainder_view.dart';
 import 'package:noobz/views/individual/change_password/change_password_binding.dart';
 import 'package:noobz/views/individual/change_password/change_password_view.dart';
 import 'package:noobz/views/company/client/addclient/addclient_view.dart';
 import 'package:noobz/views/company/client/allclient/allclient_binding.dart';
 import 'package:noobz/views/company/client/allclient/allclient_view.dart';
+import 'package:noobz/views/individual/due_details/due_details_binding.dart';
+import 'package:noobz/views/individual/due_details/due_details_view.dart';
+import 'package:noobz/views/individual/duedate/individual_duedate_binding.dart';
+import 'package:noobz/views/individual/duedate/individual_duedate_view.dart';
 import 'package:noobz/views/individual/home/Individual_home_binding.dart';
 import 'package:noobz/views/individual/home/Individual_home_view.dart';
 import 'package:noobz/views/individual/individual_profile.dart/individual_profile_binding.dart';
@@ -53,7 +70,32 @@ class AppPages {
       binding: SignUpBinding(),
     ),
     GetPage(
+      name: AppRoutes.calenderscreen,
+      page: () => const CalenderEventRemainderView(),
+      binding: CalenderEventRemainderBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.individualduadatedetail,
+      page: () => const DueDetailsView(),
+      binding: DueDetailsBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.individualduadate,
+      page: () => const IndividualDuedateView(),
+      binding: IndividualDuedateBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.changePassword,
+      page: () => const ChangePasswordView(),
+      binding: ChangePasswordBinding(),
+    ),
+    GetPage(
       name: AppRoutes.signIn,
+      page: () => const CompanySignInView(),
+      binding: CompanySignInBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.companysignin,
       page: () => const SignInView(),
       binding: SignInBinding(),
     ),
@@ -76,6 +118,11 @@ class AppPages {
       name: AppRoutes.companySignUp,
       page: () => const CompanySignUpView(),
       binding: CompanySignUpBinding(),
+    ),
+       GetPage(
+      name: AppRoutes.proofDetail,
+      page: () => const ProofDetailView(),
+      binding: ProofDetailBinding(),
     ),
     GetPage(
       name: AppRoutes.individualHome,
@@ -105,7 +152,7 @@ class AppPages {
     GetPage(
       name: AppRoutes.addclient,
       page: () => const AddClientView(),
-      binding: MemberShipBinding(),
+      binding: AddClientBinding(),
     ),
     GetPage(
       name: AppRoutes.allclient,
@@ -116,6 +163,21 @@ class AppPages {
       name: AppRoutes.companyProfile,
       page: () => const CompanyProfileView(),
       binding: CompanyProfileBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.companyProfileChangelogo,
+      page: () => const CompanyProfileChangelogoView(),
+      binding: CompanyProfileChangelogoBinding(),
+    ),
+     GetPage(
+      name: AppRoutes. companyhome,
+      page: () => const CompanyHomeView(),
+      binding: CompanyHomeBinding(),
+    ),
+     GetPage(
+      name: AppRoutes. companyaddpayment,
+      page: () => const CompanyAddPaymentView(),
+      binding: CompanyAddPaymentBinding(),
     )
   ];
 }
