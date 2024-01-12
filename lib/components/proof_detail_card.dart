@@ -14,27 +14,32 @@ class ProofDetailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 15, left: 15),
+      padding: EdgeInsets.all( 20),
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * 0.25,
+      height: MediaQuery.of(context).size.height * 0.23,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: lightGrey,
           border: Border.all(color: mainColor, width: 1)),
-      child: Column(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SvgPicture.asset(
-                'assets/images/file.svg',
-                fit: BoxFit.scaleDown,
-              ),
-              Gap(10),
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    'assets/images/file.svg',
+                    fit: BoxFit.scaleDown,
+                  ),
+                   Gap(10),
               Text(
                 name,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
               ),
-              Gap(30),
+                ],
+              ),
+             
+              
               Text(
                 'View document',
                 style: TextStyle(
