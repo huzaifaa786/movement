@@ -121,59 +121,58 @@ class _CompanyAddPaymentViewState extends State<CompanyAddPaymentView> {
                                     ]),
                               ),
                             Gap(10),
-                            if (controller.selectedOption.value ==
-                                2)  Column(
-                              children: [
-                                MonthDateContainer(
-                                  title: '1 Jan 2023',
-                                ),
-                                 Gap(3),
-                            MonthDateContainer(
-                              title: '1 Feb 2023',
-                            ),
-                            Gap(3),
-                            MonthDateContainer(
-                              title: '1 Mar 2023',
-                            ),
-                            Gap(3),
-                            MonthDateContainer(
-                              title: '1 Apr 2023',
-                            ),
-                            Gap(3),
-                            MonthDateContainer(
-                              title: '1 May 2023',
-                            ),
-                            Gap(3),
-                            MonthDateContainer(
-                              title: '1 Jun 2023',
-                            ),
-                            Gap(3),
-                            MonthDateContainer(
-                              title: '1 Jul 2023',
-                            ),
-                            Gap(3),
-                            MonthDateContainer(
-                              title: '1 Aug 2023',
-                            ),
-                            Gap(3),
-                            MonthDateContainer(
-                              title: '1 Sep 2023',
-                            ),
-                            Gap(3),
-                            MonthDateContainer(
-                              title: '1 Oct 2023',
-                            ),
-                            Gap(3),
-                            MonthDateContainer(
-                              title: '1 Nov 2023',
-                            ),
-                            Gap(3),
-                            MonthDateContainer(
-                              title: '1 Dec 2023',
-                            ),
-                              ],
-                            ),
-                           
+                            if (controller.selectedOption.value == 2)
+                              Column(
+                                children: [
+                                  MonthDateContainer(
+                                    title: '1 Jan 2023',
+                                  ),
+                                  Gap(3),
+                                  MonthDateContainer(
+                                    title: '1 Feb 2023',
+                                  ),
+                                  Gap(3),
+                                  MonthDateContainer(
+                                    title: '1 Mar 2023',
+                                  ),
+                                  Gap(3),
+                                  MonthDateContainer(
+                                    title: '1 Apr 2023',
+                                  ),
+                                  Gap(3),
+                                  MonthDateContainer(
+                                    title: '1 May 2023',
+                                  ),
+                                  Gap(3),
+                                  MonthDateContainer(
+                                    title: '1 Jun 2023',
+                                  ),
+                                  Gap(3),
+                                  MonthDateContainer(
+                                    title: '1 Jul 2023',
+                                  ),
+                                  Gap(3),
+                                  MonthDateContainer(
+                                    title: '1 Aug 2023',
+                                  ),
+                                  Gap(3),
+                                  MonthDateContainer(
+                                    title: '1 Sep 2023',
+                                  ),
+                                  Gap(3),
+                                  MonthDateContainer(
+                                    title: '1 Oct 2023',
+                                  ),
+                                  Gap(3),
+                                  MonthDateContainer(
+                                    title: '1 Nov 2023',
+                                  ),
+                                  Gap(3),
+                                  MonthDateContainer(
+                                    title: '1 Dec 2023',
+                                  ),
+                                ],
+                              ),
                             Gap(50),
                             Row(
                               children: [
