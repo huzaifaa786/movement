@@ -36,30 +36,35 @@ class _CompanyHomeViewState extends State<CompanyHomeView> {
                                   child: SvgPicture.asset(
                                       'assets/images/appLogo.svg'),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child: SizedBox(
-                                    child: Stack(
-                                      children: [
-                                        Image.asset(
-                                          'assets/images/notification_bell.png',
-                                          width: 24,
-                                          height: 24,
-                                        ),
-                                        Positioned(
-                                          bottom: 12,
-                                          right: 0,
-                                          child: Container(
-                                            width: 12,
-                                            height: 12,
-                                            decoration: BoxDecoration(
-                                              color: Colors.red,
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
+                                InkWell(
+                                  onTap: () {
+                                    Get.offNamed(AppRoutes.companyNotification);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: SizedBox(
+                                      child: Stack(
+                                        children: [
+                                          Image.asset(
+                                            'assets/images/notification_bell.png',
+                                            width: 24,
+                                            height: 24,
+                                          ),
+                                          Positioned(
+                                            bottom: 12,
+                                            right: 0,
+                                            child: Container(
+                                              width: 12,
+                                              height: 12,
+                                              decoration: BoxDecoration(
+                                                color: Colors.red,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 )

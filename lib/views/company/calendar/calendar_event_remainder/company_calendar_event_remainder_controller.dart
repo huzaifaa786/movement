@@ -1,16 +1,11 @@
 import 'package:get/get.dart';
+import 'package:noobz/utils/ui_utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class CompanyAddPaymentController extends GetxController {
-  static CompanyAddPaymentController instance = Get.find();
-  RxInt selectedOption = 1.obs;
-
-  void setSelectedOption(int? value) {
-    selectedOption.value = value ?? 1;
-    update();
-  }
-
-   CalendarFormat format = CalendarFormat.month;
+class CompanyCalendarEventRemainderController extends GetxController {
+  static CompanyCalendarEventRemainderController instance = Get.find();
+  
+  CalendarFormat format = CalendarFormat.month;
   var format1 = 'month';
   DateTime ourdate = DateTime.now();
   DateTime today = DateTime.now();

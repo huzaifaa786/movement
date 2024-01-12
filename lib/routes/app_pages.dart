@@ -6,11 +6,17 @@ import 'package:noobz/views/company/auth/signin/signin_binding.dart';
 import 'package:noobz/views/company/auth/signin/signin_view.dart';
 import 'package:noobz/views/company/add_payment/company_add_payment_binding.dart';
 import 'package:noobz/views/company/add_payment/company_add_payment_view.dart';
+import 'package:noobz/views/company/calendar/calendar_event_remainder/company_calendar_event_remainder_binding.dart';
+import 'package:noobz/views/company/calendar/calendar_event_remainder/company_calendar_event_remainder_view.dart';
+import 'package:noobz/views/company/calendar/company_calendar_binding.dart';
+import 'package:noobz/views/company/calendar/company_calendar_view.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_binding.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_view.dart';
 import 'package:noobz/views/company/client/addclient/addclient_binding.dart';
 import 'package:noobz/views/company/home/company_home_binding.dart';
 import 'package:noobz/views/company/home/company_home_view.dart';
+import 'package:noobz/views/company/notification/company_notification_binding.dart';
+import 'package:noobz/views/company/notification/company_notification_view.dart';
 
 import 'package:noobz/views/company/profile/company_profile_binding.dart';
 import 'package:noobz/views/company/profile/company_profile_view.dart';
@@ -152,6 +158,21 @@ class AppPages {
       name: AppRoutes.individualnotification,
       page: () => const IndividualNoficationView(),
       binding: IndividualNotificationBinding(),
+    ),
+     GetPage(
+      name: AppRoutes.companyNotification,
+      page: () => const CompanyNotificationView(),
+      binding: CompanyNotificationBinding(),
+    ),
+     GetPage(
+      name: AppRoutes.companyCalendar,
+      page: () => const CompanyCalendarView(),
+      binding: CompanyCalendarBinding(),
+    ),
+     GetPage(
+      name: AppRoutes.companyCalendarEventRemainder,
+      page: () => const CompanyCalendarEventRemainderView(),
+      binding: CompanyCalendarEventRemainderBinding(),
     ),
     GetPage(
       name: AppRoutes.addclient,
