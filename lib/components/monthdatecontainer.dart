@@ -55,7 +55,7 @@ class MonthDateContainer extends StatelessWidget {
                 height: 17,
                 width: 17,
               ),
-            )
+            ),
           ],
         ),
       ),

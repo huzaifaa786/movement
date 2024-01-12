@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noobz/components/day_names.dart';
 import 'package:noobz/components/event_name_container.dart';
+import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/main_input.dart';
 import 'package:noobz/components/main_input_small.dart';
 import 'package:noobz/components/monthdatecontainer.dart';
 import 'package:noobz/components/payment_date.dart';
+import 'package:noobz/components/priceinput.dart';
 import 'package:noobz/components/topbbar.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:gap/gap.dart';
@@ -391,6 +393,97 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                           ),
                         ),
                       Gap(30),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30, right: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Is there a Payment due?',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  color: darkGrey),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15, right: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.6,
+                              decoration: BoxDecoration(),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Radio<int>(
+                                        value: 1,
+                                        groupValue:
+                                            controller.selectedOption.value,
+                                        activeColor: mainColor,
+                                        onChanged: (int? value) =>
+                                            controller.setSelectedOption(value),
+                                      ),
+                                      Text(
+                                        'Yes',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Radio<int>(
+                                        value: 2,
+                                        groupValue:
+                                            controller.selectedOption.value,
+                                        activeColor: mainColor,
+                                        onChanged: (int? value) =>
+                                            controller.setSelectedOption(value),
+                                      ),
+                                      Text(
+                                        'No',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 25, right: 20),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 188,
+                              child: priceInput(
+                                hintText: 'amount',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Gap(50),
+                      Padding(
+                        padding: const EdgeInsets.all(20),
+                        child: MainButton(
+                          // buttonWidth: 0.9/,
+                          title: 'submit',
+                          isSelected: true,
+                        ),
+                      ),
                     ],
                   ),
                 ),
