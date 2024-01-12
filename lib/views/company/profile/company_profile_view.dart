@@ -4,6 +4,7 @@ import 'package:gradient_borders/gradient_borders.dart';
 import 'package:noobz/components/company_profile_action_container.dart';
 import 'package:noobz/components/company_profile_main_container.dart';
 import 'package:noobz/components/individual_profile_appbar.dart';
+import 'package:noobz/components/topbbar.dart';
 import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/company/profile/company_profile_controller.dart';
@@ -20,16 +21,23 @@ class _CompanyProfileViewState extends State<CompanyProfileView> {
   Widget build(BuildContext context) {
     return GetBuilder<CompanyProfileController>(
         builder: (controller) => Scaffold(
-                body: SafeArea(
-                    child: SingleChildScrollView(
-                        child: Padding(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              forceMaterialTransparency: true,
+              title: TitleTopBar(
+                name: 'Company profile',
+                ontap: () {
+                  Get.back();
+                },
+              ),
+            ),
+            body: SafeArea(
+                child: SingleChildScrollView(
+                    child: Padding(
               padding: const EdgeInsets.only(
                   top: 15, bottom: 15, left: 15, right: 15),
               child: Column(
                 children: [
-                  IndividualProfileAppBar(
-                    name: 'Company profile',
-                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 30, bottom: 50),
                     child: CompanyProfileMainContainer(
@@ -52,9 +60,9 @@ class _CompanyProfileViewState extends State<CompanyProfileView> {
                     ),
                   ),
                   CompanyProfileActionContainer(
-                       ontap: () {
-                        Get.offNamed(AppRoutes.language);
-                      },
+                    ontap: () {
+                      Get.offNamed(AppRoutes.language);
+                    },
                     text: 'Change language',
                     image: 'assets/images/companyprofilechangelang.png',
                   ),
