@@ -9,10 +9,12 @@ class AllclientBox extends StatelessWidget {
     Key? key,
     this.name,
     this.type,
+    this.ontap
   }) : super(key: key);
 
   final name;
   final type;
+  final ontap;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +23,7 @@ class AllclientBox extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(6.0),
         width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height*0.10,
         decoration: BoxDecoration(
             color: lightGrey,
             borderRadius: BorderRadius.all(Radius.circular(19))),
@@ -50,21 +53,24 @@ class AllclientBox extends StatelessWidget {
                           style:
                               TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              'View Client ',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: mainColor),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 15,
-                              color: mainColor,
-                            )
-                          ],
+                        InkWell(
+                          onTap: ontap,
+                          child: Row(
+                            children: [
+                              Text(
+                                'View Client ',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: mainColor),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 15,
+                                color: mainColor,
+                              )
+                            ],
+                          ),
                         ),
                       ],
                     ),
