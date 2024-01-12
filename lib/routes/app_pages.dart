@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 import 'package:noobz/routes/app_routes.dart';
+import 'package:noobz/views/company/add_event/add_event_binding.dart';
+import 'package:noobz/views/company/add_event/add_event_view.dart';
 import 'package:noobz/views/company/auth/signin/signin_binding.dart';
 import 'package:noobz/views/company/auth/signin/signin_view.dart';
 import 'package:noobz/views/company/add_payment/company_add_payment_binding.dart';
@@ -178,6 +180,11 @@ class AppPages {
       name: AppRoutes. companyaddpayment,
       page: () => const CompanyAddPaymentView(),
       binding: CompanyAddPaymentBinding(),
+    ),
+     GetPage(
+      name: AppRoutes. companyaddevent,
+      page: () => const CompanyAddEventView(),
+      binding: CompanyAddEventBinding(),
     )
   ];
 }
