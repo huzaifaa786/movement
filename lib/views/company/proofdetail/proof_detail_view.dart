@@ -33,29 +33,34 @@ class ProofDetailView extends StatelessWidget {
           child: Column(
             children: [
               Gap(30),
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/images/health_profile.svg',
-                    fit: BoxFit.scaleDown,
-                  ),
-                  Gap(5),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Mohammed Yusif',
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w600),
-                      ),
-                      Text(
-                        'Mo7o3',
-                        style: TextStyle(
-                            fontSize: 14, fontWeight: FontWeight.w500),
-                      )
-                    ],
-                  )
-                ],
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      'assets/images/health_profile.svg',
+                      fit: BoxFit.scaleDown,
+                    ),
+                    Gap(5),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Mohammed Yusif',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          'Mo7o3',
+                          style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              color: darkGrey),
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
               Gap(30),
               ProofDetailCard(
@@ -63,42 +68,84 @@ class ProofDetailView extends StatelessWidget {
                   date: '23 Dec2023',
                   type: 'Petrol payment'),
               Gap(40),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: mainColor),
-                    height: 50,
-                    width: MediaQuery.of(context).size.width * 0.40,
-                    child: Center(
-                      child: Text("Accept",
-                          style: TextStyle(
-                            color: white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          )),
-                    ),
+              if (!controller.isAccepted.value && !controller.isRejected.value)
+                Padding(
+                  padding: const EdgeInsets.only(left: 10,right: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          controller.accept();
+                         
+                        },
+                        // controller.accept(),
+                        child: Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              color: mainColor),
+                          height: 50,
+                          width: MediaQuery.of(context).size.width * 0.40,
+                          child: Center(
+                            child: Text("Accept",
+                                style: TextStyle(
+                                  color: white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                )),
+                          ),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () => controller.reject(),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(width: 1, color: mainColor),
+                          ),
+                          height: 50,
+                          width: MediaQuery.of(context).size.width * 0.40,
+                          child: Center(
+                            child: Text("Reject",
+                                style: TextStyle(
+                                  color: mainColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                )),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(width: 1, color: mainColor),
+                ),
+              if (controller.isAccepted.value)
+                Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset("assets/images/tick.svg"),
+                    Gap(10),
+                    Text(
+                      'Accepted',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,color:Color(4280469255),
+                      ),
                     ),
-                    height: 50,
-                    width: MediaQuery.of(context).size.width * 0.40,
-                    child: Center(
-                      child: Text("Reject",
-                          style: TextStyle(
-                            color: mainColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          )),
+                  ],
+                ),
+              if (controller.isRejected.value)
+                 Row(mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset("assets/images/cross.svg"),
+                    Gap(10),
+                    Text(
+                      'Rejected',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,color:red
+                      ),
                     ),
-                  ),
-                ],
-              )
+                  ],
+                ),
             ],
           ),
         )),
