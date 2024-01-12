@@ -18,7 +18,7 @@ class MainInputSmall extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 15),
+      padding: const EdgeInsets.all(10),
       child: Container(
         width: 90,
         height: 40,
