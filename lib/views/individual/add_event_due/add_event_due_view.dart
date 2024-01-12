@@ -196,6 +196,9 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                         ),
                       ),
                       Gap(20),
+                      EventNameContainer(
+                          name: 'Select event date', color: blackgrey),
+                      Gap(20),
                       Padding(
                         padding: const EdgeInsets.only(left: 16, right: 16),
                         child: Container(
