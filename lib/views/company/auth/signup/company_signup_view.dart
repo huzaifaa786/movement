@@ -8,6 +8,7 @@ import 'package:noobz/components/main_input.dart';
 import 'package:noobz/components/password_input.dart';
 import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
+import 'package:noobz/views/company/auth/signup/company_signup_controller.dart';
 
 class CompanySignUpView extends StatefulWidget {
   const CompanySignUpView({super.key});
@@ -21,8 +22,8 @@ class _CompanySignUpViewState extends State<CompanySignUpView> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(builder: (context) {
-      return Scaffold(
+    return GetBuilder<CompanySignUPController>(
+      builder: (controller) => Scaffold(
         body: SafeArea(
             child: Container(
           padding: EdgeInsets.only(right: 10, left: 10, top: 30, bottom: 30),
@@ -97,7 +98,6 @@ class _CompanySignUpViewState extends State<CompanySignUpView> {
                                   Radio<int>(
                                     value: 1,
                                     groupValue: selectedOption,
-                                   
                                     activeColor: mainColor,
                                     onChanged: (int? value) {
                                       setState(() {
@@ -134,15 +134,15 @@ class _CompanySignUpViewState extends State<CompanySignUpView> {
                 MainButton(
                   title: 'Submit',
                   isSelected: true,
-                   onTap: () {
-                  Get.toNamed(AppRoutes.companyhome);
-                },
+                  onTap: () {
+                    Get.toNamed(AppRoutes.companyhome);
+                  },
                 ),
               ],
             ),
           ),
         )),
-      );
-    });
+      ),
+    );
   }
 }
