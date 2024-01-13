@@ -25,13 +25,21 @@ class AllclientBox extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(19))),
         child: Row(
           children: [
-            SvgPicture.asset(
-              'assets/images/account.svg',
-              height: 43,
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Column(
+                children: [
+                  SvgPicture.asset(
+                    'assets/images/account.svg',
+                    height: 43,
+                  ),
+                ],
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(left: 5),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
