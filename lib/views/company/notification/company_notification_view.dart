@@ -36,92 +36,107 @@ class _CompanyNotificationViewState extends State<CompanyNotificationView> {
                     child: Padding(
                         padding:
                             const EdgeInsets.only(left: 20, right: 20, top: 15),
-                        child: Column(
-                          children: [
-                            NotificationContainer(
-                              image:
-                                  'assets/images/notification_upcoming_payment.png',
-                              notificationtext:
-                                  'You have an upcoming payment to Adnoc on 27/Dec/2023',
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 5, bottom: 32),
-                              child: Divider(
-                                thickness: 1,
-                                color: dividercolorduredate,
-                              ),
-                            ),
-                            NotificationContainer(
-                              image:
-                                  'assets/images/notification_sussesfully_submitted.png',
-                              notificationtext:
-                                  'You have successfully submitted proof of payment ,and its currently under review',
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 5, bottom: 32),
-                              child: Divider(
-                                thickness: 1,
-                                color: dividercolorduredate,
-                              ),
-                            ),
-                            NotificationContainer(
-                              image:
-                                  'assets/images/notification_rental_payment.png',
-                              notificationtext:
-                                  'You havea rental payment on 22/dec /2023',
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 5, bottom: 32),
-                              child: Divider(
-                                thickness: 1,
-                                color: dividercolorduredate,
-                              ),
-                            ),
-                            NotificationContainer(
-                              image: 'assets/images/notification_missed.png',
-                              notificationtext:
-                                  'You missed a payment on 22/dec /2023 to Adnoc',
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 5, bottom: 32),
-                              child: Divider(
-                                thickness: 1,
-                                color: dividercolorduredate,
-                              ),
-                            ),
-                            NotificationContainer(
-                              image:
-                                  'assets/images/notification_payment_sussesful.png',
-                              notificationtext:
-                                  'Adnoc accepted your  payment Successfuly',
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 5, bottom: 32),
-                              child: Divider(
-                                thickness: 1,
-                                color: dividercolorduredate,
-                              ),
-                            ),
-                            NotificationContainer(
-                              image:
-                                  'assets/images/notification_reject_attachment.png',
-                              notificationtext:
-                                  'Adnoc rejected your attachment  ,please Resubmit   the attachment.',
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 5, bottom: 32),
-                              child: Divider(
-                                thickness: 1,
-                                color: dividercolorduredate,
-                              ),
-                            ),
-                          ],
-                        ))))));
+                        child:Container(
+                          height: MediaQuery.of(context).size.height,
+                          width: MediaQuery.of(context).size.width,
+                          child: ListView.builder(
+                              itemCount: controller.items.length,
+                              itemBuilder: (context, index) {
+                                return NotificationContainer(
+                                  image:
+                                      'assets/images/notification_upcoming_payment.png',
+                                  notificationtext:
+                                      'You have an upcoming payment to Adnoc on 27/Dec/2023',
+                                );
+                              }),
+                        )
+                        //  Column(
+                        //   children: [
+                        //     NotificationContainer(
+                        //       image:
+                        //           'assets/images/notification_upcoming_payment.png',
+                        //       notificationtext:
+                        //           'You have an upcoming payment to Adnoc on 27/Dec/2023',
+                        //     ),
+                        //     Padding(
+                        //       padding:
+                        //           const EdgeInsets.only(top: 5, bottom: 32),
+                        //       child: Divider(
+                        //         thickness: 1,
+                        //         color: dividercolorduredate,
+                        //       ),
+                        //     ),
+                        //     NotificationContainer(
+                        //       image:
+                        //           'assets/images/notification_sussesfully_submitted.png',
+                        //       notificationtext:
+                        //           'You have successfully submitted proof of payment ,and its currently under review',
+                        //     ),
+                        //     Padding(
+                        //       padding:
+                        //           const EdgeInsets.only(top: 5, bottom: 32),
+                        //       child: Divider(
+                        //         thickness: 1,
+                        //         color: dividercolorduredate,
+                        //       ),
+                        //     ),
+                        //     NotificationContainer(
+                        //       image:
+                        //           'assets/images/notification_rental_payment.png',
+                        //       notificationtext:
+                        //           'You havea rental payment on 22/dec /2023',
+                        //     ),
+                        //     Padding(
+                        //       padding:
+                        //           const EdgeInsets.only(top: 5, bottom: 32),
+                        //       child: Divider(
+                        //         thickness: 1,
+                        //         color: dividercolorduredate,
+                        //       ),
+                        //     ),
+                        //     NotificationContainer(
+                        //       image: 'assets/images/notification_missed.png',
+                        //       notificationtext:
+                        //           'You missed a payment on 22/dec /2023 to Adnoc',
+                        //     ),
+                        //     Padding(
+                        //       padding:
+                        //           const EdgeInsets.only(top: 5, bottom: 32),
+                        //       child: Divider(
+                        //         thickness: 1,
+                        //         color: dividercolorduredate,
+                        //       ),
+                        //     ),
+                        //     NotificationContainer(
+                        //       image:
+                        //           'assets/images/notification_payment_sussesful.png',
+                        //       notificationtext:
+                        //           'Adnoc accepted your  payment Successfuly',
+                        //     ),
+                        //     Padding(
+                        //       padding:
+                        //           const EdgeInsets.only(top: 5, bottom: 32),
+                        //       child: Divider(
+                        //         thickness: 1,
+                        //         color: dividercolorduredate,
+                        //       ),
+                        //     ),
+                        //     NotificationContainer(
+                        //       image:
+                        //           'assets/images/notification_reject_attachment.png',
+                        //       notificationtext:
+                        //           'Adnoc rejected your attachment  ,please Resubmit   the attachment.',
+                        //     ),
+                        //     Padding(
+                        //       padding:
+                        //           const EdgeInsets.only(top: 5, bottom: 32),
+                        //       child: Divider(
+                        //         thickness: 1,
+                        //         color: dividercolorduredate,
+                        //       ),
+                        //     ),
+                        //   ],
+                        // )
+                        )))));
   }
 }
