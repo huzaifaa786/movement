@@ -31,6 +31,7 @@ class SignUpView extends StatelessWidget {
                       )),
                   Gap(50),
                   MainInput(
+                    controller: controller.EmailController,
                     prefixIcon: SvgPicture.asset(
                       'assets/images/email.svg',
                       fit: BoxFit.scaleDown,
@@ -39,6 +40,7 @@ class SignUpView extends StatelessWidget {
                   ),
                   Gap(2),
                   MainInput(
+                    controller: controller.UsernameController,
                     prefixIcon: SvgPicture.asset(
                       'assets/images/person.svg',
                       fit: BoxFit.scaleDown,
@@ -109,7 +111,9 @@ class SignUpView extends StatelessWidget {
                       ),
                       googleloginbox(
                         icon: 'assets/images/mobile.svg',
-                        ontap: () { Get.toNamed(AppRoutes.withOtp);},
+                        ontap: () {
+                          Get.toNamed(AppRoutes.withOtp);
+                        },
                       ),
                     ],
                   ),
@@ -154,7 +158,7 @@ class SignUpView extends StatelessWidget {
                     title: 'Next',
                     isSelected: true,
                     onTap: () {
-                      Get.toNamed(AppRoutes.individualHome);
+                      controller.registerUser();
                     },
                   ),
                 ],

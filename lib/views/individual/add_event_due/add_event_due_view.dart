@@ -102,7 +102,7 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                         title: Text(
                           'Day',
                           style: TextStyle(
-                            color: Colors.black,
+                            color: black,
                             fontSize: 14,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w600,
@@ -145,7 +145,7 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                                   Text(
                                     'Weekly',
                                     style: TextStyle(
-                                      color: Colors.black,
+                                      color: black,
                                       fontSize: 14,
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w600,
@@ -266,7 +266,13 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsets.only(top: 12, left: 10, right: 10),
+                            const EdgeInsets.only(left: 25, right: 25, top: 11),
+                        child: EventNameContainer(
+                            name: 'Select event date', color: darkGrey),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: 8, left: 10, right: 10),
                         child: TableCalendar(
                           selectedDayPredicate: (day) =>
                               isSameDay(day, controller.newtoday),
@@ -274,6 +280,15 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                           lastDay: DateTime.now(),
                           focusedDay: controller.newtoday,
                           onDaySelected: controller.onDaySelected,
+                          headerStyle: const HeaderStyle(
+                            formatButtonVisible: false,
+                            titleCentered: true,
+                            titleTextStyle: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
+                                color: black),
+                          ),
                           calendarStyle: CalendarStyle(
                             todayDecoration: BoxDecoration(
                                 color: mainColor.withOpacity(0.5),
@@ -316,27 +331,6 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                         ),
                       ),
                       Gap(30),
-                      if (controller.selectedOption.value ==
-                          1) // Manually selected
-                        Container(
-                          height: 56,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Color(4294375158)),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '24 Dec 2023',
-                                  style: TextStyle(
-                                      color: individualduedate,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600),
-                                )
-                              ]),
-                        ),
-                      Gap(10),
                       if (controller.selectedOption.value == 2)
                         Padding(
                           padding: const EdgeInsets.only(left: 30, right: 30),

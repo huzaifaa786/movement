@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:noobz/components/allclient_box.dart';
 import 'package:noobz/components/topbbar.dart';
+import 'package:noobz/routes/app_routes.dart';
 
 class AllclientView extends StatefulWidget {
   const AllclientView({super.key});
@@ -40,6 +41,7 @@ class _AllclientViewState extends State<AllclientView> {
               ],
             ),
             AllclientBox(
+              ontap: (){ Get.offNamed(AppRoutes.clientinfo);},
               name: 'Ali Raza',
               type: 'Petrol payment',
             ),

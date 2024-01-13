@@ -6,6 +6,7 @@ import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/main_input.dart';
 import 'package:noobz/components/topbbar.dart';
 import 'package:noobz/routes/app_routes.dart';
+import 'package:noobz/views/individual/change_password/change_password_controller.dart';
 
 class ChangePasswordView extends StatefulWidget {
   const ChangePasswordView({Key? key}) : super(key: key);
@@ -29,62 +30,64 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        forceMaterialTransparency: true,
-        title: TitleTopBar(
-          name: 'Change password',
-          ontap: () {
-            Get.back();
-          },
+    return GetBuilder<ChangePasswordController>(
+      builder: (controller) => Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          forceMaterialTransparency: true,
+          title: TitleTopBar(
+            name: 'Change password',
+            ontap: () {
+              Get.back();
+            },
+          ),
         ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(20),
-        child: MainButton(
-          // buttonWidth: 0.9/,
-          title: 'submit',
-          isSelected: true,
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.all(20),
+          child: MainButton(
+            // buttonWidth: 0.9/,
+            title: 'submit',
+            isSelected: true,
+          ),
         ),
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.9,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20, right: 20, top: 60, bottom: 8),
-                      child: MainInput(
-                        controller: _currentPasswordController,
-                        hintText: 'Old Password',
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.9,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20, right: 20, top: 60, bottom: 8),
+                        child: MainInput(
+                          controller: _currentPasswordController,
+                          hintText: 'Old Password',
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20, right: 20, bottom: 8),
-                      child: MainInput(
-                        controller: _newPasswordController,
-                        hintText: 'New Password',
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20, right: 20, bottom: 8),
+                        child: MainInput(
+                          controller: _newPasswordController,
+                          hintText: 'New Password',
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20, right: 20, bottom: 15),
-                      child: MainInput(
-                        controller: _confirmPasswordController,
-                        hintText: 'Confirm New Password',
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20, right: 20, bottom: 15),
+                        child: MainInput(
+                          controller: _confirmPasswordController,
+                          hintText: 'Confirm New Password',
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

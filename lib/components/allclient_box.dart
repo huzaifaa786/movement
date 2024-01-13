@@ -5,14 +5,12 @@ import 'package:gap/gap.dart';
 import 'package:noobz/utils/colors.dart';
 
 class AllclientBox extends StatelessWidget {
-  const AllclientBox({
-    Key? key,
-    this.name,
-    this.type,
-  }) : super(key: key);
+  const AllclientBox({Key? key, this.name, this.type, this.ontap})
+      : super(key: key);
 
   final name;
   final type;
+  final ontap;
 
   @override
   Widget build(BuildContext context) {
@@ -21,19 +19,27 @@ class AllclientBox extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(6.0),
         width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.10,
         decoration: BoxDecoration(
             color: lightGrey,
             borderRadius: BorderRadius.all(Radius.circular(19))),
         child: Row(
           children: [
-            SvgPicture.asset(
-              'assets/images/account.svg',
-              height: 43,
-            ),
-          
             Padding(
-              padding: const EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 8),
               child: Column(
+                children: [
+                  SvgPicture.asset(
+                    'assets/images/account.svg',
+                    height: 43,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -47,33 +53,34 @@ class AllclientBox extends StatelessWidget {
                       children: [
                         Text(
                           type,
-                          style:
-                              TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w500),
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              'View Client ',
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: mainColor),
-                            ),
-                            Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              size: 15,
-                              color: mainColor,
-                            )
-                          ],
+                        InkWell(
+                          onTap: ontap,
+                          child: Row(
+                            children: [
+                              Text(
+                                'View Client ',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: mainColor),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios_rounded,
+                                size: 15,
+                                color: mainColor,
+                              )
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  
                 ],
               ),
             ),
-            
           ],
         ),
       ),
