@@ -5,12 +5,8 @@ import 'package:gap/gap.dart';
 import 'package:noobz/utils/colors.dart';
 
 class AllclientBox extends StatelessWidget {
-  const AllclientBox({
-    Key? key,
-    this.name,
-    this.type,
-    this.ontap
-  }) : super(key: key);
+  const AllclientBox({Key? key, this.name, this.type, this.ontap})
+      : super(key: key);
 
   final name;
   final type;
@@ -23,7 +19,7 @@ class AllclientBox extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(6.0),
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height*0.10,
+        height: MediaQuery.of(context).size.height * 0.10,
         decoration: BoxDecoration(
             color: lightGrey,
             borderRadius: BorderRadius.all(Radius.circular(19))),
@@ -33,7 +29,6 @@ class AllclientBox extends StatelessWidget {
               'assets/images/account.svg',
               height: 43,
             ),
-          
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: Column(
@@ -50,8 +45,8 @@ class AllclientBox extends StatelessWidget {
                       children: [
                         Text(
                           type,
-                          style:
-                              TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.w500),
                         ),
                         InkWell(
                           onTap: ontap,
@@ -75,11 +70,9 @@ class AllclientBox extends StatelessWidget {
                       ],
                     ),
                   ),
-                  
                 ],
               ),
             ),
-            
           ],
         ),
       ),

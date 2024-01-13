@@ -196,9 +196,6 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                         ),
                       ),
                       Gap(20),
-                      EventNameContainer(
-                          name: 'Select event date', color: blackgrey),
-                      Gap(20),
                       Padding(
                         padding: const EdgeInsets.only(left: 16, right: 16),
                         child: Container(
@@ -269,7 +266,13 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsets.only(top: 12, left: 10, right: 10),
+                            const EdgeInsets.only(left: 25, right: 25, top: 11),
+                        child: EventNameContainer(
+                            name: 'Select event date', color: darkGrey),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(top: 8, left: 10, right: 10),
                         child: TableCalendar(
                           selectedDayPredicate: (day) =>
                               isSameDay(day, controller.newtoday),
@@ -319,27 +322,6 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                         ),
                       ),
                       Gap(30),
-                      if (controller.selectedOption.value ==
-                          1) // Manually selected
-                        Container(
-                          height: 56,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Color(4294375158)),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  '24 Dec 2023',
-                                  style: TextStyle(
-                                      color: individualduedate,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600),
-                                )
-                              ]),
-                        ),
-                      Gap(10),
                       if (controller.selectedOption.value == 2)
                         Padding(
                           padding: const EdgeInsets.only(left: 30, right: 30),
