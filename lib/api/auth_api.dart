@@ -18,7 +18,7 @@ register(name, email, password, ) async {
   );
   print(response);
   if (!response['error']) {
-    User user = User(response['user']);
+    // User user = User(response['user']);
 
     return true;
   } else {
