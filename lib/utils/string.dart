@@ -1,1 +1,1 @@
-const BASE_URL = "https://admin.klickwash.net/api/";
+const BASE_URL = "https://noobz.ezmoveportal.com/api/";
