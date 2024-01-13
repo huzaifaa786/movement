@@ -280,6 +280,15 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                           lastDay: DateTime.now(),
                           focusedDay: controller.newtoday,
                           onDaySelected: controller.onDaySelected,
+                          headerStyle: const HeaderStyle(
+                            formatButtonVisible: false,
+                            titleCentered: true,
+                            titleTextStyle: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
+                                color: black),
+                          ),
                           calendarStyle: CalendarStyle(
                             todayDecoration: BoxDecoration(
                                 color: mainColor.withOpacity(0.5),

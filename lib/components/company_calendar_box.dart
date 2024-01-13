@@ -54,15 +54,17 @@ class CompanyCalendarBox extends StatelessWidget {
                       Container(
                         width: MediaQuery.of(context).size.width * 0.75,
                         child: Container(
-                          width: MediaQuery.of(context).size.width * 0.50,
+                         // width: MediaQuery.of(context).size.width * 0.50,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
                                 width: Get.width * 0.22,
+                               
                                 child: Text(
                                   type,
                                   style: TextStyle(
+                                  
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -73,7 +75,7 @@ class CompanyCalendarBox extends StatelessWidget {
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                   )),
-                                  Gap(10),
+                                //  Gap(10),
                               Row(
                                 children: [
                                   Text(
