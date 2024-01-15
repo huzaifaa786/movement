@@ -7,7 +7,6 @@ class LoginApi {
     String email,
     String password,
   ) async {
-    print('ffffffffffffffffffffffffffffffffffffffffff');
     var url = BASE_URL + 'login';
     var data = {
       'email': email,
