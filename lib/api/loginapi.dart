@@ -1,11 +1,13 @@
 import 'package:noobz/api/api.dart';
 import 'package:noobz/models/user_model.dart';
 import 'package:noobz/utils/string.dart';
-class LoginApi{
-  Future<bool> login(
+
+class LoginApi {
+  login(
     String email,
     String password,
-  ) async {print('ffffffffffffffffffffffffffffffffffffffffff');
+  ) async {
+    print('ffffffffffffffffffffffffffffffffffffffffff');
     var url = BASE_URL + 'login';
     var data = {
       'email': email,
@@ -16,7 +18,7 @@ class LoginApi{
       url: url,
       data: data,
     );
-
+    print('sssssssssssssssssssssssssssssssssssssssssssssssssss');
     if (!response['error']) {
       return true;
     } else {
