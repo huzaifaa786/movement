@@ -104,16 +104,6 @@ class AppPages {
       binding: ChangePasswordBinding(),
     ),
     GetPage(
-<<<<<<< HEAD
-      name: AppRoutes.signIn,
-      page: () => const SignInView(),
-      binding: SignInBinding(),
-    ),
-    GetPage(
-      name: AppRoutes.companysignin,
-      page: () => const CompanySignInView(),
-      binding: CompanySignInBinding(),
-=======
       name: AppRoutes.companysignin,
       page: () => const CompanySignInView(),
       binding: CompanySignInBinding(),
@@ -122,7 +112,6 @@ class AppPages {
       name: AppRoutes.signIn,
       page: () => const SignInView(),
       binding: SignInBinding(),
->>>>>>> a1212803db22ef885a135ae587b8d0811a2aabd4
     ),
     GetPage(
       name: AppRoutes.forgetPassword,
