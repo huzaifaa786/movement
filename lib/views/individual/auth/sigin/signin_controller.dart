@@ -1,44 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:noobz/api/loginapi.dart';
+import 'package:noobz/api/auth_api.dart';
+import 'package:noobz/models/user_model.dart';
+import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/ui_utils.dart';
 
 class SignInController extends GetxController {
   static SignInController instance = Get.find();
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-
-  final authapi = LoginApi();
   bool obscureTextPassword = true;
+  final _authApi = UserApi();
+  User? user;
   void toggle() {
     obscureTextPassword = !obscureTextPassword;
     update();
   }
 
   String language = 'english';
-
-  Future<void> loginUser() async {
+  Future<void> LoginUser() async {
     try {
       if (emailController.text.isEmpty || passwordController.text.isEmpty) {
         return;
       }
-      print('objectllllllllllllllllllllllllllllllllll');
-      var response = await authapi.login(
-        emailController.text,
-        passwordController.text,
-      );
 
-      if (response) {
-        print('Login successful');
-        // Add your logic here for what to do after a successful login
+      var responce =
+          await _authApi.login(emailController.text, passwordController.text);
+      if (!responce['error']) {
+        Get.offNamed(AppRoutes.individualHome);
+        user = User.fromJson(responce['user']);
       } else {
-        // Login failed
-        print('Login nottttttttttttt successful');
-
-        // Add your logic here for what to do when login fails
+        print(responce['error_data']);
       }
-    } catch (error) {
-      print('Error logging in: $error');
-    }
+    } catch (error) {}
   }
 }

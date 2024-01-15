@@ -7,13 +7,15 @@ class UserApi {
     name,
     email,
     password,
-  ) async {print('ffffffffffffffffffffffffffffffffffffffffff');
+  ) async {
     var url = BASE_URL + 'register';
     var data;
     data = {
       'name': name.toString(),
       'email': email.toString(),
       'password': password.toString(),
+      'account_type': 'INDIVIDUAL',
+      'login_type': 'EMAIL',
     };
 
     var response = await Api.execute(
@@ -22,12 +24,27 @@ class UserApi {
     );
     print('ddddddddddddddddddddddddddddddddddddddddddddddd');
     print(response.toString());
-    if (!response['error']) {
-      //  User user = User(response['user']);
+    return response;
+  }
 
-      return true;
-    } else {
-      return false;
-    }
+  Future<Map<String, dynamic>> login(
+    String email,
+    String password,
+  ) async {
+    var url = BASE_URL + 'login';
+    var data = {
+      'email': email,
+      'password': password,
+    };
+
+    var response = await Api.execute(
+      url: url,
+      data: data,
+    );
+
+    print('Login response:');
+    print(response.toString());
+
+    return response;
   }
 }
