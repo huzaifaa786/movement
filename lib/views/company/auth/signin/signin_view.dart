@@ -5,10 +5,8 @@ import 'package:get/get.dart';
 import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/main_input.dart';
 import 'package:noobz/components/password_input.dart';
-import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/company/auth/signin/signin_controller.dart';
-import 'package:noobz/views/individual/auth/sigin/signin_controller.dart';
 
 class CompanySignInView extends StatelessWidget {
   const CompanySignInView({super.key});
