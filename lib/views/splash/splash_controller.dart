@@ -14,7 +14,7 @@ class SplashController extends GetxController {
 
   Future checkFirstSeen() async {
     
-    Get.offNamed(AppRoutes.language); 
+    Get.offNamed(AppRoutes.companysignin); 
    // Get.offNamed(AppRoutes.companyaddevent); 
   }
 }

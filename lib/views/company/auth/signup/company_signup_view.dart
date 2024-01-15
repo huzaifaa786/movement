@@ -41,6 +41,7 @@ class _CompanySignUpViewState extends State<CompanySignUpView> {
                     'assets/images/company_building.svg',
                     fit: BoxFit.scaleDown,
                   ),
+                  controller: controller.nameController,
                   hintText: 'Company name',
                 ),
                 Gap(10),
@@ -49,12 +50,14 @@ class _CompanySignUpViewState extends State<CompanySignUpView> {
                     'assets/images/email.svg',
                     fit: BoxFit.scaleDown,
                   ),
+                  controller: controller.emailController,
                   hintText: 'Email address',
                 ),
                 Gap(10),
                 PasswordInput(
                   hintText: 'Password',
                   obscure: true,
+                  controller: controller.passwordController,
                   prefixIcon: SvgPicture.asset(
                     'assets/images/lock_simple.svg',
                     fit: BoxFit.scaleDown,
@@ -135,7 +138,9 @@ class _CompanySignUpViewState extends State<CompanySignUpView> {
                   title: 'Submit',
                   isSelected: true,
                   onTap: () {
-                    Get.toNamed(AppRoutes.companyhome);
+                    controller.companyregisterUser();
+                    //  Get.toNamed(AppRoutes.companyhome);
+
                   },
                 ),
               ],

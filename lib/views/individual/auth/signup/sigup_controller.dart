@@ -42,6 +42,7 @@ class SigUpController extends GetxController {
       );
       user = User.fromJson(respone);
     } catch (error) {
+      
       print('Error registering user: $error');
     }
   }
