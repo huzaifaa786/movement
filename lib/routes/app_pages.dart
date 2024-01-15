@@ -105,13 +105,13 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.signIn,
-      page: () => const CompanySignInView(),
-      binding: CompanySignInBinding(),
+      page: () => const SignInView(),
+      binding: SignInBinding(),
     ),
     GetPage(
       name: AppRoutes.companysignin,
-      page: () => const SignInView(),
-      binding: SignInBinding(),
+      page: () => const CompanySignInView(),
+      binding: CompanySignInBinding(),
     ),
     GetPage(
       name: AppRoutes.forgetPassword,
