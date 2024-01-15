@@ -40,14 +40,20 @@ class CompanySignUPController extends GetxController {
   }
 
   final picker = ImagePicker();
-  late XFile? selectedImage;
+  late XFile? selectedLogo;
+  late XFile? selectedLicense;
 
   // Method to open the image picker and select an image
-  Future<void> pickImage() async {
+  Future<void> pickImage(ImageType imageType) async {
     try {
-      final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+      final pickedImage =
+          await picker.pickImage(source: ImageSource.gallery);
       if (pickedImage != null) {
-        selectedImage = pickedImage;
+        if (imageType == ImageType.logo) {
+          selectedLogo = pickedImage;
+        } else if (imageType == ImageType.license) {
+          selectedLicense = pickedImage;
+        }
         update();
       }
     } catch (error) {
@@ -55,14 +61,23 @@ class CompanySignUPController extends GetxController {
     }
   }
 
-  // Method to upload the selected image
-  Future<void> uploadImage() async {
-    if (selectedImage == null) {
-      return;
+  // Method to upload the selected images
+  Future<void> uploadImages() async {
+    if (selectedLogo != null) {
+      // Implement your logo image uploading logic here
+      // You can use selectedLogo.path to access the image file path
+      // and upload it to your desired location.
     }
 
-    // Implement your image uploading logic here
-    // You can use the selectedImage.path to access the image file path
-    // and upload it to your desired location.
+    if (selectedLicense != null) {
+      // Implement your license image uploading logic here
+      // You can use selectedLicense.path to access the image file path
+      // and upload it to your desired location.
+    }
   }
+}
+
+enum ImageType {
+  logo,
+  license,
 }

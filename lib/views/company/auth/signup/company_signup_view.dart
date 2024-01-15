@@ -67,13 +67,13 @@ class _CompanySignUpViewState extends State<CompanySignUpView> {
                 CompanyCard(
                     title: 'Company logo',
                     onTap: () {
-                      controller.pickImage();
+                      controller.pickImage(ImageType.logo);
                     }),
                 Gap(20),
                 CompanyCard(
                     title: 'Company license',
                     onTap: () {
-                      controller.pickImage();
+                      controller.pickImage(ImageType.license);
                     }),
                 Gap(20),
                 Container(
@@ -146,7 +146,7 @@ class _CompanySignUpViewState extends State<CompanySignUpView> {
                   title: 'Submit',
                   isSelected: true,
                   onTap: () {
-                    controller.uploadImage();
+                    controller.uploadImages();
                     //  Get.toNamed(AppRoutes.companyhome);
                   },
                 ),
