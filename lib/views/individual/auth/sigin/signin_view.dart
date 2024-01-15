@@ -33,6 +33,7 @@ class SignInView extends StatelessWidget {
                   fit: BoxFit.scaleDown,
                 ),
                 hintText: 'Email address',
+                controller: controller.emailController,
               ),
               PasswordInput(
                 prefixIcon: Icon(Icons.lock_outline_rounded),
@@ -63,7 +64,8 @@ class SignInView extends StatelessWidget {
                 title: 'Next',
                 isSelected: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.individualHome);
+                  // Get.toNamed(AppRoutes.individualHome);
+                  controller.loginUser();
                 },
               )
             ],

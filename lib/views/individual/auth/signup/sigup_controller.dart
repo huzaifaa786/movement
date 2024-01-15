@@ -25,7 +25,6 @@ class SigUpController extends GetxController {
   String language = 'english';
 
   Future<void> registerUser() async {
-    print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
     try {
       if (UsernameController.text.isEmpty ||
           EmailController.text.isEmpty ||
@@ -43,6 +42,7 @@ class SigUpController extends GetxController {
       if (response) {
       } else {}
     } catch (error) {
+      
       print('Error registering user: $error');
     }
   }
