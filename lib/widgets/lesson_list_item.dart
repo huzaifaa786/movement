@@ -1,3 +1,5 @@
+import 'package:academy_app/widgets/for_preview.dart';
+import 'package:academy_app/widgets/from_vimeo_id.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../models/lesson.dart';
@@ -33,21 +35,20 @@ class _LessonListItemState extends State<LessonListItem> {
         );
       } else if (lesson.videoTypeWeb == 'Vimeo') {
         String vimeoVideoId = lesson.videoUrlWeb!.split('/').last;
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //       builder: (context) => PlayVideoFromVimeoId(
-        //           courseId: widget.courseId,
-        //           lessonId: lesson.id!,
-        //           vimeoVideoId: vimeoVideoId),
-        //     ));
-        String vimUrl = 'https://player.vimeo.com/video/$vimeoVideoId';
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    VimeoIframe(url: vimUrl)));
-                    
+              builder: (context) => PreviewPlayVideoFromVimeoId(
+                  courseId: widget.courseId,
+                  lessonId: lesson.id!,
+                  vimeoVideoId: vimeoVideoId),
+            ));
+        // String vimUrl = 'https://player.vimeo.com/video/$vimeoVideoId';
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) =>
+        //             VimeoIframe(url: vimUrl)));
       } else {
         Navigator.push(
             context,
