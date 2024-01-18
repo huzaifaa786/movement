@@ -50,11 +50,13 @@ class _AddClientViewState extends State<AddClientView> {
                 ),
                 Gap(12),
                 MainInput(
+                    controller: controller.userNameController,
                     hintText: 'User name',
                     prefixIcon: Image.asset(
                       'assets/images/account.png',
                     )),
                 MainInput(
+                    controller: controller.emailController,
                     hintText: 'Email Address',
                     prefixIcon: Icon(Icons.email_outlined)),
                 PasswordInput(
@@ -76,10 +78,12 @@ class _AddClientViewState extends State<AddClientView> {
                   color: const Color.fromARGB(255, 220, 217, 217),
                 ),
                 MainInput(
+                  controller: controller.paymentController,
                   hintText: 'Payment name',
                 ),
                 Gap(12),
                 priceInput(
+                  controller: controller.priceController,
                   hintText: 'Price',
                 ),
                 Gap(12),
@@ -132,6 +136,7 @@ class _AddClientViewState extends State<AddClientView> {
                   daysOfWeekVisible: true,
                 ),
                 MainInput(
+                  controller: controller.dateController,
                   hintText: 'date',
                 ),
                 Gap(10),
@@ -145,17 +150,24 @@ class _AddClientViewState extends State<AddClientView> {
                   ],
                 ),
                 MainInput(
+                  controller: controller.unitNameController,
                   hintText: 'Unit name',
                 ),
                 MainInput(
+                  controller: controller.unitNumberController,
                   hintText: 'Unit number',
                 ),
                 MainInput(
+                  controller: controller.unitTypeController,
                   hintText: 'Unit type (villa, apartment, ... )',
                 ),
                 Gap(15),
                 MainButton(
                   title: 'Submit',
+                  isSelected: true,
+                  onTap: () {
+                    controller.addClientUser();
+                  },
                 )
               ],
             ),

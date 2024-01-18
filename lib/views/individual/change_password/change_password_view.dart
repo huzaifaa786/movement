@@ -16,17 +16,15 @@ class ChangePasswordView extends StatefulWidget {
 }
 
 class _ChangePasswordViewState extends State<ChangePasswordView> {
-  TextEditingController _currentPasswordController = TextEditingController();
-  TextEditingController _newPasswordController = TextEditingController();
-  TextEditingController _confirmPasswordController = TextEditingController();
+  
 
-  @override
-  void dispose() {
-    _currentPasswordController.dispose();
-    _newPasswordController.dispose();
-    _confirmPasswordController.dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _currentPasswordController.dispose();
+  //   _newPasswordController.dispose();
+  //   _confirmPasswordController.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +61,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                         padding: const EdgeInsets.only(
                             left: 20, right: 20, top: 60, bottom: 8),
                         child: MainInput(
-                          controller: _currentPasswordController,
+                          controller: controller.oldPasswordController,
                           hintText: 'Old Password',
                         ),
                       ),
@@ -71,7 +69,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                         padding: const EdgeInsets.only(
                             left: 20, right: 20, bottom: 8),
                         child: MainInput(
-                          controller: _newPasswordController,
+                          controller: controller.newPasswordcontroller,
                           hintText: 'New Password',
                         ),
                       ),
@@ -79,7 +77,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                         padding: const EdgeInsets.only(
                             left: 20, right: 20, bottom: 15),
                         child: MainInput(
-                          controller: _confirmPasswordController,
+                          controller: controller.confirmPasswordController,
                           hintText: 'Confirm New Password',
                         ),
                       ),
