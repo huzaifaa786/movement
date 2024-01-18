@@ -41,6 +41,7 @@ class _CompanySignUpViewState extends State<CompanySignUpView> {
                     'assets/images/company_building.svg',
                     fit: BoxFit.scaleDown,
                   ),
+                  controller: controller.nameController,
                   hintText: 'Company name',
                 ),
                 Gap(10),
@@ -49,21 +50,31 @@ class _CompanySignUpViewState extends State<CompanySignUpView> {
                     'assets/images/email.svg',
                     fit: BoxFit.scaleDown,
                   ),
+                  controller: controller.emailController,
                   hintText: 'Email address',
                 ),
                 Gap(10),
                 PasswordInput(
                   hintText: 'Password',
                   obscure: true,
+                  controller: controller.passwordController,
                   prefixIcon: SvgPicture.asset(
                     'assets/images/lock_simple.svg',
                     fit: BoxFit.scaleDown,
                   ),
                 ),
                 Gap(20),
-                CompanyCard(title: 'Company logo', onTap: () {}),
+                CompanyCard(
+                    title: 'Company logo',
+                    onTap: () {
+                      controller.pickImage(ImageType.logo);
+                    }),
                 Gap(20),
-                CompanyCard(title: 'Company license', onTap: () {}),
+                CompanyCard(
+                    title: 'Company license',
+                    onTap: () {
+                      controller.pickImage(ImageType.license);
+                    }),
                 Gap(20),
                 Container(
                   padding: EdgeInsets.only(top: 15, right: 15),
@@ -135,7 +146,8 @@ class _CompanySignUpViewState extends State<CompanySignUpView> {
                   title: 'Submit',
                   isSelected: true,
                   onTap: () {
-                    Get.toNamed(AppRoutes.companyhome);
+                    controller.uploadImages();
+                    //  Get.toNamed(AppRoutes.companyhome);
                   },
                 ),
               ],

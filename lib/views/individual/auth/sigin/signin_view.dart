@@ -28,6 +28,7 @@ class SignInView extends StatelessWidget {
               ),
               Gap(60),
               MainInput(
+                controller: controller.emailController,
                 prefixIcon: SvgPicture.asset(
                   'assets/images/email.svg',
                   fit: BoxFit.scaleDown,
@@ -35,11 +36,11 @@ class SignInView extends StatelessWidget {
                 hintText: 'Email address',
               ),
               PasswordInput(
+                controller: controller.passwordController,
                 prefixIcon: Icon(Icons.lock_outline_rounded),
                 hintText: 'Password',
                 toggle: controller.toggle,
                 obscure: controller.obscureTextPassword,
-                controller: controller.passwordController,
               ),
               Gap(10),
               Row(
@@ -63,7 +64,7 @@ class SignInView extends StatelessWidget {
                 title: 'Next',
                 isSelected: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.individualHome);
+                  controller.LoginUser();
                 },
               )
             ],

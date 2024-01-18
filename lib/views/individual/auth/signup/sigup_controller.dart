@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noobz/api/auth_api.dart';
+import 'package:noobz/models/user_model.dart';
 import 'package:noobz/utils/ui_utils.dart';
 
 class SigUpController extends GetxController {
@@ -11,6 +12,7 @@ class SigUpController extends GetxController {
   TextEditingController EmailController = TextEditingController();
   bool obscureTextPassword = true;
   bool obscureTextPassword1 = true;
+  User? user;
   final _authApi = UserApi();
   void toggle() {
     obscureTextPassword = !obscureTextPassword;
@@ -25,7 +27,6 @@ class SigUpController extends GetxController {
   String language = 'english';
 
   Future<void> registerUser() async {
-    print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
     try {
       if (UsernameController.text.isEmpty ||
           EmailController.text.isEmpty ||
@@ -34,15 +35,14 @@ class SigUpController extends GetxController {
         return;
       }
 
-      var response = await _authApi.register(
+      var respone = await _authApi.register(
         UsernameController.text,
         EmailController.text,
         passwordController.text,
       );
-
-      if (response) {
-      } else {}
+      user = User.fromJson(respone);
     } catch (error) {
+      
       print('Error registering user: $error');
     }
   }

@@ -11,22 +11,22 @@ class ChangePasswordController extends GetxController {
   TextEditingController newPasswordcontroller = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   
-  Future<void> changePasswordUser() async {
-    if (oldPasswordController.text.isEmpty ||
-        newPasswordcontroller.text.isEmpty ||
-        confirmPasswordController.text.isEmpty) {
-      return;
-    }
-          var response = await UserApi.changePassword(
-        oldPasswordController.text,
-        newPasswordcontroller.text,
-        confirmPasswordController.text,
-      );
-       if (!response['error']) {
-        print('i am here');
-      } else {
-        print('responce have error');
-      }
-    } 
+  // Future<void> changePasswordUser() async {
+  //   if (oldPasswordController.text.isEmpty ||
+  //       newPasswordcontroller.text.isEmpty ||
+  //       confirmPasswordController.text.isEmpty) {
+  //     return;
+  //   }
+  //         var response = await UserApi.changePassword(
+  //       oldPasswordController.text,
+  //       newPasswordcontroller.text,
+  //       confirmPasswordController.text,
+  //     );
+  //      if (!response['error']) {
+  //       print('i am here');
+  //     } else {
+  //       print('responce have error');
+  //     }
+  //   } 
   }
 

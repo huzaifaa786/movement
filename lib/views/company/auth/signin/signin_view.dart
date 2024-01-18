@@ -5,16 +5,15 @@ import 'package:get/get.dart';
 import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/main_input.dart';
 import 'package:noobz/components/password_input.dart';
-import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
-import 'package:noobz/views/individual/auth/sigin/signin_controller.dart';
+import 'package:noobz/views/company/auth/signin/signin_controller.dart';
 
 class CompanySignInView extends StatelessWidget {
   const CompanySignInView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SignInController>(
+    return GetBuilder<CompanySignInController>(
       builder: (controller) => Scaffold(
         body: SafeArea(
             child: Container(
@@ -47,7 +46,8 @@ class CompanySignInView extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      Get.toNamed(AppRoutes.forgetPassword);
+                      // Get.toNamed(AppRoutes.forgetPassword);
+                      controller.companyloginUser();
                     },
                     child: Text("Forgot password?",
                         style: TextStyle(
@@ -63,7 +63,8 @@ class CompanySignInView extends StatelessWidget {
                 title: 'Next',
                 isSelected: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.individualHome);
+                  // Get.toNamed(AppRoutes.individualHome);
+                  controller.companyloginUser();
                 },
               )
             ],
