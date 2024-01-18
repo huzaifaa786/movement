@@ -8,6 +8,8 @@ class AddClientController extends GetxController {
   TextEditingController confirmPasswordController = TextEditingController();
   bool obscureTextPassword = true;
   bool obscureTextPassword1 = true;
+  List<String> paymentDates = ['Manually', 'automatic'];
+   String selectedPaymentDateType = '';
   void toggle() {
     obscureTextPassword = !obscureTextPassword;
     update();

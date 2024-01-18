@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
         textSelectionTheme: const TextSelectionThemeData(
-          cursorColor: Colors.black,
+          cursorColor: Colors.black, 
         ),
         useMaterial3: true,
         fontFamily: 'Poppins',

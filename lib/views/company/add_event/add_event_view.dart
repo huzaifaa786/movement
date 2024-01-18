@@ -115,11 +115,15 @@ class _CompanyAddEventViewState extends State<CompanyAddEventView> {
                               thickness: 1,
                             ),
                             Gap(10),
-                            PaymentDateContainer(
-                              selectedOption: controller.selectedOption.value,
-                              onOptionChanged: (int? value) =>
-                                  controller.setSelectedOption(value),
-                            ),
+                          PaymentDateContainer(
+                                      options: controller.paymentDates,
+                                      selectedOption:
+                                          controller.selectedPaymentDateType,
+                                      onOptionChanged: (String? value) {
+                                        controller.selectedPaymentDateType =
+                                            value!;
+                                        controller.update();
+                                      }),
                             Gap(30),
                             Text(
                               'Is there a Payment due?',

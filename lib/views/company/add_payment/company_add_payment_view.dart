@@ -60,11 +60,15 @@ class _CompanyAddPaymentViewState extends State<CompanyAddPaymentView> {
                               hintText: 'Payment amount',
                             ),
                             Gap(20),
-                            PaymentDateContainer(
-                              selectedOption: controller.selectedOption.value,
-                              onOptionChanged: (int? value) =>
-                                  controller.setSelectedOption(value),
-                            ),
+                          PaymentDateContainer(
+                                      options: controller.paymentDates,
+                                      selectedOption:
+                                          controller.selectedPaymentDateType,
+                                      onOptionChanged: (String? value) {
+                                        controller.selectedPaymentDateType =
+                                            value!;
+                                        controller.update();
+                                      }),
                             Gap(10),
                             TableCalendar(
                               selectedDayPredicate: (day) =>

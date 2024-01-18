@@ -84,10 +84,14 @@ class _AddClientViewState extends State<AddClientView> {
                 ),
                 Gap(12),
                 PaymentDateContainer(
-                  selectedOption: controller.selectedOption.value,
-                  onOptionChanged: (int? value) =>
-                      controller.setSelectedOption(value),
-                ),
+                                      options: controller.paymentDates,
+                                      selectedOption:
+                                          controller.selectedPaymentDateType,
+                                      onOptionChanged: (String? value) {
+                                        controller.selectedPaymentDateType =
+                                            value!;
+                                        controller.update();
+                                      }),
                 Gap(15),
                 TableCalendar(
                   selectedDayPredicate: (day) =>
