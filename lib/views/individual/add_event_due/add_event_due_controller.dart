@@ -95,9 +95,30 @@ class AddEventDueController extends GetxController {
         payment_type: selectedEventType == eventTypes.first ? 'other' : '',
         schedule: schedules,
       );
-    } else {
-      
-    }
+      resetFields();
+    } else {}
+  }
+
+  resetFields() {
+    eventController.text = '';
+    amountController.text = '';
+    noOfDayMonthsController.text = '1';
+    noOfWeekMonthsController.text = '1';
+    noOfMonthYearsController.text = '1';
+    selectedReminder = reminderOptions.first;
+    selectedWeekDay = weekdays.first;
+    selectedMonth = months.first;
+    selectedDayDate = DateFormat('yyyy-MM-dd')
+        .format(DateTime.now().add(Duration(hours: 30)));
+    selectedEventType = eventTypes.first;
+    selectedPaymentDateType = paymentDates.first;
+    dailyMonths.clear();
+    weeklyMonths.clear();
+    monthlyYears.clear();
+    noOfDayMonths = 1;
+    noOfWeekMonths = 1;
+    noOfMonthYears = 1;
+    update();
   }
 
   // get daily date string list

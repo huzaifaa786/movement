@@ -41,37 +41,31 @@ class UiUtilites {
         builder: (BuildContext context) {
           return AlertDialog(
             backgroundColor: Colors.transparent,
-            shape: RoundedRectangleBorder(
-                side: BorderSide(
-                    color: Colors.transparent, style: BorderStyle.solid),
-                borderRadius: BorderRadius.all(Radius.circular(12.0))),
+            
             contentPadding: EdgeInsets.only(top: 10.0),
             content: Container(
               width: 300.0,
               decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.01),
+                color: white,
                 boxShadow: [
-                  BoxShadow(
-                      blurRadius: 20,
-                      offset: Offset(12, 15),
-                      color: Colors.black),
-                  BoxShadow(
-                      blurRadius: 20,
-                      offset: Offset(12, -15),
-                      color: Colors.black),
-                  BoxShadow(
-                      blurRadius: 20,
-                      offset: Offset(-12, 15),
-                      color: Colors.black),
-                  BoxShadow(
-                      blurRadius: 20,
-                      offset: Offset(-12, -15),
-                      color: Colors.black)
+                  // BoxShadow(
+                  //     blurRadius: 20,
+                  //     offset: Offset(12, 15),
+                  //     color: Colors.black),
+                  // BoxShadow(
+                  //     blurRadius: 20,
+                  //     offset: Offset(12, -15),
+                  //     color: Colors.black),
+                  // BoxShadow(
+                  //     blurRadius: 20,
+                  //     offset: Offset(-12, 15),
+                  //     color: Colors.black),
+                  // BoxShadow(
+                  //     blurRadius: 20,
+                  //     offset: Offset(-12, -15),
+                  //     color: Colors.black)
                 ],
-                border: GradientBoxBorder(
-                  gradient: LinearGradient(colors: [Colors.blue, Colors.red]),
-                  width: 1,
-                ),
+              
                 borderRadius: BorderRadius.all(Radius.circular(12.0)),
               ),
               child: Column(
@@ -80,8 +74,7 @@ class UiUtilites {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Gap(40),
-                  Image.asset('assets/images/Approve_Badge.png',
-                      height: 50, width: 50),
+                  Icon(Icons.verified,size: 36,color: Colors.green,),
                   Gap(10),
                   Text(
                     title,
@@ -89,7 +82,7 @@ class UiUtilites {
                       fontFamily: "Montserrat",
                       fontSize: 12,
                       fontWeight: FontWeight.w700,
-                      color: Colors.white,
+                      color: black,
                       // height: 52 / 12,
                     ),
                     textAlign: TextAlign.center,

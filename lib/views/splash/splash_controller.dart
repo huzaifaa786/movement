@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:noobz/routes/app_routes.dart';
 
 class SplashController extends GetxController {
@@ -12,7 +13,14 @@ class SplashController extends GetxController {
   }
 
   Future checkFirstSeen() async {
-    Get.offNamed(AppRoutes.addEventDue);
-    // Get.offNamed(AppRoutes.companyaddevent);
+    GetStorage box = GetStorage();
+
+    String? authCheck = await box.read('api_token');
+    print(authCheck);
+    if (authCheck != null) {
+      Get.offNamed(AppRoutes.individualHome);
+    } else {
+      Get.offNamed(AppRoutes.signIn);
+    }
   }
 }

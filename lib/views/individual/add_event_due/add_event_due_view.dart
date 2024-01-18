@@ -588,6 +588,7 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                         padding: const EdgeInsets.all(20),
                         child: MainButton(
                           onTap: () {
+                           
                             controller.submit();
                           },
                           // buttonWidth: 0.9/,
