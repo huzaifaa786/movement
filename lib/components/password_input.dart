@@ -11,7 +11,8 @@ class PasswordInput extends StatelessWidget {
       this.prefixIcon,
       this.obscure,
       this.toggle,
-      this.validator,
+      // this.validator,
+      this.fieldValidator,
       this.type,
       this.readOnly,
       this.autovalidateMode})
@@ -20,12 +21,13 @@ class PasswordInput extends StatelessWidget {
   final controller;
   final hintText;
   final prefixIcon;
-  final validator;
+  // final validator;
   final type;
   final toggle;
   final obscure;
   final autovalidateMode;
   final readOnly;
+  final FormFieldValidator<String>? fieldValidator;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +38,9 @@ class PasswordInput extends StatelessWidget {
         obscureText: obscure,
         controller: controller,
         keyboardType: type,
-        validator: validator,
+        validator: fieldValidator,
         autovalidateMode: autovalidateMode ??
-            (validator == true.obs
+            (fieldValidator == true.obs
                 ? AutovalidateMode.always
                 : AutovalidateMode.onUserInteraction),
         decoration: InputDecoration(

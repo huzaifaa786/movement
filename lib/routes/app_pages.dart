@@ -14,6 +14,8 @@ import 'package:noobz/views/company/calendar/company_calendar_binding.dart';
 import 'package:noobz/views/company/calendar/company_calendar_view.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_binding.dart';
 import 'package:noobz/views/company/change_logo/company_profile_change_logo_view.dart';
+import 'package:noobz/views/company/change_password/company_change_password_binding.dart';
+import 'package:noobz/views/company/change_password/company_change_password_view.dart';
 import 'package:noobz/views/company/client/addclient/addclient_binding.dart';
 import 'package:noobz/views/company/client/clientinfo/clientinfo_binding.dart';
 import 'package:noobz/views/company/client/clientinfo/clientinfo_view.dart';
@@ -226,6 +228,11 @@ class AppPages {
       name: AppRoutes.clientinfo,
       page: () => const ClientInfo(),
       binding: ClientInfoBinding(),
-    )
+    ),
+    GetPage(
+      name: AppRoutes.companyChangepassword,
+      page: () => const CompanyChangePasswordView(),
+      binding: CompanyChangePasswordBinding(),
+    ),
   ];
 }

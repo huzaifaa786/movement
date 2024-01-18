@@ -19,7 +19,7 @@ class SignInController extends GetxController {
 
   String language = 'english';
   Future<void> LoginUser() async {
-    try {
+    // try {
       if (emailController.text.isEmpty || passwordController.text.isEmpty) {
         return;
       }
@@ -32,6 +32,7 @@ class SignInController extends GetxController {
       } else {
         print(responce['error_data']);
       }
-    } catch (error) {}
+    // }
+    //  catch (error) {}
   }
 }

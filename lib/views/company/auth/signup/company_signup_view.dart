@@ -18,7 +18,8 @@ class CompanySignUpView extends StatefulWidget {
 }
 
 class _CompanySignUpViewState extends State<CompanySignUpView> {
-  int? selectedOption;
+  String? selectedOption;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,129 +29,154 @@ class _CompanySignUpViewState extends State<CompanySignUpView> {
             child: Container(
           padding: EdgeInsets.only(right: 10, left: 10, top: 30, bottom: 30),
           child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Text("Sign Up",
-                    style: TextStyle(
-                      fontSize: 36,
-                      fontWeight: FontWeight.w700,
-                    )),
-                Gap(50),
-                MainInput(
-                  prefixIcon: SvgPicture.asset(
-                    'assets/images/company_building.svg',
-                    fit: BoxFit.scaleDown,
+            child: Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  Text("Sign Up",
+                      style: TextStyle(
+                        fontSize: 36,
+                        fontWeight: FontWeight.w700,
+                      )),
+                  Gap(50),
+                  MainInput(
+                    prefixIcon: SvgPicture.asset(
+                      'assets/images/company_building.svg',
+                      fit: BoxFit.scaleDown,
+                    ),
+                    controller: controller.nameController,
+                    hintText: 'Company name',
+                    fieldValidator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a company name';
+                      }
+                      return null;
+                    },
                   ),
-                  controller: controller.nameController,
-                  hintText: 'Company name',
-                ),
-                Gap(10),
-                MainInput(
-                  prefixIcon: SvgPicture.asset(
-                    'assets/images/email.svg',
-                    fit: BoxFit.scaleDown,
+                  Gap(10),
+                  MainInput(
+                    prefixIcon: SvgPicture.asset(
+                      'assets/images/email.svg',
+                      fit: BoxFit.scaleDown,
+                    ),
+                    controller: controller.emailController,
+                    hintText: 'Email address',
+                    fieldValidator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter an email address';
+                      }
+                      return null;
+                    },
                   ),
-                  controller: controller.emailController,
-                  hintText: 'Email address',
-                ),
-                Gap(10),
-                PasswordInput(
-                  hintText: 'Password',
-                  obscure: true,
-                  controller: controller.passwordController,
-                  prefixIcon: SvgPicture.asset(
-                    'assets/images/lock_simple.svg',
-                    fit: BoxFit.scaleDown,
+                  Gap(10),
+                  PasswordInput(
+                    hintText: 'Password',
+                    obscure: true,
+                    controller: controller.passwordController,
+                    prefixIcon: SvgPicture.asset(
+                      'assets/images/lock_simple.svg',
+                      fit: BoxFit.scaleDown,
+                    ),
+                      fieldValidator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a password';
+                      }
+                      return null;
+                    },
                   ),
-                ),
-                Gap(20),
-                CompanyCard(
-                    title: 'Company logo',
+                  Gap(20),
+                  CompanyCard(
+                      title: 'Company logo',
+                      onTap: () {
+                        controller.selectlogoImage();
+                      }),
+                  Gap(20),
+                  CompanyCard(
+                      title: 'Company license',
+                      onTap: () {
+                        controller.selectlicenseImage();
+                      }),
+                  Gap(20),
+                  Container(
+                    padding: EdgeInsets.only(top: 15, right: 15),
+                    width: MediaQuery.of(context).size.width,
+                    //height: 123,
+                    height: MediaQuery.of(context).size.height * 0.18,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: lightGrey,
+                        border: Border.all(color: borderGrey, width: 2)),
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 15),
+                              child: Text("Type of service",
+                                  style: TextStyle(
+                                      color: darkGrey,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w500)),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Radio<String>(
+                                      value: 'real_estate',
+                                      groupValue: selectedOption,
+                                      activeColor: mainColor,
+                                      onChanged: (String? value) {
+                                        setState(() {
+                                          selectedOption = value;
+                                          controller.service_type = value;
+                                        });
+                                      },
+                                    ),
+                                    Text('Real estate'),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Radio<String>(
+                                      value: 'other_services',
+                                      groupValue: selectedOption,
+                                      activeColor: mainColor,
+                                      onChanged: (String? value) {
+                                        setState(() {
+                                          selectedOption = value;
+                                          controller.service_type = value;
+                                        });
+                                      },
+                                    ),
+                                    Text('Other service'),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Gap(30),
+                  MainButton(
+                    title: 'Submit',
+                    isSelected: true,
                     onTap: () {
-                      controller.pickImage(ImageType.logo);
-                    }),
-                Gap(20),
-                CompanyCard(
-                    title: 'Company license',
-                    onTap: () {
-                      controller.pickImage(ImageType.license);
-                    }),
-                Gap(20),
-                Container(
-                  padding: EdgeInsets.only(top: 15, right: 15),
-                  width: MediaQuery.of(context).size.width,
-                  //height: 123,
-                  height: MediaQuery.of(context).size.height * 0.18,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: lightGrey,
-                      border: Border.all(color: borderGrey, width: 2)),
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 15),
-                            child: Text("Type of service",
-                                style: TextStyle(
-                                    color: darkGrey,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500)),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Radio<int>(
-                                    value: 1,
-                                    groupValue: selectedOption,
-                                    activeColor: mainColor,
-                                    onChanged: (int? value) {
-                                      setState(() {
-                                        selectedOption = value!;
-                                      });
-                                    },
-                                  ),
-                                  Text('Real estate'),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Radio<int>(
-                                    value: 2,
-                                    groupValue: selectedOption,
-                                    activeColor: mainColor,
-                                    onChanged: (int? value) {
-                                      setState(() {
-                                        selectedOption = value!;
-                                      });
-                                    },
-                                  ),
-                                  Text('Other service'),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
+                      if (_formKey.currentState!.validate()) {
+                        // Form is valid, proceed with registration
+                        controller.companyregisterUser();
+                      } //  Get.toNamed(AppRoutes.companyhome);
+                    },
                   ),
-                ),
-                Gap(30),
-                MainButton(
-                  title: 'Submit',
-                  isSelected: true,
-                  onTap: () {
-                    controller.uploadImages();
-                    //  Get.toNamed(AppRoutes.companyhome);
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         )),
