@@ -41,6 +41,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.18"
+  auto_orientation:
+    dependency: transitive
+    description:
+      name: auto_orientation
+      sha256: cd56bb59b36fa54cc28ee254bc600524f022a4862f31d5ab20abd7bb1c54e678
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.1"
   background_downloader:
     dependency: "direct main"
     description:
@@ -318,6 +326,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.16"
+  flutter_screen_wake:
+    dependency: transitive
+    description:
+      name: flutter_screen_wake
+      sha256: "7c69295d1405a5e7b673f5fe938d116076a4e8620cacdf04e884242622296f65"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.2"
   flutter_staggered_grid_view:
     dependency: "direct main"
     description:
@@ -592,6 +608,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.9"
+  lecle_yoyo_player:
+    dependency: "direct main"
+    description:
+      name: lecle_yoyo_player
+      sha256: d0ff194aa3fe85803f6d01b072fc8ebc71b2eb0ebfbaed787334fc443ed4042a
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.8"
   lints:
     dependency: transitive
     description:
@@ -1173,6 +1197,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  video_player_web_hls:
+    dependency: transitive
+    description:
+      name: video_player_web_hls
+      sha256: "278c7841a2450d1b1ad2a2eb746840045b07e5d2ad21663c84a1486925ed338b"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.0"
   wakelock_plus:
     dependency: transitive
     description:

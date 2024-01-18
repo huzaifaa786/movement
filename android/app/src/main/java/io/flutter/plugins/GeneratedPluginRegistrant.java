@@ -21,6 +21,11 @@ public final class GeneratedPluginRegistrant {
       Log.e(TAG, "Error registering plugin audio_session, com.ryanheise.audio_session.AudioSessionPlugin", e);
     }
     try {
+      flutterEngine.getPlugins().add(new de.bytepark.autoorientation.AutoOrientationPlugin());
+    } catch (Exception e) {
+      Log.e(TAG, "Error registering plugin auto_orientation, de.bytepark.autoorientation.AutoOrientationPlugin", e);
+    }
+    try {
       flutterEngine.getPlugins().add(new com.bbflight.background_downloader.BDPlugin());
     } catch (Exception e) {
       Log.e(TAG, "Error registering plugin background_downloader, com.bbflight.background_downloader.BDPlugin", e);
@@ -34,6 +39,11 @@ public final class GeneratedPluginRegistrant {
       flutterEngine.getPlugins().add(new io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin());
     } catch (Exception e) {
       Log.e(TAG, "Error registering plugin flutter_plugin_android_lifecycle, io.flutter.plugins.flutter_plugin_android_lifecycle.FlutterAndroidLifecyclePlugin", e);
+    }
+    try {
+      flutterEngine.getPlugins().add(new br.com.erickhaendel.flutter_screen_wake.FlutterScreenWakePlugin());
+    } catch (Exception e) {
+      Log.e(TAG, "Error registering plugin flutter_screen_wake, br.com.erickhaendel.flutter_screen_wake.FlutterScreenWakePlugin", e);
     }
     try {
       flutterEngine.getPlugins().add(new io.github.ponnamkarthik.toast.fluttertoast.FlutterToastPlugin());

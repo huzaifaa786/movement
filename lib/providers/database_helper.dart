@@ -68,6 +68,7 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> queryAllRows(table) async {
     Database db = await instance.database;
     var result = await db.query(table);
+
     return result.toList();
   }
 
@@ -77,8 +78,8 @@ class DatabaseHelper {
   }
 
   Future<int> removeVideo(int id) async {
-    Database db = await instance.database;
-    return await db.delete('video_list', where: 'id = ?', whereArgs: [id]);
+    // Database db = await instance.database;
+    return 0;
   }
 
   Future<bool> lessonExists(id) async {
@@ -88,6 +89,7 @@ class DatabaseHelper {
       result = await _database!.rawQuery(
         'SELECT EXISTS(SELECT * FROM video_list WHERE lesson_id="$id")',
       );
+      // print(result)
       exists = Sqflite.firstIntValue(result);
     } else {
       exists = 0;
@@ -115,6 +117,7 @@ class DatabaseHelper {
   Future<List<CourseDbModel>> getCourse() async {
     Database db = await instance.database;
     var courses = await db.query('course_list', orderBy: 'id');
+    print(courses);
     List<CourseDbModel> courseList = courses.isNotEmpty
         ? courses.map((c) => CourseDbModel.fromMap(c)).toList()
         : [];

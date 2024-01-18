@@ -304,11 +304,13 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
 
   void _initDownload(
       Lesson lesson, myCourseId, coTitle, coThumbnail, secTitle, secId) async {
-    // print(lesson.videoTypeWeb);
+    print(lesson.videoTypeWeb);
     if (lesson.videoTypeWeb == 'YouTube') {
       CommonFunctions.showSuccessToast(
           'This video format is not supported for download.');
     } else if (lesson.videoTypeWeb == 'Vimeo' || lesson.videoTypeWeb == 'vimeo') {
+      print(lesson.videoUrl);
+      print(lesson.vimeoVideoId);
       CommonFunctions.showSuccessToast(
           'This video format is not supported for download.');
     } else {

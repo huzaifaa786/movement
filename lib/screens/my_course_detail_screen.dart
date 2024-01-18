@@ -80,22 +80,21 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
   late StreamController<TaskProgressUpdate> progressUpdateStream;
 
   Future<void> _refresh() async {
-    
-      setState(() {
-        _isLoading = true;
-      });
+    setState(() {
+      _isLoading = true;
+    });
 
-      Provider.of<MyCourses>(context, listen: false)
-          .fetchCourseSections(widget.courseId)
-          .then((_) {
-        final activeSections =
-            Provider.of<MyCourses>(context, listen: false).sectionItems;
-        setState(() {
-          _isLoading = false;
-          _activeLesson = activeSections.first.mLesson!.first;
-        });
+    Provider.of<MyCourses>(context, listen: false)
+        .fetchCourseSections(widget.courseId)
+        .then((_) {
+      final activeSections =
+          Provider.of<MyCourses>(context, listen: false).sectionItems;
+      setState(() {
+        _isLoading = false;
+        _activeLesson = activeSections.first.mLesson!.first;
       });
-    
+    });
+
     setState(() {
       _isLoading = true;
     });
@@ -121,38 +120,45 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
 
     // Registering a callback and configure notifications
     FileDownloader()
-      .registerCallbacks(
-          taskNotificationTapCallback: myNotificationTapCallback)
-      .configureNotificationForGroup(FileDownloader.defaultGroup,
-          // For the main download button
-          // which uses 'enqueue' and a default group
-          running: const TaskNotification('Download {filename}',
-              'File: {filename} - {progress} - speed {networkSpeed} and {timeRemaining} remaining'),
-          complete: const TaskNotification(
-              'Download {filename}', 'Download complete'),
-          error: const TaskNotification(
-              'Download {filename}', 'Download failed'),
-          paused: const TaskNotification(
-              'Download {filename}', 'Paused with metadata {metadata}'),
-          progressBar: true)
-      .configureNotification(
-          // for the 'Download & Open' dog picture
-          // which uses 'download' which is not the .defaultGroup
-          // but the .await group so won't use the above config
-          complete: const TaskNotification(
-              'Download {filename}', 'Download complete'),
-          tapOpensFile: true); // dog can also open directly from tap
+        .registerCallbacks(
+            taskNotificationTapCallback: myNotificationTapCallback)
+        .configureNotificationForGroup(FileDownloader.defaultGroup,
+            // For the main download button
+            // which uses 'enqueue' and a default group
+            running: const TaskNotification('Download {filename}',
+                'File: {filename} - {progress} - speed {networkSpeed} and {timeRemaining} remaining'),
+            complete: const TaskNotification(
+                'Download {filename}', 'Download complete'),
+            error: const TaskNotification(
+                'Download {filename}', 'Download failed'),
+            paused: const TaskNotification(
+                'Download {filename}', 'Paused with metadata {metadata}'),
+            progressBar: true)
+        .configureNotification(
+            // for the 'Download & Open' dog picture
+            // which uses 'download' which is not the .defaultGroup
+            // but the .await group so won't use the above config
+            complete: const TaskNotification(
+                'Download {filename}', 'Download complete'),
+            tapOpensFile: true); // dog can also open directly from tap
 
     // Listen to updates and process
     FileDownloader().updates.listen((update) async {
+      print('Listen ka andr lga dia ha hahahaha');
+      print(update.task.toString());
       switch (update) {
         case TaskStatusUpdate _:
           if (update.task == backgroundDownloadTask) {
             setState(() {
               downloadTaskStatus = update.status;
+              print('task complete hu gya ha');
+              print(update.status.runtimeType);
             });
           }
-          if(downloadTaskStatus == TaskStatus.complete) {
+          if (downloadTaskStatus == TaskStatus.complete) {
+            print('object********************');
+              print('video upload hu rhi ha');
+
             await DatabaseHelper.instance.addVideo(
               VideoModel(
                   title: fileName,
@@ -166,6 +172,7 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
                   downloadId: downloadId),
             );
             var val = await DatabaseHelper.instance.courseExists(courseId);
+            print(val);
             if (val != true) {
               await DatabaseHelper.instance.addCourse(
                 CourseDbModel(
@@ -199,7 +206,8 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
         'Tapped notification $notificationType for taskId ${task.directory}');
   }
 
-  Future<void> processButtonPress(lesson, myCourseId, coTitle, coThumbnail, secTitle, secId) async {
+  Future<void> processButtonPress(
+      lesson, myCourseId, coTitle, coThumbnail, secTitle, secId) async {
     // print("${BaseDirectory.applicationSupport}/system");
     String fileUrl;
 
@@ -209,21 +217,22 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
       final RegExp regExp = RegExp(r'[-\w]{25,}');
       final Match? match = regExp.firstMatch(lesson.videoUrlWeb.toString());
 
-      fileUrl = 'https://drive.google.com/uc?export=download&id=${match!.group(0)}';
-
+      fileUrl =
+          'https://drive.google.com/uc?export=download&id=${match!.group(0)}';
     } else {
       final token = await SharedPreferenceHelper().getAuthToken();
-      fileUrl = '$BASE_URL/api_files/offline_video_for_mobile_app/${lesson.id}/$token';
+      fileUrl =
+          '$BASE_URL/api_files/offline_video_for_mobile_app/${lesson.id}/$token';
     }
 
     backgroundDownloadTask = DownloadTask(
-      url: fileUrl,
-      filename: lesson.title.toString(),
-      directory: 'system',
-      baseDirectory: BaseDirectory.applicationSupport,
-      updates: Updates.statusAndProgress,
-      allowPause: true,
-      metaData: '<video metaData>');
+        url: fileUrl,
+        filename: lesson.title.toString(),
+        directory: 'system',
+        baseDirectory: BaseDirectory.applicationSupport,
+        updates: Updates.statusAndProgress,
+        allowPause: true,
+        metaData: '<video metaData>');
     await FileDownloader().enqueue(backgroundDownloadTask!);
     if (mounted) {
       setState(() {
@@ -236,7 +245,6 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
         sectionTitle = secTitle;
         thumbnail = coThumbnail;
       });
-
     }
   }
 
@@ -295,23 +303,25 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
     if (lesson.videoTypeWeb == 'YouTube') {
       CommonFunctions.showSuccessToast(
           'This video format is not supported for download.');
-    } else if (lesson.videoTypeWeb == 'Vimeo' || lesson.videoTypeWeb == 'vimeo') {
+    } else if (lesson.videoTypeWeb == 'Vimeo' ||
+        lesson.videoTypeWeb == 'vimeo') {
       CommonFunctions.showSuccessToast(
           'This video format is not supported for download.');
     } else {
       var les = await DatabaseHelper.instance.lessonExists(lesson.id);
-      if(les == true) {
+      if (les == true) {
         var check = await DatabaseHelper.instance.lessonDetails(lesson.id);
         File checkPath = File("${check['path']}/${check['title']}");
-        // print(checkPath.existsSync());
         if (!checkPath.existsSync()) {
           await DatabaseHelper.instance.removeVideo(check['id']);
-          processButtonPress(lesson, myCourseId, coTitle, coThumbnail, secTitle, secId);
+          processButtonPress(
+              lesson, myCourseId, coTitle, coThumbnail, secTitle, secId);
         } else {
           CommonFunctions.showSuccessToast('Video was downloaded already.');
         }
       } else {
-        processButtonPress(lesson, myCourseId, coTitle, coThumbnail, secTitle, secId);
+        processButtonPress(
+            lesson, myCourseId, coTitle, coThumbnail, secTitle, secId);
       }
     }
   }
@@ -333,8 +343,7 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
   void lessonAction(Lesson lesson) async {
     // print(lesson.videoTypeWeb);
     if (lesson.lessonType == 'video') {
-      if (lesson.videoTypeWeb == 'html5' ||
-          lesson.videoTypeWeb == 'amazon') {
+      if (lesson.videoTypeWeb == 'html5' || lesson.videoTypeWeb == 'amazon') {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -343,9 +352,10 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
                   lessonId: lesson.id!,
                   videoUrl: lesson.videoUrlWeb!)),
         );
-      } else if(lesson.videoTypeWeb == 'system'){
+      } else if (lesson.videoTypeWeb == 'system') {
         final token = await SharedPreferenceHelper().getAuthToken();
-        var url = '$BASE_URL/api_files/file_content?course_id=${widget.courseId}&lesson_id=${lesson.id}&auth_token=$token';
+        var url =
+            '$BASE_URL/api_files/file_content?course_id=${widget.courseId}&lesson_id=${lesson.id}&auth_token=$token';
         // print(url);
         Navigator.push(
           context,
@@ -355,13 +365,13 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
                   lessonId: lesson.id!,
                   videoUrl: url)),
         );
-      } else if(lesson.videoTypeWeb == 'google_drive'){
-
+      } else if (lesson.videoTypeWeb == 'google_drive') {
         final RegExp regExp = RegExp(r'[-\w]{25,}');
         final Match? match = regExp.firstMatch(lesson.videoUrlWeb.toString());
 
-        String url = 'https://drive.google.com/uc?export=download&id=${match!.group(0)}';
-        
+        String url =
+            'https://drive.google.com/uc?export=download&id=${match!.group(0)}';
+
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -370,7 +380,6 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
                   lessonId: lesson.id!,
                   videoUrl: url)),
         );
-        
       } else if (lesson.videoTypeWeb!.toLowerCase() == 'vimeo') {
         // print(lesson.videoTypeWeb);
         String vimeoVideoId = lesson.videoUrlWeb!.split('/').last;
@@ -404,7 +413,8 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
       final token = await SharedPreferenceHelper().getAuthToken();
       final url = '$BASE_URL/api/quiz_mobile_web_view/${lesson.id}/$token';
       // print(_url);
-      Navigator.push(context,
+      Navigator.push(
+        context,
         MaterialPageRoute(
           builder: (context) => WebViewScreen(url: url),
         ),
@@ -417,8 +427,7 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    WebViewScreenIframe(url: url)));
+                builder: (context) => WebViewScreenIframe(url: url)));
       } else if (lesson.attachmentType == 'description') {
         // data = lesson.attachment;
         // Navigator.push(
@@ -429,11 +438,8 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
         final token = await SharedPreferenceHelper().getAuthToken();
         final url = '$BASE_URL/api/lesson_mobile_web_view/${lesson.id}/$token';
         // print(_url);
-        Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      WebViewScreen(url: url)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => WebViewScreen(url: url)));
       } else if (lesson.attachmentType == 'txt') {
         final url = '$BASE_URL/uploads/lesson_files/${lesson.attachment}';
         data = await http.read(Uri.parse(url));
@@ -444,7 +450,8 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
                     FileDataScreen(textData: data, note: lesson.summary!)));
       } else {
         final token = await SharedPreferenceHelper().getAuthToken();
-        final url = '$BASE_URL/api_files/file_content?course_id=${widget.courseId}&lesson_id=${lesson.id}&auth_token=$token';
+        final url =
+            '$BASE_URL/api_files/file_content?course_id=${widget.courseId}&lesson_id=${lesson.id}&auth_token=$token';
         // print(url);
         _launchURL(url);
       }
@@ -1010,9 +1017,12 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
                                                                   .black45,
                                                               onPressed: () => _initDownload(
                                                                   lesson,
-                                                                  widget.courseId,
-                                                                  myLoadedCourse.title,
-                                                                  myLoadedCourse.thumbnail,
+                                                                  widget
+                                                                      .courseId,
+                                                                  myLoadedCourse
+                                                                      .title,
+                                                                  myLoadedCourse
+                                                                      .thumbnail,
                                                                   section.title,
                                                                   section.id),
                                                             ),
@@ -1034,11 +1044,16 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
                                                                       .black45,
                                                                   onPressed: () => _initDownload(
                                                                       lesson,
-                                                                      widget.courseId,
-                                                                      myLoadedCourse.title,
-                                                                      myLoadedCourse.thumbnail,
-                                                                      section.title,
-                                                                      section.id),
+                                                                      widget
+                                                                          .courseId,
+                                                                      myLoadedCourse
+                                                                          .title,
+                                                                      myLoadedCourse
+                                                                          .thumbnail,
+                                                                      section
+                                                                          .title,
+                                                                      section
+                                                                          .id),
                                                                 ),
                                                               )
                                                             : Container()
@@ -1057,9 +1072,12 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
                                                                   .black45,
                                                               onPressed: () => _initDownload(
                                                                   lesson,
-                                                                  widget.courseId,
-                                                                  myLoadedCourse.title,
-                                                                  myLoadedCourse.thumbnail,
+                                                                  widget
+                                                                      .courseId,
+                                                                  myLoadedCourse
+                                                                      .title,
+                                                                  myLoadedCourse
+                                                                      .thumbnail,
                                                                   section.title,
                                                                   section.id),
                                                             ),
@@ -2041,7 +2059,8 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
       backgroundColor: kBackgroundColor,
       body: _isLoading
           ? Center(
-              child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
+              child: CircularProgressIndicator(
+                  color: kPrimaryColor.withOpacity(0.7)),
             )
           : liveClassStatus == false && courseForumStatus == false
               ? myCourseBody()

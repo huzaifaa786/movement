@@ -29,7 +29,7 @@ class PlayVideoFromVimeoId extends StatefulWidget {
 class _PlayVideoFromVimeoIdState extends State<PlayVideoFromVimeoId> {
   late final PodPlayerController controller;
   final videoTextFieldCtr = TextEditingController();
-
+  List videos = [];
   Timer? timer;
 
   @override
@@ -109,7 +109,27 @@ class _PlayVideoFromVimeoIdState extends State<PlayVideoFromVimeoId> {
       backgroundColor: kBackgroundColor,
       body: SafeArea(
         child: Center(
-          child: PodVideoPlayer(controller: controller),
+          child: Column(
+            children: [
+              PodVideoPlayer(controller: controller),
+              // Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     OutlinedButton(
+              //         onPressed: () {
+              //           controller.changeVideo(
+              //               playVideoFrom: PlayVideoFrom.vimeo(videos[1]));
+              //         },
+              //         child: Icon(Icons.skip_previous_outlined)),
+              //     OutlinedButton(
+              //         onPressed: () {
+              //           controller.changeVideo(
+              //               playVideoFrom: PlayVideoFrom.vimeo(videos[2]));
+              //         },
+              //         child: Icon(Icons.skip_next_outlined)),
+              //   ],
+              // ),
+            ],
+          ),
         ),
       ),
     );

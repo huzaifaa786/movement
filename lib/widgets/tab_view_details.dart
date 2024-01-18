@@ -33,7 +33,7 @@ class TabViewDetails extends StatelessWidget {
         Expanded(
           child: ListView.builder(
             shrinkWrap: true,
-            physics: const ClampingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             itemBuilder: (ctx, index) {
               return Padding(
                 padding:

@@ -71,18 +71,17 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
         // loadedCourse =
         //     Provider.of<Courses>(context, listen: false).findById(courseId);
 
-        
         setState(() {
           _isLoading = false;
         });
       });
-       final products = await Purchases.getProducts(
+      final products = await Purchases.getProducts(
         [loadedCourse!.productId],
         productCategory: ProductCategory.nonSubscription,
         type: PurchaseType.inapp,
       );
       coursePrice = products.first.priceString;
-      setState(() {}); 
+      setState(() {});
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -99,8 +98,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
     super.initState();
   }
 
-    var coursePrice = '';
- 
+  var coursePrice = '';
 
   @override
   Widget build(BuildContext context) {
@@ -374,7 +372,6 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
                                           setState(() {
                                             _isLoading = false;
                                           });
-                                        
                                         });
                                       }
                                       // final url =
@@ -476,19 +473,20 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
                                     ),
                                     Container(
                                       width: double.infinity,
-                                      height: 300,
+                                      height: 400,
                                       padding: const EdgeInsets.only(
                                           right: 10,
                                           left: 10,
                                           top: 0,
                                           bottom: 10),
                                       child: TabBarView(
+                                        physics: BouncingScrollPhysics(),
                                         controller: _tabController,
                                         children: [
                                           TabViewHtmlDetails(
                                             titleText: 'Description',
-                                            listText: loadedCourseDetail
-                                                .description,
+                                            listText:
+                                                loadedCourseDetail.description,
                                           ),
                                           TabViewDetails(
                                             titleText: 'What you will learn',
