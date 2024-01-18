@@ -66,15 +66,18 @@ class _AccountScreenState extends State<AccountScreen> {
   }
 
   Future<List<Map<String, dynamic>>?> getCourse() async {
-    List<Map<String, dynamic>> listMap =
-        await DatabaseHelper.instance.queryAllRows('course_list');
+    // List<Map<String, dynamic>> listMap =
+    //     await DatabaseHelper.instance.queryAllRows('course_list');
     
-    for (var map in listMap) {
-      if(!courseArr.contains(map['course_id'])){
-        await DatabaseHelper.instance.removeCourse(map['course_id']);
-        await DatabaseHelper.instance.removeCourseSection(map['course_id']);
-      }
-    }
+    // for (var map in listMap) {
+    //   print('map');
+    //   print(courseArr);
+    //   print(courseArr.contains(map['course_id']));
+      // if(!courseArr.contains(map['course_id'])){
+      //   await DatabaseHelper.instance.removeCourse(map['course_id']);
+      //   await DatabaseHelper.instance.removeCourseSection(map['course_id']);
+      // }
+    // }
 
     return null;
   }

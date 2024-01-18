@@ -188,7 +188,7 @@ class _DownloadListScreenState extends State<DownloadListScreen> {
                                                     '${getVideo.path}/${getVideo.title}';
                                                 // path = '/storage/emulated/0/Download/Youtube Downloadermp4';
                                                 if (path == null) return;
-                                                // print(path);
+                                                print(path);
                                                 Navigator.of(context).push(
                                                   CupertinoPageRoute(
                                                     builder: (context) {

@@ -116,8 +116,7 @@ class DatabaseHelper {
 
   Future<List<CourseDbModel>> getCourse() async {
     Database db = await instance.database;
-    var courses = await db.query('course_list', orderBy: 'id');
-    print(courses);
+    var courses = await db.query('course_list');
     List<CourseDbModel> courseList = courses.isNotEmpty
         ? courses.map((c) => CourseDbModel.fromMap(c)).toList()
         : [];
@@ -130,6 +129,7 @@ class DatabaseHelper {
   }
 
   Future<int> removeCourse(id) async {
+    print('************removing***********************');
     Database db = await instance.database;
     return await db
         .delete('course_list', where: 'course_id = ?', whereArgs: [id]);
