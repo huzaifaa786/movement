@@ -6,7 +6,7 @@ class Api {
     var result;
 
     Dio dio = Dio();
-
+    print('$url = $data');
     result = await dio.post(url, data: data);
     print(result);
     var response = jsonDecode(result.toString());

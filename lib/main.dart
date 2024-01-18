@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: Colors.white,  
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Colors.black, 
         ),

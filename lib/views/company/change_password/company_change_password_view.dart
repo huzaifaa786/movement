@@ -6,21 +6,20 @@ import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/main_input.dart';
 import 'package:noobz/components/topbbar.dart';
 import 'package:noobz/routes/app_routes.dart';
+import 'package:noobz/views/company/change_password/company_change_password_controller.dart';
 import 'package:noobz/views/individual/change_password/change_password_controller.dart';
 
-class ChangePasswordView extends StatefulWidget {
-  const ChangePasswordView({Key? key}) : super(key: key);
+class CompanyChangePasswordView extends StatefulWidget {
+  const CompanyChangePasswordView({Key? key}) : super(key: key);
 
   @override
-  State<ChangePasswordView> createState() => _ChangePasswordViewState();
+  State<CompanyChangePasswordView> createState() => _ChangePasswordViewState();
 }
 
-class _ChangePasswordViewState extends State<ChangePasswordView> {
-  
-
+class _ChangePasswordViewState extends State<CompanyChangePasswordView> {
   // @override
   // void dispose() {
-  //   _currentPasswordController.dispose();
+  //   currentPasswordController.dispose();
   //   _newPasswordController.dispose();
   //   _confirmPasswordController.dispose();
   //   super.dispose();
@@ -28,7 +27,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ChangePasswordController>(
+    return GetBuilder<CompanyChangePasswordController>(
       builder: (controller) => Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -36,7 +35,9 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
           title: TitleTopBar(
             name: 'Change password',
             ontap: () {
-              Get.back();
+              controller.changePasswordUser();
+
+              // Get.back();
             },
           ),
         ),
@@ -61,7 +62,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                         padding: const EdgeInsets.only(
                             left: 20, right: 20, top: 60, bottom: 8),
                         child: MainInput(
-                          controller: controller.oldPasswordController,
+                          controller: controller.oldPassword,
                           hintText: 'Old Password',
                         ),
                       ),
@@ -69,7 +70,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                         padding: const EdgeInsets.only(
                             left: 20, right: 20, bottom: 8),
                         child: MainInput(
-                          controller: controller.newPasswordcontroller,
+                          controller: controller.newPassword,
                           hintText: 'New Password',
                         ),
                       ),
@@ -77,7 +78,7 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
                         padding: const EdgeInsets.only(
                             left: 20, right: 20, bottom: 15),
                         child: MainInput(
-                          controller: controller.confirmPasswordController,
+                          controller: controller.confirmPassword,
                           hintText: 'Confirm New Password',
                         ),
                       ),

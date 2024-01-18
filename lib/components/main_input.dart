@@ -8,18 +8,19 @@ class MainInput extends StatelessWidget {
     this.hintText,
     this.prefixIcon,
     this.type,
+    this.fieldValidator,
   }) : super(key: key);
 
   final controller;
   final hintText;
   final prefixIcon;
   final type;
-
+  final FormFieldValidator<String>? fieldValidator;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 12),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         keyboardType: type,
         decoration: InputDecoration(
@@ -40,6 +41,7 @@ class MainInput extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(width: 2, color: borderGrey)),
         ),
+         validator: fieldValidator,
       ),
     );
   }
