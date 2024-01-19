@@ -59,26 +59,6 @@ class UserApi {
   }
 
 
-  // Future<Map<String, dynamic>> companylogin(
-  //   String email,
-  //   String password,
-  // ) async {
-  //   var url = BASE_URL + 'company/login';
-  //   var data = {
-  //     'email': email,
-  //     'password': password,
-  //   };
-
-  //   var response = await Api.execute(
-  //     url: url,
-  //     data: data,
-  //   );
-
-  //   print('Login response:');
-  //   print(response.toString());
-
-  //   return response;
-  // }
 
   Future<Map<String, dynamic>> changePassword(
     String oldPassword,
