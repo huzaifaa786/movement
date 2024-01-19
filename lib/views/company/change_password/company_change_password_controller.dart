@@ -26,22 +26,11 @@ class CompanyChangePasswordController extends GetxController {
         print("New Password and Confirm New Password do not match");
         return;
       }
-        User? user;
 
-  //  user = User.fromJson(responce['user']);
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? apiToken = prefs.getString('api_token');
-
-      if (apiToken == null) {
-        print("API token not found");
-        return;
-      }
-
-      print('API Token:');
-      print(apiToken);
+      String apiToken = '';
 
       var response = await comapnyauth.changePassword(
-          oldPassword.text, newPassword.text, apiToken ?? '');
+          oldPassword.text, newPassword.text, apiToken );
       print('objectssssssssssssssssssssssssssssssssssss');
       if (!response['error']) {
         print("Password changed successfully");
