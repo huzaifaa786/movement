@@ -35,9 +35,7 @@ class _ChangePasswordViewState extends State<CompanyChangePasswordView> {
           title: TitleTopBar(
             name: 'Change password',
             ontap: () {
-              controller.changePasswordUser();
-
-              // Get.back();
+              Get.back();
             },
           ),
         ),
@@ -47,6 +45,9 @@ class _ChangePasswordViewState extends State<CompanyChangePasswordView> {
             // buttonWidth: 0.9/,
             title: 'submit',
             isSelected: true,
+            onTap: () {
+              controller.changePasswordUser();
+            },
           ),
         ),
         body: SafeArea(

@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:noobz/api/api.dart';
 import 'package:noobz/utils/string.dart';
 
@@ -51,15 +48,13 @@ class ComapnyAuthApi {
   Future<Map<String, dynamic>> changePassword(
     String oldPassword,
     String newPassword,
-    String apiToken,
-
-    // String api_token
+    String api_token
   ) async {
     var url = BASE_URL + 'changePassword';
     var data = {
       'password': oldPassword.toString(),
-      'new_password': newPassword.toString(),
-      'api_token': apiToken.toString(),
+      'new_password': newPassword.toString(), 
+      'api_token' : api_token.toString(),
     };
 
     var response = await Api.execute(

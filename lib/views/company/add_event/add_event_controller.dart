@@ -4,13 +4,15 @@ import 'package:table_calendar/table_calendar.dart';
 
 class CompanyAddEventController extends GetxController {
   static CompanyAddEventController instance = Get.find();
- 
- CalendarFormat format = CalendarFormat.month;
+
+  CalendarFormat format = CalendarFormat.month;
   var format1 = 'month';
   DateTime ourdate = DateTime.now();
   DateTime today = DateTime.now();
   DateTime? rangeStart;
   DateTime? rangeEnd;
+  List<String> paymentDates = ['Manually', 'automatic'];
+  String selectedPaymentDateType = '';
 
   void onFormatChanged(DateTime date) {
     today = date;
@@ -22,7 +24,7 @@ class CompanyAddEventController extends GetxController {
   void onDaySelected(DateTime day, DateTime foucsedDay) async {
     today = day;
     ourdate = day;
-  
+
     update();
   }
 
@@ -32,18 +34,14 @@ class CompanyAddEventController extends GetxController {
     today = focusedDay;
     ourdate = focusedDay;
     if (end == null) {
-   
-    } else {
-    
-    }
+    } else {}
     update();
   }
 
-   RxInt selectedOption = 1.obs;
+  RxInt selectedOption = 1.obs;
 
   void setSelectedOption(int? value) {
     selectedOption.value = value ?? 1;
     update();
   }
-  
 }

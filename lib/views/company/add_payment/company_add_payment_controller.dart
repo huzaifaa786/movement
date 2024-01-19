@@ -4,6 +4,8 @@ import 'package:table_calendar/table_calendar.dart';
 class CompanyAddPaymentController extends GetxController {
   static CompanyAddPaymentController instance = Get.find();
   RxInt selectedOption = 1.obs;
+  List<String> paymentDates = ['Manually', 'automatic'];
+   String selectedPaymentDateType = '';
 
   void setSelectedOption(int? value) {
     selectedOption.value = value ?? 1;

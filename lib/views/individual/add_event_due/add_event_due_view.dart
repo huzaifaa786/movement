@@ -11,8 +11,10 @@ import 'package:noobz/components/priceinput.dart';
 import 'package:noobz/components/topbbar.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:gap/gap.dart';
+import 'package:noobz/utils/ui_utils.dart';
 import 'package:noobz/views/individual/add_event_due/add_event_due_controller.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:intl/intl.dart';
 
 class AddEventDueView extends StatefulWidget {
   const AddEventDueView({Key? key}) : super(key: key);
@@ -21,41 +23,7 @@ class AddEventDueView extends StatefulWidget {
   State<AddEventDueView> createState() => _AddEventDueViewState();
 }
 
-List<String> options = ['Day', 'Weekly', 'Monthly'];
-
 class _AddEventDueViewState extends State<AddEventDueView> {
-  List<String> weekdays = ["S", "M", "T", "W", "TH", "F", "S"];
-  String currentOption = options[0];
-  List<bool> selectedDays = [false, false, false, false, false, false, false];
-  List<String> months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec"
-  ];
-  List<bool> selectedMonths = [
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false
-  ];
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AddEventDueController>(
@@ -86,7 +54,9 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 30, right: 30),
-                            child: MainInput(),
+                            child: MainInput(
+                              controller: controller.eventController,
+                            ),
                           ),
                         ],
                       ),
@@ -110,19 +80,18 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                         ),
                         leading: Radio(
                           activeColor: mainColor,
-                          value: options[0],
-                          groupValue: currentOption,
+                          value: controller.reminderOptions.first,
+                          groupValue: controller.selectedReminder,
                           onChanged: (value) {
-                            setState(() {
-                              currentOption = value.toString();
-                            });
+                            controller.selectedReminder = value!;
+                            controller.update();
                           },
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 16, right: 16),
                         child: Container(
-                          height: MediaQuery.of(context).size.height * 0.18,
+                          height: MediaQuery.of(context).size.height * 0.20,
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: lightGrey,
@@ -134,12 +103,11 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                                 children: [
                                   Radio(
                                     activeColor: mainColor,
-                                    value: options[1],
-                                    groupValue: currentOption,
+                                    value: controller.reminderOptions[1],
+                                    groupValue: controller.selectedReminder,
                                     onChanged: (value) {
-                                      setState(() {
-                                        currentOption = value.toString();
-                                      });
+                                      controller.selectedReminder = value!;
+                                      controller.update();
                                     },
                                   ),
                                   Text(
@@ -160,19 +128,26 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    for (int i = 0; i < weekdays.length; i++)
-                                      DayNames(
-                                        name: weekdays[i],
-                                        isSelected: selectedDays[i],
+                                    for (int i = 0;
+                                        i < controller.weekdays.length;
+                                        i++)
+                                      WeekDayName(
+                                        name: controller.weekdays[i],
+                                        isSelected:
+                                            controller.selectedWeekDay ==
+                                                    controller.weekdays[i]
+                                                ? true
+                                                : false,
                                         onDaySelected: () {
-                                          setState(() {
-                                            for (int j = 0;
-                                                j < selectedDays.length;
-                                                j++) {
-                                              selectedDays[j] = false;
-                                            }
-                                            selectedDays[i] = true;
-                                          });
+                                          if (controller.selectedReminder ==
+                                              controller.reminderOptions[1]) {
+                                            controller.selectedWeekDay =
+                                                controller.weekdays[i];
+                                            controller.getFutureDates(
+                                                controller.selectedWeekDay,
+                                                controller.noOfWeekMonths);
+                                            controller.update();
+                                          }
                                         },
                                       ),
                                   ],
@@ -182,13 +157,33 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 15, right: 20, top: 20),
+                                        left: 15, right: 20),
                                     child: EventNameContainer(
                                       color: blackgrey,
                                       name: 'Number of months',
                                     ),
                                   ),
-                                  MainInputSmall(),
+                                  MainInputSmall(
+                                    type: TextInputType.number,
+                                    controller:
+                                        controller.noOfWeekMonthsController,
+                                    onChange: (value) {
+                                      if (value == '') {
+                                        controller
+                                            .noOfWeekMonthsController.text = '';
+                                        value = '1';
+                                      } else {
+                                        controller.noOfWeekMonthsController
+                                            .text = value;
+                                      }
+
+                                      controller.noOfWeekMonths =
+                                          int.parse(value);
+                                      controller.getFutureDates(
+                                          controller.selectedWeekDay,
+                                          int.parse(value));
+                                    },
+                                  ),
                                 ],
                               ),
                             ],
@@ -199,7 +194,7 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                       Padding(
                         padding: const EdgeInsets.only(left: 16, right: 16),
                         child: Container(
-                          height: MediaQuery.of(context).size.height * 0.235,
+                          height: MediaQuery.of(context).size.height * 0.265,
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: lightGrey,
@@ -211,12 +206,11 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                                 children: [
                                   Radio(
                                     activeColor: mainColor,
-                                    value: options[2],
-                                    groupValue: currentOption,
+                                    value: controller.reminderOptions[2],
+                                    groupValue: controller.selectedReminder,
                                     onChanged: (value) {
-                                      setState(() {
-                                        currentOption = value.toString();
-                                      });
+                                      controller.selectedReminder = value!;
+                                      controller.update();
                                     },
                                   ),
                                   Text(
@@ -233,16 +227,17 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                               Wrap(
                                 children: [
                                   for (int i = 0; i < 12; i++)
-                                    DayNames(
-                                      name: months[i],
-                                      isSelected: selectedMonths[i],
+                                    WeekDayName(
+                                      name: controller.months[i],
+                                      isSelected: controller.selectedMonth ==
+                                          controller.months[i],
                                       onDaySelected: () {
-                                        setState(() {
-                                          for (int j = 0; j < 12; j++) {
-                                            selectedMonths[j] = false;
-                                          }
-                                          selectedMonths[i] = true;
-                                        });
+                                        controller.selectedMonth =
+                                            controller.months[i];
+                                        controller.getFutureYear(
+                                            controller.selectedMonth,
+                                            controller.noOfMonthYears);
+                                        controller.update();
                                       },
                                     ),
                                 ],
@@ -251,138 +246,248 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 15, right: 20, top: 20),
+                                        left: 15, right: 20),
                                     child: EventNameContainer(
                                       color: blackgrey,
                                       name: 'Number of years',
                                     ),
                                   ),
-                                  MainInputSmall(),
+                                  MainInputSmall(
+                                    type: TextInputType.number,
+                                    controller:
+                                        controller.noOfMonthYearsController,
+                                    onChange: (value) {
+                                      if (value == '') {
+                                        controller
+                                            .noOfMonthYearsController.text = '';
+                                        value = '1';
+                                      } else {
+                                        controller.noOfMonthYearsController
+                                            .text = value;
+                                      }
+
+                                      controller.noOfMonthYears =
+                                          int.parse(value);
+                                      controller.getFutureYear(
+                                          controller.selectedMonth,
+                                          int.parse(value));
+                                    },
+                                  ),
                                 ],
                               ),
                             ],
                           ),
                         ),
                       ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(left: 25, right: 25, top: 11),
-                        child: EventNameContainer(
-                            name: 'Select event date', color: darkGrey),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsets.only(top: 8, left: 10, right: 10),
-                        child: TableCalendar(
-                          selectedDayPredicate: (day) =>
-                              isSameDay(day, controller.newtoday),
-                          firstDay: DateTime.utc(2023, 1, 1),
-                          lastDay: DateTime.now(),
-                          focusedDay: controller.newtoday,
-                          onDaySelected: controller.onDaySelected,
-                          headerStyle: const HeaderStyle(
-                            formatButtonVisible: false,
-                            titleCentered: true,
-                            titleTextStyle: TextStyle(
-                                fontFamily: "Poppins",
-                                fontSize: 24,
-                                fontWeight: FontWeight.w500,
-                                color: black),
-                          ),
-                          calendarStyle: CalendarStyle(
-                            todayDecoration: BoxDecoration(
-                                color: mainColor.withOpacity(0.5),
-                                shape: BoxShape.circle),
-                            selectedDecoration: BoxDecoration(
-                                color: mainColor, shape: BoxShape.circle),
-                            markerDecoration: BoxDecoration(
-                              color: Colors.grey.shade600,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            rangeStartDecoration: BoxDecoration(
-                                color: mainColor, shape: BoxShape.circle),
-                            rangeEndDecoration: BoxDecoration(
-                                color: mainColor, shape: BoxShape.circle),
-                            rangeHighlightColor: mainColor.withOpacity(0.5),
-                            isTodayHighlighted: true,
-                            outsideDaysVisible: false,
-                          ),
-                          availableCalendarFormats: const {
-                            CalendarFormat.month: 'Month',
-                          },
-                          onPageChanged: controller.onFormatChanged,
-                          calendarFormat: controller.format,
-                          startingDayOfWeek: StartingDayOfWeek.monday,
-                          daysOfWeekVisible: true,
-                        ),
-                      ),
+                      controller.selectedReminder ==
+                              controller.reminderOptions.first
+                          ? Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 25, right: 25, top: 11),
+                                  child: EventNameContainer(
+                                      name: 'Select event date',
+                                      color: darkGrey),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 8, left: 10, right: 10),
+                                  child: TableCalendar(
+                                    selectedDayPredicate: (day) =>
+                                        isSameDay(day, controller.newtoday),
+                                    firstDay:
+                                        DateTime.now().add(Duration(hours: 30)),
+                                    lastDay: DateTime.now()
+                                        .add(Duration(days: 100000000000000)),
+                                    focusedDay: controller.newtoday,
+                                    onDaySelected: controller.onDaySelected,
+                                    headerStyle: const HeaderStyle(
+                                      formatButtonVisible: false,
+                                      titleCentered: true,
+                                      titleTextStyle: TextStyle(
+                                          fontFamily: "Poppins",
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.w500,
+                                          color: black),
+                                    ),
+                                    calendarStyle: CalendarStyle(
+                                      todayDecoration: BoxDecoration(
+                                          color: mainColor.withOpacity(0.5),
+                                          shape: BoxShape.circle),
+                                      selectedDecoration: BoxDecoration(
+                                          color: mainColor,
+                                          shape: BoxShape.circle),
+                                      markerDecoration: BoxDecoration(
+                                        color: Colors.grey.shade600,
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      rangeStartDecoration: BoxDecoration(
+                                          color: mainColor,
+                                          shape: BoxShape.circle),
+                                      rangeEndDecoration: BoxDecoration(
+                                          color: mainColor,
+                                          shape: BoxShape.circle),
+                                      rangeHighlightColor:
+                                          mainColor.withOpacity(0.5),
+                                      isTodayHighlighted: true,
+                                      outsideDaysVisible: false,
+                                    ),
+                                    availableCalendarFormats: const {
+                                      CalendarFormat.month: 'Month',
+                                    },
+                                    onPageChanged: controller.onFormatChanged,
+                                    calendarFormat: controller.format,
+                                    startingDayOfWeek: StartingDayOfWeek.monday,
+                                    daysOfWeekVisible: true,
+                                  ),
+                                ),
+                                Gap(20),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 23, right: 23),
+                                  child: PaymentDateContainer(
+                                      controller:
+                                          controller.noOfDayMonthsController,
+                                      onInputChange: (value) {
+                                        if (value == '') {
+                                          controller.noOfDayMonthsController
+                                              .text = '';
+                                          value = '1';
+                                        } else {
+                                          controller.noOfDayMonthsController
+                                              .text = value;
+                                        }
+
+                                        controller.noOfDayMonths =
+                                            int.parse(value);
+                                        controller.getFutureDatesFromDate(
+                                            controller.selectedDayDate,
+                                            int.parse(value));
+                                        controller.update();
+                                      },
+                                      options: controller.paymentDates,
+                                      selectedOption:
+                                          controller.selectedPaymentDateType,
+                                      onOptionChanged: (String? value) {
+                                        controller.selectedPaymentDateType =
+                                            value!;
+                                        controller.update();
+                                      }),
+                                ),
+                              ],
+                            )
+                          : Text(''),
                       Divider(
                         color: grey,
                         indent: 23,
                         endIndent: 23,
                       ),
-                      Gap(20),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 23, right: 23),
-                        child: PaymentDateContainer(
-                          selectedOption: controller.selectedOption.value,
-                          onOptionChanged: (int? value) =>
-                              controller.setSelectedOption(value),
-                        ),
-                      ),
                       Gap(30),
-                      if (controller.selectedOption.value == 2)
+                      if (controller.selectedPaymentDateType ==
+                              controller.paymentDates[1] &&
+                          controller.selectedReminder ==
+                              controller.reminderOptions.first)
                         Padding(
                           padding: const EdgeInsets.only(left: 30, right: 30),
                           child: Column(
                             children: [
-                              MonthDateContainer(
-                                title: '1 Jan 2023',
-                              ),
-                              Gap(3),
-                              MonthDateContainer(
-                                title: '1 Feb 2023',
-                              ),
-                              Gap(3),
-                              MonthDateContainer(
-                                title: '1 Mar 2023',
-                              ),
-                              Gap(3),
-                              MonthDateContainer(
-                                title: '1 Apr 2023',
-                              ),
-                              Gap(3),
-                              MonthDateContainer(
-                                title: '1 May 2023',
-                              ),
-                              Gap(3),
-                              MonthDateContainer(
-                                title: '1 Jun 2023',
-                              ),
-                              Gap(3),
-                              MonthDateContainer(
-                                title: '1 Jul 2023',
-                              ),
-                              Gap(3),
-                              MonthDateContainer(
-                                title: '1 Aug 2023',
-                              ),
-                              Gap(3),
-                              MonthDateContainer(
-                                title: '1 Sep 2023',
-                              ),
-                              Gap(3),
-                              MonthDateContainer(
-                                title: '1 Oct 2023',
-                              ),
-                              Gap(3),
-                              MonthDateContainer(
-                                title: '1 Nov 2023',
-                              ),
-                              Gap(3),
-                              MonthDateContainer(
-                                title: '1 Dec 2023',
-                              ),
+                              for (int i = 0;
+                                  i < controller.dailyMonths.length;
+                                  i++)
+                                Column(
+                                  children: [
+                                    MonthDateContainer(
+                                      title: DateFormat('d MMM yyyy').format(
+                                          DateTime.parse(
+                                              controller.dailyMonths[i])),
+                                      onTap: () {
+                                        var date = DateFormat('d MMM yyyy')
+                                            .format(DateTime.parse(
+                                                controller.dailyMonths[i]));
+                                        UiUtilites.confirmRemoveDateAlert(
+                                            context,
+                                            'Sure want to delete \n  $date  \n from selected dates?',
+                                            () {
+                                          controller.removeDailyMonths(i);
+                                        }, () {
+                                          Get.back();
+                                        }, 'Yes', 'Cancel');
+                                      },
+                                    ),
+                                    Gap(5),
+                                  ],
+                                ),
+                            ],
+                          ),
+                        ),
+                      if (controller.selectedReminder ==
+                          controller.reminderOptions[1])
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30, right: 30),
+                          child: Column(
+                            children: [
+                              for (int i = 0;
+                                  i < controller.weeklyMonths.length;
+                                  i++)
+                                Column(
+                                  children: [
+                                    MonthDateContainer(
+                                      title: DateFormat('d MMM yyyy').format(
+                                          DateTime.parse(
+                                              controller.weeklyMonths[i])),
+                                      onTap: () {
+                                        var date = DateFormat('d MMM yyyy')
+                                            .format(DateTime.parse(
+                                                controller.weeklyMonths[i]));
+                                        UiUtilites.confirmRemoveDateAlert(
+                                            context,
+                                            'Sure want to delete \n  $date  \n from selected dates?',
+                                            () {
+                                          controller.removeWeeklyMonths(i);
+                                        }, () {
+                                          Get.back();
+                                        }, 'Yes', 'Cancel');
+                                      },
+                                    ),
+                                    Gap(5),
+                                  ],
+                                ),
+                            ],
+                          ),
+                        ),
+                      if (controller.selectedReminder ==
+                          controller.reminderOptions[2])
+                        Padding(
+                          padding: const EdgeInsets.only(left: 30, right: 30),
+                          child: Column(
+                            children: [
+                              for (int i = 0;
+                                  i < controller.monthlyYears.length;
+                                  i++)
+                                Column(
+                                  children: [
+                                    MonthDateContainer(
+                                      title: DateFormat('d MMM yyyy').format(
+                                          DateTime.parse(
+                                              controller.monthlyYears[i])),
+                                      onTap: () {
+                                        var date = DateFormat('d MMM yyyy')
+                                            .format(DateTime.parse(
+                                                controller.monthlyYears[i]));
+                                        UiUtilites.confirmRemoveDateAlert(
+                                            context,
+                                            'Sure want to delete \n  $date  \n from selected dates?',
+                                            () {
+                                          controller.removeYearly(i);
+                                        }, () {
+                                          Get.back();
+                                        }, 'Yes', 'Cancel');
+                                      },
+                                    ),
+                                    Gap(5),
+                                  ],
+                                ),
                             ],
                           ),
                         ),
@@ -416,14 +521,16 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                                 children: [
                                   Row(
                                     children: [
-                                      Radio<int>(
-                                        value: 1,
-                                        groupValue:
-                                            controller.selectedOption.value,
-                                        activeColor: mainColor,
-                                        onChanged: (int? value) =>
-                                            controller.setSelectedOption(value),
-                                      ),
+                                      Radio(
+                                          value: controller.eventTypes.first,
+                                          groupValue:
+                                              controller.selectedEventType,
+                                          activeColor: mainColor,
+                                          onChanged: (String? value) {
+                                            controller.selectedEventType =
+                                                value!;
+                                            controller.update();
+                                          }),
                                       Text(
                                         'Yes',
                                         style: TextStyle(
@@ -434,14 +541,16 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                                   ),
                                   Row(
                                     children: [
-                                      Radio<int>(
-                                        value: 2,
-                                        groupValue:
-                                            controller.selectedOption.value,
-                                        activeColor: mainColor,
-                                        onChanged: (int? value) =>
-                                            controller.setSelectedOption(value),
-                                      ),
+                                      Radio(
+                                          value: controller.eventTypes[1],
+                                          groupValue:
+                                              controller.selectedEventType,
+                                          activeColor: mainColor,
+                                          onChanged: (String? value) {
+                                            controller.selectedEventType =
+                                                value!;
+                                            controller.update();
+                                          }),
                                       Text(
                                         'No',
                                         style: TextStyle(
@@ -456,25 +565,34 @@ class _AddEventDueViewState extends State<AddEventDueView> {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 25, right: 20),
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 188,
-                              child: priceInput(
-                                hintText: 'amount',
+                      controller.eventTypes.first ==
+                              controller.selectedEventType
+                          ? Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 25, right: 20),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 188,
+                                    child: priceInput(
+                                      controller: controller.amountController,
+                                      hintText: 'Amount',
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
+                            )
+                          : Text(''),
                       Gap(50),
                       Padding(
                         padding: const EdgeInsets.all(20),
                         child: MainButton(
+                          onTap: () {
+                           
+                            controller.submit();
+                          },
                           // buttonWidth: 0.9/,
-                          title: 'submit',
+                          title: 'Submit',
                           isSelected: true,
                         ),
                       ),
