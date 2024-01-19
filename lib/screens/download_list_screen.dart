@@ -8,6 +8,7 @@ import 'package:academy_app/widgets/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:html_unescape/html_unescape.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:pod_player/pod_player.dart';
 import 'downloaded_course_list.dart';
 
@@ -74,6 +75,49 @@ class _DownloadListScreenState extends State<DownloadListScreen> {
       DatabaseHelper.instance.removeCourse(courseId);
     }
   }
+
+  // void readDataFromPath(String path) {
+  //   try {
+  //     File file = File(path);
+
+  //     if (file.existsSync()) {
+  //       // Read the contents of the file
+  //       String contents = file.readAsStringSync();
+
+  //       // Do something with the file contents
+  //       print("File contents: $contents");
+  //     } else {
+  //       print("File does not exist at the specified path.");
+  //     }
+  //   } catch (e) {
+  //     print("Error reading file: $e");
+  //   }
+  // }
+
+  // void requestStoragePermission(path) async {
+  //   Map<Permission, PermissionStatus> result = await [
+  //     Permission.manageExternalStorage,
+  //   ].request();
+  //   var status = await Permission.storage.request();
+  //   if (status == PermissionStatus.granted) {
+  //     // Permissions granted, proceed with your logic
+  //   } else {
+  //     // Permissions denied, handle accordingly
+  //   }
+  //   print('${result[Permission.storage]} storage permission');
+  //   print(
+  //       '${result[Permission.manageExternalStorage]} manageExternalStorage permission');
+
+  //   //if permission is granted only then show home screen else permission error screen is already shown
+  //   if (result[Permission.storage] == PermissionStatus.granted ||
+  //       result[Permission.manageExternalStorage] == PermissionStatus.granted) {
+  //     setState(() {});
+  //     print('Permission not denied');
+  //     readDataFromPath(path);
+  //   } else {
+  //     print('error');
+  //   }
+  // }
 
   @override
   void initState() {
@@ -183,12 +227,13 @@ class _DownloadListScreenState extends State<DownloadListScreen> {
                                         children: <Widget>[
                                           InkWell(
                                             onTap: () {
-                                              setState(() async {
+                                              setState(() {
                                                 path =
                                                     '${getVideo.path}/${getVideo.title}';
                                                 // path = '/storage/emulated/0/Download/Youtube Downloadermp4';
                                                 if (path == null) return;
                                                 print(path);
+                                                // requestStoragePermission(path);
                                                 Navigator.of(context).push(
                                                   CupertinoPageRoute(
                                                     builder: (context) {
@@ -242,15 +287,15 @@ class _DownloadListScreenState extends State<DownloadListScreen> {
                                                               AlertDialog(
                                                             title: const Text(
                                                                 'Notifying'),
-                                                            content: const Column(
+                                                            content:
+                                                                const Column(
                                                               mainAxisSize:
                                                                   MainAxisSize
                                                                       .min,
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
                                                                       .start,
-                                                              children: <
-                                                                  Widget>[
+                                                              children: <Widget>[
                                                                 Text(
                                                                     'Do you wish to remove this lesson?'),
                                                               ],
@@ -356,6 +401,8 @@ class _VideoAppState extends State<VideoApp> {
   late final PodPlayerController controller;
   @override
   void initState() {
+    print('Idr agya hu file dekho a gai ha idr yah nhi ?');
+    print(widget.file!.path);
     controller = PodPlayerController(
       playVideoFrom: PlayVideoFrom.file(widget.file!),
     )..initialise();

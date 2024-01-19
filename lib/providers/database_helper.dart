@@ -78,8 +78,8 @@ class DatabaseHelper {
   }
 
   Future<int> removeVideo(int id) async {
-    // Database db = await instance.database;
-    return 0;
+    Database db = await instance.database;
+    return await db.delete('video_list', where: 'id = ?', whereArgs: [id]);
   }
 
   Future<bool> lessonExists(id) async {
@@ -100,7 +100,8 @@ class DatabaseHelper {
   Future<dynamic> lessonDetails(id) async {
     dynamic result = [];
     if (_database != null) {
-      result = await _database!.rawQuery('SELECT * FROM video_list WHERE lesson_id="$id"');
+      result = await _database!
+          .rawQuery('SELECT * FROM video_list WHERE lesson_id="$id"');
       // Get first result
       var dbItem = result.first;
 

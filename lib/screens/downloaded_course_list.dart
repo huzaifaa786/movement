@@ -24,7 +24,6 @@ class _DownloadedCourseListState extends State<DownloadedCourseList> {
   List<VideoModel> listVideos = [];
   List<int> courseArr = [];
 
-
   Future<List<Map<String, dynamic>>?> getVideos() async {
     List<Map<String, dynamic>> listMap =
         await DatabaseHelper.instance.queryAllRows('video_list');
@@ -46,7 +45,7 @@ class _DownloadedCourseListState extends State<DownloadedCourseList> {
   // Future<List<Map<String, dynamic>>?> getCourse() async {
   //   List<Map<String, dynamic>> listMap =
   //       await DatabaseHelper.instance.queryAllRows('course_list');
-    
+
   //   for (var map in listMap) {
   //     if(!courseArr.contains(map['course_id'])){
   //       await DatabaseHelper.instance.removeCourse(map['course_id']);
@@ -69,9 +68,10 @@ class _DownloadedCourseListState extends State<DownloadedCourseList> {
     for (int i = 0; i < listVideos.length; i++) {
       VideoModel getVideo = listVideos[i];
       File checkPath = File("${getVideo.path}/${getVideo.title}");
-      if(checkPath.existsSync()) {
+      if (checkPath.existsSync()) {
         if (getVideo.courseId == courseId) {
           count = count + 1;
+          setState(() {});
         }
       } else {
         DatabaseHelper.instance.removeVideo(getVideo.id!);
@@ -218,7 +218,7 @@ class _DownloadedCourseListState extends State<DownloadedCourseList> {
                         ),
                       ),
                     );
-                  }, 
+                  },
                   mainAxisSpacing: 5.0,
                   crossAxisSpacing: 5.0,
                 );
