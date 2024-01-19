@@ -45,6 +45,7 @@ dependencies:
   table_calendar: ^3.0.9
   flutter_otp_text_field: ^1.1.1
   dio: ^5.4.0
+  get_storage: ^2.1.1
   
 
 dev_dependencies:

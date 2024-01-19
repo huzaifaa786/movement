@@ -1,33 +1,27 @@
 class User {
-  late String username;
+  late String name;
   late String email;
-  late String password;
- 
+  String? api_token;
 
   User({
-    required this.username,
+    required this.name,
     required this.email,
-    required this.password,
-   
+    this.api_token,
   });
 
-  // Factory method to create an instance from JSON data
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      username: json['username'],
+      name: json['name'],
       email: json['email'],
-      password: json['password'],
-    
+      api_token: json['api_token'],
     );
   }
 
-  // Method to convert the model to JSON data
   Map<String, dynamic> toJson() {
     return {
-      'username': username,
+      'name': name,
       'email': email,
-      'password': password,
-    
+      'api_token': api_token,
     };
   }
 }

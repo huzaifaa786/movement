@@ -1,8 +1,12 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class AddEventDueController extends GetxController {
   static AddEventDueController instance = Get.find();
+  GetStorage box = GetStorage();
+
   RxInt selectedOption = 1.obs;
 
   void setSelectedOption(int? value) {
