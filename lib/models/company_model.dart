@@ -1,4 +1,4 @@
-class User {
+class CompanyUser {
   late int id;
   String? username;
   String? email;
@@ -7,7 +7,7 @@ class User {
   String? api_token;
   String? login_type;
 
-  User({
+  CompanyUser({
     required this.id,
     this.username,
     this.email,
@@ -17,8 +17,9 @@ class User {
     this.login_type,
   });
 
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
+  // Factory method to create an instance from JSON data
+  factory CompanyUser.fromJson(Map<String, dynamic> json) {
+    return CompanyUser(
       id: json['id'],
       username: json['name'],
       email: json['email'],
@@ -29,11 +30,11 @@ class User {
     );
   }
 
+  // Method to convert the model to JSON data
   Map<String, dynamic> toJson() {
     return {
-      'name': username,
+      'username': username,
       'email': email,
-      'api_token': api_token,
       'password': password,
     };
   }

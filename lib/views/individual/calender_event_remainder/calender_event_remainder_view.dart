@@ -32,65 +32,63 @@ class _CalenderEventRemainderViewState
               ),
             ),
             body: SafeArea(
-                child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Container(
-                            // decoration: BoxDecoration(border: Border.all()),
-                            child: TableCalendar(
-                              selectedDayPredicate: (day) =>
-                                  isSameDay(day, controller.today),
-                              firstDay: DateTime.utc(2023, 1, 1),
-                              lastDay: DateTime.now(),
-                              focusedDay: controller.today,
-                              onDaySelected: controller.onDaySelected,
-                              headerStyle: const HeaderStyle(
-                                formatButtonVisible: false,
-                                titleCentered: true,
-                                titleTextStyle: TextStyle(
-                                    fontFamily: "Poppins",
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.w500,
-                                    color: black),
-                              ),
-                              calendarStyle: CalendarStyle(
-                                todayDecoration: BoxDecoration(
-                                    color: mainColor.withOpacity(0.5),
-                                    shape: BoxShape.circle),
-                                selectedDecoration: BoxDecoration(
-                                    color: mainColor, shape: BoxShape.circle),
-                                markerDecoration: BoxDecoration(
-                                  color: Colors.grey.shade600,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                rangeStartDecoration: BoxDecoration(
-                                    color: mainColor, shape: BoxShape.circle),
-                                rangeEndDecoration: BoxDecoration(
-                                    color: mainColor, shape: BoxShape.circle),
-                                rangeHighlightColor: mainColor.withOpacity(0.5),
-                                isTodayHighlighted: true,
-                                outsideDaysVisible: false,
-                              ),
-                              availableCalendarFormats: const {
-                                CalendarFormat.month: 'Month',
-                              },
-                              onPageChanged: controller.onFormatChanged,
-                              calendarFormat: controller.format,
-                              startingDayOfWeek: StartingDayOfWeek.monday,
-                              daysOfWeekVisible: true,
-                            ),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Container(
+                        // decoration: BoxDecoration(border: Border.all()),
+                        child: TableCalendar(
+                          selectedDayPredicate: (day) =>
+                              isSameDay(day, controller.today),
+                          firstDay: DateTime.utc(2023, 1, 1),
+                          lastDay: DateTime.now(),
+                          focusedDay: controller.today,
+                          onDaySelected: controller.onDaySelected,
+                          headerStyle: const HeaderStyle(
+                            formatButtonVisible: false,
+                            titleCentered: true,
+                            titleTextStyle: TextStyle(
+                                fontFamily: "Poppins",
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
+                                color: black),
                           ),
+                          calendarStyle: CalendarStyle(
+                            todayDecoration: BoxDecoration(
+                                color: mainColor.withOpacity(0.5),
+                                shape: BoxShape.circle),
+                            selectedDecoration: BoxDecoration(
+                                color: mainColor, shape: BoxShape.circle),
+                            markerDecoration: BoxDecoration(
+                              color: Colors.grey.shade600,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            rangeStartDecoration: BoxDecoration(
+                                color: mainColor, shape: BoxShape.circle),
+                            rangeEndDecoration: BoxDecoration(
+                                color: mainColor, shape: BoxShape.circle),
+                            rangeHighlightColor: mainColor.withOpacity(0.5),
+                            isTodayHighlighted: true,
+                            outsideDaysVisible: false,
+                          ),
+                          availableCalendarFormats: const {
+                            CalendarFormat.month: 'Month',
+                          },
+                          onPageChanged: controller.onFormatChanged,
+                          calendarFormat: controller.format,
+                          startingDayOfWeek: StartingDayOfWeek.monday,
+                          daysOfWeekVisible: true,
                         ),
-                           CalenderEventRemainderContainer(
-                          calendereventremainder: 3,
-                        ),
-                      ],
+                      ),
                     ),
-            
-            ),
-            
+                    CalenderEventRemainderContainer(
+                      calendereventremainder: 3,
+                    ),
+                  ],
+                ),
+              ),
             )));
   }
 }
