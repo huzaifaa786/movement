@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noobz/api/auth_api.dart';
+import 'package:noobz/api/company_auth_api.dart';
+import 'package:noobz/models/user_model.dart';
+import 'package:noobz/routes/app_routes.dart';
 
 class CompanySignInController extends GetxController {
   static CompanySignInController instance = Get.find();
   TextEditingController passwordController = TextEditingController();
   TextEditingController emailController = TextEditingController();
 
-  final authapi = UserApi();
+  final comapnyauth = ComapnyAuthApi();
+  User? user;
 
   bool obscureTextPassword = true;
   void toggle() {
@@ -17,30 +21,23 @@ class CompanySignInController extends GetxController {
 
   String language = 'english';
 
-  Future<void> companyloginUser() async {
-    // try {
-    //   print('objectllllllllllllllllllllllllllllllllll');
+  Future<void> companyLoginUser() async {
 
-    //   if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-    //     return;
-    //   }
-    //   print('objectllllllllllllllllllllllllllllllllll');
-    //   var response = await authapi.login(
-    //     emailController.text,
-    //     passwordController.text,
-    //   );
+    try {
+      if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+        return;
+      }
 
-    //   if (response) {
-    //     print('Login successful');
-    //     // Add your logic here for what to do after a successful login
-    //   } else {
-    //     // Login failed
-    //     print('Login nottttttttttttt successful');
+      var responce = await comapnyauth.companylogin(
+          emailController.text, passwordController.text);
+      if (!responce['error']) {
 
-    //     // Add your logic here for what to do when login fails
-    //   }
-    // } catch (error) {
-    //   print('Error logging in: $error');
-    // }
+        Get.offNamed(AppRoutes.individualHome);
+        user = User.fromJson(responce['user']);
+      } else {
+
+        print(responce['error_data']);
+      }
+    } catch (error) {}
   }
 }

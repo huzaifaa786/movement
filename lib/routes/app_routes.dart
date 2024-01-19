@@ -36,4 +36,6 @@ class AppRoutes {
   static const companyNotification = '/companyNotification';
   static const companyCalendar = '/companyCalendar';
   static const companyCalendarEventRemainder = '/companyCalendarEventRemainder';
+  static const companyChangepassword = '/companyChangepassword';
+
 }

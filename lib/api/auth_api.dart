@@ -1,3 +1,4 @@
+import 'package:get_storage/get_storage.dart';
 import 'package:noobz/api/api.dart';
 import 'package:noobz/models/user_model.dart';
 import 'package:noobz/utils/string.dart';
@@ -22,12 +23,16 @@ class UserApi {
       url: url,
       data: data,
     );
-    print('ddddddddddddddddddddddddddddddddddddddddddddddd');
-    print(response.toString());
+
+    User user = User.fromJson(response['user']);
+    GetStorage box = GetStorage();
+    box.write('api_token', user.api_token);
+    box.write('user_id', user.id);
+
     return response;
   }
 
-  Future<Map<String, dynamic>> login(
+  login(
     String email,
     String password,
   ) async {
@@ -42,8 +47,13 @@ class UserApi {
       data: data,
     );
 
-    print('Login response:');
-    print(response.toString());
+    if (!response['error']) {
+      User user = User.fromJson(response['user']);
+      GetStorage box = GetStorage();
+      box.write('api_token', user.api_token);
+      box.write('user_id', user.id);
+      print(box.read('api_token'));
+    }
 
     return response;
   }

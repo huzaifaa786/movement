@@ -1,7 +1,10 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:noobz/api/auth_api.dart';
+import 'package:noobz/api/company_auth_api.dart';
 import 'package:noobz/utils/ui_utils.dart';
 
 class CompanySignUPController extends GetxController {
@@ -11,7 +14,7 @@ class CompanySignUPController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  final authApi = UserApi();
+  final companyauthApi = ComapnyAuthApi();
 
   bool obscureTextPassword = true;
   void toggle() {
@@ -19,65 +22,77 @@ class CompanySignUPController extends GetxController {
     update();
   }
 
+// license = cv, pssprt = logo
+
+  String? service_type = "real_estate";
+  XFile? logoImage = XFile('');
+  XFile? licenseImage = XFile('');
+
+  Future<void> selectlogoImage() async {
+    final ImagePicker _picker = ImagePicker();
+    var image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      logoImage = image;
+      update();
+    } else {
+      logoImage = XFile('');
+      update();
+    }
+  }
+
+  Future<void> selectlicenseImage() async {
+    final ImagePicker _picker = ImagePicker();
+    var image = await _picker.pickImage(source: ImageSource.gallery);
+    if (image != null) {
+      licenseImage = image;
+      update();
+    } else {
+      licenseImage = XFile('');
+      update();
+    }
+  }
+
   Future<void> companyregisterUser() async {
-    try {
+    // try {
       if (nameController.text.isEmpty ||
           emailController.text.isEmpty ||
           passwordController.text.isEmpty) {
+            print('Please fill in all fields');
         return;
       }
-      var response = await authApi.register(
+
+      String logoBase64 = '';
+      String licenseBase64 = '';
+
+      if (logoImage != null) {
+        final logoBytes = await File(logoImage!.path).readAsBytes();
+        logoBase64 = base64Encode(logoBytes);
+      }
+
+      if (licenseImage != null) {
+        final licenseBytes = await File(licenseImage!.path).readAsBytes();
+        licenseBase64 = base64Encode(licenseBytes);
+      }
+      print(licenseBase64);
+
+      var response = await companyauthApi.companyregister(
         nameController.text,
         emailController.text,
         passwordController.text,
+        logoBase64,
+        licenseBase64,
+        service_type ,
       );
+      print('response a gya haaaaaaa');
 
-      if (response) {
-      } else {}
-    } catch (error) {
-      print('Error registering user: $error');
-    }
-  }
+      if (!response['error']) {
 
-  final picker = ImagePicker();
-  late XFile? selectedLogo;
-  late XFile? selectedLicense;
-
-  // Method to open the image picker and select an image
-  Future<void> pickImage(ImageType imageType) async {
-    try {
-      final pickedImage =
-          await picker.pickImage(source: ImageSource.gallery);
-      if (pickedImage != null) {
-        if (imageType == ImageType.logo) {
-          selectedLogo = pickedImage;
-        } else if (imageType == ImageType.license) {
-          selectedLicense = pickedImage;
-        }
-        update();
+        print('Registration successful');
+      } else {
+        print('Registration  not  not   successful');
       }
-    } catch (error) {
-      print('Error picking image: $error');
-    }
+    // } catch (error) {
+    //   print('Error registering user: $error');
+    // }
   }
-
-  // Method to upload the selected images
-  Future<void> uploadImages() async {
-    if (selectedLogo != null) {
-      // Implement your logo image uploading logic here
-      // You can use selectedLogo.path to access the image file path
-      // and upload it to your desired location.
-    }
-
-    if (selectedLicense != null) {
-      // Implement your license image uploading logic here
-      // You can use selectedLicense.path to access the image file path
-      // and upload it to your desired location.
-    }
-  }
-}
-
-enum ImageType {
-  logo,
-  license,
 }
