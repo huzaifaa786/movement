@@ -1,4 +1,7 @@
 // ignore_for_file: unused_import
+import 'dart:io';
+import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noobz/routes/app_pages.dart';
@@ -27,7 +30,15 @@ import 'package:noobz/views/company/client/clientinfo/clientinfo_binding.dart';
 import 'package:noobz/views/company/client/clientinfo/clientinfo_view.dart';
 
 void main() {
+  //   final dio = Dio();
+  // (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
+  //   client.badCertificateCallback = (cert, host, port) => true;
+  //   return client;
+  // };
+   
+
   WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
 }
 
@@ -51,5 +62,13 @@ class MyApp extends StatelessWidget {
       home: SplashView(),
       getPages: AppPages.pages,
     );
+  }
+
+}
+ class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
   }
 }

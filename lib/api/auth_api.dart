@@ -94,4 +94,29 @@ class UserApi {
 
   //   return response;
   // }
+
+  Future<Map<String, dynamic>> changePassword(
+    String oldPassword,
+    String newPassword,
+    String api_token,
+
+    // String api_token
+  ) async {
+    var url = BASE_URL + 'changePassword';
+    var data = {
+      'password': oldPassword.toString(),
+      'new_password': newPassword.toString(),
+      'api_token': api_token.toString(),
+    };
+
+    var response = await Api.execute(
+      url: url,
+      data: data,
+    );
+
+    print('Change Password response:');
+    print(response.toString());
+
+    return response;
+  }
 }

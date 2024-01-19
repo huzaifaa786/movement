@@ -17,7 +17,8 @@ class CompanyChangePasswordController extends GetxController {
     if (
         oldPassword.text.isEmpty ||
         newPassword.text.isEmpty ||
-        confirmPassword.text.isEmpty) {
+        confirmPassword.text.isEmpty
+        ) {
       return;
     }
 
@@ -29,8 +30,8 @@ class CompanyChangePasswordController extends GetxController {
     var response = await comapnyauth.changePassword(
       oldPassword.text,
       newPassword.text,
-      
-      
+      confirmPassword.text,
+
     );
 
     if (!response['error']) {

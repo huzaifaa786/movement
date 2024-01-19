@@ -5,8 +5,7 @@ import 'package:noobz/api/api.dart';
 import 'package:noobz/utils/string.dart';
 
 class ComapnyAuthApi {
-
-   companyregister(  name, email, password, logo, lisense, service_type) async {
+  companyregister(name, email, password, logo, lisense, service_type) async {
     var url = BASE_URL + 'company/register';
     print(url);
 
@@ -28,7 +27,6 @@ class ComapnyAuthApi {
     return response;
   }
 
-  
   Future<Map<String, dynamic>> companylogin(
     String email,
     String password,
@@ -50,18 +48,18 @@ class ComapnyAuthApi {
     return response;
   }
 
-
   Future<Map<String, dynamic>> changePassword(
     String oldPassword,
     String newPassword,
+    String apiToken,
+
     // String api_token
   ) async {
-    
     var url = BASE_URL + 'changePassword';
     var data = {
       'password': oldPassword.toString(),
-      'new_password': newPassword.toString(), 
-      // 'api_token' : api_token.toString(),
+      'new_password': newPassword.toString(),
+      'api_token': apiToken.toString(),
     };
 
     var response = await Api.execute(
@@ -74,5 +72,4 @@ class ComapnyAuthApi {
 
     return response;
   }
-
 }

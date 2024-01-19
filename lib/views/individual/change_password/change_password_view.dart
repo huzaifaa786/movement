@@ -16,8 +16,6 @@ class ChangePasswordView extends StatefulWidget {
 }
 
 class _ChangePasswordViewState extends State<ChangePasswordView> {
-  
-
   // @override
   // void dispose() {
   //   _currentPasswordController.dispose();
@@ -46,6 +44,9 @@ class _ChangePasswordViewState extends State<ChangePasswordView> {
             // buttonWidth: 0.9/,
             title: 'submit',
             isSelected: true,
+            onTap: () {
+              controller.changePasswordUser();
+            },
           ),
         ),
         body: SafeArea(
