@@ -14,16 +14,6 @@ class CompanyChangePasswordController extends GetxController {
   final comapnyauth = ComapnyAuthApi();
 
   Future<void> changePasswordUser() async {
-<<<<<<< HEAD
-  try {
-    if (
-        oldPassword.text.isEmpty ||
-        newPassword.text.isEmpty ||
-        confirmPassword.text.isEmpty
-        ) {
-      return;
-    }
-=======
     try {
       if (oldPassword.text.isEmpty ||
           newPassword.text.isEmpty ||
@@ -31,7 +21,6 @@ class CompanyChangePasswordController extends GetxController {
         print("text fields are empty");
         return;
       }
->>>>>>> 24747830c7c6858ff7fcf1f96fc189880d0ba9b0
 
       if (newPassword.text != confirmPassword.text) {
         print("New Password and Confirm New Password do not match");
@@ -39,18 +28,9 @@ class CompanyChangePasswordController extends GetxController {
       }
         User? user;
 
-<<<<<<< HEAD
-    var response = await comapnyauth.changePassword(
-      oldPassword.text,
-      newPassword.text,
-      confirmPassword.text,
-
-    );
-=======
   //  user = User.fromJson(responce['user']);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? apiToken = prefs.getString('api_token');
->>>>>>> 24747830c7c6858ff7fcf1f96fc189880d0ba9b0
 
       if (apiToken == null) {
         print("API token not found");
