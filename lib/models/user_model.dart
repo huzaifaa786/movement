@@ -17,7 +17,6 @@ class User {
     this.login_type,
   });
 
-  // Factory method to create an instance from JSON data
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json['id'],
@@ -30,11 +29,11 @@ class User {
     );
   }
 
-  // Method to convert the model to JSON data
   Map<String, dynamic> toJson() {
     return {
-      'username': username,
+      'name': username,
       'email': email,
+      'api_token': api_token,
       'password': password,
     };
   }

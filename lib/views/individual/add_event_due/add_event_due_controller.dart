@@ -1,3 +1,6 @@
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noobz/api/event_api.dart';
@@ -8,6 +11,9 @@ import 'package:intl/intl.dart';
 
 class AddEventDueController extends GetxController {
   static AddEventDueController instance = Get.find();
+  GetStorage box = GetStorage();
+
+  RxInt selectedOption = 1.obs;
   final TextEditingController eventController = TextEditingController();
   final TextEditingController amountController = TextEditingController();
   final TextEditingController noOfDayMonthsController = TextEditingController();
