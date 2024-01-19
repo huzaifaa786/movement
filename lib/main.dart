@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:noobz/routes/app_pages.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/individual/add_event_due/add_event_due_binding.dart';
@@ -26,8 +27,9 @@ import 'package:noobz/views/company/client/allclient/allclient_view.dart';
 import 'package:noobz/views/company/client/clientinfo/clientinfo_binding.dart';
 import 'package:noobz/views/company/client/clientinfo/clientinfo_view.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   runApp(const MyApp());
 }
 
@@ -38,7 +40,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp( 
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,  
+        scaffoldBackgroundColor: Colors.white,
         textSelectionTheme: const TextSelectionThemeData(
           cursorColor: Colors.black,
         ),

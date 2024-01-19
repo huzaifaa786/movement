@@ -1,23 +1,32 @@
 class User {
-  late String username;
-  late String email;
-  late String password;
- 
+  late int id;
+  String? username;
+  String? email;
+  String? password;
+  String? account_type;
+  String? api_token;
+  String? login_type;
 
   User({
-    required this.username,
-    required this.email,
-    required this.password,
-   
+    required this.id,
+    this.username,
+    this.email,
+    this.password,
+    this.account_type,
+    this.api_token,
+    this.login_type,
   });
 
   // Factory method to create an instance from JSON data
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      username: json['username'],
+      id: json['id'],
+      username: json['name'],
       email: json['email'],
       password: json['password'],
-    
+      account_type: json['account_type'],
+      api_token: json['api_token'],
+      login_type: json['login_type'],
     );
   }
 
@@ -27,7 +36,6 @@ class User {
       'username': username,
       'email': email,
       'password': password,
-    
     };
   }
 }

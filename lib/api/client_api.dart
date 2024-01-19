@@ -15,7 +15,7 @@ class ClientApi {
     unitNumber,
     unitType,
   ) async {
-    print('ffffffffffffffffffffffffffffffffffffffffff');
+  
 
     var url = BASE_URL + 'client/create';
 
@@ -39,7 +39,7 @@ class ClientApi {
       url: url,
       data: data,
     );
-    print('ddddddddddddddddddddddddddddddddddddddddddddddd');
+  
     print(response.toString());
     if (!response['error']) {
       //  User user = User(response['user']);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:noobz/utils/colors.dart';
 
-class DayNames extends StatefulWidget {
-  const DayNames(
+class WeekDayName extends StatefulWidget {
+  const WeekDayName(
       {Key? key,
       required this.name,
       required this.isSelected,
@@ -14,10 +14,10 @@ class DayNames extends StatefulWidget {
   final VoidCallback onDaySelected;
 
   @override
-  _DayNamesState createState() => _DayNamesState();
+  _WeekDayNameState createState() => _WeekDayNameState();
 }
 
-class _DayNamesState extends State<DayNames> {
+class _WeekDayNameState extends State<WeekDayName> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

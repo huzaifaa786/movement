@@ -8,9 +8,11 @@ class MonthDateContainer extends StatelessWidget {
   const MonthDateContainer({
     Key? key,
     this.title,
+    this.onTap,
   }) : super(key: key);
 
   final title;
+  final onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -34,28 +36,32 @@ class MonthDateContainer extends StatelessWidget {
                   fontSize: 14,
                   fontWeight: FontWeight.w500),
             ),
-            GestureDetector(
-              onTap: () {
-                print('xzvxfdd');
-                AlertDialog(
-                  title: Text(
-                      'Sure want to delete \n 1 Jan 2023 \n from selected dates?'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        // Handle "No" button action
-                      },
-                      child: Text('No'),
-                    ),
-                  ],
-                );
-              },
+            // GestureDetector(
+            //   onTap: () {
+            //     print('xzvxfdd');
+            //     AlertDialog(
+            //       title: Text(
+            //           'Sure want to delete \n 1 Jan 2023 \n from selected dates?'),
+            //       actions: [
+            //         TextButton(
+            //           onPressed: () {
+            //             // Handle "No" button action
+            //           },
+            //           child: Text('No'),
+            //         ),
+            //       ],
+            //     );
+            //   },
+            //   child:
+            InkWell(
+              onTap: onTap,
               child: SvgPicture.asset(
                 'assets/images/cross_calender.svg',
                 height: 17,
                 width: 17,
               ),
             ),
+            // ),
           ],
         ),
       ),

@@ -1,12 +1,9 @@
-import 'dart:convert';
-import 'dart:io';
-
+import 'package:get_storage/get_storage.dart';
 import 'package:noobz/api/api.dart';
 import 'package:noobz/models/user_model.dart';
 import 'package:noobz/utils/string.dart';
 
 class UserApi {
- 
   register(
     name,
     email,
@@ -26,33 +23,16 @@ class UserApi {
       url: url,
       data: data,
     );
-    print(response.toString());
+
+    User user = User.fromJson(response['user']);
+    GetStorage box = GetStorage();
+    box.write('api_token', user.api_token);
+    box.write('user_id', user.id);
+
     return response;
   }
 
-  //  companyregister(  name, email, password, logo, lisense, service_type) async {
-  //   var url = BASE_URL + 'company/register';
-  //   print(url);
-
-  //   var data;
-  //   data = {
-  //     'name': name.toString(),
-  //     'email': email.toString(),
-  //     'password': password.toString(),
-  //     'logo': logo.toString(),
-  //     'license': lisense.toString(),
-  //     'service_type': service_type.toString(),
-  //   };
-  //   print(data.toString());
-  //   var response = await Api.execute(
-  //     url: url,
-  //     data: data,
-  //   );
-  //   print(response.toString());
-  //   return response;
-  // }
-
-  Future<Map<String, dynamic>> login(
+  login(
     String email,
     String password,
   ) async {
@@ -67,31 +47,14 @@ class UserApi {
       data: data,
     );
 
-    print('Login response:');
-    print(response.toString());
+    if (!response['error']) {
+      User user = User.fromJson(response['user']);
+      GetStorage box = GetStorage();
+      box.write('api_token', user.api_token);
+      box.write('user_id', user.id);
+      print(box.read('api_token'));
+    }
 
     return response;
   }
-
-
-  // Future<Map<String, dynamic>> companylogin(
-  //   String email,
-  //   String password,
-  // ) async {
-  //   var url = BASE_URL + 'company/login';
-  //   var data = {
-  //     'email': email,
-  //     'password': password,
-  //   };
-
-  //   var response = await Api.execute(
-  //     url: url,
-  //     data: data,
-  //   );
-
-  //   print('Login response:');
-  //   print(response.toString());
-
-  //   return response;
-  // }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:noobz/utils/colors.dart';
 
 class MainInputSmall extends StatelessWidget {
@@ -8,12 +9,14 @@ class MainInputSmall extends StatelessWidget {
     this.hintText,
     this.prefixIcon,
     this.type,
+    this.onChange,
   }) : super(key: key);
 
   final controller;
   final hintText;
   final prefixIcon;
   final type;
+  final onChange;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +25,11 @@ class MainInputSmall extends StatelessWidget {
       child: Container(
         width: 90,
         height: 40,
+        
         child: TextField(
           controller: controller,
           keyboardType: type,
+          onChanged: onChange,
           decoration: InputDecoration(
             filled: true,
             hintText: hintText,

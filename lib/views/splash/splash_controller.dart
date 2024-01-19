@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:noobz/routes/app_routes.dart';
-import 'package:noobz/utils/ui_utils.dart';
 
 class SplashController extends GetxController {
   static SplashController instance = Get.find();
@@ -13,8 +13,14 @@ class SplashController extends GetxController {
   }
 
   Future checkFirstSeen() async {
-    
-    Get.offNamed(AppRoutes.companyChangepassword); 
-   // Get.offNamed(AppRoutes.companyaddevent); 
+    GetStorage box = GetStorage();
+
+    String? authCheck = await box.read('api_token');
+    print(authCheck);
+    if (authCheck != null) {
+      Get.offNamed(AppRoutes.individualHome);
+    } else {
+      Get.offNamed(AppRoutes.signIn);
+    }
   }
 }
