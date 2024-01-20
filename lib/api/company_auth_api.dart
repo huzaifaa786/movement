@@ -1,9 +1,10 @@
 import 'package:noobz/api/api.dart';
+import 'package:noobz/models/company_model.dart';
 import 'package:noobz/utils/string.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ComapnyAuthApi {
-
-   companyregister(  name, email, password, logo, lisense, service_type) async {
+  companyregister(name, email, password, logo, lisense, service_type) async {
     var url = BASE_URL + 'company/register';
     print(url);
 
@@ -21,11 +22,14 @@ class ComapnyAuthApi {
       url: url,
       data: data,
     );
+     CompanyUser user = CompanyUser.fromJson(response['user']);
+    GetStorage box = GetStorage();
+    box.write('api_token', user.api_token);
+    box.write('user_id', user.id);
     print(response.toString());
     return response;
   }
 
-  
   Future<Map<String, dynamic>> companylogin(
     String email,
     String password,
@@ -40,20 +44,22 @@ class ComapnyAuthApi {
       url: url,
       data: data,
     );
-
+ CompanyUser user = CompanyUser.fromJson(response['user']);
+      GetStorage box = GetStorage();
+      box.write('api_token', user.api_token);
+      box.write('user_id', user.id);
+      print(box.read('api_token'));
     print('Login response:');
     print(response.toString());
 
     return response;
   }
 
-
   Future<Map<String, dynamic>> changePassword(
     String oldPassword,
     String newPassword,
     String api_token
   ) async {
-    
     var url = BASE_URL + 'changePassword';
     var data = {
       'password': oldPassword.toString(),
@@ -71,5 +77,4 @@ class ComapnyAuthApi {
 
     return response;
   }
-
 }

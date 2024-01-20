@@ -2,31 +2,48 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:noobz/api/api.dart';
 import 'package:noobz/api/auth_api.dart';
+
+import 'package:noobz/api/company_auth_api.dart';
 import 'package:noobz/utils/string.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChangePasswordController extends GetxController {
   static ChangePasswordController instance = Get.find();
+  String? api_token = '';
 
   TextEditingController oldPasswordController = TextEditingController();
   TextEditingController newPasswordcontroller = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
-  
-  // Future<void> changePasswordUser() async {
-  //   if (oldPasswordController.text.isEmpty ||
-  //       newPasswordcontroller.text.isEmpty ||
-  //       confirmPasswordController.text.isEmpty) {
-  //     return;
-  //   }
-  //         var response = await UserApi.changePassword(
-  //       oldPasswordController.text,
-  //       newPasswordcontroller.text,
-  //       confirmPasswordController.text,
-  //     );
-  //      if (!response['error']) {
-  //       print('i am here');
-  //     } else {
-  //       print('responce have error');
-  //     }
-  //   } 
-  }
 
+  final authApi = UserApi();
+  Future<void> changePasswordUser() async {
+    if (oldPasswordController.text.isEmpty ||
+        newPasswordcontroller.text.isEmpty ||
+        confirmPasswordController.text.isEmpty) {
+      return;
+    }
+
+    if (newPasswordcontroller.text != confirmPasswordController.text) {
+      return;
+    }
+
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    api_token = preferences.getString('api_token');
+
+    if (api_token != null) {
+      print('api token exists');
+    }
+
+    var response = await authApi.changePassword(
+      oldPasswordController.text,
+      newPasswordcontroller.text,
+      api_token ?? '',
+    );
+
+    if (!response['error']) {
+      print('Password changed successfully');
+    } else {
+      print('Password change failed');
+    }
+  }
+}
