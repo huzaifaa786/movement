@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:noobz/components/change_password_card.dart';
 import 'package:noobz/components/individual_profile_appbar.dart';
 import 'package:noobz/components/individual_profile_card.dart';
@@ -24,8 +25,8 @@ class IndividualProfileView extends StatefulWidget {
 class _IndividualProfileViewState extends State<IndividualProfileView> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<IndividualProfileController>(builder: (controller) => 
-     Scaffold(
+    return GetBuilder<IndividualProfileController>(
+      builder: (controller) => Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           forceMaterialTransparency: true,
@@ -68,6 +69,23 @@ class _IndividualProfileViewState extends State<IndividualProfileView> {
                 ),
               ),
               WhiteBlackCard(),
+              Padding(
+                padding: EdgeInsets.only(top: 15),
+                child: InkWell(
+                    onTap: () async {
+                      GetStorage box = GetStorage();
+                      String? api_token = await box.read('api_token');
+
+                      box.remove('api_token');
+                      Get.offNamed(AppRoutes.signIn);
+                      print('Logout');
+                    },
+                    child: Text(
+                      'Logout',
+                      style: TextStyle(
+                          color: mainColor, fontWeight: FontWeight.bold),
+                    )),
+              ),
             ],
           ),
         ),

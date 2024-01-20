@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/main_input.dart';
 import 'package:noobz/components/password_input.dart';
+import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/company/auth/signin/signin_controller.dart';
 
@@ -64,7 +65,7 @@ class CompanySignInView extends StatelessWidget {
                 title: 'Next',
                 isSelected: true,
                 onTap: () {
-                  // Get.toNamed(AppRoutes.individualHome);
+                  Get.toNamed(AppRoutes.companyhome);
                   controller.companyLoginUser();
                 },
               )
