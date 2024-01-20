@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:noobz/components/company_profile_action_container.dart';
 import 'package:noobz/components/company_profile_main_container.dart';
-import 'package:noobz/components/individual_profile_appbar.dart';
 import 'package:noobz/components/topbbar.dart';
 import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/company/profile/company_profile_controller.dart';
+import 'package:get_storage/get_storage.dart';
 
 class CompanyProfileView extends StatefulWidget {
   const CompanyProfileView({super.key});
@@ -17,6 +18,7 @@ class CompanyProfileView extends StatefulWidget {
 }
 
 class _CompanyProfileViewState extends State<CompanyProfileView> {
+  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CompanyProfileController>(
@@ -66,6 +68,22 @@ class _CompanyProfileViewState extends State<CompanyProfileView> {
                     text: 'Change language',
                     image: 'assets/images/companyprofilechangelang.png',
                   ),
+                  Gap(35),
+                  GestureDetector(
+                    onTap: () async {
+                      String? api_token = await box.read('api_token');
+
+                      box.remove('api_token');
+                      Get.offNamed(AppRoutes.companySignUp);
+                    },
+                    child: Text(
+                      'LogOut',
+                      style: TextStyle(
+                          color: red,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  )
                 ],
               ),
             )))));

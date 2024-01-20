@@ -1,8 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:noobz/api/company_auth_api.dart';
-import 'package:noobz/models/user_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CompanyChangePasswordController extends GetxController {
   static CompanyChangePasswordController instance = Get.find();
@@ -26,22 +25,11 @@ class CompanyChangePasswordController extends GetxController {
         print("New Password and Confirm New Password do not match");
         return;
       }
-        User? user;
 
-  //  user = User.fromJson(responce['user']);
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      String? apiToken = prefs.getString('api_token');
-
-      if (apiToken == null) {
-        print("API token not found");
-        return;
-      }
-
-      print('API Token:');
-      print(apiToken);
+      String apiToken = GetStorage().read('api_token');
 
       var response = await comapnyauth.changePassword(
-          oldPassword.text, newPassword.text, apiToken ?? '');
+          oldPassword.text, newPassword.text, apiToken );
       print('objectssssssssssssssssssssssssssssssssssss');
       if (!response['error']) {
         print("Password changed successfully");
@@ -49,7 +37,6 @@ class CompanyChangePasswordController extends GetxController {
         print(response['error_data']);
       }
     } catch (error) {
-      // Handle any error that occurs during the password change process.
     }
   }
 }

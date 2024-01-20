@@ -48,4 +48,21 @@ class EventApi {
     }
     return response;
   }
+
+  Future<Map<String, dynamic>> getAllEvents() async {
+    var url = BASE_URL + 'event/get';
+    var data;
+    GetStorage box = GetStorage();
+    var apiToken = box.read('api_token');
+
+    data = {
+      'api_token': apiToken,
+    };
+
+    var response = await Api.execute(
+      url: url,
+      data: data,
+    );
+    return response;
+  }
 }
