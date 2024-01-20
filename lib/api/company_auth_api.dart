@@ -17,16 +17,16 @@ class ComapnyAuthApi {
       'license': lisense.toString(),
       'service_type': service_type.toString(),
     };
-    print(data.toString());
+    // print(data.toString());
     var response = await Api.execute(
       url: url,
       data: data,
     );
-     CompanyUser user = CompanyUser.fromJson(response['user']);
+    CompanyUser companyuser = CompanyUser.fromJson(response['company']);
     GetStorage box = GetStorage();
-    box.write('api_token', user.api_token);
-    box.write('user_id', user.id);
-    print(response.toString());
+    box.write('api_token', companyuser.api_token);
+    box.write('user_id', companyuser.id);
+    print(companyuser.api_token.toString());
     return response;
   }
 
@@ -44,11 +44,11 @@ class ComapnyAuthApi {
       url: url,
       data: data,
     );
- CompanyUser user = CompanyUser.fromJson(response['user']);
-      GetStorage box = GetStorage();
-      box.write('api_token', user.api_token);
-      box.write('user_id', user.id);
-      print(box.read('api_token'));
+    CompanyUser user = CompanyUser.fromJson(response['company']);
+    GetStorage box = GetStorage();
+    box.write('api_token', user.api_token);
+    box.write('user_id', user.id);
+    print(box.read('api_token'));
     print('Login response:');
     print(response.toString());
 
@@ -56,21 +56,21 @@ class ComapnyAuthApi {
   }
 
   Future<Map<String, dynamic>> changePassword(
-    String oldPassword,
-    String newPassword,
-    String api_token
-  ) async {
-    var url = BASE_URL + 'changePassword';
+      String oldPassword, String newPassword, String api_token) async {
+    var url = BASE_URL + 'company/changePassword';
     var data = {
       'password': oldPassword.toString(),
-      'new_password': newPassword.toString(), 
-      'api_token' : api_token.toString(),
+      'new_password': newPassword.toString(),
+      'api_token': api_token.toString(),
     };
-
+    print('objectkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
     var response = await Api.execute(
       url: url,
       data: data,
     );
+
+    // CompanyUser companyUser = CompanyUser.fromJson(response['company']);
+    print('objectkkkkkkkkkkkkkkhu777777777777777kkkkkkkkkkkkkkkkkkkkkkkkkk');
 
     print('Change Password response:');
     print(response.toString());
