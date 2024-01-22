@@ -50,18 +50,18 @@ class _AccountScreenState extends State<AccountScreen> {
 
 
   Future<List<Map<String, dynamic>>?> getVideos() async {
-    List<Map<String, dynamic>> listMap =
-        await DatabaseHelper.instance.queryAllRows('video_list');
-    setState(() {
-      for (var map in listMap) {
-        File checkPath = File("${map['path']}/${map['title']}");
-        if(checkPath.existsSync()) {
-          courseArr.add(map['course_id']);
-        } else {
-          DatabaseHelper.instance.removeVideo(map['id']);
-        }
-      }
-    });
+    // List<Map<String, dynamic>> listMap =
+    //     await DatabaseHelper.instance.queryAllRows('video_list');
+    // setState(() {
+    //   for (var map in listMap) {
+    //     File checkPath = File("${map['path']}/${map['title']}");
+    //     if(checkPath.existsSync()) {
+    //       courseArr.add(map['course_id']);
+    //     } else {
+    //       DatabaseHelper.instance.removeVideo(map['id']);
+    //     }
+    //   }
+    // });
     return null;
   }
 

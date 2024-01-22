@@ -53,10 +53,10 @@ packages:
     dependency: "direct main"
     description:
       name: background_downloader
-      sha256: "9a00bf2e24fa577ca238698cd658a1e858b9897b6efebe5558ead733b34b32d6"
+      sha256: ab416ed9543020687be640599e5e432e0707d0f8d98b65c7f6a2425ebd5fdefc
       url: "https://pub.dev"
     source: hosted
-    version: "7.10.0"
+    version: "8.0.5"
   badges:
     dependency: "direct main"
     description:
@@ -310,6 +310,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.1"
+  flutter_downloader:
+    dependency: "direct main"
+    description:
+      name: flutter_downloader
+      sha256: e130001cf85d8d7450b8318a4670c19e495dd8c102ad4b15a512e9405e7c451d
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.11.6"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -1209,10 +1217,10 @@ packages:
     dependency: transitive
     description:
       name: video_player
-      sha256: "74b86e63529cf5885130c639d74cd2f9232e7c8a66cbecbddd1dcb9dbd060d1e"
+      sha256: fbf28ce8bcfe709ad91b5789166c832cb7a684d14f571a81891858fefb5bb1c2
       url: "https://pub.dev"
     source: hosted
-    version: "2.7.2"
+    version: "2.8.2"
   video_player_android:
     dependency: transitive
     description:

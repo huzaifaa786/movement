@@ -15,6 +15,8 @@ class DatabaseHelper {
 
   Future<Database> _initDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    print('init database is running abchay giiii ************************');
+    print(documentsDirectory.path);
     String path = join(documentsDirectory.path, 'offline.db');
     return await openDatabase(
       path,
@@ -73,11 +75,12 @@ class DatabaseHelper {
   }
 
   Future<int> addVideo(VideoModel video) async {
-    Database db = await instance.database;
+    Database db = await instance.database; 
     return await db.insert('video_list', video.toMap());
   }
 
   Future<int> removeVideo(int id) async {
+    print(" remove honay lagi ha *********************************************************************************************");
     Database db = await instance.database;
     return await db.delete('video_list', where: 'id = ?', whereArgs: [id]);
   }

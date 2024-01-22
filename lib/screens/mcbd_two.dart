@@ -231,7 +231,7 @@ class _McbdTwoState extends State<McbdTwo> with SingleTickerProviderStateMixin {
     await FileDownloader().enqueue(backgroundDownloadTask!);
     if (mounted) {
       setState(() {
-        path = "/data/user/0/com.example.academy_app/files/system";
+        path = "/data/user/0/se.movementapp.movementapp/files/system";
         fileName = lesson.title.toString();
         lessonId = lesson.id;
         courseId = myCourseId;

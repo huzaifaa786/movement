@@ -20,6 +20,7 @@ import 'package:academy_app/models/lesson.dart';
 import 'package:academy_app/providers/my_courses.dart';
 import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
@@ -63,6 +64,8 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
   dynamic data;
   Lesson? _activeLesson;
 
+   String myPath ="";
+
   String downloadId = "";
 
   dynamic path;
@@ -99,9 +102,22 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
       _isLoading = true;
     });
   }
-
+checkPermissions() async{
+final permissionType = PermissionType.iosAddToPhotoLibrary;
+    var status = await FileDownloader().permissions.status(permissionType);
+    if (status != PermissionStatus.granted) {
+      if (await FileDownloader()
+          .permissions
+          .shouldShowRationale(permissionType)) {
+      print('Show a dialog with rationale');
+      }
+      status = await FileDownloader().permissions.request(permissionType);
+      debugPrint('Permission for $permissionType was $status');
+    }
+}
   @override
   void initState() {
+    checkPermissions();
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
     _tabController = TabController(length: widget.len, vsync: this);
@@ -117,6 +133,7 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
     ], iOSConfig: [
       (Config.localize, {'Cancel': 'StopIt'}),
     ]).then((result) => debugPrint('Configuration result = $result'));
+      getApplicationDocumentsDirectory().then((value) => myPath = value.path.toString());
 
     // Registering a callback and configure notifications
     FileDownloader()
@@ -144,20 +161,19 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
 
     // Listen to updates and process
     FileDownloader().updates.listen((update) async {
-      print('Listen ka andr lga dia ha hahahaha');
-      print(update.task.toString());
       switch (update) {
         case TaskStatusUpdate _:
           if (update.task == backgroundDownloadTask) {
             setState(() {
               downloadTaskStatus = update.status;
               print('task complete hu gya ha');
-              print(update.status.runtimeType);
+              print(update.task);
             });
           }
           if (downloadTaskStatus == TaskStatus.complete) {
-            print('object********************');
-              print('video upload hu rhi ha');
+            print('***************Alll path*****************');
+            print(path);
+            print('***************All path*****************');
 
             await DatabaseHelper.instance.addVideo(
               VideoModel(
@@ -171,6 +187,9 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
                   thumbnail: thumbnail,
                   downloadId: downloadId),
             );
+
+            var videos = await DatabaseHelper.instance.getVideos();
+            print('videos ki list');
             var val = await DatabaseHelper.instance.courseExists(courseId);
             print(val);
             if (val != true) {
@@ -211,6 +230,7 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
     // print("${BaseDirectory.applicationSupport}/system");
     String fileUrl;
 
+
     if (lesson.videoTypeWeb == 'html5' || lesson.videoTypeWeb == 'amazon') {
       fileUrl = lesson.videoUrlWeb.toString();
     } else if (lesson.videoTypeWeb == 'google_drive') {
@@ -225,18 +245,26 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
           '$BASE_URL/api_files/offline_video_for_mobile_app/${lesson.id}/$token';
     }
 
+    // activate tracking at the start of your app
+    await FileDownloader().trackTasks();
+
     backgroundDownloadTask = DownloadTask(
         url: fileUrl,
         filename: lesson.title.toString(),
         directory: 'system',
-        baseDirectory: BaseDirectory.applicationSupport,
+        baseDirectory: BaseDirectory.applicationDocuments,
         updates: Updates.statusAndProgress,
         allowPause: true,
         metaData: '<video metaData>');
+
     await FileDownloader().enqueue(backgroundDownloadTask!);
+
+
+    
+
     if (mounted) {
       setState(() {
-        path = "/data/user/0/com.example.academy_app/files/system";
+        path = myPath;
         fileName = lesson.title.toString();
         lessonId = lesson.id;
         courseId = myCourseId;
@@ -341,7 +369,6 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
   }
 
   void lessonAction(Lesson lesson) async {
-    // print(lesson.videoTypeWeb);
     if (lesson.lessonType == 'video') {
       if (lesson.videoTypeWeb == 'html5' || lesson.videoTypeWeb == 'amazon') {
         Navigator.push(
@@ -363,7 +390,7 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
               builder: (context) => PlayVideoFromNetwork(
                   courseId: widget.courseId,
                   lessonId: lesson.id!,
-                  videoUrl: url)),
+                  videoUrl: lesson.videoUrlWeb!)),
         );
       } else if (lesson.videoTypeWeb == 'google_drive') {
         final RegExp regExp = RegExp(r'[-\w]{25,}');

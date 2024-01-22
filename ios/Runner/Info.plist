@@ -26,8 +26,15 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
 	<key>NSAllowsArbitraryLoads</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>The Movement App requires access to your photo library to allow you to select a profile image. This image will be used solely for personalizing your profile within the app and will not be shared or used for any other purposes. Your privacy and data security are important to us.</string>
 	<key>NSMicrophoneUsageDescription</key>
@@ -37,6 +44,13 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>The Movement App requires access to your photo library to allow you to select a profile image. This image will be used solely for personalizing your profile within the app and will not be shared or used for any other purposes. Your privacy and data security are important to us.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
+	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
