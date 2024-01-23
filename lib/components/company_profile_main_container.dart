@@ -7,10 +7,12 @@ class CompanyProfileMainContainer extends StatelessWidget {
     Key? key,
     this.profilepic,
     this.title,
+    this.email,
   }) : super(key: key);
 
   final title;
   final profilepic;
+  final email;
 
   @override
   Widget build(BuildContext context) {
@@ -18,27 +20,28 @@ class CompanyProfileMainContainer extends StatelessWidget {
       height: 92,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-          border: GradientBoxBorder(
-            width: 2,
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                secondaryColor,
-                mainColor,
-              ],
-            ),
+        border: GradientBoxBorder(
+          width: 2,
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              secondaryColor,
+              mainColor,
+            ],
           ),
-          borderRadius: BorderRadius.circular(20),color: Colors.white,
-           boxShadow: [
-      BoxShadow(
-        color: Colors.black.withOpacity(0.2),
-        spreadRadius: 0,
-        blurRadius: 15,
-        offset: Offset(0, 0), // changes the position of the shadow
+        ),
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 0,
+            blurRadius: 15,
+            offset: Offset(0, 0), // changes the position of the shadow
+          ),
+        ],
       ),
-    ],
-          ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -99,7 +102,8 @@ class CompanyProfileMainContainer extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 4),
                         child: Text(
-                          'adnoc6@gmail.com',
+                          email,
+                          //'adnoc6@gmail.com'
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,

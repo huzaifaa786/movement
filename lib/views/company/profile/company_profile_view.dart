@@ -43,8 +43,12 @@ class _CompanyProfileViewState extends State<CompanyProfileView> {
                   Padding(
                     padding: const EdgeInsets.only(top: 30, bottom: 50),
                     child: CompanyProfileMainContainer(
-                      profilepic: 'assets/images/Profile Image.png',
-                      title: 'Adnoc',
+                      profilepic:controller.imageUrl ,
+                      //'assets/images/Profile Image.png'
+                      title: controller.userName,
+                     // 'Adnoc'
+                      email: controller.userEmail,
+                     // 'adnoc6@gmail.com'
                     ),
                   ),
                   CompanyProfileActionContainer(
@@ -56,7 +60,7 @@ class _CompanyProfileViewState extends State<CompanyProfileView> {
                     child: CompanyProfileActionContainer(
                       text: 'Change logo',
                       ontap: () {
-                        Get.offNamed(AppRoutes.companyProfileChangelogo);
+                        Get.toNamed(AppRoutes.companyProfileChangelogo);
                       },
                       image: 'assets/images/companyprofilechangelogo.png',
                     ),

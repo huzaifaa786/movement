@@ -5,15 +5,11 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:noobz/api/company_logo_auth_api.dart';
+import 'package:noobz/utils/ui_utils.dart';
 
 class CompanyProfileChangelogocontroller extends GetxController {
   static CompanyProfileChangelogocontroller instance = Get.find();
-  @override
-  void initState() {
-    // TODO: implement initState
 
-    companyregisterLogo();
-  }
 
   final companyauthlogoApi = ComapnyAuthLogoApi();
 
@@ -51,22 +47,23 @@ class CompanyProfileChangelogocontroller extends GetxController {
           return;
         }
       }
-
+    
       if (api_token != null) {
         print('api token exists');
       }
       var response = await companyauthlogoApi.companyregisterlogo(
         logoBase64,
       );
-      print('response a gya haaaaaaa');
+      print('$response response a gya haaaaaaa');
 
       if (!response['error']) {
         print('logo Registration successful');
+        Get.back();
       } else {
         print('logo Registration  not  not   successful');
       }
     } catch (error) {
-      print('Error logo registering : $error');
+      UiUtilites.successSnackbar('$error.t', 'error');
     }
   }
 }

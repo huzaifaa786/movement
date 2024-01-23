@@ -43,7 +43,7 @@ class CompanySignInController extends GetxController {
         box.write('api_token', compnyuser!.api_token);
         print(box);
 
-        Get.offNamed(AppRoutes.allclient);
+        Get.offAllNamed(AppRoutes.companyhome);
       } else {
         print('Login  not successful');
         print(responce['error_data']);

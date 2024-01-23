@@ -48,6 +48,10 @@ class ComapnyAuthApi {
     GetStorage box = GetStorage();
     box.write('api_token', user.api_token);
     box.write('user_id', user.id);
+    box.write('user_name', user.name);
+    box.write('user_image', user.image);
+    box.write('user_email', user.email);
+
     print(box.read('api_token'));
     print('Login response:');
     print(response.toString());
@@ -73,6 +77,23 @@ class ComapnyAuthApi {
     print('objectkkkkkkkkkkkkkkhu777777777777777kkkkkkkkkkkkkkkkkkkkkkkkkk');
 
     print('Change Password response:');
+    print(response.toString());
+
+    return response;
+  }
+
+  Future<Map<String, dynamic>> getCompanyInfo(String api_token) async {
+    var url = BASE_URL + 'companyDetails';
+    var data = {
+      'api_token': api_token.toString(),
+    };
+
+    var response = await Api.execute(
+      url: url,
+      data: data,
+    );
+
+    print('Get Company Info response:');
     print(response.toString());
 
     return response;

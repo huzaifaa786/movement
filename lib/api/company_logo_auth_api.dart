@@ -26,11 +26,22 @@ class ComapnyAuthLogoApi {
       url: url,
       data: data,
     );
-    CompanyUser user = CompanyUser.fromJson(response['user']);
-
-    box.write('api_token', user.api_token);
-    box.write('user_id', user.id);
     print(response.toString());
     return response;
+
+
+//     if (logo != null && api_token != null) {
+//   var data = {
+//     'logo': logo.toString(),
+//     'api_token': api_token.toString(),
+//   };
+//   print(data);
+
+ 
+// } else {
+//   print('Error: logo or api_token is null.');
+  
+// }
+
   }
 }
