@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:io';
+
 import 'package:academy_app/constants.dart';
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/providers/auth.dart';
@@ -7,6 +9,7 @@ import 'package:academy_app/screens/forgot_password_screen.dart';
 import 'package:academy_app/screens/signup_screen.dart';
 import 'package:academy_app/screens/tabs_screen.dart';
 import 'package:academy_app/widgets/string_extension.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -95,10 +98,14 @@ class _AuthScreenState extends State<AuthScreen> {
     setState(() {
       _isLoading = true;
     });
+    FirebaseMessaging.instance.requestPermission();
+
+    String? firebase_token = await FirebaseMessaging.instance.getToken();
 
     await Provider.of<Auth>(context, listen: false).login(
       _authData['email'].toString(),
       _authData['password'].toString(),
+      firebase_token!
     ).then((_) {
       setState(() {
         _isLoading = false;

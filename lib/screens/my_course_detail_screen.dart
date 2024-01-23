@@ -103,17 +103,13 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
     });
   }
 checkPermissions() async{
-final permissionType = PermissionType.iosAddToPhotoLibrary;
-    var status = await FileDownloader().permissions.status(permissionType);
-    if (status != PermissionStatus.granted) {
-      if (await FileDownloader()
-          .permissions
-          .shouldShowRationale(permissionType)) {
-      print('Show a dialog with rationale');
-      }
-      status = await FileDownloader().permissions.request(permissionType);
-      debugPrint('Permission for $permissionType was $status');
-    }
+// final permissionType = PermissionType.notifications;
+//     var status = await FileDownloader().permissions.status(permissionType);
+//     if (status != PermissionStatus.granted) {
+      
+//       status = await FileDownloader().permissions.request(permissionType);
+//       debugPrint('Permission for $permissionType was $status');
+//     }
 }
   @override
   void initState() {
@@ -140,24 +136,19 @@ final permissionType = PermissionType.iosAddToPhotoLibrary;
         .registerCallbacks(
             taskNotificationTapCallback: myNotificationTapCallback)
         .configureNotificationForGroup(FileDownloader.defaultGroup,
-            // For the main download button
-            // which uses 'enqueue' and a default group
             running: const TaskNotification('Download {filename}',
                 'File: {filename} - {progress} - speed {networkSpeed} and {timeRemaining} remaining'),
             complete: const TaskNotification(
-                'Download {filename}', 'Download complete'),
+                'Download {filename}', 'Download complete, watch this video from downloaded courses'),
             error: const TaskNotification(
                 'Download {filename}', 'Download failed'),
             paused: const TaskNotification(
                 'Download {filename}', 'Paused with metadata {metadata}'),
             progressBar: true)
         .configureNotification(
-            // for the 'Download & Open' dog picture
-            // which uses 'download' which is not the .defaultGroup
-            // but the .await group so won't use the above config
             complete: const TaskNotification(
-                'Download {filename}', 'Download complete'),
-            tapOpensFile: true); // dog can also open directly from tap
+                'Download {filename}', 'Download complete, watch this video from downloaded courses'),
+            tapOpensFile: false); // dog can also open directly from tap
 
     // Listen to updates and process
     FileDownloader().updates.listen((update) async {
@@ -166,15 +157,11 @@ final permissionType = PermissionType.iosAddToPhotoLibrary;
           if (update.task == backgroundDownloadTask) {
             setState(() {
               downloadTaskStatus = update.status;
-              print('task complete hu gya ha');
-              print(update.task);
             });
           }
           if (downloadTaskStatus == TaskStatus.complete) {
-            print('***************Alll path*****************');
-            print(path);
-            print('***************All path*****************');
-
+                print('task is complete');
+                print('adding vide now');
             await DatabaseHelper.instance.addVideo(
               VideoModel(
                   title: fileName,
@@ -189,9 +176,7 @@ final permissionType = PermissionType.iosAddToPhotoLibrary;
             );
 
             var videos = await DatabaseHelper.instance.getVideos();
-            print('videos ki list');
             var val = await DatabaseHelper.instance.courseExists(courseId);
-            print(val);
             if (val != true) {
               await DatabaseHelper.instance.addCourse(
                 CourseDbModel(
@@ -245,12 +230,10 @@ final permissionType = PermissionType.iosAddToPhotoLibrary;
           '$BASE_URL/api_files/offline_video_for_mobile_app/${lesson.id}/$token';
     }
 
-    // activate tracking at the start of your app
-    await FileDownloader().trackTasks();
 
     backgroundDownloadTask = DownloadTask(
         url: fileUrl,
-        filename: lesson.title.toString(),
+        filename: lesson.title.toString() + '.mp4',
         directory: 'system',
         baseDirectory: BaseDirectory.applicationDocuments,
         updates: Updates.statusAndProgress,

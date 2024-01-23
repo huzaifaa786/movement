@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "529370155955",
+    "project_id": "movement-app-68bbc",
+    "storage_bucket": "movement-app-68bbc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529370155955:android:84f394b42f5266dc70d9c6",
+        "android_client_info": {
+          "package_name": "se.movementapp.movementapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqmIBscikhlD4RoYDHCAFZ4sbT4a0omuo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

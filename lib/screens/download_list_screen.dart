@@ -228,22 +228,6 @@ class _DownloadListScreenState extends State<DownloadListScreen> {
                                         children: <Widget>[
                                           InkWell(
                                             onTap: () {
-                                              String filePath = '${getVideo.path}/system/${getVideo.title}';
-
-                                              File file = File(filePath);
-
-                                              file.exists().then((bool exists) {
-                                                if (exists) {
-                                                  print(
-                                                      'File exists and is accessible.');
-                                                } else {
-                                                  print(
-                                                      'File does not exist or is not accessible.');
-                                                }
-                                              }).catchError((e) {
-                                                print(
-                                                    'Error checking file accessibility: $e');
-                                              });
                                               setState(() {
                                                 path =
                                                     '${getVideo.path}/system/${getVideo.title}';
@@ -259,7 +243,7 @@ class _DownloadListScreenState extends State<DownloadListScreen> {
                                                           // "/data/user/0/se.movementapp.movementapp/app_flutter/system/test"
 
                                                           // '/var/mobile/Containers/Data/Application/1279F2B4-CEAA-407E-BEF1-16B64F3FB743/Documents/system/test'
-                                                            path.toString()
+                                                            path.toString() + '.mp4'
                                                             ),
                                                       );
                                                     },
@@ -422,8 +406,6 @@ class _VideoAppState extends State<VideoApp> {
   late final PodPlayerController controller;
   @override
   void initState() {
-    print('Idr agya hu file dekho a gai ha idr yah nhi ?');
-    print(widget.file!);
     controller = PodPlayerController(
       playVideoFrom: PlayVideoFrom.file(widget.file!),
     )..initialise();
@@ -448,7 +430,8 @@ class _VideoAppState extends State<VideoApp> {
       ),
       backgroundColor: kBackgroundColor,
       body: Center(
-        child: PodVideoPlayer(
+        child: 
+        PodVideoPlayer(
           controller: controller,
           podPlayerLabels: const PodPlayerLabels(
             play: "PLAY",

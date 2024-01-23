@@ -33,8 +33,8 @@ class Auth with ChangeNotifier {
     return _user;
   }
 
-  Future<void> login(String email, String password) async {
-    var url = '$BASE_URL/api/login?email=$email&password=$password';
+  Future<void> login(String email, String password, String? firebase_token) async {
+    var url = '$BASE_URL/api/login?email=$email&password=$password&firebase_token=$firebase_token';
 
     try {
       final response = await http.get(Uri.parse(url));

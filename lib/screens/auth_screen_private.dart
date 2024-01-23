@@ -7,6 +7,7 @@ import 'package:academy_app/screens/signup_screen.dart';
 import 'package:academy_app/screens/tabs_screen.dart';
 import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:academy_app/widgets/string_extension.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/user.dart';
@@ -95,21 +96,25 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
       _isLoading = true;
     });
 
-    await Provider.of<Auth>(context, listen: false).login(
-      _authData['email'].toString(),
-      _authData['password'].toString(),
-    ).then((_) {
+       String? firebase_token = await FirebaseMessaging.instance.getToken();
+
+    await Provider.of<Auth>(context, listen: false)
+        .login(_authData['email'].toString(), _authData['password'].toString(),
+            firebase_token!
+    )
+        .then((_) {
       setState(() {
         _isLoading = false;
         userDetails = Provider.of<Auth>(context, listen: false).user;
       });
     });
 
-    if(userDetails.validity == 1){
-     Navigator.of(context).pushReplacement(
+    if (userDetails.validity == 1) {
+      Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const TabsScreen()));
     } else {
-      CommonFunctions.showErrorDialog(userDetails.deviceVerification!.capitalize(), context);
+      CommonFunctions.showErrorDialog(
+          userDetails.deviceVerification!.capitalize(), context);
     }
 
     setState(() {

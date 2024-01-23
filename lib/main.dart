@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'package:academy_app/firebase_options.dart';
 import 'package:academy_app/models/store_config.dart';
 import 'package:academy_app/providers/bundles.dart';
 import 'package:academy_app/providers/course_forum.dart';
 import 'package:academy_app/providers/messages.dart';
+import 'package:academy_app/providers/notification.dart';
 import 'package:academy_app/screens/account_remove_screen.dart';
 import 'package:academy_app/screens/auth_screen_private.dart';
 import 'package:academy_app/screens/downloaded_course_list.dart';
@@ -13,6 +15,8 @@ import 'package:academy_app/screens/message_screen.dart';
 import 'package:academy_app/screens/start_chat_screen.dart';
 import 'package:academy_app/screens/sub_category_screen.dart';
 import 'package:academy_app/screens/verification_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:logging/logging.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'providers/auth.dart';
@@ -56,6 +60,14 @@ void main() async {
     );
   }
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  final NotificationService notificationService = NotificationService();
+  await notificationService.registerNotification();
+  await notificationService.checkForInitialMessage();
   // if(Purchases.isConfigured == false)
   await _configureSDK();
 
@@ -86,6 +98,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (ctx) => Auth(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => NotificationService(),
         ),
         ChangeNotifierProvider(
           create: (ctx) => Categories(),
