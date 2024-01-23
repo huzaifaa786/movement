@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:noobz/utils/colors.dart';
 
 class DuedateContainer extends StatelessWidget {
@@ -6,11 +7,15 @@ class DuedateContainer extends StatelessWidget {
     Key? key,
     this.image,
     this.name,
-    this.onTap
+    this.onTap,
+    this.amount,
+    this.date,
   }) : super(key: key);
   final image;
   final name;
   final onTap;
+  final amount;
+  final date;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,17 +57,20 @@ class DuedateContainer extends StatelessWidget {
                     height: 90,
                     decoration: BoxDecoration(),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      // mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
                           padding: EdgeInsets.only(top: 8),
-                          child: Text(
-                            name,
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w600,
+                          child: SizedBox(
+                            child: Text(
+                              name,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),
@@ -73,6 +81,12 @@ class DuedateContainer extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w400),
                             ),
+                            Gap(20),
+                            Text(
+                              amount + ' AED',
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w600),
+                            ),
                           ],
                         ),
                         Row(
@@ -82,34 +96,18 @@ class DuedateContainer extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.w400),
                             ),
+                            Gap(20),
+                            Text(
+                              date,
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.w500),
+                            ),
                           ],
                         ),
                       ],
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 5),
-                  child: Container(
-                    height: 90,
-                    decoration: BoxDecoration(),
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            '100 AED',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w600),
-                          ),
-                          Text(
-                            '12 / 12 /  2023',
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w500),
-                          ),
-                        ]),
-                  ),
-                )
               ],
             ),
             InkWell(
@@ -126,7 +124,7 @@ class DuedateContainer extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            'View datailes',
+                            'View details',
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
