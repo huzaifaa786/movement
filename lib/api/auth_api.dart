@@ -58,20 +58,20 @@ class UserApi {
     return response;
   }
 
-
-
   Future<Map<String, dynamic>> changePassword(
     String oldPassword,
     String newPassword,
-    String api_token,
+    String apiToken,
 
     // String api_token
   ) async {
+    GetStorage box = GetStorage();
+    String? apiToken = box.read('api_token');
     var url = BASE_URL + 'changePassword';
     var data = {
       'password': oldPassword.toString(),
       'new_password': newPassword.toString(),
-      'api_token': api_token.toString(),
+      'api_token': apiToken.toString(),
     };
 
     var response = await Api.execute(

@@ -1,10 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:noobz/api/company_auth_api.dart';
+import 'package:noobz/models/company_model.dart';
+import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/ui_utils.dart';
 
 class CompanySignUPController extends GetxController {
@@ -85,14 +89,22 @@ class CompanySignUPController extends GetxController {
       );
       print('response a gya haaaaaaa');
 
-      if (!response['error']) {
 
-        print('Registration successful');
+CompanyUser? companyUser;
+  GetStorage box = GetStorage();
+
+      if (!response['error']) {
+        print('dddddddddddd');
+        companyUser = CompanyUser.fromJson(response['company']);
+        print(companyUser);
+        UiUtilites.successSnackbar('SignUp successfully.', 'Success!');
+        box.write('api_token', companyUser!.api_token);
+        print(box);
+        
+        Get.offNamed(AppRoutes.allclient);
       } else {
-        print('Registration  not  not   successful');
+        print(response['error_data']);
       }
-    // } catch (error) {
-    //   print('Error registering user: $error');
-    // }
-  }
+    } 
+    
 }

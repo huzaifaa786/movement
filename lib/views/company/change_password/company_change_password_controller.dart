@@ -1,8 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:noobz/api/company_auth_api.dart';
-import 'package:noobz/models/user_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CompanyChangePasswordController extends GetxController {
   static CompanyChangePasswordController instance = Get.find();
@@ -27,7 +26,7 @@ class CompanyChangePasswordController extends GetxController {
         return;
       }
 
-      String apiToken = '';
+      String apiToken = GetStorage().read('api_token');
 
       var response = await comapnyauth.changePassword(
           oldPassword.text, newPassword.text, apiToken );
@@ -38,7 +37,6 @@ class CompanyChangePasswordController extends GetxController {
         print(response['error_data']);
       }
     } catch (error) {
-      // Handle any error that occurs during the password change process.
     }
   }
 }

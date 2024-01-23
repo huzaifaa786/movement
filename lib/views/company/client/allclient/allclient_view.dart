@@ -1,10 +1,11 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:noobz/components/allclient_box.dart';
 import 'package:noobz/components/topbbar.dart';
+import 'package:noobz/models/company_model.dart';
 import 'package:noobz/routes/app_routes.dart';
+import 'package:noobz/views/company/client/allclient/allclient_controller.dart';
 
 class AllclientView extends StatefulWidget {
   const AllclientView({super.key});
@@ -16,54 +17,69 @@ class AllclientView extends StatefulWidget {
 class _AllclientViewState extends State<AllclientView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        forceMaterialTransparency: true,
-        title: TitleTopBar(
-          name: 'All Client',
-          ontap: () {
-            Get.back();
-          },
-        ),
-      ),
-      body: SafeArea(
-          child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Text(
-                  '235 Client',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-                )
-              ],
-            ),
-            AllclientBox(
-              ontap: (){ Get.offNamed(AppRoutes.clientinfo);},
-              name: 'Ali Raza',
-              type: 'Petrol payment',
-            ),
-            AllclientBox(
-              name: 'Ali Raza',
-              type: 'Petrol payment',
-            ),
-            AllclientBox(
-              name: 'Ali Raza',
-              type: 'Petrol payment',
-            ),
-            AllclientBox(
-              name: 'Ali Raza',
-              type: 'Petrol payment',
-            ),
-            AllclientBox(
-              name: 'Ali Raza',
-              type: 'Petrol payment',
-            ),
-          ],
-        ),
-      )),
-    );
+    return GetBuilder<AllClientController>(
+        builder: (controller) => Scaffold(
+              appBar: AppBar(
+                automaticallyImplyLeading: false,
+                forceMaterialTransparency: true,
+                title: TitleTopBar(
+                  name: 'All Client',
+                  ontap: () {
+                    Get.back();
+                  },
+                ),
+              ),
+              body: SafeArea(
+                  child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          '${controller.userList.length} Clients',
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w700),
+                        )
+                      ],
+                    ),
+                    Gap(20),
+                    Expanded(
+                        child: ListView.builder(
+                            itemCount: controller.userList.length,
+                            itemBuilder: (context, index) => AllclientBox(
+                                  ontap: () {
+                                    Get.offNamed(AppRoutes.clientinfo);
+                                  },
+                                  name: controller.userList[index].name,
+                                  type: controller.userList[index].type,
+                                )))
+                    // AllclientBox(
+                    //   ontap: () {
+                    //     Get.offNamed(AppRoutes.clientinfo);
+                    //   },
+                    //   name: 'Ali Raza',
+                    //   type: 'Petrol payment',
+                    // ),
+                    // AllclientBox(
+                    //   name: 'Ali Raza',
+                    //   type: 'Petrol payment',
+                    // ),
+                    // AllclientBox(
+                    //   name: 'Ali Raza',
+                    //   type: 'Petrol payment',
+                    // ),
+                    // AllclientBox(
+                    //   name: 'Ali Raza',
+                    //   type: 'Petrol payment',
+                    // ),
+                    // AllclientBox(
+                    //   name: 'Ali Raza',
+                    //   type: 'Petrol payment',
+                    // ),
+                  ],
+                ),
+              )),
+            ));
   }
 }
