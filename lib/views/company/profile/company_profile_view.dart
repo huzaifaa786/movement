@@ -18,7 +18,6 @@ class CompanyProfileView extends StatefulWidget {
 }
 
 class _CompanyProfileViewState extends State<CompanyProfileView> {
-  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CompanyProfileController>(
@@ -43,12 +42,10 @@ class _CompanyProfileViewState extends State<CompanyProfileView> {
                   Padding(
                     padding: const EdgeInsets.only(top: 30, bottom: 50),
                     child: CompanyProfileMainContainer(
-                      profilepic:controller.imageUrl ,
-                      //'assets/images/Profile Image.png'
+                      profilepic: controller.imageUrl,
                       title: controller.userName,
-                     // 'Adnoc'
                       email: controller.userEmail,
-                     // 'adnoc6@gmail.com'
+                      
                     ),
                   ),
                   CompanyProfileActionContainer(
@@ -60,7 +57,7 @@ class _CompanyProfileViewState extends State<CompanyProfileView> {
                     child: CompanyProfileActionContainer(
                       text: 'Change logo',
                       ontap: () {
-                        Get.toNamed(AppRoutes.companyProfileChangelogo);
+                        Get.toNamed(AppRoutes.companyProfileChangelogo)!.then((value) => controller.getUserData());
                       },
                       image: 'assets/images/companyprofilechangelogo.png',
                     ),
@@ -75,9 +72,6 @@ class _CompanyProfileViewState extends State<CompanyProfileView> {
                   Gap(35),
                   GestureDetector(
                     onTap: () async {
-                      String? api_token = await box.read('api_token');
-
-                      box.remove('api_token');
                       Get.offNamed(AppRoutes.companySignUp);
                     },
                     child: Text(

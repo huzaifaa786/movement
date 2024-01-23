@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:noobz/api/api.dart';
 import 'package:noobz/models/company_model.dart';
 import 'package:noobz/utils/string.dart';
@@ -49,16 +50,20 @@ class ComapnyAuthApi {
     box.write('api_token', user.api_token);
     box.write('user_id', user.id);
     box.write('user_name', user.name);
+
     box.write('user_image', user.image);
     box.write('user_email', user.email);
 
     print(box.read('api_token'));
     print('Login response:');
     print(response.toString());
-
+    
+    // update();
     return response;
+    
   }
 
+  
   Future<Map<String, dynamic>> changePassword(
       String oldPassword, String newPassword, String api_token) async {
     var url = BASE_URL + 'company/changePassword';

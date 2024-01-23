@@ -30,17 +30,14 @@ import 'package:noobz/views/company/client/allclient/allclient_view.dart';
 import 'package:noobz/views/company/client/clientinfo/clientinfo_binding.dart';
 import 'package:noobz/views/company/client/clientinfo/clientinfo_view.dart';
 
-void main() {
-  //   final dio = Dio();
-  // (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
-  //   client.badCertificateCallback = (cert, host, port) => true;
-  //   return client;
-  // };
-   
-
-  WidgetsFlutterBinding.ensureInitialized();
+void main()async
+ {
+  
+   WidgetsFlutterBinding.ensureInitialized();
   HttpOverrides.global = MyHttpOverrides();
+  await GetStorage.init();
   runApp(const MyApp());
+  
 }
 
 class MyApp extends StatelessWidget {
