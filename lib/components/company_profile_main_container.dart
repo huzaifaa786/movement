@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:noobz/utils/colors.dart';
@@ -49,25 +50,42 @@ class CompanyProfileMainContainer extends StatelessWidget {
             padding: const EdgeInsets.only(left: 15),
             child: Container(
               height: 90,
-              decoration: BoxDecoration(
-                  // border: Border.all(),
-                  borderRadius: BorderRadius.circular(20)),
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(20)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(top: 2),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage(
-                        profilepic,
+                      padding: EdgeInsets.only(top: 2),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      radius: 30,
-                    ),
-                  ),
+                      child: profilepic != null
+                          ? Container(
+                              width: 50,
+                              height: 50,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: CachedNetworkImage(
+                                imageUrl: profilepic,
+                                fit: BoxFit.fill,
+                              ),
+                            )
+                          : Container(
+                              width: 50,
+                              height: 50,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: Image.asset(
+                                'assets/images/Profile Image.png',
+                                scale: 1.0,
+                              ),
+                            )),
                 ],
               ),
             ),

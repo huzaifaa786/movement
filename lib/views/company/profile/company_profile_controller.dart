@@ -10,9 +10,9 @@ import 'package:noobz/utils/ui_utils.dart';
 class CompanyProfileController extends GetxController {
   static CompanyProfileController instance = Get.find();
 
-  String imageUrl = '';
-  String userName = '';
-  String userEmail = '';
+  String? imageUrl = '';
+  String? userName = '';
+  String? userEmail = '';
   GetStorage box = GetStorage();
 
   getUserData() async {
@@ -22,8 +22,7 @@ class CompanyProfileController extends GetxController {
     print(userName);
     print(imageUrl);
     print(userEmail);
-
-    
+    update();
   }
 
   @override
