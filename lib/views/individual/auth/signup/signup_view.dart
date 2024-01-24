@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:noobz/api/individual_google_signup_api.dart';
 import 'package:noobz/components/logintype.dart';
 import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/main_input.dart';
@@ -107,7 +108,22 @@ class SignUpView extends StatelessWidget {
                       ),
                       googleloginbox(
                         icon: 'assets/images/google.svg',
-                        ontap: () {},
+                        ontap: () async {
+                          var response =
+                              await GoogleSignUpApi().signUpWithGoogle();
+
+                          if (response['error']) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(response['message']),
+                              ),
+                            );
+                          } else {
+                            // Successful sign-up, you can navigate to another screen or update UI
+                            // For example, you might want to navigate to the home screen:
+                            // Navigator.pushReplacementNamed(context, '/home');
+                          }
+                        },
                       ),
                       googleloginbox(
                         icon: 'assets/images/mobile.svg',
