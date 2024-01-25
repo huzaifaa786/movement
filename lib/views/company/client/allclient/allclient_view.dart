@@ -37,7 +37,7 @@ class _AllclientViewState extends State<AllclientView> {
                     Row(
                       children: [
                         Text(
-                          '${controller.userList.length} Clients',
+                          '${controller.compnyusers.length} Clients',
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w700),
                         )
@@ -46,13 +46,15 @@ class _AllclientViewState extends State<AllclientView> {
                     Gap(20),
                     Expanded(
                         child: ListView.builder(
-                            itemCount: controller.userList.length,
+                            itemCount: controller.compnyusers.length,
                             itemBuilder: (context, index) => AllclientBox(
                                   ontap: () {
-                                    Get.offNamed(AppRoutes.clientinfo);
+                                    Get.offNamed(AppRoutes.clientinfo
+                                     
+                                    );
                                   },
-                                  name: controller.userList[index].name,
-                                  type: controller.userList[index].type,
+                                  name: controller.compnyusers[index].username,
+                                  type: controller.compnyusers[index].account_type,
                                 )))
                     // AllclientBox(
                     //   ontap: () {

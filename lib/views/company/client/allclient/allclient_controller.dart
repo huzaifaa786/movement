@@ -1,12 +1,11 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:noobz/api/all_client_api.dart';
-import 'package:noobz/models/company_model.dart';
+import 'package:noobz/models/user_model.dart';
 
 class AllClientController extends GetxController {
   static AllClientController instance = Get.find();
-
-  RxList<CompanyUser> userList = RxList<CompanyUser>([]);
+  List<User> compnyusers = [];
 
   @override
   void onInit() async {
@@ -25,28 +24,28 @@ class AllClientController extends GetxController {
     print('dffffffffffffffffsffsdfferugcetgebrygyasbgcfyuxfgyscegayuxgif');
     print(response);
 
-    CompanyUser? companyUser;
     if (response != null && !response['error']) {
       print('Data received successfully');
 
       if (response['users'] != null) {
         List<dynamic> user = response['users'];
-        
-        List<CompanyUser> users = List<CompanyUser>.from(
-          response['users'].map((user) => CompanyUser.fromJson(user)),
-        );
-        print('ssssssssssssssssssssssssssssssssss');
-        print(users);
-        userList.assignAll(users);
-        print('User List Length: ${userList.length}');
+        for (var userdata in user) {
+          User cmpnyuser = User.fromJson(userdata);
+          compnyusers.add(cmpnyuser);
+          print('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+          print(compnyusers.toString());
+        }
+        update();
+        // userList.assignAll(Compnyuser);
+        print('User List Length: ${compnyusers.length}');
       } else {
         print('No users data found');
       }
     } else {
-      print('responce have error');
+      print('response has an error');
     }
   }
-  // catch (error) {
-  //   print('Error registering user: $error');
-  // }
+  
+
+
 }
