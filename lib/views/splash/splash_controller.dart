@@ -19,12 +19,10 @@ class SplashController extends GetxController {
 
     String? authCheck = await box.read('api_token');
     print(authCheck);
-    print('ggggggggggggggggggggggggggggggggggggggg');
-    print(box.read('api_token'));
     if (authCheck != null) {
-      Get.offNamed(AppRoutes.individualHome);
+      Get.offNamed(AppRoutes.membershipType);
     } else {
-      Get.offNamed(AppRoutes.companysignin);
+      Get.offNamed(AppRoutes.membershipType);
     }
   }
 }

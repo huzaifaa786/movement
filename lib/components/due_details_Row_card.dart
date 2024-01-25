@@ -4,7 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:noobz/utils/colors.dart';
 
 class DueDetailsRowCard extends StatelessWidget {
-  const DueDetailsRowCard({super.key});
+  const DueDetailsRowCard({Key? key, this.user_name}) : super(key: key);
+  final user_name;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class DueDetailsRowCard extends StatelessWidget {
                   )),
             ),
             Text(
-              'Adnoc',
+              user_name,
               style: TextStyle(
                 fontSize: 18,
                 fontFamily: 'Poppins',

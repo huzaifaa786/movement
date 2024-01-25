@@ -198,7 +198,7 @@ class _CompanyHomeViewState extends State<CompanyHomeView> {
                             Gap(17),
                             HomeEventContainer(
                               ontap: () {
-                                Get.offNamed(AppRoutes.companyProfile);
+                                Get.toNamed(AppRoutes.companyProfile);
                               },
                               text: 'Profile',
                               image: 'assets/images/profilehomeevent.svg',

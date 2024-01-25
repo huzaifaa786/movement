@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:noobz/utils/colors.dart';
 
 class DueDetailsColumnCard extends StatelessWidget {
-  const DueDetailsColumnCard({super.key});
+  const DueDetailsColumnCard(
+      {Key? key,
+      this.trackingNumber,
+      this.typeOfService,
+      this.dueDate,
+      this.amount,
+      this.status})
+      : super(key: key);
+  final trackingNumber;
+  final typeOfService;
+  final dueDate;
+  final amount;
+  final status;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +58,7 @@ class DueDetailsColumnCard extends StatelessWidget {
                     decoration: BoxDecoration(color: white),
                     child: Center(
                       child: Text(
-                        '1235689',
+                        trackingNumber,
                         style: TextStyle(
                           fontSize: 16,
                           fontFamily: 'Poppins',
@@ -72,7 +85,7 @@ class DueDetailsColumnCard extends StatelessWidget {
                   ),
                   Gap(10),
                   Text(
-                    'Petrol payment',
+                    typeOfService,
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: 'Poppins',
@@ -97,7 +110,7 @@ class DueDetailsColumnCard extends StatelessWidget {
                   ),
                   Gap(15),
                   Text(
-                    '23 / 11/ 2023',
+                    dueDate,
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: 'Poppins',
@@ -122,7 +135,7 @@ class DueDetailsColumnCard extends StatelessWidget {
                   ),
                   Gap(15),
                   Text(
-                    '250.00',
+                    amount,
                     style: TextStyle(
                       fontSize: 16,
                       fontFamily: 'Poppins',
@@ -155,12 +168,25 @@ class DueDetailsColumnCard extends StatelessWidget {
                     ),
                   ),
                   Gap(18),
-                  SvgPicture.asset('assets/images/payment_cancel.svg'),
+                  status == 'unpaid'
+                      ? SvgPicture.asset('assets/images/payment_cancel.svg')
+                      : status == 'missed'
+                          ? SvgPicture.asset('assets/images/payment_cancel.svg')
+                          : status == 'paid'
+                              ? SvgPicture.asset('assets/images/paid_icon.svg')
+                              : SvgPicture.asset(
+                                  'assets/images/payment_pending.svg'),
                   Gap(8),
                   Text(
-                    '',
+                    status,
                     style: TextStyle(
-                      color: red,
+                      color: status == 'unpaid'
+                          ? red
+                          : status == ' missed'
+                              ? red
+                              : status == 'paid'
+                                  ? Colors.green
+                                  : Colors.amber,
                       fontSize: 16,
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w600,
@@ -187,7 +213,7 @@ class DueDetailsColumnCard extends StatelessWidget {
               ),
               Gap(35),
               Container(
-                height: MediaQuery.of(context).size.height * 0.08,
+                height: MediaQuery.of(context).size.height * 0.06,
                 width: MediaQuery.of(context).size.width * 0.835,
                 decoration: BoxDecoration(
                     color: lightGrey,

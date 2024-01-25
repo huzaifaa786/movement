@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:noobz/components/individual_profile_appbar.dart';
 import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/topbbar.dart';
@@ -33,15 +36,15 @@ class _CompanyProfileChangelogoViewState
             ),
             body: SafeArea(
                 child: Padding(
-                    padding: const EdgeInsets.all(
-                        15),
+                    padding: const EdgeInsets.all(15),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          height: MediaQuery.of(context).size.height * 0.53,
+                          height: MediaQuery.of(context).size.height * 0.65,
                           decoration: BoxDecoration(
                               // border: Border.all()
+
                               ),
                           child: Column(
                             children: [
@@ -49,9 +52,7 @@ class _CompanyProfileChangelogoViewState
                                 padding:
                                     const EdgeInsets.only(top: 30, bottom: 55),
                                 child: Container(
-                                  // padding: EdgeInsets.only(top: 2),
                                   decoration: BoxDecoration(
-                                    // border: Border.all(),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Colors.black.withOpacity(0.2),
@@ -62,18 +63,24 @@ class _CompanyProfileChangelogoViewState
                                     ],
                                     borderRadius: BorderRadius.circular(60),
                                   ),
-                                  child:
-                                      //  SvgPicture.asset('assets/images/Profile Image.png')
-                                      CircleAvatar(
-                                    backgroundImage: AssetImage(
-                                      'assets/images/Profile Image.png',
+                                  child: GestureDetector(
+                                    child: CircleAvatar(
+                                      backgroundImage: 
+                                      controller.logoImage !=
+                                              null
+                                          ? FileImage(File(
+                                                  controller.logoImage!.path))
+                                              as ImageProvider
+                                          : 
+                                          AssetImage(
+                                              'assets/images/userprofile.png'),
+                                      radius: 60,
                                     ),
-                                    radius: 60,
                                   ),
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(),
+                                padding: const EdgeInsets.only(bottom: 20),
                                 child: Container(
                                     height: 145,
                                     width: MediaQuery.of(context).size.width,
@@ -102,7 +109,9 @@ class _CompanyProfileChangelogoViewState
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 15, right: 15),
+                                              left: 15,
+                                              right: 15,
+                                            ),
                                             child: Container(
                                                 height: 62,
                                                 width: MediaQuery.of(context)
@@ -118,31 +127,40 @@ class _CompanyProfileChangelogoViewState
                                                   borderRadius:
                                                       BorderRadius.circular(10),
                                                 ),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    Image.asset(
-                                                      'assets/images/changelogoupload.png',
-                                                      height: 28,
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 6),
-                                                      child: Text(
-                                                        'Upload new',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            fontSize: 14,
-                                                            color:
-                                                                individualhomeviewcalender),
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    controller
+                                                        .selectlogoImage();
+                                                  },
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Image.asset(
+                                                        'assets/images/changelogoupload.png',
+                                                        height: 28,
                                                       ),
-                                                    )
-                                                  ],
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 6),
+                                                        child: Text(
+                                                          'Upload new',
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              fontSize: 14,
+                                                              color:
+                                                                  individualhomeviewcalender),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
                                                 )),
                                           )
                                         ],
@@ -157,6 +175,9 @@ class _CompanyProfileChangelogoViewState
                           child: MainButton(
                             title: 'submit',
                             isSelected: true,
+                            onTap: () {
+                              controller.companyregisterLogo();
+                            },
                           ),
                         )
                       ],

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_borders/gradient_borders.dart';
 import 'package:noobz/utils/colors.dart';
@@ -7,10 +8,12 @@ class CompanyProfileMainContainer extends StatelessWidget {
     Key? key,
     this.profilepic,
     this.title,
+    this.email,
   }) : super(key: key);
 
   final title;
   final profilepic;
+  final email;
 
   @override
   Widget build(BuildContext context) {
@@ -18,27 +21,28 @@ class CompanyProfileMainContainer extends StatelessWidget {
       height: 92,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-          border: GradientBoxBorder(
-            width: 2,
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                secondaryColor,
-                mainColor,
-              ],
-            ),
+        border: GradientBoxBorder(
+          width: 2,
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              secondaryColor,
+              mainColor,
+            ],
           ),
-          borderRadius: BorderRadius.circular(20),color: Colors.white,
-           boxShadow: [
-      BoxShadow(
-        color: Colors.black.withOpacity(0.2),
-        spreadRadius: 0,
-        blurRadius: 15,
-        offset: Offset(0, 0), // changes the position of the shadow
+        ),
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 0,
+            blurRadius: 15,
+            offset: Offset(0, 0), // changes the position of the shadow
+          ),
+        ],
       ),
-    ],
-          ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
@@ -54,17 +58,39 @@ class CompanyProfileMainContainer extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(top: 2),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: CircleAvatar(
-                      backgroundImage: AssetImage(
-                        profilepic,
+                      padding: EdgeInsets.only(top: 2),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      radius: 30,
-                    ),
-                  ),
+                      child: profilepic == null
+                          ? Container(
+                              width: 50,
+                              height: 50,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 196, 153, 203),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Image.asset(
+                                'assets/images/Profile Image.png',
+                                scale: 1.0,
+                              ),
+                            )
+                          : Container(
+                              width: 50,
+                              height: 50,
+                              clipBehavior: Clip.antiAlias,
+                              decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 196, 153, 203),
+                                shape: BoxShape.circle,
+                              ),
+                              child: CachedNetworkImage(
+                                imageUrl: profilepic,
+                                fit: BoxFit.fill,
+                                // placeholder: (context, url) =>
+                                //     CircularProgressIndicator(),
+                              ),
+                            )),
                 ],
               ),
             ),
@@ -81,7 +107,7 @@ class CompanyProfileMainContainer extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(top: 8),
                     child: Text(
-                      title,
+                      title.toString(),
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.black,
@@ -99,7 +125,8 @@ class CompanyProfileMainContainer extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 4),
                         child: Text(
-                          'adnoc6@gmail.com',
+                          email.toString(),
+                          //'adnoc6@gmail.com'
                           style: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.w500,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:noobz/api/auth_api.dart';
+import 'package:noobz/api/individual_google_signup_api.dart';
 import 'package:noobz/models/user_model.dart';
 import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/ui_utils.dart';
@@ -20,6 +21,8 @@ class SigUpController extends GetxController {
 
   User? user;
   final _authApi = UserApi();
+  final _googleSignUpApi = GoogleSignUpApi();
+
   void toggle() {
     obscureTextPassword = !obscureTextPassword;
     update();
@@ -61,6 +64,21 @@ class SigUpController extends GetxController {
       }
     } catch (error) {
       print('Error registering user: $error');
+    }
+  }
+
+  Future<void> signUpWithGoogle() async {
+    try {
+      var response = await _googleSignUpApi.signUpWithGoogle();
+
+      if (response['error']) {
+        UiUtilites.errorSnackbar('Google Sign Up failed.', 'Error!');
+      } else {
+        UiUtilites.successSnackbar('Google Sign Up successful.', 'Success!');
+        Get.offNamed(AppRoutes.individualHome);
+      }
+    } catch (error) {
+      print('Error signing up with Google: $error');
     }
   }
 
