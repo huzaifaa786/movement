@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:noobz/components/individual_profile_appbar.dart';
 import 'package:noobz/components/main_button.dart';
 import 'package:noobz/components/topbbar.dart';
@@ -19,8 +20,6 @@ class CompanyProfileChangelogoView extends StatefulWidget {
 
 class _CompanyProfileChangelogoViewState
     extends State<CompanyProfileChangelogoView> {
- 
-      
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CompanyProfileChangelogocontroller>(
@@ -45,6 +44,7 @@ class _CompanyProfileChangelogoViewState
                           height: MediaQuery.of(context).size.height * 0.65,
                           decoration: BoxDecoration(
                               // border: Border.all()
+
                               ),
                           child: Column(
                             children: [
@@ -65,13 +65,15 @@ class _CompanyProfileChangelogoViewState
                                   ),
                                   child: GestureDetector(
                                     child: CircleAvatar(
-                                      backgroundImage: controller.logoImage !=
+                                      backgroundImage: 
+                                      controller.logoImage !=
                                               null
                                           ? FileImage(File(
                                                   controller.logoImage!.path))
                                               as ImageProvider
-                                          : AssetImage(
-                                              'assets/images/Profile Image.png'),
+                                          : 
+                                          AssetImage(
+                                              'assets/images/userprofile.png'),
                                       radius: 60,
                                     ),
                                   ),

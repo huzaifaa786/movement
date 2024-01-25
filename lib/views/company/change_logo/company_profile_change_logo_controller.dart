@@ -12,7 +12,7 @@ class CompanyProfileChangelogocontroller extends GetxController {
 
   final companyauthlogoApi = ComapnyAuthLogoApi();
 
-  XFile? logoImage = XFile('');
+  XFile? logoImage;
 
   Future<void> selectlogoImage() async {
     final ImagePicker _picker = ImagePicker();
@@ -21,7 +21,7 @@ class CompanyProfileChangelogocontroller extends GetxController {
       logoImage = image;
       update();
     } else {
-      logoImage = XFile('');
+      logoImage = null;
       update();
     }
   }

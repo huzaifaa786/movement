@@ -50,8 +50,9 @@ class CompanyProfileMainContainer extends StatelessWidget {
             padding: const EdgeInsets.only(left: 15),
             child: Container(
               height: 90,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(20)),
+              decoration: BoxDecoration(
+                  // border: Border.all(),
+                  borderRadius: BorderRadius.circular(20)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,17 +62,18 @@ class CompanyProfileMainContainer extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: profilepic != null
+                      child: profilepic == null
                           ? Container(
                               width: 50,
                               height: 50,
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 196, 153, 203),
                                 shape: BoxShape.circle,
                               ),
-                              child: CachedNetworkImage(
-                                imageUrl: profilepic,
-                                fit: BoxFit.fill,
+                              child: Image.asset(
+                                'assets/images/Profile Image.png',
+                                scale: 1.0,
                               ),
                             )
                           : Container(
@@ -79,11 +81,14 @@ class CompanyProfileMainContainer extends StatelessWidget {
                               height: 50,
                               clipBehavior: Clip.antiAlias,
                               decoration: BoxDecoration(
+                                color: Color.fromARGB(255, 196, 153, 203),
                                 shape: BoxShape.circle,
                               ),
-                              child: Image.asset(
-                                'assets/images/Profile Image.png',
-                                scale: 1.0,
+                              child: CachedNetworkImage(
+                                imageUrl: profilepic,
+                                fit: BoxFit.fill,
+                                // placeholder: (context, url) =>
+                                //     CircularProgressIndicator(),
                               ),
                             )),
                 ],
@@ -102,7 +107,7 @@ class CompanyProfileMainContainer extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(top: 8),
                     child: Text(
-                      title,
+                      title.toString(),
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.black,
@@ -120,7 +125,7 @@ class CompanyProfileMainContainer extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 4),
                         child: Text(
-                          email,
+                          email.toString(),
                           //'adnoc6@gmail.com'
                           style: TextStyle(
                               fontSize: 12,
