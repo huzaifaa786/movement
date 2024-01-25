@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "260450139061",
+    "project_id": "noobz-7f237",
+    "storage_bucket": "noobz-7f237.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260450139061:android:f61cc3f797cf91672937fc",
+        "android_client_info": {
+          "package_name": "com.tritec.noobz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBa5KtyCETV6KrV6y1C2Ci_W5UN9OojN7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

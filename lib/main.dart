@@ -2,9 +2,11 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:noobz/firebase_options.dart';
 import 'package:noobz/routes/app_pages.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/individual/add_event_due/add_event_due_binding.dart';
@@ -30,10 +32,17 @@ import 'package:noobz/views/company/client/allclient/allclient_view.dart';
 import 'package:noobz/views/company/client/clientinfo/clientinfo_binding.dart';
 import 'package:noobz/views/company/client/clientinfo/clientinfo_view.dart';
 
-void main()async
- {
-  
-   WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  //   final dio = Dio();
+  // (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (client) {
+  //   client.badCertificateCallback = (cert, host, port) => true;
+  //   return client;
+  // };
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   HttpOverrides.global = MyHttpOverrides();
   await GetStorage.init();
   runApp(const MyApp());
@@ -45,7 +54,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp( 
+    return GetMaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
         textSelectionTheme: const TextSelectionThemeData(
@@ -61,12 +70,13 @@ class MyApp extends StatelessWidget {
       getPages: AppPages.pages,
     );
   }
-
 }
- class MyHttpOverrides extends HttpOverrides{
+
+class MyHttpOverrides extends HttpOverrides {
   @override
-  HttpClient createHttpClient(SecurityContext? context){
+  HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }
