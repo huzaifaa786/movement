@@ -55,6 +55,10 @@ dependencies:
   firebase_messaging: ^14.7.10
   flutter_easyloading: ^3.0.5
   otp_autofill: ^3.0.2
+  google_sign_in: ^6.2.1
+  firebase_auth: ^4.16.0
+  sign_in_with_apple: ^5.0.0
+  firebase_core: ^2.24.2
   
 
 dev_dependencies:

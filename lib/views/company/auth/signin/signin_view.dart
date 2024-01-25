@@ -65,7 +65,7 @@ class CompanySignInView extends StatelessWidget {
                 title: 'Next',
                 isSelected: true,
                 onTap: () {
-                  Get.toNamed(AppRoutes.companyhome);
+                  // Get.offAllNamed(AppRoutes.companyhome);
                   controller.companyLoginUser();
                 },
               )

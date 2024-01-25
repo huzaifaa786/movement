@@ -5,8 +5,9 @@ class CompanyUser {
   String? account_type;
   String? api_token;
   String? login_type;
- String? name; // Add the 'name' property
-  String? type; 
+  String? name; // Add the 'name' property
+  String? type;
+  String? image;
   CompanyUser({
     required this.id,
     this.username,
@@ -14,9 +15,9 @@ class CompanyUser {
     this.account_type,
     this.api_token,
     this.login_type,
-     this.name,
-      this.type,
-    
+    this.name,
+    this.type,
+    this.image,
   });
 
   // Factory method to create an instance from JSON data
@@ -28,8 +29,9 @@ class CompanyUser {
       account_type: json['account_type'],
       api_token: json['api_token'],
       login_type: json['login_type'],
-       name: json['name'], // Assign value to the 'name' property
+      name: json['name'], // Assign value to the 'name' property
       type: json['type'],
+      image: json['image'],
     );
   }
 
@@ -38,8 +40,9 @@ class CompanyUser {
     return {
       'username': username,
       'email': email,
-        'name': name,
+      'name': name,
       'type': type,
+      'image':image,
     };
   }
 }
