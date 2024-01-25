@@ -26,5 +26,6 @@ class CompanyProfileController extends GetxController {
   void onInit() {
     getUserData();
     super.onInit();
+   
   }
 }

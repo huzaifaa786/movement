@@ -49,6 +49,7 @@ class _IndividualProfileViewState extends State<IndividualProfileView> {
               ChangePasswordCard(
                 ontap: () {
                   Get.toNamed(AppRoutes.changePassword);
+                  
                 },
               ),
               Padding(
