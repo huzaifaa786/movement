@@ -42,9 +42,8 @@ class _IndividualProfileViewState extends State<IndividualProfileView> {
             children: [
               IndividualProfileCard(
                   userpic: SvgPicture.asset('assets/images/user_profile.svg'),
-                  name: 'Mohammed Yusif',
-                  nick: 'mo7Y0',
-                  email: 'mohammed3@gmail.com',
+                  name: controller.name,
+                  email: controller.email,
                   icon: SvgPicture.asset('assets/images/email.svg')),
               ChangePasswordCard(
                 ontap: () {

@@ -23,8 +23,8 @@ class DueDetailsView extends StatefulWidget {
 class _DueDetailsViewState extends State<DueDetailsView> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<DueDetailsController>(builder: (controller) => 
-       Scaffold(
+    return GetBuilder<DueDetailsController>(
+      builder: (controller) => Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
             forceMaterialTransparency: true,
@@ -58,18 +58,32 @@ class _DueDetailsViewState extends State<DueDetailsView> {
                   ],
                 ),
               ),
-              DueDetailsRowCard(user_name: controller.user_name,),
+              DueDetailsRowCard(
+                user_name: controller.user_name,
+              ),
               DueDetailsColumnCard(
                 typeOfService: controller.typeOfService,
                 trackingNumber: controller.trackingNumber,
                 dueDate: controller.dueDate,
                 amount: controller.amount,
                 status: controller.status,
+                onTap: controller.company_id == null
+                    ? () {}
+                    : () {
+                        controller.selectPaymentImage();
+                      },
+                image:
+                    controller.isSelected ? controller.paymentAttachment : null,
+                isSelected: controller.isSelected,
+                isCompanyUser: controller.company_id == null ? false : true,
               ),
               Gap(60),
               MainButton(
-                isSelected: true,
+                isSelected: controller.company_id == null ? false : true,
                 title: 'submit',
+                onTap: () {
+                  controller.UploadPaymentImage();
+                },
               )
             ],
           ))),

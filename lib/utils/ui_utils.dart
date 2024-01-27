@@ -24,11 +24,12 @@ class UiUtilites {
     Get.snackbar(
       title,
       message,
-      backgroundGradient: const LinearGradient(
-        colors: [mainColor, secondaryColor],
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-      ),
+      backgroundColor: mainColor,
+      // backgroundGradient: const LinearGradient(
+      //   colors: [mainColor, secondaryColor],
+      //   begin: Alignment.topCenter,
+      //   end: Alignment.bottomCenter,
+      // ),
       colorText: white,
       duration: const Duration(seconds: 2),
       snackPosition: SnackPosition.BOTTOM,
