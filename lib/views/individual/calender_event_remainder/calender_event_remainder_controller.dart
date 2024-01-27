@@ -56,9 +56,7 @@ String selectedDate = '';
     //         day.toLocal().toString().split(' ')[0]))
     //     .toList();
 
-    // print('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
-    // print(events);
-    // print(myevents);
+    
 
     update();
   }
