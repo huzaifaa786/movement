@@ -1,7 +1,9 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class NotificationService with ChangeNotifier {
   late final FirebaseMessaging _messaging;
@@ -10,7 +12,18 @@ class NotificationService with ChangeNotifier {
       
    registerNotification() async {
     print('register user k andar a gya haaaa *************************');
+    Future<Map<Permission, PermissionStatus>> requestPermission() async {
+      Map<Permission, PermissionStatus> statuses =
+          await [Permission.notification].request();
+      return statuses;
+    }
     _messaging = FirebaseMessaging.instance;
+      _messaging.setForegroundNotificationPresentationOptions(
+      alert: true, // Required to display a heads up notification
+      badge: true,
+      sound: true,
+    );
+    
     NotificationSettings settings = await _messaging.requestPermission(
       alert: true,
       badge: true,
@@ -36,7 +49,7 @@ class NotificationService with ChangeNotifier {
       );
 
       await flutterLocalNotificationsPlugin.initialize(initializationSettings);
-
+      
       FirebaseMessaging.onMessage.listen(showFlutterNotification);
     } else {
       print('User declined or has not accepted permission');
@@ -44,7 +57,8 @@ class NotificationService with ChangeNotifier {
   }
 
   void showFlutterNotification(RemoteMessage message) {
-    print('hehehe');
+    print(message.data['badge']);
+    FlutterAppBadger.updateBadgeCount(int.parse(message.data['badge']));
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
     const AndroidNotificationDetails androidPlatformChannelSpecifics =
@@ -53,7 +67,7 @@ class NotificationService with ChangeNotifier {
             priority: Priority.high,
             showWhen: false);
     const DarwinNotificationDetails iOSPlatformChannelSpecifics =
-        DarwinNotificationDetails();
+        DarwinNotificationDetails(presentAlert: true,presentBadge: true, presentBanner: true,);
     const NotificationDetails platformChannelSpecifics = NotificationDetails(
         android: androidPlatformChannelSpecifics,
         iOS: iOSPlatformChannelSpecifics);

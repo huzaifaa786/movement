@@ -14,6 +14,7 @@ import 'package:flutter/gestures.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -78,6 +79,8 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
       setState(() {
         _isLoading = false;
       });
+      FlutterAppBadger.removeBadge();
+
     } catch (error) {
       const errorMsg = 'Could not refresh!';
       CommonFunctions.showErrorDialog(errorMsg, context);
@@ -94,6 +97,7 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
       messages = await Provider.of<Messages>(context, listen: false)
           .getMessages(instructor!.threadCode!);
       setState(() {});
+      FlutterAppBadger.removeBadge();
     } catch (error) {
       const errorMsg = 'Could not refresh!';
       CommonFunctions.showErrorDialog(errorMsg, context);

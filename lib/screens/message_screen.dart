@@ -106,50 +106,54 @@ class _MessagesScreenState extends State<MessagesScreen> {
         ],
       ),
       backgroundColor: kBackgroundColor,
-      body: RefreshIndicator(
-        onRefresh: refreshList,
-        child: SingleChildScrollView(
-          child: Column(
+      body: SafeArea(
+        child: RefreshIndicator(
+          onRefresh: refreshList,
+          child: ListView(
             children: [
-              _isLoading
-                  ? SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.5,
-                      child: Center(
-                        child: CircularProgressIndicator(
-                            color: kPrimaryColor.withOpacity(0.7)),
-                      ),
-                    )
-                  : Container(
-                      margin: const EdgeInsets.symmetric(vertical: 0.0),
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      height: MediaQuery.of(context).size.height * 0.85,
-                      child: ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemBuilder: (ctx, index) {
-                          MessageUser messageUser = messages![index];
-                          return CustomChatListItem(
-                            ontap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => MessageDetailScreen(
-                                      messageUser: messageUser),
-                                ),
+              Column(
+                children: [
+                  _isLoading
+                      ? SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          child: Center(
+                            child: CircularProgressIndicator(
+                                color: kPrimaryColor.withOpacity(0.7)),
+                          ),
+                        )
+                      : Container(
+                          margin: const EdgeInsets.symmetric(vertical: 0.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          height: MediaQuery.of(context).size.height * 0.85,
+                          child: ListView.builder(
+                            scrollDirection: Axis.vertical,
+                            itemBuilder: (ctx, index) {
+                              MessageUser messageUser = messages![index];
+                              return CustomChatListItem(
+                                ontap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => MessageDetailScreen(
+                                          messageUser: messageUser),
+                                    ),
+                                  );
+                                },
+                                name: messageUser.firstName! +
+                                    ' ' +
+                                    messageUser.lastName!,
+                                lastMessageTime:
+                                    getPastTime(messageUser.lastMessageTimestamp!),
+                                email: messageUser.lastMessage,
+                                imageUrl: messageUser.imageUrl,
+                                unreadCount: messageUser.countUnread,
                               );
                             },
-                            name: messageUser.firstName! +
-                                ' ' +
-                                messageUser.lastName!,
-                            lastMessageTime:
-                                getPastTime(messageUser.lastMessageTimestamp!),
-                            email: messageUser.lastMessage,
-                            imageUrl: messageUser.imageUrl,
-                            unreadCount: messageUser.countUnread,
-                          );
-                        },
-                        itemCount: messages != null ? messages!.length : 0,
-                      ),
-                    )
+                            itemCount: messages != null ? messages!.length : 0,
+                          ),
+                        )
+                ],
+              ),
             ],
           ),
         ),

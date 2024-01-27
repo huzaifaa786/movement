@@ -14,6 +14,10 @@
 	<string>se.movementapp.movementapp</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
+	<key>FLTEnableImpeller</key>
+	<false />
 	<key>CFBundleName</key>
 	<string>The Movement App</string>
 	<key>CFBundlePackageType</key>
