@@ -8,6 +8,7 @@ import 'package:noobz/components/main_input.dart';
 import 'package:noobz/components/topbbar.dart';
 import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
+import 'package:noobz/views/company/client/clientinfo/clientinfo_controller.dart';
 
 class ClientInfo extends StatefulWidget {
   const ClientInfo({super.key});
@@ -17,9 +18,11 @@ class ClientInfo extends StatefulWidget {
 }
 
 class _ClientInfoState extends State<ClientInfo> {
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return GetBuilder<ClientinfoController>(
+        builder: (controller) =>Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           forceMaterialTransparency: true,
@@ -112,6 +115,6 @@ class _ClientInfoState extends State<ClientInfo> {
                     type: 'Petrol Payment',
                     date: '23 dec23',
                   )
-                ]))));
+                ])))));
   }
 }

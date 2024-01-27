@@ -8,6 +8,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:noobz/firebase_options.dart';
+import 'package:noobz/helpers/loading.dart';
 import 'package:noobz/routes/app_pages.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/individual/add_event_due/add_event_due_binding.dart';
@@ -47,7 +48,9 @@ void main() async {
   HttpOverrides.global = MyHttpOverrides();
   await GetStorage.init();
   runApp(const MyApp());
+ // LoadingHelper.init();
   
+  EasyLoading.init();
 }
 
 class MyApp extends StatelessWidget {
@@ -55,6 +58,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    EasyLoading.init();
+    //LoadingHelper.init();
     return GetMaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,

@@ -17,6 +17,7 @@ class LoadingHelper {
 
   static init() {
     EasyLoading.instance
+      
       ..displayDuration = const Duration(milliseconds: 2000)
       ..indicatorType = EasyLoadingIndicatorType.circle
       ..loadingStyle = EasyLoadingStyle.custom
@@ -30,5 +31,6 @@ class LoadingHelper {
       ..userInteractions = false
       ..dismissOnTap = false
       ..boxShadow = <BoxShadow>[];
+      
   }
 }
