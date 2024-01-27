@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:noobz/api/api.dart';
 import 'package:noobz/api/auth_api.dart';
 
-import 'package:noobz/api/company_auth_api.dart';
-import 'package:noobz/utils/string.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:noobz/helpers/loading.dart';
+import 'package:noobz/utils/ui_utils.dart';
 
 class ChangePasswordController extends GetxController {
   static ChangePasswordController instance = Get.find();
@@ -30,25 +28,26 @@ class ChangePasswordController extends GetxController {
 
     // SharedPreferences preferences = await SharedPreferences.getInstance();
     // api_token = preferences.getString('api_token');
-    
+
     GetStorage box = GetStorage();
     String? authCheck = await box.read('api_token');
 
     if (authCheck != null) {
       print('api token exists');
     }
-
+    LoadingHelper.show();
     var response = await authApi.changePassword(
       oldPasswordController.text,
       newPasswordcontroller.text,
       // api_token ?? '',
       authCheck.toString(),
     );
-
+    LoadingHelper.dismiss();
     if (!response['error']) {
-      print('Password changed successfully');
+      Get.back();
+      UiUtilites.successSnackbar('password updated successfully', 'Success!');
     } else {
-      print('Password change failed');
+      UiUtilites.errorSnackbar('could not update password', 'Error!');
     }
   }
 }

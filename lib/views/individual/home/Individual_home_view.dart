@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
-import 'package:gradient_borders/gradient_borders.dart';
 import 'package:noobz/components/home_events_container.dart';
 import 'package:noobz/components/home_individual_remainder_container.dart';
 import 'package:noobz/routes/app_routes.dart';
-import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/individual/home/Individual_home_controller.dart';
 
 class IndividualHomeView extends StatefulWidget {

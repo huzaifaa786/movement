@@ -21,4 +21,18 @@ class DueDatesApi {
       return [];
     }
   }
+
+  uploadPaymentAttachment(schedule_id, payment_attachment) async {
+    var url = BASE_URL + 'upload/paymentAttachment';
+    GetStorage box = GetStorage();
+    String api_token = box.read('api_token');
+    var data;
+    data = {
+      'api_token': api_token,
+      'schedule_id': schedule_id,
+      'payment_attachment': payment_attachment,
+    };
+    var response = await Api.execute(url: url, data: data);
+    return response;
+  }
 }

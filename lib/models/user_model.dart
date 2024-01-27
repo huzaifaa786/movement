@@ -5,6 +5,7 @@ class User {
   String? account_type;
   String? api_token;
   String? login_type;
+  String? company_id;
 
   User({
     required this.id,
@@ -13,6 +14,7 @@ class User {
     this.account_type,
     this.api_token,
     this.login_type,
+    this.company_id,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,8 @@ class User {
       account_type: json['account_type'],
       api_token: json['api_token'],
       login_type: json['login_type'],
+      company_id: json['company_id'],
+      
     );
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:noobz/api/auth_api.dart';
+import 'package:noobz/helpers/loading.dart';
 import 'package:noobz/models/user_model.dart';
 import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/ui_utils.dart';
@@ -22,24 +23,28 @@ class SignInController extends GetxController {
   String language = 'english';
   Future<void> LoginUser() async {
     // try {
-      if (emailController.text.isEmpty || passwordController.text.isEmpty) {
-        return;
-      }
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      return;
+    }
+    LoadingHelper.show();
+    var responce =
+        await _authApi.login(emailController.text, passwordController.text);
+    if (!responce['error']) {
+      print('dddddddddddd');
+      user = User.fromJson(responce['user']);
+      print(user);
+      UiUtilites.successSnackbar('Sigin successfully.', 'Success!');
+      box.write('api_token', user!.api_token);
+      box.write('company_id', user!.company_id);
+      box.write('name', user!.username);
+      box.write('email', user!.email);
 
-      var responce =
-          await _authApi.login(emailController.text, passwordController.text);
-      if (!responce['error']) {
-        print('dddddddddddd');
-        user = User.fromJson(responce['user']);
-        print(user);
-        UiUtilites.successSnackbar('Sigin successfully.', 'Success!');
-        box.write('api_token', user!.api_token);
-        print(box);
-
-        Get.offNamed(AppRoutes.individualHome);
-      } else {
-        print(responce['error_data']);
-      }
+      print(box);
+      Get.offNamed(AppRoutes.individualHome);
+    } else {
+      UiUtilites.errorSnackbar(responce['error_data'], 'Error');
+    }
+    LoadingHelper.dismiss();
     // }
     //  catch (error) {}
   }
