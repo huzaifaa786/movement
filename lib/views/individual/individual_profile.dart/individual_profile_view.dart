@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ import 'package:noobz/components/individual_profile_card.dart';
 import 'package:noobz/components/individual_rounded_circle.dart';
 import 'package:noobz/components/topbbar.dart';
 import 'package:noobz/components/whites_blacks_card.dart';
+import 'package:noobz/helpers/loading.dart';
 import 'package:noobz/routes/app_routes.dart';
 import 'package:noobz/utils/colors.dart';
 import 'package:noobz/views/individual/individual_profile.dart/individual_profile_controller.dart';
@@ -25,8 +27,11 @@ class IndividualProfileView extends StatefulWidget {
 class _IndividualProfileViewState extends State<IndividualProfileView> {
   @override
   Widget build(BuildContext context) {
+    
+    EasyLoading.init();
     return GetBuilder<IndividualProfileController>(
-      builder: (controller) => Scaffold(
+      builder: (controller) 
+      => Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           forceMaterialTransparency: true,
@@ -47,9 +52,13 @@ class _IndividualProfileViewState extends State<IndividualProfileView> {
                   email: 'mohammed3@gmail.com',
                   icon: SvgPicture.asset('assets/images/email.svg')),
               ChangePasswordCard(
-                ontap: () {
+                ontap: () async {
+                  LoadingHelper.show();
+
+                  await Future.delayed(Duration(seconds: 2));
+
+                  LoadingHelper.dismiss();
                   Get.toNamed(AppRoutes.changePassword);
-                  
                 },
               ),
               Padding(
@@ -91,6 +100,8 @@ class _IndividualProfileViewState extends State<IndividualProfileView> {
           ),
         ),
       ),
+
+      
     );
   }
 }
