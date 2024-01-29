@@ -44,7 +44,7 @@ class _IndividualDuedateViewState extends State<IndividualDuedateView> {
                           children: [
                             DuedateContainer(
                               onTap: () {
-                                Get.offNamed(AppRoutes.individualduadatedetail,
+                                Get.toNamed(AppRoutes.individualduadatedetail,
                                     parameters: {
                                       'event_date': dueDate['event_date'] ?? '',
                                       'type_of_service':
@@ -54,6 +54,7 @@ class _IndividualDuedateViewState extends State<IndividualDuedateView> {
                                       'tracking_number':
                                           dueDate['tracking_number'] ?? '',
                                           'user_name' : controller.user_name,
+                                          'schedule_id' : dueDate['schedule_id'].toString(),
                                     });
                               },
                               image: 'assets/images/Profile Image.png',

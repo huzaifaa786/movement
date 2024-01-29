@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
@@ -5,19 +7,27 @@ import 'package:get/get.dart';
 import 'package:noobz/utils/colors.dart';
 
 class DueDetailsColumnCard extends StatelessWidget {
-  const DueDetailsColumnCard(
-      {Key? key,
-      this.trackingNumber,
-      this.typeOfService,
-      this.dueDate,
-      this.amount,
-      this.status})
-      : super(key: key);
+  const DueDetailsColumnCard({
+    Key? key,
+    this.trackingNumber,
+    this.typeOfService,
+    this.dueDate,
+    this.amount,
+    this.status,
+    this.onTap,
+    this.image,
+    this.isSelected,
+    this.isCompanyUser,
+  }) : super(key: key);
   final trackingNumber;
   final typeOfService;
   final dueDate;
   final amount;
   final status;
+  final onTap;
+  final image;
+  final isSelected;
+  final isCompanyUser;
 
   @override
   Widget build(BuildContext context) {
@@ -224,21 +234,34 @@ class DueDetailsColumnCard extends StatelessWidget {
                           blurStyle: BlurStyle.normal,
                           color: darkGrey)
                     ]),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SvgPicture.asset('assets/images/upload-file.svg'),
-                    Gap(6),
-                    Text(
-                      'Upload',
-                      style: TextStyle(
-                        color: mainColor,
-                        fontSize: 14,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
+                child: GestureDetector(
+                  onTap: onTap,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      isSelected == false
+                          ? Row(
+                              children: [
+                                isCompanyUser == true
+                                    ? SvgPicture.asset(
+                                        'assets/images/upload-file.svg')
+                                    : SvgPicture.asset(
+                                        'assets/images/ep_upload-gray.svg'),
+                                Gap(6),
+                                Text(
+                                  'Upload',
+                                  style: TextStyle(
+                                    color: isCompanyUser ==true? mainColor: grey,
+                                    fontSize: 14,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
+                            )
+                          : Image(image: FileImage(File(image.path))),
+                    ],
+                  ),
                 ),
               ),
             ],

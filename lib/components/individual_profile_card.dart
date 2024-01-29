@@ -4,11 +4,11 @@ import 'package:noobz/utils/colors.dart';
 
 class IndividualProfileCard extends StatelessWidget {
   const IndividualProfileCard(
-      {super.key, this.userpic, this.name, this.nick, this.icon, this.email});
+      {super.key, this.userpic, this.name,  this.icon, this.email});
 
   final userpic;
   final name;
-  final nick;
+ 
   final icon;
   final email;
 
@@ -47,19 +47,19 @@ class IndividualProfileCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Row(
-                          children: [
-                            Text(
-                              nick,
-                              style: TextStyle(
-                                color: darkGrey,
-                                fontSize: 14,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
+                        // Row(
+                        //   children: [
+                        //     Text(
+                        //       nick,
+                        //       style: TextStyle(
+                        //         color: darkGrey,
+                        //         fontSize: 14,
+                        //         fontFamily: 'Poppins',
+                        //         fontWeight: FontWeight.w600,
+                        //       ),
+                        //     ),
+                        //   ],
+                        // ),
                       ],
                     ),
                   ),
