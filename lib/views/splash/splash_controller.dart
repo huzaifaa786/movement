@@ -24,7 +24,7 @@ class SplashController extends GetxController {
       print('1');
     } else {
       print('2');
-      Get.offNamed(AppRoutes.calenderscreen);
+      Get.offNamed(AppRoutes.signUp);
     }
   }
 }
