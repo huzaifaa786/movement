@@ -27,7 +27,7 @@ class GoogleSignUpApi {
     final String accessToken = googleSignInAuthentication.accessToken!;
     final String idToken = googleSignInAuthentication.idToken!;
 
-    var url = 'BASE_URL' + 'googleSignUp';
+    var url = BASE_URL + 'googleSignUp';
     var data = {
       'access_token': accessToken,
       'id_token': idToken,
@@ -49,5 +49,27 @@ class GoogleSignUpApi {
     }
 
     return response;
+  }
+}
+
+class User {
+  final String id;
+  final String name;
+  final String email;
+  final String api_token;
+
+  User(
+      {required this.id,
+      required this.name,
+      required this.email,
+      required this.api_token});
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      id: json['id'],
+      name: json['name'],
+      email: json['email'],
+      api_token: json['api_token'],
+    );
   }
 }
