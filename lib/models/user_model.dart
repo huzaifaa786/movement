@@ -26,6 +26,8 @@ class User {
     );
   }
 
+  get name => null;
+
   Map<String, dynamic> toJson() {
     return {
       'name': username,
