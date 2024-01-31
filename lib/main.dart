@@ -42,14 +42,14 @@ void main() async {
   // };
 
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   HttpOverrides.global = MyHttpOverrides();
-  await GetStorage.init();
   runApp(const MyApp());
  // LoadingHelper.init();
-  
   EasyLoading.init();
 }
 

@@ -1,7 +1,11 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:noobz/api/api.dart';
+import 'package:noobz/api/due_dates_api.dart';
 import 'package:noobz/api/event_api.dart';
 import 'package:noobz/models/event_model.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:noobz/utils/string.dart';
 
 class CalenderEventRemainderController extends GetxController {
   static CalenderEventRemainderController instance = Get.find();
@@ -16,6 +20,11 @@ class CalenderEventRemainderController extends GetxController {
   DateTime? rangeStart;
   DateTime? rangeEnd;
 
+
+String selectedDate = '';
+  List<EventModel> selectedDateEvents = [];
+
+  
   void onFormatChanged(DateTime date) {
     today = date;
     ourdate = date;
@@ -47,9 +56,7 @@ class CalenderEventRemainderController extends GetxController {
     //         day.toLocal().toString().split(' ')[0]))
     //     .toList();
 
-    // print('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
-    // print(events);
-    // print(myevents);
+    
 
     update();
   }
@@ -68,6 +75,8 @@ class CalenderEventRemainderController extends GetxController {
     {
       print('ggggggggggggggggggggggggggggggggggggggggggggggg');
       getEvents();
+      fetchDueDatesforcalender();
+      getUserName();
       update();
     }
     super.onInit();
@@ -94,5 +103,30 @@ class CalenderEventRemainderController extends GetxController {
       print('Exception while fetching events: $e');
       return [];
     }
+  }
+
+  List<Map<String, dynamic>> dueDatesforcalenders = [];
+
+  var data;
+  var URL = BASE_URL + 'userDetails';
+  DueDatesApi dueDatesApi = new DueDatesApi();
+  GetStorage box = GetStorage();
+
+  String user_name = '';
+
+  fetchDueDatesforcalender() async {
+    dueDatesforcalenders = await dueDatesApi.fetchDueDates();
+    update();
+    // print(dueDates);
+  }
+
+  getUserName() async {
+    String api_token = box.read('api_token');
+    data = {'api_token': api_token};
+    var response = await Api.execute(url: URL, data: data);
+    user_name = response['user']['name'];
+    update();
+    print(response);
+    print('object');
   }
 }
