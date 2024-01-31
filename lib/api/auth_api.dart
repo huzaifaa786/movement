@@ -79,7 +79,46 @@ class UserApi {
       data: data,
     );
 
+    print('Change forgot Password response:');
+    print(response.toString());
+
+    return response;
+  }
+
+
+    Future forgotPassword(String emailAddres, ) async {
+
+    var url = BASE_URL + 'forgetpassword';
+    var data = {
+      'email' : emailAddres.toString(),
+    };
+
+    var response = await Api.execute(
+      url: url,
+      data: data,
+    );
+
     print('Change Password response:');
+    print(response.toString());
+
+    return response;
+  }
+
+
+
+    Future verifyOtp(String otpAddres, ) async {
+
+    var url = BASE_URL + 'verifyOtp';
+    var data = {
+      'otp' : otpAddres.toString(),
+    };
+
+    var response = await Api.execute(
+      url: url,
+      data: data,
+    );
+
+    print('Change Otp response:');
     print(response.toString());
 
     return response;

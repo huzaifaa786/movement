@@ -13,9 +13,9 @@ class WithOtpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GetBuilder<WithOtpController>(
-        builder: (controller) => SafeArea(
+    return GetBuilder<WithOtpController>(
+      builder: (controller) => Scaffold(
+        body: SafeArea(
             child: Container(
           padding: EdgeInsets.only(top: 50, left: 10, right: 10),
           child: Column(

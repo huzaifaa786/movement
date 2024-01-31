@@ -26,9 +26,6 @@ class ChangePasswordController extends GetxController {
       return;
     }
 
-    // SharedPreferences preferences = await SharedPreferences.getInstance();
-    // api_token = preferences.getString('api_token');
-
     GetStorage box = GetStorage();
     String? authCheck = await box.read('api_token');
 
