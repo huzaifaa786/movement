@@ -25,11 +25,14 @@ class GoogleSignUpApi {
     final String accountType = 'Individual';
 
     GetStorage box = GetStorage();
+    print('Box');
+    pragma(box as String);
     box.write('name', userName);
     box.write('email', userEmail);
     box.write('id_token', idToken);
 
     var url = BASE_URL + 'register';
+    print('dydtyyio;iuytyuiouytui');
     print(url);
 
     var data;
