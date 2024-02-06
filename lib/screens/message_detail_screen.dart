@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings
+
 import 'dart:async';
 
 import 'package:academy_app/constants.dart';
@@ -15,6 +17,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_app_badger/flutter_app_badger.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -195,7 +198,7 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
                             style: TextStyle(
                                 fontFamily: 'Poppins',
                                 fontWeight: FontWeight.w600),
-                          ),
+                          ).translate(),
                           Text(
                             instructor!.email!,
                             style: TextStyle(
@@ -203,7 +206,7 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w400,
                             ),
-                          ),
+                          ).translate(),
                         ],
                       ),
                     ),

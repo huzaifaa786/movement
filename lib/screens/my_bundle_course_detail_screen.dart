@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, deprecated_member_use
+// ignore_for_file: use_build_context_synchronously, deprecated_member_use, prefer_const_constructors
 
 import 'dart:async';
 import 'dart:convert';
@@ -16,6 +16,7 @@ import 'package:academy_app/widgets/forum_tab_widget.dart';
 import 'package:academy_app/widgets/live_class_tab_widget.dart';
 import 'package:background_downloader/background_downloader.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:http/http.dart' as http;
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -84,7 +85,6 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
   late StreamController<TaskProgressUpdate> progressUpdateStream;
 
   Future<void> _refresh() async {
-    
     setState(() {
       _isLoading = true;
     });
@@ -101,13 +101,12 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
         .fetchCourseSections(widget.courseId)
         .then((_) {
       setState(() {
-        sections =
-            Provider.of<MyBundles>(context, listen: false).sectionItems;
+        sections = Provider.of<MyBundles>(context, listen: false).sectionItems;
         _isLoading = false;
         _activeLesson = sections.first.mLesson!.first;
       });
     });
-    
+
     setState(() {
       _isLoading = true;
     });
@@ -133,22 +132,22 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
 
     // Registering a callback and configure notifications
     FileDownloader()
-      .registerCallbacks(
-        taskNotificationTapCallback: myNotificationTapCallback)
-      .configureNotificationForGroup(FileDownloader.defaultGroup,
-        running: const TaskNotification('Download {filename}',
-            'File: {filename} - {progress} - speed {networkSpeed} and {timeRemaining} remaining'),
-        complete: const TaskNotification(
-            'Download {filename}', 'Download complete'),
-        error: const TaskNotification(
-            'Download {filename}', 'Download failed'),
-        paused: const TaskNotification(
-            'Download {filename}', 'Paused with metadata {metadata}'),
-        progressBar: true)
-      .configureNotification(
-        complete: const TaskNotification(
-            'Download {filename}', 'Download complete'),
-        tapOpensFile: true); 
+        .registerCallbacks(
+            taskNotificationTapCallback: myNotificationTapCallback)
+        .configureNotificationForGroup(FileDownloader.defaultGroup,
+            running: const TaskNotification('Download {filename}',
+                'File: {filename} - {progress} - speed {networkSpeed} and {timeRemaining} remaining'),
+            complete: const TaskNotification(
+                'Download {filename}', 'Download complete'),
+            error: const TaskNotification(
+                'Download {filename}', 'Download failed'),
+            paused: const TaskNotification(
+                'Download {filename}', 'Paused with metadata {metadata}'),
+            progressBar: true)
+        .configureNotification(
+            complete: const TaskNotification(
+                'Download {filename}', 'Download complete'),
+            tapOpensFile: true);
 
     FileDownloader().updates.listen((update) async {
       switch (update) {
@@ -158,7 +157,7 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
               downloadTaskStatus = update.status;
             });
           }
-          if(downloadTaskStatus == TaskStatus.complete) {
+          if (downloadTaskStatus == TaskStatus.complete) {
             await DatabaseHelper.instance.addVideo(
               VideoModel(
                   title: fileName,
@@ -197,7 +196,6 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
           break;
       }
     });
-
   }
 
   void myNotificationTapCallback(Task task, NotificationType notificationType) {
@@ -205,7 +203,8 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
         'Tapped notification $notificationType for taskId ${task.directory}');
   }
 
-  Future<void> processButtonPress(lesson, myCourseId, coTitle, coThumbnail, secTitle, secId) async {
+  Future<void> processButtonPress(
+      lesson, myCourseId, coTitle, coThumbnail, secTitle, secId) async {
     // print("${BaseDirectory.applicationSupport}/system");
     String fileUrl;
 
@@ -215,21 +214,22 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
       final RegExp regExp = RegExp(r'[-\w]{25,}');
       final Match? match = regExp.firstMatch(lesson.videoUrlWeb.toString());
 
-      fileUrl = 'https://drive.google.com/uc?export=download&id=${match!.group(0)}';
-
+      fileUrl =
+          'https://drive.google.com/uc?export=download&id=${match!.group(0)}';
     } else {
       final token = await SharedPreferenceHelper().getAuthToken();
-      fileUrl = '$BASE_URL/api_files/offline_video_for_mobile_app/${lesson.id}/$token';
+      fileUrl =
+          '$BASE_URL/api_files/offline_video_for_mobile_app/${lesson.id}/$token';
     }
 
     backgroundDownloadTask = DownloadTask(
-      url: fileUrl,
-      filename: lesson.title.toString(),
-      directory: 'system',
-      baseDirectory: BaseDirectory.applicationSupport,
-      updates: Updates.statusAndProgress,
-      allowPause: true,
-      metaData: '<video metaData>');
+        url: fileUrl,
+        filename: lesson.title.toString(),
+        directory: 'system',
+        baseDirectory: BaseDirectory.applicationSupport,
+        updates: Updates.statusAndProgress,
+        allowPause: true,
+        metaData: '<video metaData>');
     await FileDownloader().enqueue(backgroundDownloadTask!);
     if (mounted) {
       setState(() {
@@ -242,7 +242,6 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
         sectionTitle = secTitle;
         thumbnail = coThumbnail;
       });
-
     }
   }
 
@@ -308,25 +307,28 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
     if (lesson.videoTypeWeb == 'YouTube') {
       CommonFunctions.showSuccessToast(
           'This video format is not supported for download.');
-    } else if (lesson.videoTypeWeb == 'Vimeo' || lesson.videoTypeWeb == 'vimeo') {
+    } else if (lesson.videoTypeWeb == 'Vimeo' ||
+        lesson.videoTypeWeb == 'vimeo') {
       print(lesson.videoUrl);
       print(lesson.vimeoVideoId);
       CommonFunctions.showSuccessToast(
           'This video format is not supported for download.');
     } else {
       var les = await DatabaseHelper.instance.lessonExists(lesson.id);
-      if(les == true) {
+      if (les == true) {
         var check = await DatabaseHelper.instance.lessonDetails(lesson.id);
         File checkPath = File("${check['path']}/${check['title']}");
         // print(checkPath.existsSync());
         if (!checkPath.existsSync()) {
           await DatabaseHelper.instance.removeVideo(check['id']);
-          processButtonPress(lesson, myCourseId, coTitle, coThumbnail, secTitle, secId);
+          processButtonPress(
+              lesson, myCourseId, coTitle, coThumbnail, secTitle, secId);
         } else {
           CommonFunctions.showSuccessToast('Video was downloaded already.');
         }
       } else {
-        processButtonPress(lesson, myCourseId, coTitle, coThumbnail, secTitle, secId);
+        processButtonPress(
+            lesson, myCourseId, coTitle, coThumbnail, secTitle, secId);
       }
     }
   }
@@ -348,8 +350,7 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
   void lessonAction(Lesson lesson) async {
     // print(lesson.videoTypeWeb);
     if (lesson.lessonType == 'video') {
-      if (lesson.videoTypeWeb == 'html5' ||
-          lesson.videoTypeWeb == 'amazon') {
+      if (lesson.videoTypeWeb == 'html5' || lesson.videoTypeWeb == 'amazon') {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -358,9 +359,10 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
                   lessonId: lesson.id!,
                   videoUrl: lesson.videoUrlWeb!)),
         );
-      } else if(lesson.videoTypeWeb == 'system'){
+      } else if (lesson.videoTypeWeb == 'system') {
         final token = await SharedPreferenceHelper().getAuthToken();
-        var url = '$BASE_URL/api_files/file_content?course_id=${widget.courseId}&lesson_id=${lesson.id}&auth_token=$token';
+        var url =
+            '$BASE_URL/api_files/file_content?course_id=${widget.courseId}&lesson_id=${lesson.id}&auth_token=$token';
         // print(url);
         Navigator.push(
           context,
@@ -370,13 +372,13 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
                   lessonId: lesson.id!,
                   videoUrl: url)),
         );
-      } else if(lesson.videoTypeWeb == 'google_drive'){
-
+      } else if (lesson.videoTypeWeb == 'google_drive') {
         final RegExp regExp = RegExp(r'[-\w]{25,}');
         final Match? match = regExp.firstMatch(lesson.videoUrlWeb.toString());
 
-        String url = 'https://drive.google.com/uc?export=download&id=${match!.group(0)}';
-        
+        String url =
+            'https://drive.google.com/uc?export=download&id=${match!.group(0)}';
+
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -385,7 +387,6 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
                   lessonId: lesson.id!,
                   videoUrl: url)),
         );
-        
       } else if (lesson.videoTypeWeb!.toLowerCase() == 'vimeo') {
         // print(lesson.videoTypeWeb);
         String vimeoVideoId = lesson.videoUrlWeb!.split('/').last;
@@ -419,7 +420,8 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
       final token = await SharedPreferenceHelper().getAuthToken();
       final url = '$BASE_URL/api/quiz_mobile_web_view/${lesson.id}/$token';
       // print(_url);
-      Navigator.push(context,
+      Navigator.push(
+        context,
         MaterialPageRoute(
           builder: (context) => WebViewScreen(url: url),
         ),
@@ -432,8 +434,7 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    WebViewScreenIframe(url: url)));
+                builder: (context) => WebViewScreenIframe(url: url)));
       } else if (lesson.attachmentType == 'description') {
         // data = lesson.attachment;
         // Navigator.push(
@@ -444,11 +445,8 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
         final token = await SharedPreferenceHelper().getAuthToken();
         final url = '$BASE_URL/api/lesson_mobile_web_view/${lesson.id}/$token';
         // print(_url);
-        Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      WebViewScreen(url: url)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => WebViewScreen(url: url)));
       } else if (lesson.attachmentType == 'txt') {
         final url = '$BASE_URL/uploads/lesson_files/${lesson.attachment}';
         data = await http.read(Uri.parse(url));
@@ -459,7 +457,8 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
                     FileDataScreen(textData: data, note: lesson.summary!)));
       } else {
         final token = await SharedPreferenceHelper().getAuthToken();
-        final url = '$BASE_URL/api_files/file_content?course_id=${widget.courseId}&lesson_id=${lesson.id}&auth_token=$token';
+        final url =
+            '$BASE_URL/api_files/file_content?course_id=${widget.courseId}&lesson_id=${lesson.id}&auth_token=$token';
         // print(url);
         _launchURL(url);
       }
@@ -520,7 +519,8 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
   Widget myCourseBody() {
     return _isLoading
         ? Center(
-            child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
+            child: CircularProgressIndicator(
+                color: kPrimaryColor.withOpacity(0.7)),
           )
         : SingleChildScrollView(
             child: Padding(
@@ -575,13 +575,15 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
                                         Icons.more_vert,
                                       ),
                                       itemBuilder: (_) => [
-                                        const PopupMenuItem(
+                                        PopupMenuItem(
                                           value: 'details',
-                                          child: Text('Course Details'),
+                                          child: Text('Course Details')
+                                              .translate(),
                                         ),
-                                        const PopupMenuItem(
+                                        PopupMenuItem(
                                           value: 'share',
-                                          child: Text('Share this Course'),
+                                          child: Text('Share this Course')
+                                              .translate(),
                                         ),
                                       ],
                                     ),
@@ -765,7 +767,8 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
                                                 Expanded(
                                                   flex: 1,
                                                   child: Checkbox(
-                                                      activeColor: kPrimaryColor,
+                                                      activeColor:
+                                                          kPrimaryColor,
                                                       value:
                                                           lesson.isCompleted ==
                                                                   '1'
@@ -1110,7 +1113,8 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
   Widget addonBody() {
     return _isLoading
         ? Center(
-            child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
+            child: CircularProgressIndicator(
+                color: kPrimaryColor.withOpacity(0.7)),
           )
         : NestedScrollView(
             controller: _scrollController,
@@ -1168,13 +1172,15 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
                                             Icons.more_vert,
                                           ),
                                           itemBuilder: (_) => [
-                                            const PopupMenuItem(
+                                            PopupMenuItem(
                                               value: 'details',
-                                              child: Text('Course Details'),
+                                              child: Text('Course Details')
+                                                  .translate(),
                                             ),
-                                            const PopupMenuItem(
+                                            PopupMenuItem(
                                               value: 'share',
-                                              child: Text('Share this Course'),
+                                              child: Text('Share this Course')
+                                                  .translate(),
                                             ),
                                           ],
                                         ),
@@ -1251,7 +1257,7 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
                         unselectedLabelColor: Colors.black87,
                         labelColor: Colors.white,
                         tabs: [
-                          const Tab(
+                          Tab(
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -1265,12 +1271,12 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
                                     // fontWeight: FontWeight.bold,
                                     fontSize: 12,
                                   ),
-                                ),
+                                ).translate(),
                               ],
                             ),
                           ),
                           if (liveClassStatus == true)
-                            const Tab(
+                            Tab(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -1281,12 +1287,12 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
                                       // fontWeight: FontWeight.bold,
                                       fontSize: 14,
                                     ),
-                                  ),
+                                  ).translate(),
                                 ],
                               ),
                             ),
                           if (courseForumStatus == true)
-                            const Tab(
+                            Tab(
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -1297,7 +1303,7 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
                                       // fontWeight: FontWeight.bold,
                                       fontSize: 14,
                                     ),
-                                  ),
+                                  ).translate(),
                                 ],
                               ),
                             ),
@@ -1328,7 +1334,8 @@ class _MyBundleCourseDetailScreenState extends State<MyBundleCourseDetailScreen>
       backgroundColor: kBackgroundColor,
       body: _isLoading
           ? Center(
-              child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
+              child: CircularProgressIndicator(
+                  color: kPrimaryColor.withOpacity(0.7)),
             )
           : liveClassStatus == false && courseForumStatus == false
               ? myCourseBody()

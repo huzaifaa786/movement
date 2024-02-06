@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously, deprecated_member_use
+// ignore_for_file: use_build_context_synchronously, deprecated_member_use, prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_print
 
 import 'dart:async';
 import 'dart:convert';
@@ -13,6 +13,9 @@ import 'package:academy_app/widgets/custom_text.dart';
 import 'package:academy_app/widgets/forum_tab_widget.dart';
 import 'package:academy_app/widgets/live_class_tab_widget.dart';
 import 'package:background_downloader/background_downloader.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:http/http.dart' as http;
 import 'package:academy_app/constants.dart';
@@ -64,7 +67,7 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
   dynamic data;
   Lesson? _activeLesson;
 
-   String myPath ="";
+  String myPath = "";
 
   String downloadId = "";
 
@@ -102,15 +105,16 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
       _isLoading = true;
     });
   }
-checkPermissions() async{
+
+  checkPermissions() async {
 // final permissionType = PermissionType.notifications;
 //     var status = await FileDownloader().permissions.status(permissionType);
 //     if (status != PermissionStatus.granted) {
-      
+
 //       status = await FileDownloader().permissions.request(permissionType);
 //       debugPrint('Permission for $permissionType was $status');
 //     }
-}
+  }
   @override
   void initState() {
     checkPermissions();
@@ -129,7 +133,8 @@ checkPermissions() async{
     ], iOSConfig: [
       (Config.localize, {'Cancel': 'StopIt'}),
     ]).then((result) => debugPrint('Configuration result = $result'));
-      getApplicationDocumentsDirectory().then((value) => myPath = value.path.toString());
+    getApplicationDocumentsDirectory()
+        .then((value) => myPath = value.path.toString());
 
     // Registering a callback and configure notifications
     FileDownloader()
@@ -138,16 +143,16 @@ checkPermissions() async{
         .configureNotificationForGroup(FileDownloader.defaultGroup,
             running: const TaskNotification('Download {filename}',
                 'File: {filename} - {progress} - speed {networkSpeed} and {timeRemaining} remaining'),
-            complete: const TaskNotification(
-                'Download {filename}', 'Download complete, watch this video from downloaded courses'),
+            complete: const TaskNotification('Download {filename}',
+                'Download complete, watch this video from downloaded courses'),
             error: const TaskNotification(
                 'Download {filename}', 'Download failed'),
             paused: const TaskNotification(
                 'Download {filename}', 'Paused with metadata {metadata}'),
             progressBar: true)
         .configureNotification(
-            complete: const TaskNotification(
-                'Download {filename}', 'Download complete, watch this video from downloaded courses'),
+            complete: const TaskNotification('Download {filename}',
+                'Download complete, watch this video from downloaded courses'),
             tapOpensFile: false); // dog can also open directly from tap
 
     // Listen to updates and process
@@ -160,8 +165,8 @@ checkPermissions() async{
             });
           }
           if (downloadTaskStatus == TaskStatus.complete) {
-                print('task is complete');
-                print('adding vide now');
+            print('task is complete');
+            print('adding vide now');
             await DatabaseHelper.instance.addVideo(
               VideoModel(
                   title: fileName,
@@ -215,7 +220,6 @@ checkPermissions() async{
     // print("${BaseDirectory.applicationSupport}/system");
     String fileUrl;
 
-
     if (lesson.videoTypeWeb == 'html5' || lesson.videoTypeWeb == 'amazon') {
       fileUrl = lesson.videoUrlWeb.toString();
     } else if (lesson.videoTypeWeb == 'google_drive') {
@@ -230,7 +234,6 @@ checkPermissions() async{
           '$BASE_URL/api_files/offline_video_for_mobile_app/${lesson.id}/$token';
     }
 
-
     backgroundDownloadTask = DownloadTask(
         url: fileUrl,
         filename: lesson.title.toString() + '.mp4',
@@ -241,9 +244,6 @@ checkPermissions() async{
         metaData: '<video metaData>');
 
     await FileDownloader().enqueue(backgroundDownloadTask!);
-
-
-    
 
     if (mounted) {
       setState(() {
@@ -532,6 +532,75 @@ checkPermissions() async{
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
+              GestureDetector(
+                onTap: () {
+                  showModalBottomSheet<void>(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Container(
+                        height: 200,
+                        color: Colors.white,
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  " Yoga Nidra's Course",
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: RatingBar.builder(
+                                    initialRating: 1,
+                                    minRating: 1,
+                                    direction: Axis.horizontal,
+                                    allowHalfRating: false,
+                                    itemCount: 5,
+                                    itemPadding:
+                                        EdgeInsets.symmetric(horizontal: 4.0),
+                                    itemBuilder: (context, _) => Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    ),
+                                    onRatingUpdate: (rating) {
+                                      print(rating);
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 12),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: kTimeBackColor,
+                                    ),
+                                    child: Text('Submit',
+                                        style: TextStyle(color: kTimeColor)),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text('Rate this Course  '),
+                      Icon(CupertinoIcons.star),
+                    ],
+                  ),
+                ),
+              ),
               Card(
                 elevation: 0.3,
                 shape: RoundedRectangleBorder(
@@ -573,13 +642,13 @@ checkPermissions() async{
                                 Icons.more_vert,
                               ),
                               itemBuilder: (_) => [
-                                const PopupMenuItem(
+                                PopupMenuItem(
                                   value: 'details',
-                                  child: Text('Course Details'),
+                                  child: Text('Course Details').translate(),
                                 ),
-                                const PopupMenuItem(
+                                PopupMenuItem(
                                   value: 'share',
-                                  child: Text('Share this Course'),
+                                  child: Text('Share this Course').translate(),
                                 ),
                               ],
                             ),
@@ -1918,13 +1987,14 @@ checkPermissions() async{
                                   Icons.more_vert,
                                 ),
                                 itemBuilder: (_) => [
-                                  const PopupMenuItem(
+                                  PopupMenuItem(
                                     value: 'details',
-                                    child: Text('Course Details'),
+                                    child: Text('Course Details').translate(),
                                   ),
-                                  const PopupMenuItem(
+                                  PopupMenuItem(
                                     value: 'share',
-                                    child: Text('Share this Course'),
+                                    child:
+                                        Text('Share this Course').translate(),
                                   ),
                                 ],
                               ),
@@ -1994,7 +2064,7 @@ checkPermissions() async{
                     unselectedLabelColor: Colors.black87,
                     labelColor: Colors.white,
                     tabs: [
-                      const Tab(
+                      Tab(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -2008,12 +2078,12 @@ checkPermissions() async{
                                 // fontWeight: FontWeight.bold,
                                 fontSize: 14,
                               ),
-                            ),
+                            ).translate(),
                           ],
                         ),
                       ),
                       if (liveClassStatus == true)
-                        const Tab(
+                        Tab(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -2024,12 +2094,12 @@ checkPermissions() async{
                                   // fontWeight: FontWeight.bold,
                                   fontSize: 14,
                                 ),
-                              ),
+                              ).translate(),
                             ],
                           ),
                         ),
                       if (courseForumStatus == true)
-                        const Tab(
+                        Tab(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -2040,7 +2110,7 @@ checkPermissions() async{
                                   // fontWeight: FontWeight.bold,
                                   fontSize: 14,
                                 ),
-                              ),
+                              ).translate(),
                             ],
                           ),
                         ),

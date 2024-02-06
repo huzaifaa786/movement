@@ -1,5 +1,6 @@
 import 'package:academy_app/screens/course_detail_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import '../constants.dart';
 import '../widgets/star_display_widget.dart';
@@ -95,7 +96,7 @@ class _CourseListItemState extends State<CourseListItem> {
                         fontSize: 14,
                         color: kTextColor,
                       ),
-                    ),
+                    ).translate(),
                     const SizedBox(
                       height: 10,
                     ),
@@ -105,7 +106,7 @@ class _CourseListItemState extends State<CourseListItem> {
                         color: Colors.grey,
                         fontSize: 12,
                       ),
-                    ),
+                    ).translate(),
                     const SizedBox(
                       height: 5,
                     ),
@@ -135,7 +136,7 @@ class _CourseListItemState extends State<CourseListItem> {
                               fontSize: 12,
                               color: Colors.grey,
                             ),
-                          ),
+                          ).translate(),
                         ),
                         SizedBox(
                           width: 30,
@@ -145,7 +146,7 @@ class _CourseListItemState extends State<CourseListItem> {
                               color: Colors.grey,
                               fontSize: 12,
                             ),
-                          ),
+                          ).translate(),
                         ),
                         Expanded(
                           child: Text(
@@ -156,7 +157,7 @@ class _CourseListItemState extends State<CourseListItem> {
                               fontWeight: FontWeight.w400,
                             ),
                             textAlign: TextAlign.end,
-                          ),
+                          ).translate(),
                         ),
                       ],
                     ),

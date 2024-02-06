@@ -3,6 +3,7 @@ import 'package:academy_app/providers/bundles.dart';
 import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:academy_app/widgets/bundle_list_item.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 
 class BundleListScreen extends StatefulWidget {
@@ -71,7 +72,7 @@ class _BundleListScreenState extends State<BundleListScreen> {
                             fontWeight: FontWeight.w400,
                             fontSize: 18,
                           ),
-                        ),
+                        ).translate(),
                       ],
                     ),
                   ),

@@ -1,9 +1,10 @@
-// ignore_for_file: use_build_context_synchronously, deprecated_member_use
+// ignore_for_file: use_build_context_synchronously, deprecated_member_use, prefer_const_constructors
 
 import 'dart:convert';
 import 'package:academy_app/models/live_class_model.dart';
 import 'package:academy_app/providers/shared_pref_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../constants.dart';
@@ -67,7 +68,7 @@ class _LiveClassTabWidgetState extends State<LiveClassTabWidget> {
                   child: Container(
                     width: double.infinity,
                     color: kNoteColor,
-                    child: const Padding(
+                    child:  Padding(
                       padding:
                           EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
                       child: Text(
@@ -78,7 +79,7 @@ class _LiveClassTabWidgetState extends State<LiveClassTabWidget> {
                           height: 1.5,
                           wordSpacing: 1,
                         ),
-                      ),
+                      ).translate(),
                     ),
                   ),
                 ),
@@ -137,7 +138,7 @@ class _LiveClassTabWidgetState extends State<LiveClassTabWidget> {
                           height: 1.5,
                           wordSpacing: 1,
                         ),
-                      ),
+                      ).translate(),
                     ),
                   ),
                 ),

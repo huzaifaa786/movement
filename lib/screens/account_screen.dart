@@ -1,14 +1,18 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:academy_app/providers/auth.dart';
 import 'package:academy_app/screens/account_remove_screen.dart';
+import 'package:academy_app/screens/app_translate/translate.dart';
 import 'package:academy_app/screens/message_screen.dart';
 import 'package:academy_app/widgets/account_list_tile.dart';
 import 'package:academy_app/widgets/custom_text.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 import '../constants.dart';
 import '../providers/database_helper.dart';
@@ -46,8 +50,8 @@ class _AccountScreenState extends State<AccountScreen> {
       });
     }
   }
-  List<int> courseArr = [];
 
+  List<int> courseArr = [];
 
   Future<List<Map<String, dynamic>>?> getVideos() async {
     // List<Map<String, dynamic>> listMap =
@@ -68,15 +72,15 @@ class _AccountScreenState extends State<AccountScreen> {
   Future<List<Map<String, dynamic>>?> getCourse() async {
     // List<Map<String, dynamic>> listMap =
     //     await DatabaseHelper.instance.queryAllRows('course_list');
-    
+
     // for (var map in listMap) {
     //   print('map');
     //   print(courseArr);
     //   print(courseArr.contains(map['course_id']));
-      // if(!courseArr.contains(map['course_id'])){
-      //   await DatabaseHelper.instance.removeCourse(map['course_id']);
-      //   await DatabaseHelper.instance.removeCourseSection(map['course_id']);
-      // }
+    // if(!courseArr.contains(map['course_id'])){
+    //   await DatabaseHelper.instance.removeCourse(map['course_id']);
+    //   await DatabaseHelper.instance.removeCourseSection(map['course_id']);
+    // }
     // }
 
     return null;
@@ -139,7 +143,8 @@ class _AccountScreenState extends State<AccountScreen> {
         builder: (ctx, dataSnapshot) {
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
             return Center(
-              child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
+              child: CircularProgressIndicator(
+                  color: kPrimaryColor.withOpacity(0.7)),
             );
           } else {
             if (dataSnapshot.error != null) {
@@ -154,14 +159,15 @@ class _AccountScreenState extends State<AccountScreen> {
                             "assets/images/no_connection.png",
                             height: MediaQuery.of(context).size.height * .35,
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.all(4.0),
-                            child: Text('There is no Internet connection'),
+                            child: Text('There is no Internet connection')
+                                .translate(),
                           ),
-                          const Padding(
+                          Padding(
                             padding: EdgeInsets.all(4.0),
-                            child:
-                                Text('Please check your Internet connection'),
+                            child: Text('Please check your Internet connection')
+                                .translate(),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -180,7 +186,7 @@ class _AccountScreenState extends State<AccountScreen> {
                               label: const Text(
                                 'Play offline courses',
                                 style: TextStyle(color: Colors.white),
-                              ),
+                              ).translate(),
                             ),
                           ),
                         ],
@@ -197,8 +203,8 @@ class _AccountScreenState extends State<AccountScreen> {
                                     context, '/home', (r) => false));
                           },
                         ),
-                        const Center(
-                          child: Text('Error Occurred'),
+                        Center(
+                          child: Text('Error Occurred').translate(),
                         ),
                       ],
                     );
@@ -272,6 +278,30 @@ class _AccountScreenState extends State<AccountScreen> {
                                 onTap: () {
                                   Navigator.of(context)
                                       .pushNamed(MessagesScreen.routeName);
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 65,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              elevation: 0.1,
+                              child: GestureDetector(
+                                child: const AccountListTile(
+                                  titleText: 'Change Language',
+                                  icon: Icons.language,
+                                  actionType: 'language',
+                                ),
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) =>
+                                          const TranslateScreen()));
                                 },
                               ),
                             ),

@@ -1,6 +1,7 @@
 import 'package:academy_app/constants.dart';
 import 'package:academy_app/screens/courses_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 
 class SearchWidget extends StatefulWidget {
   static const routeName = '/search-item';
@@ -42,10 +43,12 @@ class _SearchWidgetState extends State<SearchWidget> {
   Widget build(BuildContext context) {
     return _isLoading
         ? Center(
-            child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
+            child: CircularProgressIndicator(
+                color: kPrimaryColor.withOpacity(0.7)),
           )
         : Scaffold(
             resizeToAvoidBottomInset: false,
+            backgroundColor: kBackgroundColor,
             body: Column(
               children: <Widget>[
                 const SizedBox(
@@ -82,7 +85,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 const Text(
                   "Type In Search Bar...",
                   style: TextStyle(color: kSecondaryColor),
-                ),
+                ).translate(),
               ],
             ),
           );

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 import 'package:academy_app/firebase_options.dart';
 import 'package:academy_app/models/store_config.dart';
@@ -17,6 +19,8 @@ import 'package:academy_app/screens/sub_category_screen.dart';
 import 'package:academy_app/screens/verification_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:logging/logging.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'providers/auth.dart';
@@ -60,7 +64,7 @@ void main() async {
     );
   }
   WidgetsFlutterBinding.ensureInitialized();
-
+  GetStorage.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -94,6 +98,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    GetStorage box = GetStorage();
+    box.read('Locale') == null ? box.write('Locale', 'en') : null;
+    String locale = box.read('Locale') ?? 'en';
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -136,43 +143,59 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: Consumer<Auth>(
-        builder: (ctx, auth, _) => MaterialApp(
-          title: 'Academy App',
-          theme: ThemeData(
-            fontFamily: 'google_sans',
-            colorScheme:
-                ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple)
-                    .copyWith(secondary: kDarkButtonBg),
-          ),
-          debugShowCheckedModeBanner: false,
-          home: const SplashScreen(),
-          routes: {
-            '/home': (ctx) => const TabsScreen(),
-            AuthScreen.routeName: (ctx) => const AuthScreen(),
-            MessagesScreen.routeName: (ctx) => const MessagesScreen(),
-            StartChatScreen.routeName: (ctx) => const StartChatScreen(),
-            AuthScreenPrivate.routeName: (ctx) => const AuthScreenPrivate(),
-            SignUpScreen.routeName: (ctx) => const SignUpScreen(),
-            ForgotPassword.routeName: (ctx) => const ForgotPassword(),
-            CoursesScreen.routeName: (ctx) => const CoursesScreen(),
-            CourseDetailScreen.routeName: (ctx) => const CourseDetailScreen(),
-            EditPasswordScreen.routeName: (ctx) => const EditPasswordScreen(),
-            EditProfileScreen.routeName: (ctx) => const EditProfileScreen(),
-            VerificationScreen.routeName: (ctx) => const VerificationScreen(),
-            AccountRemoveScreen.routeName: (ctx) => const AccountRemoveScreen(),
-            DownloadedCourseList.routeName: (ctx) =>
-                const DownloadedCourseList(),
-            SubCategoryScreen.routeName: (ctx) => const SubCategoryScreen(),
-            MessageDetailScreen.routeName: (ctx) => const MessageDetailScreen(),
-            BundleListScreen.routeName: (ctx) => const BundleListScreen(),
-            BundleDetailsScreen.routeName: (ctx) => const BundleDetailsScreen(),
-            MyBundleCoursesListScreen.routeName: (ctx) =>
-                const MyBundleCoursesListScreen(),
-            DeviceVerificationScreen.routeName: (context) =>
-                const DeviceVerificationScreen(),
-          },
-        ),
-      ),
+          builder: (ctx, auth, _) => GoogleTranslatorInit(
+                  'AIzaSyBOr3bXgN2bj9eECzSudyj_rgIFjyXkdn8',
+                  translateFrom:
+                      box.read('Locale') == 'en' ? Locale('ur') : Locale('en'),
+                  translateTo: Locale(locale),
+                  automaticDetection: false, builder: () {
+                return MaterialApp(
+                  title: 'Academy App',
+                  theme: ThemeData(
+                    fontFamily: 'google_sans',
+                    colorScheme:
+                        ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple)
+                            .copyWith(secondary: kDarkButtonBg),
+                  ),
+                  debugShowCheckedModeBanner: false,
+                  home: const SplashScreen(),
+                  routes: {
+                    '/home': (ctx) => const TabsScreen(),
+                    AuthScreen.routeName: (ctx) => const AuthScreen(),
+                    MessagesScreen.routeName: (ctx) => const MessagesScreen(),
+                    StartChatScreen.routeName: (ctx) => const StartChatScreen(),
+                    AuthScreenPrivate.routeName: (ctx) =>
+                        const AuthScreenPrivate(),
+                    SignUpScreen.routeName: (ctx) => const SignUpScreen(),
+                    ForgotPassword.routeName: (ctx) => const ForgotPassword(),
+                    CoursesScreen.routeName: (ctx) => const CoursesScreen(),
+                    CourseDetailScreen.routeName: (ctx) =>
+                        const CourseDetailScreen(),
+                    EditPasswordScreen.routeName: (ctx) =>
+                        const EditPasswordScreen(),
+                    EditProfileScreen.routeName: (ctx) =>
+                        const EditProfileScreen(),
+                    VerificationScreen.routeName: (ctx) =>
+                        const VerificationScreen(),
+                    AccountRemoveScreen.routeName: (ctx) =>
+                        const AccountRemoveScreen(),
+                    DownloadedCourseList.routeName: (ctx) =>
+                        const DownloadedCourseList(),
+                    SubCategoryScreen.routeName: (ctx) =>
+                        const SubCategoryScreen(),
+                    MessageDetailScreen.routeName: (ctx) =>
+                        const MessageDetailScreen(),
+                    BundleListScreen.routeName: (ctx) =>
+                        const BundleListScreen(),
+                    BundleDetailsScreen.routeName: (ctx) =>
+                        const BundleDetailsScreen(),
+                    MyBundleCoursesListScreen.routeName: (ctx) =>
+                        const MyBundleCoursesListScreen(),
+                    DeviceVerificationScreen.routeName: (context) =>
+                        const DeviceVerificationScreen(),
+                  },
+                );
+              })),
     );
   }
 }

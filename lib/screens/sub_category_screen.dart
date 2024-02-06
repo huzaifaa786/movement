@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 import 'package:academy_app/constants.dart';
 import 'package:academy_app/providers/categories.dart';
@@ -5,6 +7,7 @@ import 'package:academy_app/widgets/sub_category_list_item.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 
 class SubCategoryScreen extends StatefulWidget {
@@ -71,7 +74,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(title, maxLines: 2),
+        title: Text(title, maxLines: 2).translate(),
         titleTextStyle: const TextStyle(color: Colors.black, fontSize: 15),
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
@@ -105,20 +108,20 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                               "assets/images/no_connection.png",
                               height: MediaQuery.of(context).size.height * .35,
                             ),
-                            const Padding(
+                             Padding(
                               padding: EdgeInsets.all(4.0),
-                              child: Text('There is no Internet connection'),
+                              child: Text('There is no Internet connection').translate(),
                             ),
-                            const Padding(
+                             Padding(
                               padding: EdgeInsets.all(4.0),
                               child:
-                                  Text('Please check your Internet connection'),
+                                  Text('Please check your Internet connection').translate(),
                             ),
                           ],
                         ),
                       )
-                    : const Center(
-                        child: Text('Error Occured'),
+                    :  Center(
+                        child: Text('Error Occured').translate(),
                         // child: Text(dataSnapshot.error.toString()),
                       );
               } else {
@@ -141,7 +144,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                                   fontWeight: FontWeight.w300,
                                   fontSize: 17,
                                 ),
-                              ),
+                              ).translate(),
                             ],
                           ),
                         ),

@@ -1,5 +1,6 @@
 import 'package:academy_app/screens/courses_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:html_unescape/html_unescape.dart';
 import '../constants.dart';
 
@@ -44,8 +45,8 @@ class SubCategoryListItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 15.0, bottom: 15),
               child: Text(
-                "${index!+1}.",
-              ),
+                "${index! + 1}.",
+              ).translate(),
             ),
             Expanded(
               flex: 7,
@@ -66,7 +67,7 @@ class SubCategoryListItem extends StatelessWidget {
                             fontSize: 16,
                             fontWeight: FontWeight.w500,
                           ),
-                        ),
+                        ).translate(),
                       ),
                     ),
                     Align(
@@ -75,7 +76,7 @@ class SubCategoryListItem extends StatelessWidget {
                         '$numberOfCourses Courses',
                         style: const TextStyle(color: Colors.black54),
                         textAlign: TextAlign.left,
-                      ),
+                      ).translate(),
                     ),
                   ],
                 ),
@@ -92,8 +93,8 @@ class SubCategoryListItem extends StatelessWidget {
                   ),
                   color: iCardColor,
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 2),
                     child: ImageIcon(
                       const AssetImage("assets/images/long_arrow_right.png"),
                       color: kPrimaryColor.withOpacity(0.7),

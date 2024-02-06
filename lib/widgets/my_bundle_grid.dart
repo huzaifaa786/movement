@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:academy_app/models/bundle.dart';
 import 'package:academy_app/screens/bundle_details_screen.dart';
 import 'package:academy_app/screens/my_bundle_courses_list_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import '../constants.dart';
 import '../widgets/star_display_widget.dart';
 import '../widgets/custom_text.dart';
@@ -124,7 +127,7 @@ class MyBundleGrid extends StatelessWidget {
                                 fontSize: 12,
                                 color: Colors.grey,
                               ),
-                            ),
+                            ).translate(),
                           ),
                         ],
                       ),
@@ -190,9 +193,9 @@ class MyBundleGrid extends StatelessWidget {
                               Icons.more_vert,
                             ),
                             itemBuilder: (_) => [
-                              const PopupMenuItem(
+                               PopupMenuItem(
                                 value: 'bundle-details',
-                                child: Text('Bundle Details'),
+                                child: Text('Bundle Details').translate(),
                               ),
                             ],
                           ),

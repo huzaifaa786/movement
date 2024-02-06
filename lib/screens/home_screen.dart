@@ -1,9 +1,10 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
 import 'dart:async';
 import 'dart:convert';
 import 'package:academy_app/providers/bundles.dart';
 import 'package:academy_app/widgets/bundle_grid.dart';
+import 'package:google_translator/google_translator.dart';
 import '../providers/categories.dart';
 import '../widgets/category_list_item.dart';
 import '../widgets/course_grid.dart';
@@ -88,7 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
           topCourses = Provider.of<Courses>(context, listen: false).topItems;
         });
       });
-      Provider.of<Courses>(context).filterCourses('all', 'all', 'all', 'all', 'all');
+      Provider.of<Courses>(context)
+          .filterCourses('all', 'all', 'all', 'all', 'all');
       Provider.of<Bundles>(context).fetchBundle(true).then((_) {
         setState(() {
           bundles = Provider.of<Bundles>(context, listen: false).bundleItems;
@@ -137,7 +139,8 @@ class _HomeScreenState extends State<HomeScreen> {
               return SizedBox(
                 height: MediaQuery.of(context).size.height * .5,
                 child: Center(
-                  child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
+                  child: CircularProgressIndicator(
+                      color: kPrimaryColor.withOpacity(0.7)),
                 ),
               );
             } else {
@@ -154,155 +157,165 @@ class _HomeScreenState extends State<HomeScreen> {
                               "assets/images/no_connection.png",
                               height: MediaQuery.of(context).size.height * .35,
                             ),
-                            const Padding(
+                            Padding(
                               padding: EdgeInsets.all(4.0),
-                              child: Text('There is no Internet connection'),
+                              child: Text('There is no Internet connection')
+                                  .translate(),
                             ),
-                            const Padding(
+                            Padding(
                               padding: EdgeInsets.all(4.0),
                               child:
-                                  Text('Please check your Internet connection'),
+                                  Text('Please check your Internet connection')
+                                      .translate(),
                             ),
                           ],
                         ),
                       )
-                    : const Center(
-                        child: Text('Error Occured'),
+                    : Center(
+                        child: Text('Error Occured').translate(),
                         // child: Text(dataSnapshot.error.toString()),
                       );
               } else {
                 return Column(
                   children: [
-                    if(topCourses.isNotEmpty)
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          const Text(
-                            'Top Course',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 18),
-                          ),
-                          MaterialButton(
-                            onPressed: () {
-                              Navigator.of(context).pushNamed(
-                                CoursesScreen.routeName,
-                                arguments: {
-                                  'category_id': null,
-                                  'seacrh_query': null,
-                                  'type': CoursesPageData.All,
-                                },
-                              );
-                            },
-                            padding: const EdgeInsets.all(0),
-                            child: Row(
-                              children: [
-                                const Text('All courses'),
-                                Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  color: kPrimaryColor.withOpacity(0.7),
-                                  size: 18,
-                                ),
-                              ],
+                    if (topCourses.isNotEmpty)
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10, horizontal: 20),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            const Text(
+                              'Top Course',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600, fontSize: 18),
                             ),
-                          )
-                        ],
+                            MaterialButton(
+                              onPressed: () {
+                                Navigator.of(context).pushNamed(
+                                  CoursesScreen.routeName,
+                                  arguments: {
+                                    'category_id': null,
+                                    'seacrh_query': null,
+                                    'type': CoursesPageData.All,
+                                  },
+                                );
+                              },
+                              padding: const EdgeInsets.all(0),
+                              child: Row(
+                                children: [
+                                  const Text('All courses').translate(),
+                                  Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    color: kPrimaryColor.withOpacity(0.7),
+                                    size: 18,
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
-                    ),
                     _isLoading
                         ? Center(
-                            child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
+                            child: CircularProgressIndicator(
+                                color: kPrimaryColor.withOpacity(0.7)),
                           )
-                        : topCourses.isNotEmpty 
-                          ? Container(
-                              margin: const EdgeInsets.symmetric(vertical: 0.0),
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
-                              height: 260.0,
-                              child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (ctx, index) {
-                                  return CourseGrid(
-                                    id: topCourses[index].id,
-                                    title: topCourses[index].title,
-                                    thumbnail: topCourses[index].thumbnail,
-                                    instructorName: topCourses[index].instructor,
-                                    instructorImage:
-                                        topCourses[index].instructorImage,
-                                    rating: topCourses[index].rating,
-                                    price: topCourses[index].price,
-                                    product_id : topCourses[index].productId,
-                                  );
-                                },
-                                itemCount: topCourses.length,
-                              ),
-                            ) 
-                          : const SizedBox(height: 0),
-                    if (bundleStatus == true)
-                      Column(
-                        children: [
-                          if(bundles.isNotEmpty)
-                          Container(
-                            width: double.infinity,
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: <Widget>[
-                                const Text(
-                                  'Bundles',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18),
-                                ),
-                                MaterialButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pushNamed(
-                                      BundleListScreen.routeName,
-                                    );
-                                  },
-                                  padding: const EdgeInsets.all(0),
-                                  child: Row(
-                                    children: [
-                                      const Text('All bundles'),
-                                      Icon(
-                                        Icons.arrow_forward_ios_rounded,
-                                        color: kPrimaryColor.withOpacity(0.7),
-                                        size: 18,
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          bundles.isNotEmpty 
+                        : topCourses.isNotEmpty
                             ? Container(
-                                margin: const EdgeInsets.symmetric(vertical: 0.0),
-                                padding: const EdgeInsets.symmetric(horizontal: 20),
-                                height: 240.0,
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 0.0),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
+                                height: 260.0,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (ctx, index) {
-                                    return BundleGrid(
-                                      id: bundles[index].id,
-                                      title: bundles[index].title,
-                                      banner:
-                                          // ignore: prefer_interpolation_to_compose_strings
-                                          '$BASE_URL/uploads/course_bundle/banner/' +
-                                              bundles[index].banner,
-                                      averageRating: bundles[index].averageRating,
-                                      numberOfRatings:
-                                          bundles[index].numberOfRatings,
-                                      price: bundles[index].price,
+                                    return CourseGrid(
+                                      id: topCourses[index].id,
+                                      title: topCourses[index].title,
+                                      thumbnail: topCourses[index].thumbnail,
+                                      instructorName:
+                                          topCourses[index].instructor,
+                                      instructorImage:
+                                          topCourses[index].instructorImage,
+                                      rating: topCourses[index].rating,
+                                      price: topCourses[index].price,
+                                      product_id: topCourses[index].productId,
                                     );
                                   },
-                                  itemCount: bundles.length,
+                                  itemCount: topCourses.length,
                                 ),
-                              ) 
+                              )
                             : const SizedBox(height: 0),
+                    if (bundleStatus == true)
+                      Column(
+                        children: [
+                          if (bundles.isNotEmpty)
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 20),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  const Text(
+                                    'Bundles',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18),
+                                  ).translate(),
+                                  MaterialButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pushNamed(
+                                        BundleListScreen.routeName,
+                                      );
+                                    },
+                                    padding: const EdgeInsets.all(0),
+                                    child: Row(
+                                      children: [
+                                        const Text('All bundles').translate(),
+                                        Icon(
+                                          Icons.arrow_forward_ios_rounded,
+                                          color: kPrimaryColor.withOpacity(0.7),
+                                          size: 18,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          bundles.isNotEmpty
+                              ? Container(
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 0.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  height: 240.0,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (ctx, index) {
+                                      return BundleGrid(
+                                        id: bundles[index].id,
+                                        title: bundles[index].title,
+                                        banner:
+                                            // ignore: prefer_interpolation_to_compose_strings
+                                            '$BASE_URL/uploads/course_bundle/banner/' +
+                                                bundles[index].banner,
+                                        averageRating:
+                                            bundles[index].averageRating,
+                                        numberOfRatings:
+                                            bundles[index].numberOfRatings,
+                                        price: bundles[index].price,
+                                      );
+                                    },
+                                    itemCount: bundles.length,
+                                  ),
+                                )
+                              : const SizedBox(height: 0),
                         ],
                       ),
                     Container(
@@ -316,7 +329,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             'Course Categories',
                             style: TextStyle(
                                 fontWeight: FontWeight.w600, fontSize: 18),
-                          ),
+                          ).translate(),
                           MaterialButton(
                             onPressed: () {
                               Navigator.of(context).pushNamed(
@@ -331,7 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: const EdgeInsets.all(0),
                             child: Row(
                               children: [
-                                const Text('All courses'),
+                                const Text('All courses').translate(),
                                 Icon(
                                   Icons.arrow_forward_ios_rounded,
                                   color: kPrimaryColor.withOpacity(0.7),

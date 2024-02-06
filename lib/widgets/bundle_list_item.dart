@@ -1,5 +1,6 @@
 import 'package:academy_app/screens/bundle_details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import '../constants.dart';
 import '../widgets/star_display_widget.dart';
 
@@ -72,7 +73,7 @@ class BundleListItem extends StatelessWidget {
                         fontSize: 14,
                         color: kTextColor,
                       ),
-                    ),
+                    ).translate(),
                     const SizedBox(
                       height: 10,
                     ),
@@ -105,7 +106,7 @@ class BundleListItem extends StatelessWidget {
                               fontSize: 12,
                               color: Colors.grey,
                             ),
-                          ),
+                          ).translate(),
                         ),
                         SizedBox(
                           width: 30,
@@ -115,7 +116,7 @@ class BundleListItem extends StatelessWidget {
                               color: Colors.grey,
                               fontSize: 12,
                             ),
-                          ),
+                          ).translate(),
                         ),
                         Expanded(
                           child: Text(
@@ -126,7 +127,7 @@ class BundleListItem extends StatelessWidget {
                               fontWeight: FontWeight.w400,
                             ),
                             textAlign: TextAlign.end,
-                          ),
+                          ).translate(),
                         ),
                       ],
                     ),

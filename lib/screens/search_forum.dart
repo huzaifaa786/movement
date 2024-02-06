@@ -8,6 +8,7 @@ import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:academy_app/widgets/ask_question_widget.dart';
 import 'package:academy_app/widgets/forum_question_grid.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
@@ -220,7 +221,7 @@ class _SearchForumState extends State<SearchForum> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("Found ${activeQuestions.length} Questions."),
+                    Text("Found ${activeQuestions.length} Questions.").translate(),
                     TextButton(
                       onPressed: () async {
                         //Use await and then navigate to report page
@@ -230,7 +231,7 @@ class _SearchForumState extends State<SearchForum> {
                         //After popped back from report page call refresh indicator to refresh page
                         refreshKey.currentState!.show();
                       },
-                      child: const Text('Ask a new question'),
+                      child: const Text('Ask a new question').translate(),
                     ),
                   ],
                 ),
@@ -241,7 +242,7 @@ class _SearchForumState extends State<SearchForum> {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (ctx, index) {
-                  // return Text(activeQuestions.length.toString());
+                  // return Text(activeQuestions.length.toString()).translate();
                   return ForumQuestionGrid(
                     question: activeQuestions[index],
                     index: index,

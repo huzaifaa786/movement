@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import '../constants.dart';
 import '../widgets/star_display_widget.dart';
@@ -159,7 +160,7 @@ class _MyCourseGridState extends State<MyCourseGrid> {
                                 fontSize: 12,
                                 color: Colors.grey,
                               ),
-                            ),
+                            ).translate(),
                           ),
                         ],
                       ),

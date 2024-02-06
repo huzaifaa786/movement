@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, use_build_context_synchronously
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously, prefer_const_constructors
 
 import 'dart:async';
 import 'dart:io';
@@ -13,6 +13,7 @@ import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:academy_app/widgets/custom_text.dart';
 import 'package:background_downloader/background_downloader.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:http/http.dart' as http;
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -525,13 +526,13 @@ class _McbdOneState extends State<McbdOne> with SingleTickerProviderStateMixin {
                                         Icons.more_vert,
                                       ),
                                       itemBuilder: (_) => [
-                                        const PopupMenuItem(
+                                         PopupMenuItem(
                                           value: 'details',
-                                          child: Text('Course Details'),
+                                          child: Text('Course Details').translate(),
                                         ),
-                                        const PopupMenuItem(
+                                         PopupMenuItem(
                                           value: 'share',
-                                          child: Text('Share this Course'),
+                                          child: Text('Share this Course').translate(),
                                         ),
                                       ],
                                     ),

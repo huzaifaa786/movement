@@ -2,6 +2,7 @@ import 'package:academy_app/providers/courses.dart';
 import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:academy_app/widgets/course_list_item.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 
 import '../constants.dart';
@@ -104,7 +105,7 @@ class _CoursesScreenState extends State<CoursesScreen> {
                             fontWeight: FontWeight.w400,
                             fontSize: 18,
                           ),
-                        ),
+                        ).translate(),
                       ],
                     ),
                   ),

@@ -106,6 +106,11 @@ public final class GeneratedPluginRegistrant {
       Log.e(TAG, "Error registering plugin purchases_flutter, com.revenuecat.purchases_flutter.PurchasesFlutterPlugin", e);
     }
     try {
+      flutterEngine.getPlugins().add(new fr.skyost.ratemyapp.RateMyAppPlugin());
+    } catch (Exception e) {
+      Log.e(TAG, "Error registering plugin rate_my_app, fr.skyost.ratemyapp.RateMyAppPlugin", e);
+    }
+    try {
       flutterEngine.getPlugins().add(new io.flutter.plugins.share.SharePlugin());
     } catch (Exception e) {
       Log.e(TAG, "Error registering plugin share, io.flutter.plugins.share.SharePlugin", e);

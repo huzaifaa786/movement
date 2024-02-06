@@ -1,5 +1,6 @@
 import 'package:academy_app/widgets/util.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import '../constants.dart';
 import '../models/course.dart';
 import '../screens/course_detail_screen.dart';
@@ -79,7 +80,7 @@ class WishlistGrid extends StatelessWidget {
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                           ),
-                        ),
+                        ).translate(),
                         style: OutlinedButton.styleFrom(
                           backgroundColor: kBackgroundColor,
                           shape: RoundedRectangleBorder(

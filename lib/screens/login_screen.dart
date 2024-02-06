@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
+import 'package:google_translator/google_translator.dart';
 
 import './auth_screen.dart';
 import 'package:flutter/material.dart';
@@ -72,13 +75,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     "assets/images/login_forget.png",
                     height: MediaQuery.of(context).size.height * .27,
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.all(4.0),
-                    child: Text('There is no Internet connection'),
+                    child: Text('There is no Internet connection').translate(),
                   ),
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.all(4.0),
-                    child: Text('Please check your Internet connection'),
+                    child: Text('Please check your Internet connection').translate(),
                   ),
                 ],
               ),
@@ -114,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: const Text(
                       'Sign In',
                       style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
+                    ).translate(),
                   ),
                 ),
               ],

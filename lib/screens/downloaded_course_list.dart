@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 
 import 'package:academy_app/models/course_db_model.dart';
@@ -7,6 +9,7 @@ import 'package:academy_app/screens/download_list_screen.dart';
 import 'package:academy_app/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:google_translator/google_translator.dart';
 import '../constants.dart';
 
 class DownloadedCourseList extends StatefulWidget {
@@ -105,7 +108,7 @@ class _DownloadedCourseListState extends State<DownloadedCourseList> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text("Downloaded Course"),
+        title: const Text("Downloaded Course").translate(),
         titleTextStyle: const TextStyle(color: Colors.black, fontSize: 17),
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
@@ -118,7 +121,7 @@ class _DownloadedCourseListState extends State<DownloadedCourseList> {
         builder: (BuildContext context,
             AsyncSnapshot<List<CourseDbModel>> snapshot) {
           if (!snapshot.hasData) {
-            return const Center(child: Text('Loading...'));
+            return  Center(child: Text('Loading...').translate());
           }
           return snapshot.data!.isEmpty
               ? Center(
@@ -130,12 +133,12 @@ class _DownloadedCourseListState extends State<DownloadedCourseList> {
                         "assets/images/no_connection.png",
                         height: MediaQuery.of(context).size.height * .35,
                       ),
-                      const Padding(
+                       Padding(
                         padding: EdgeInsets.only(top: 20.0),
                         child: Text(
                           'No lessons downloaded yet',
                           style: TextStyle(color: Colors.black54),
-                        ),
+                        ).translate(),
                       ),
                     ],
                   ),

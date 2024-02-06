@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:google_translator/google_translator.dart';
 
 class CustomChatListItem extends StatelessWidget {
   final String? lastMessageTime;
@@ -43,7 +46,7 @@ class CustomChatListItem extends StatelessWidget {
           tileColor: Colors.white,
           leading: unreadCount! > 0
               ? badges.Badge(
-                  badgeContent: Text(unreadCount!.toString()),
+                  badgeContent: Text(unreadCount!.toString()).translate(),
                   child: SizedBox(
                     height: 60,
                     width: 60,
@@ -80,7 +83,7 @@ class CustomChatListItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                       fontFamily: 'Poppins', fontWeight: FontWeight.w600),
-                ),
+                ).translate(),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
@@ -91,7 +94,7 @@ class CustomChatListItem extends StatelessWidget {
                     fontFamily: 'Poppins',
                     fontWeight: FontWeight.w400,
                   ),
-                ),
+                ).translate(),
               )
             ],
           ),
@@ -107,7 +110,7 @@ class CustomChatListItem extends StatelessWidget {
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w400,
               ),
-            ),
+            ).translate(),
           ),
         ),
       ),

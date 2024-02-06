@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
+
 import 'dart:async';
 
 import 'package:academy_app/constants.dart';
@@ -10,6 +12,7 @@ import 'package:academy_app/screens/start_chat_screen.dart';
 import 'package:academy_app/widgets/custom_chat_item.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -88,7 +91,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text("Message"),
+        title: const Text("Message").translate(),
         titleTextStyle: const TextStyle(color: Colors.black, fontSize: 17),
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
@@ -142,8 +145,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
                                 name: messageUser.firstName! +
                                     ' ' +
                                     messageUser.lastName!,
-                                lastMessageTime:
-                                    getPastTime(messageUser.lastMessageTimestamp!),
+                                lastMessageTime: getPastTime(
+                                    messageUser.lastMessageTimestamp!),
                                 email: messageUser.lastMessage,
                                 imageUrl: messageUser.imageUrl,
                                 unreadCount: messageUser.countUnread,

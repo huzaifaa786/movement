@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use, use_build_context_synchronously
+// ignore_for_file: deprecated_member_use, use_build_context_synchronously, prefer_const_constructors
 
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/providers/shared_pref_helper.dart';
@@ -8,6 +8,7 @@ import 'package:academy_app/widgets/star_display_widget.dart';
 import 'package:academy_app/widgets/tab_view_details.dart';
 import 'package:academy_app/widgets/tab_view_html_details.dart';
 import 'package:academy_app/widgets/util.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:share/share.dart';
@@ -306,7 +307,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
                                   fontSize: 11,
                                   color: kTextColor,
                                 ),
-                              ),
+                              ).translate(),
                             ),
                             CustomText(
                               text: '${loadedCourse.totalNumberRating}+ Rating',
@@ -403,7 +404,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
                                         : 'Buy Now',
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w400, fontSize: 16),
-                              ),
+                              ).translate(),
                             ),
                           ],
                         ),
@@ -434,7 +435,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
                                         unselectedLabelColor: kTextColor,
                                         padding: const EdgeInsets.all(10),
                                         labelColor: Colors.white,
-                                        tabs: const <Widget>[
+                                        tabs: <Widget>[
                                           Tab(
                                             child: Text(
                                               "Description",
@@ -442,7 +443,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 11,
                                               ),
-                                            ),
+                                            ).translate(),
                                           ),
                                           Tab(
                                             child: Align(
@@ -453,7 +454,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 11,
                                                 ),
-                                              ),
+                                              ).translate(),
                                             ),
                                           ),
                                           Tab(
@@ -465,7 +466,7 @@ class _CourseDetailScreenState extends State<CourseDetailScreen>
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 10,
                                                 ),
-                                              ),
+                                              ).translate(),
                                             ),
                                           ),
                                         ],

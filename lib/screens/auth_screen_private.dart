@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 import 'package:academy_app/constants.dart';
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/providers/auth.dart';
@@ -9,6 +9,7 @@ import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:academy_app/widgets/string_extension.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 import '../models/user.dart';
 import 'device_verifcation.dart';
@@ -163,9 +164,9 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                             fontSize: 22,
                             fontWeight: FontWeight.w400,
                           ),
-                        ),
+                        ).translate(),
                         const SizedBox(height: 20),
-                        const Align(
+                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -175,7 +176,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               ),
-                            ),
+                            ).translate(),
                           ),
                         ),
                         Padding(
@@ -201,7 +202,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Align(
+                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -211,7 +212,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               ),
-                            ),
+                            ).translate(),
                           ),
                         ),
                         Padding(
@@ -278,7 +279,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                             Navigator.of(context)
                                 .pushNamed(ForgotPassword.routeName);
                           },
-                          child: const Padding(
+                          child:  Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 5),
                             child: Align(
@@ -286,7 +287,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                               child: Text(
                                 'Forget Password?',
                                 style: TextStyle(color: kSecondaryColor),
-                              ),
+                              ).translate(),
                             ),
                           ),
                         ),
@@ -307,7 +308,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                                           BorderRadiusDirectional.circular(10),
                                       // side: const BorderSide(color: kPrimaryColor),
                                     ),
-                                    child: const Row(
+                                    child:  Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
@@ -318,7 +319,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
                                           ),
-                                        ),
+                                        ).translate(),
                                       ],
                                     ),
                                   ),
@@ -343,7 +344,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                     ),
-                  ),
+                  ).translate(),
                   InkWell(
                     onTap: () {
                       Navigator.of(context).pushNamed(SignUpScreen.routeName);
@@ -354,7 +355,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                         fontSize: 17,
                         fontWeight: FontWeight.w400,
                       ),
-                    ),
+                    ).translate(),
                   ),
                 ],
               ),

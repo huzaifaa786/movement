@@ -1,5 +1,6 @@
 import 'package:academy_app/screens/sub_category_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import '../constants.dart';
 
 class CategoryListItem extends StatelessWidget {
@@ -80,7 +81,7 @@ class CategoryListItem extends StatelessWidget {
                         '$numberOfSubCategories Sub-Categories',
                         style: const TextStyle(color: Colors.black54),
                         textAlign: TextAlign.left,
-                      ),
+                      ).translate(),
                     ),
                   ],
                 ),
@@ -97,8 +98,8 @@ class CategoryListItem extends StatelessWidget {
                   ),
                   color: iCardColor,
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 2),
                     child: ImageIcon(
                       const AssetImage("assets/images/long_arrow_right.png"),
                       color: kPrimaryColor.withOpacity(0.7),

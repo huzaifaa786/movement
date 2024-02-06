@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 import 'dart:io';
 
@@ -9,6 +11,7 @@ import 'package:academy_app/providers/shared_pref_helper.dart';
 import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:academy_app/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -209,7 +212,7 @@ class _ForumReplyScreenState extends State<ForumReplyScreen> {
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                ),
+                                ).translate(),
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(
@@ -224,7 +227,7 @@ class _ForumReplyScreenState extends State<ForumReplyScreen> {
                                 padding: const EdgeInsets.only(left: 10.0),
                                 child: Row(
                                   children: [
-                                    Text(widget.name),
+                                    Text(widget.name).translate(),
                                     Expanded(
                                       flex: 1,
                                       child: CustomText(
@@ -307,7 +310,7 @@ class _ForumReplyScreenState extends State<ForumReplyScreen> {
                                                       fontWeight:
                                                           FontWeight.bold,
                                                     ),
-                                                  ),
+                                                  ).translate(),
                                                   Expanded(
                                                     flex: 1,
                                                     child: CustomText(
@@ -426,7 +429,7 @@ class _ForumReplyScreenState extends State<ForumReplyScreen> {
                               borderRadius: BorderRadiusDirectional.circular(5),
                               side: const BorderSide(color: kPrimaryColor),
                             ),
-                            child: const Row(
+                            child:  Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
@@ -436,7 +439,7 @@ class _ForumReplyScreenState extends State<ForumReplyScreen> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                ),
+                                ).translate(),
                               ],
                             ),
                           ),

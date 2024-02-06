@@ -1,4 +1,4 @@
-// ignore_for_file: deprecated_member_use
+// ignore_for_file: deprecated_member_use, prefer_const_constructors
 
 import 'package:academy_app/models/bundle_details_model.dart';
 import 'package:academy_app/models/common_functions.dart';
@@ -9,6 +9,7 @@ import 'package:academy_app/widgets/course_grid.dart';
 import 'package:academy_app/widgets/custom_text.dart';
 import 'package:academy_app/widgets/star_display_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:universal_html/html.dart' as html;
@@ -74,7 +75,8 @@ class _BundleDetailsScreenState extends State<BundleDetailsScreen> {
       backgroundColor: kBackgroundColor,
       body: _isLoading
           ? Center(
-              child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
+              child: CircularProgressIndicator(
+                  color: kPrimaryColor.withOpacity(0.7)),
             )
           : SingleChildScrollView(
               child: Column(
@@ -149,14 +151,14 @@ class _BundleDetailsScreenState extends State<BundleDetailsScreen> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(right: 10),
+                          padding:  EdgeInsets.only(right: 10),
                           child: Text(
                             '( ${bundles[0].averageRating}.0 )',
                             style: const TextStyle(
                               fontSize: 11,
                               color: kTextColor,
                             ),
-                          ),
+                          ).translate(),
                         ),
                         CustomText(
                           text: '${bundles[0].numberOfRatings}+ Rating',
@@ -222,7 +224,7 @@ class _BundleDetailsScreenState extends State<BundleDetailsScreen> {
                                     : 'Buy Now',
                             style: const TextStyle(
                                 fontWeight: FontWeight.w400, fontSize: 16),
-                          ),
+                          ).translate(),
                         ),
                       ],
                     ),
@@ -235,7 +237,7 @@ class _BundleDetailsScreenState extends State<BundleDetailsScreen> {
                       'Included Courses',
                       style:
                           TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-                    ),
+                    ).translate(),
                   ),
                   Container(
                     margin: const EdgeInsets.symmetric(vertical: 0.0),
@@ -267,7 +269,7 @@ class _BundleDetailsScreenState extends State<BundleDetailsScreen> {
                       'Description',
                       style:
                           TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
-                    ),
+                    ).translate(),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -279,7 +281,7 @@ class _BundleDetailsScreenState extends State<BundleDetailsScreen> {
                         wordSpacing: 2,
                       ),
                       maxLines: 4,
-                    ),
+                    ).translate(),
                   ),
                   const SizedBox(
                     height: 10.0,

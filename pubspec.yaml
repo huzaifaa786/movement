@@ -69,11 +69,21 @@ dependencies:
   firebase_messaging: ^14.7.10
   flutter_local_notifications: ^16.3.2
   flutter_app_badger: ^1.5.0
-
+  google_translator:
+    git:
+      url: https://github.com/huzaifaa786/google_translator
+  translator: ^0.1.7
+  get_storage: ^2.1.1
+  rate_my_app: ^2.0.0
+  flutter_rating_bar: ^4.0.1
+  modal_bottom_sheet: ^2.1.2
+ 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+dependency_overrides:
+  http: ^1.1.0
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:academy_app/providers/my_bundles.dart';
@@ -8,6 +10,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import '../constants.dart';
@@ -126,7 +129,7 @@ class _MyCoursesScreenState extends State<MyCoursesScreen>
                                 color: kPrimaryColor),
                             unselectedLabelColor: Colors.black87,
                             labelColor: Colors.white,
-                            tabs: const [
+                            tabs:  [
                               Tab(
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -141,7 +144,7 @@ class _MyCoursesScreenState extends State<MyCoursesScreen>
                                         fontWeight: FontWeight.bold,
                                         fontSize: 12,
                                       ),
-                                    ),
+                                    ).translate(),
                                   ],
                                 ),
                               ),
@@ -159,7 +162,7 @@ class _MyCoursesScreenState extends State<MyCoursesScreen>
                                         fontWeight: FontWeight.bold,
                                         fontSize: 12,
                                       ),
-                                    ),
+                                    ).translate(),
                                   ],
                                 ),
                               ),
@@ -184,14 +187,14 @@ class _MyCoursesScreenState extends State<MyCoursesScreen>
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 20),
-                        child: const Row(
+                        child:  Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Text(
                               'My Courses',
                               style: TextStyle(
                                   fontWeight: FontWeight.w400, fontSize: 20),
-                            ),
+                            ).translate(),
                           ],
                         ),
                       ),
@@ -226,20 +229,20 @@ class _MyCoursesScreenState extends State<MyCoursesScreen>
                           "assets/images/no_connection.png",
                           height: MediaQuery.of(context).size.height * .35,
                         ),
-                        const Padding(
+                         Padding(
                           padding: EdgeInsets.all(4.0),
-                          child: Text('There is no Internet connection'),
+                          child: Text('There is no Internet connection').translate(),
                         ),
-                        const Padding(
+                         Padding(
                           padding: EdgeInsets.all(4.0),
-                          child: Text('Please check your Internet connection'),
+                          child: Text('Please check your Internet connection').translate(),
                         ),
                       ],
                     ),
                   )
                 : Center(
                     // child: Text('Error Occured'),
-                    child: Text(dataSnapshot.error.toString()),
+                    child: Text(dataSnapshot.error.toString()).translate(),
                   );
           } else {
             return Consumer<MyCourses>(
@@ -288,21 +291,21 @@ class _MyCoursesScreenState extends State<MyCoursesScreen>
                             "assets/images/no_connection.png",
                             height: MediaQuery.of(context).size.height * .35,
                           ),
-                          const Padding(
+                           Padding(
                             padding: EdgeInsets.all(4.0),
-                            child: Text('There is no Internet connection'),
+                            child: Text('There is no Internet connection').translate(),
                           ),
-                          const Padding(
+                           Padding(
                             padding: EdgeInsets.all(4.0),
                             child:
-                                Text('Please check your Internet connection'),
+                                Text('Please check your Internet connection').translate(),
                           ),
                         ],
                       ),
                     )
                   : Center(
                       // child: Text('Error Occured'),
-                      child: Text(dataSnapshot.error.toString()),
+                      child: Text(dataSnapshot.error.toString()).translate(),
                     );
             } else {
               return Consumer<MyBundles>(

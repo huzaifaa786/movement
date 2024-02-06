@@ -3,6 +3,7 @@
 import 'package:academy_app/models/common_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:http/http.dart' as http;
 import '../constants.dart';
 import '../models/update_verify_model.dart';
@@ -381,7 +382,7 @@ class _DeviceVerificationScreenState extends State<DeviceVerificationScreen> {
                         const Text(
                           'Enter 6 digit verification code send to your email.',
                           style: TextStyle(color: kSecondaryColor),
-                        ),
+                        ).translate(),
                         _isResendLoading
                         ? const Center(child: CircularProgressIndicator()) 
                         : TextButton(
@@ -390,7 +391,7 @@ class _DeviceVerificationScreenState extends State<DeviceVerificationScreen> {
                             'Resend',
                             style: TextStyle(color: kBlueColor),
                             textAlign: TextAlign.start,
-                          ),
+                          ).translate(),
                         ),
                         SizedBox(
                           width: double.infinity,
@@ -445,7 +446,7 @@ class _DeviceVerificationScreenState extends State<DeviceVerificationScreen> {
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                     ),
-                  ),
+                  ).translate(),
                   InkWell(
                     onTap: () {
                       Navigator.of(context).pushNamed(AuthScreen.routeName);
@@ -456,7 +457,7 @@ class _DeviceVerificationScreenState extends State<DeviceVerificationScreen> {
                         fontSize: 17,
                         fontWeight: FontWeight.w400,
                       ),
-                    ),
+                    ).translate(),
                   ),
                 ],
               ),

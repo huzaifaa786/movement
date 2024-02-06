@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_const_constructors
 import 'dart:async';
 import 'package:academy_app/providers/courses.dart';
 import 'package:academy_app/widgets/wishlist_grid.dart';
@@ -5,6 +6,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 
 import '../constants.dart';
@@ -68,13 +70,13 @@ class _MyWishlistScreenState extends State<MyWishlistScreen> {
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
                   'My Wishlist',
                   style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
-                ),
+                ).translate(),
               ],
             ),
           ),
@@ -84,7 +86,8 @@ class _MyWishlistScreenState extends State<MyWishlistScreen> {
             builder: (ctx, dataSnapshot) {
               if (dataSnapshot.connectionState == ConnectionState.waiting) {
                 return Center(
-                  child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
+                  child: CircularProgressIndicator(
+                      color: kPrimaryColor.withOpacity(0.7)),
                 );
               } else {
                 if (dataSnapshot.error != null) {
@@ -100,20 +103,22 @@ class _MyWishlistScreenState extends State<MyWishlistScreen> {
                                 height:
                                     MediaQuery.of(context).size.height * .35,
                               ),
-                              const Padding(
+                              Padding(
                                 padding: EdgeInsets.all(4.0),
-                                child: Text('There is no Internet connection'),
+                                child: Text('There is no Internet connection')
+                                    .translate(),
                               ),
-                              const Padding(
+                              Padding(
                                 padding: EdgeInsets.all(4.0),
                                 child: Text(
-                                    'Please check your Internet connection'),
+                                        'Please check your Internet connection')
+                                    .translate(),
                               ),
                             ],
                           ),
                         )
-                      : const Center(
-                          child: Text('Error Occurred'),
+                      : Center(
+                          child: Text('Error Occurred').translate(),
                         );
                 } else {
                   return Consumer<Courses>(

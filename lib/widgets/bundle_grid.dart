@@ -1,5 +1,6 @@
 import 'package:academy_app/screens/bundle_details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import '../constants.dart';
 import '../widgets/star_display_widget.dart';
 
@@ -75,7 +76,7 @@ class BundleGrid extends StatelessWidget {
                               : title.toString().substring(0, 40),
                           style: const TextStyle(
                               fontSize: 14, color: kTextLightColor),
-                        ),
+                        ).translate(),
                       ),
                       const SizedBox(
                         height: 12,
@@ -102,7 +103,7 @@ class BundleGrid extends StatelessWidget {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 color: kTextLightColor),
-                          ),
+                          ).translate(),
                         ],
                       )
                     ],

@@ -1,8 +1,9 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 
 import '../constants.dart';
@@ -21,7 +22,6 @@ class AccountRemoveScreen extends StatefulWidget {
 }
 
 class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
-
   TextEditingController passwordController = TextEditingController();
 
   dynamic courseAccessibility;
@@ -43,46 +43,32 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
   }
 
   accountDelete() async {
-    
     final token = await SharedPreferenceHelper().getAuthToken();
 
     var url = "$BASE_URL/api/account_disable/$token";
 
-    final response = await http.post(Uri.parse(url),
-     body: {
+    final response = await http.post(Uri.parse(url), body: {
       'account_password': passwordController.text,
     });
 
     var data = jsonDecode(response.body);
 
     if (data['validity'] == 1) {
-
       CommonFunctions.showSuccessToast(data['message']);
 
       if (courseAccessibility == 'publicly') {
-        Provider.of<Auth>(context, listen: false)
-            .logout()
-            .then((_) =>
-                Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    '/home',
-                    (r) => false));
+        Provider.of<Auth>(context, listen: false).logout().then((_) =>
+            Navigator.pushNamedAndRemoveUntil(context, '/home', (r) => false));
       } else {
-        Provider.of<Auth>(context, listen: false)
-            .logout()
-            .then((_) =>
-                Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    '/auth-private',
-                    (r) => false));
+        Provider.of<Auth>(context, listen: false).logout().then((_) =>
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/auth-private', (r) => false));
       }
-
     } else {
       CommonFunctions.showWarningToast(data['message']);
     }
 
     passwordController.clear();
-
   }
 
   @override
@@ -137,7 +123,7 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
               elevation: 0.1,
               child: Column(
                 children: [
-                  const ListTile(
+                  ListTile(
                     leading: CircleAvatar(
                       backgroundColor: kPrimaryColor,
                       radius: 20,
@@ -153,10 +139,9 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
                     ),
                     title: Text(
                       "Delete Your Account",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    ),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ).translate(),
                   ),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
@@ -169,12 +154,11 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     child: Text(
                       "When you delete your account you will lose accesss to your account services and we permanentlly delete your personal data.",
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400),
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
                     ),
                   ),
-                   Align(
+                  Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -195,10 +179,9 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
                           // padding: const EdgeInsets.symmetric(
                           //   horizontal: 20, vertical: 16),
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                              BorderRadiusDirectional.circular(10),
+                            borderRadius: BorderRadiusDirectional.circular(10),
                           ),
-                          child: const Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
@@ -208,7 +191,7 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
                                 ),
-                              ),
+                              ).translate(),
                             ],
                           ),
                         ),
@@ -230,9 +213,11 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
     return AlertDialog(
       backgroundColor: kBackgroundColor,
       titlePadding: EdgeInsets.zero,
-      title: const Padding(
+      title: Padding(
         padding: EdgeInsets.only(left: 15.0, right: 15, top: 10),
-        child: Text('Notifying', style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+        child: Text('Notifying',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600))
+            .translate(),
       ),
       contentPadding: EdgeInsets.zero,
       content: StatefulBuilder(
@@ -242,12 +227,16 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-                child: Text('To remove your account provide your account password.', style: TextStyle(fontSize: 13)),
+                child: Text(
+                        'To remove your account provide your account password.',
+                        style: TextStyle(fontSize: 13))
+                    .translate(),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: TextFormField(
                   style: const TextStyle(fontSize: 12),
                   obscureText: hidePassword,
@@ -290,7 +279,6 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
                       passwordController.text = value;
                     });
                   },
-                  
                 ),
               ),
             ],
@@ -307,19 +295,17 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
                 child: MaterialButton(
                   elevation: 0,
                   color: kRedColor,
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadiusDirectional.circular(6),
+                    borderRadius: BorderRadiusDirectional.circular(6),
                     // side: const BorderSide(color: kPrimaryColor),
                   ),
-                  child: const Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'No',
@@ -328,7 +314,7 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                         ),
-                      ),
+                      ).translate(),
                     ],
                   ),
                 ),
@@ -339,21 +325,19 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
                 child: MaterialButton(
                   elevation: 0,
                   color: kPrimaryColor,
-                  onPressed: (){
+                  onPressed: () {
                     Navigator.of(context).pop();
 
                     accountDelete();
                   },
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 12, vertical: 12),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadiusDirectional.circular(6),
+                    borderRadius: BorderRadiusDirectional.circular(6),
                     // side: const BorderSide(color: kPrimaryColor),
                   ),
-                  child: const Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Confirm',
@@ -362,7 +346,7 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
                           color: Colors.white,
                           fontWeight: FontWeight.w500,
                         ),
-                      ),
+                      ).translate(),
                     ],
                   ),
                 ),
@@ -374,5 +358,4 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
       ],
     );
   }
-
 }

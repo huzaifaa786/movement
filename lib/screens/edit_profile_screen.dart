@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
 import 'dart:io';
 import 'package:academy_app/constants.dart';
@@ -8,6 +8,7 @@ import 'package:academy_app/providers/auth.dart';
 import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:academy_app/widgets/user_image_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 
@@ -113,12 +114,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
         builder: (ctx, dataSnapshot) {
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
             return Center(
-              child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
+              child: CircularProgressIndicator(
+                  color: kPrimaryColor.withOpacity(0.7)),
             );
           } else {
             if (dataSnapshot.error != null) {
-              return const Center(
-                child: Text('Error Occured'),
+              return Center(
+                child: Text('Error Occured').translate(),
               );
             } else {
               return Consumer<Auth>(
@@ -155,7 +157,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  const Align(
+                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
                                       padding: EdgeInsets.only(
@@ -166,7 +168,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                         ),
-                                      ),
+                                      ).translate(),
                                     ),
                                   ),
                                   Padding(
@@ -194,7 +196,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       },
                                     ),
                                   ),
-                                  const Align(
+                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
                                       padding: EdgeInsets.only(bottom: 5.0),
@@ -204,7 +206,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                         ),
-                                      ),
+                                      ).translate(),
                                     ),
                                   ),
                                   Padding(
@@ -233,7 +235,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       },
                                     ),
                                   ),
-                                  const Align(
+                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
                                       padding: EdgeInsets.only(bottom: 5.0),
@@ -243,7 +245,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                         ),
-                                      ),
+                                      ).translate(),
                                     ),
                                   ),
                                   TextFormField(
@@ -259,7 +261,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       _userData['bio'] = value.toString();
                                     },
                                   ),
-                                  const Align(
+                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
                                       padding: EdgeInsets.only(bottom: 5.0),
@@ -269,7 +271,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                         ),
-                                      ),
+                                      ).translate(),
                                     ),
                                   ),
                                   TextFormField(
@@ -284,7 +286,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       _userData['facebook'] = value.toString();
                                     },
                                   ),
-                                  const Align(
+                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
                                       padding: EdgeInsets.only(bottom: 5.0),
@@ -294,7 +296,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                         ),
-                                      ),
+                                      ).translate(),
                                     ),
                                   ),
                                   TextFormField(
@@ -309,7 +311,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       _userData['twitter'] = value.toString();
                                     },
                                   ),
-                                  const Align(
+                                   Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
                                       padding: EdgeInsets.only(bottom: 5.0),
@@ -319,7 +321,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400,
                                         ),
-                                      ),
+                                      ).translate(),
                                     ),
                                   ),
                                   TextFormField(
@@ -343,11 +345,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                         ? const CircularProgressIndicator()
                                         : MaterialButton(
                                             onPressed: () {
-                                              _userData['user_id'] = user.userId!;
+                                              _userData['user_id'] =
+                                                  user.userId!;
                                               _userData['email'] = user.email!;
                                               _userData['role'] = user.role!;
-                                              _userData['validity'] = user.validity.toString();
-                                              _userData['device_verification'] = user.deviceVerification!;
+                                              _userData['validity'] =
+                                                  user.validity.toString();
+                                              _userData['device_verification'] =
+                                                  user.deviceVerification!;
                                               _userData['token'] = user.token!;
                                               _submit();
                                               // print(_userData['validity']);
@@ -367,7 +372,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                               'Update Now',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold),
-                                            ),
+                                            ).translate(),
                                           ),
                                   ),
                                 ],

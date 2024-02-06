@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:academy_app/screens/courses_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:http/http.dart' as http;
 import 'package:academy_app/models/app_logo.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             return Container();
           } else {
             if (snapshot.error != null) {
-              return const Text("Error Occured");
+              return const Text("Error Occured").translate();
             } else {
               return Transform.scale(
                 scale: 3.5,

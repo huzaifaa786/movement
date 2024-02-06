@@ -5,6 +5,7 @@ import 'package:academy_app/providers/shared_pref_helper.dart';
 import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:academy_app/widgets/my_bundle_course_list_item.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -87,7 +88,7 @@ class _MyBundleCoursesListScreenState extends State<MyBundleCoursesListScreen> {
                           const Text(
                             'Your subscription has been expired. To continue please renew the subscription.',
                             style: TextStyle(color: kBackgroundColor),
-                          ),
+                          ).translate(),
                           MaterialButton(
                             elevation: 0,
                             onPressed: () async {
@@ -110,7 +111,7 @@ class _MyBundleCoursesListScreenState extends State<MyBundleCoursesListScreen> {
                             child: const Text(
                               'Renew Now',
                               style: TextStyle(fontSize: 15),
-                            ),
+                            ).translate(),
                           ),
                         ],
                       ),
@@ -135,7 +136,7 @@ class _MyBundleCoursesListScreenState extends State<MyBundleCoursesListScreen> {
                                     fontWeight: FontWeight.w400,
                                     fontSize: 18,
                                   ),
-                                ),
+                                ).translate(),
                               ],
                             ),
                           ),

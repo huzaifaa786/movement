@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:academy_app/models/common_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import '../constants.dart';
 import '../screens/mcbd_one.dart';
 import '../screens/mcbd_three.dart';
@@ -134,7 +135,7 @@ class _MyBundleCourseListItemState extends State<MyBundleCourseListItem> {
                         fontSize: 14,
                         color: kTextColor,
                       ),
-                    ),
+                    ).translate(),
                     const SizedBox(
                       height: 10,
                     ),
@@ -184,7 +185,7 @@ class _MyBundleCourseListItemState extends State<MyBundleCourseListItem> {
                               fontSize: 12,
                               color: Colors.grey,
                             ),
-                          ),
+                          ).translate(),
                         ),
                         SizedBox(
                           child: Text(
@@ -193,7 +194,7 @@ class _MyBundleCourseListItemState extends State<MyBundleCourseListItem> {
                               color: Colors.grey,
                               fontSize: 12,
                             ),
-                          ),
+                          ).translate(),
                         ),
                       ],
                     ),

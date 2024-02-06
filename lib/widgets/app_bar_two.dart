@@ -1,6 +1,10 @@
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:http/http.dart' as http;
 import 'package:academy_app/models/app_logo.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +61,7 @@ class _CustomAppBarTwoState extends State<CustomAppBarTwo> {
             return Container();
           } else {
             if (snapshot.error != null) {
-              return const Text("Error Occured");
+              return const Text("Error Occured").translate();
             } else {
               // saveImageUrlToSharedPref(snapshot.data.darkLogo);
               return CachedNetworkImage(

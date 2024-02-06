@@ -1,8 +1,11 @@
+// ignore_for_file: avoid_print, prefer_const_constructors
+
 import 'package:academy_app/constants.dart';
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/models/instructor.dart';
 import 'package:academy_app/providers/messages.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -80,7 +83,7 @@ class _StartChatScreenState extends State<StartChatScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: const Text("Start Chat"),
+        title: const Text("Start Chat").translate(),
         titleTextStyle: const TextStyle(color: Colors.black, fontSize: 17),
         backgroundColor: Colors.white,
         iconTheme: const IconThemeData(
@@ -98,7 +101,7 @@ class _StartChatScreenState extends State<StartChatScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Align(
+                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 5.0),
@@ -108,7 +111,7 @@ class _StartChatScreenState extends State<StartChatScreen> {
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),
-                        ),
+                        ).translate(),
                       ),
                     ),
                     allInstructors.isNotEmpty
@@ -124,7 +127,7 @@ class _StartChatScreenState extends State<StartChatScreen> {
                                     allInstructors.map((Instructor instructor) {
                                   return DropdownMenuItem<Instructor>(
                                     value: instructor,
-                                    child: Text(instructor.name!),
+                                    child: Text(instructor.name!).translate(),
                                   );
                                 }).toList(),
                                 onChanged: (newValue) {
@@ -135,7 +138,7 @@ class _StartChatScreenState extends State<StartChatScreen> {
                               ),
                             ))
                         : Text(''),
-                    const Align(
+                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 5.0,top: 8),
@@ -145,7 +148,7 @@ class _StartChatScreenState extends State<StartChatScreen> {
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),
-                        ),
+                        ).translate(),
                       ),
                     ),
                     Padding(
@@ -200,7 +203,7 @@ class _StartChatScreenState extends State<StartChatScreen> {
                         child: const Text(
                           'Send Message',
                           style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
+                        ).translate(),
                       ),
                     ),
                   ],

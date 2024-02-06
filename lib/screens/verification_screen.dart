@@ -1,9 +1,10 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/models/update_user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:http/http.dart' as http;
 import '../constants.dart';
 import 'auth_screen.dart';
@@ -237,9 +238,9 @@ class _VerificationScreenState extends State<VerificationScreen> {
                             fontSize: 22,
                             fontWeight: FontWeight.w400,
                           ),
-                        ),
+                        ).translate(),
                         const SizedBox(height: 20),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -249,7 +250,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               ),
-                            ),
+                            ).translate(),
                           ),
                         ),
                         Padding(
@@ -359,14 +360,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         const Text(
                           'Enter 6 digit verification code send to your email.',
                           style: TextStyle(color: kSecondaryColor),
-                        ),
+                        ).translate(),
                         TextButton(
                           onPressed: _resend,
-                          child: const Text(
+                          child: Text(
                             'Resend',
                             style: TextStyle(color: kBlueColor),
                             textAlign: TextAlign.start,
-                          ),
+                          ).translate(),
                         ),
                         SizedBox(
                           width: double.infinity,
@@ -385,7 +386,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                           BorderRadiusDirectional.circular(10),
                                       // side: const BorderSide(color: kPrimaryColor),
                                     ),
-                                    child: const Row(
+                                    child:  Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
@@ -396,7 +397,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
                                           ),
-                                        ),
+                                        ).translate(),
                                       ],
                                     ),
                                   ),
@@ -421,7 +422,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                     ),
-                  ),
+                  ).translate(),
                   InkWell(
                     onTap: () {
                       Navigator.of(context).pushNamed(AuthScreen.routeName);
@@ -432,7 +433,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                         fontSize: 17,
                         fontWeight: FontWeight.w400,
                       ),
-                    ),
+                    ).translate(),
                   ),
                 ],
               ),

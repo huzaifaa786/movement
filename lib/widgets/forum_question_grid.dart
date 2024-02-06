@@ -6,6 +6,7 @@ import 'package:academy_app/providers/course_forum.dart';
 import 'package:academy_app/providers/shared_pref_helper.dart';
 import 'package:academy_app/screens/forum_reply_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -204,7 +205,7 @@ class _ForumQuestionGridState extends State<ForumQuestionGrid> {
                       style: const TextStyle(
                         fontSize: 14,
                       ),
-                    ),
+                    ).translate(),
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: IconButton(
@@ -223,7 +224,7 @@ class _ForumQuestionGridState extends State<ForumQuestionGrid> {
                         style: const TextStyle(
                           fontSize: 14,
                         ),
-                      ),
+                      ).translate(),
                     ),
                   ],
                 ),

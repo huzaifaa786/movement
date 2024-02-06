@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, avoid_print, prefer_interpolation_to_compose_strings
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:academy_app/constants.dart';
@@ -8,6 +10,7 @@ import 'package:academy_app/providers/database_helper.dart';
 import 'package:academy_app/widgets/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pod_player/pod_player.dart';
@@ -142,7 +145,7 @@ class _DownloadListScreenState extends State<DownloadListScreen> {
       child: Scaffold(
         appBar: AppBar(
           elevation: 0,
-          title: Text(widget.title, maxLines: 2),
+          title: Text(widget.title, maxLines: 2).translate(),
           backgroundColor: Colors.white,
           titleTextStyle: const TextStyle(color: Colors.black, fontSize: 15),
           leading: IconButton(
@@ -165,12 +168,12 @@ class _DownloadListScreenState extends State<DownloadListScreen> {
                       "assets/images/no_connection.png",
                       height: MediaQuery.of(context).size.height * .35,
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(top: 20.0),
                       child: Text(
                         'No lessons downloaded yet',
                         style: TextStyle(color: Colors.black54),
-                      ),
+                      ).translate(),
                     ),
                   ],
                 ),
@@ -240,11 +243,11 @@ class _DownloadListScreenState extends State<DownloadListScreen> {
                                                     builder: (context) {
                                                       return VideoApp(
                                                         file: File(
-                                                          // "/data/user/0/se.movementapp.movementapp/app_flutter/system/test"
+                                                            // "/data/user/0/se.movementapp.movementapp/app_flutter/system/test"
 
-                                                          // '/var/mobile/Containers/Data/Application/1279F2B4-CEAA-407E-BEF1-16B64F3FB743/Documents/system/test'
-                                                            path.toString() + '.mp4'
-                                                            ),
+                                                            // '/var/mobile/Containers/Data/Application/1279F2B4-CEAA-407E-BEF1-16B64F3FB743/Documents/system/test'
+                                                            path.toString() +
+                                                                '.mp4'),
                                                       );
                                                     },
                                                   ),
@@ -291,9 +294,9 @@ class _DownloadListScreenState extends State<DownloadListScreen> {
                                                                   context) =>
                                                               AlertDialog(
                                                             title: const Text(
-                                                                'Notifying'),
+                                                                'Notifying').translate(),
                                                             content:
-                                                                const Column(
+                                                                 Column(
                                                               mainAxisSize:
                                                                   MainAxisSize
                                                                       .min,
@@ -302,7 +305,7 @@ class _DownloadListScreenState extends State<DownloadListScreen> {
                                                                       .start,
                                                               children: <Widget>[
                                                                 Text(
-                                                                    'Do you wish to remove this lesson?'),
+                                                                    'Do you wish to remove this lesson?').translate(),
                                                               ],
                                                             ),
                                                             actions: <Widget>[
@@ -363,7 +366,7 @@ class _DownloadListScreenState extends State<DownloadListScreen> {
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                           .green),
-                                                                ),
+                                                                ).translate(),
                                                               ),
                                                             ],
                                                           ),
@@ -430,8 +433,7 @@ class _VideoAppState extends State<VideoApp> {
       ),
       backgroundColor: kBackgroundColor,
       body: Center(
-        child: 
-        PodVideoPlayer(
+        child: PodVideoPlayer(
           controller: controller,
           podPlayerLabels: const PodPlayerLabels(
             play: "PLAY",

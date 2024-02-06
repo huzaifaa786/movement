@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import '../constants.dart';
 
 class CustomText extends StatelessWidget {
@@ -16,6 +17,6 @@ class CustomText extends StatelessWidget {
         style: TextStyle(
             fontSize: fontSize ?? 16,
             color: colors ?? kSecondaryColor,
-            fontWeight: fontWeight ?? FontWeight.normal));
+            fontWeight: fontWeight ?? FontWeight.normal)).translate();
   }
 }

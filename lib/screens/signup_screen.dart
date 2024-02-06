@@ -1,8 +1,9 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/models/update_user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:http/http.dart' as http;
 import '../constants.dart';
 import 'auth_screen.dart';
@@ -171,9 +172,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontSize: 22,
                             fontWeight: FontWeight.w400,
                           ),
-                        ),
+                        ).translate(),
                         const SizedBox(height: 10),
-                        const Align(
+                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -183,7 +184,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               ),
-                            ),
+                            ).translate(),
                           ),
                         ),
                         Padding(
@@ -208,7 +209,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             },
                           ),
                         ),
-                        const Align(
+                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -218,7 +219,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               ),
-                            ),
+                            ).translate(),
                           ),
                         ),
                         Padding(
@@ -245,7 +246,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             },
                           ),
                         ),
-                        const Align(
+                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -255,7 +256,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               ),
-                            ),
+                            ).translate(),
                           ),
                         ),
                         Padding(
@@ -280,7 +281,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             },
                           ),
                         ),
-                        const Align(
+                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -290,7 +291,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               ),
-                            ),
+                            ).translate(),
                           ),
                         ),
                         Padding(
@@ -373,7 +374,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           BorderRadiusDirectional.circular(10),
                                       // side: const BorderSide(color: kPrimaryColor),
                                     ),
-                                    child: const Row(
+                                    child:  Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
@@ -384,7 +385,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
                                           ),
-                                        ),
+                                        ).translate(),
                                       ],
                                     ),
                                   ),
@@ -409,7 +410,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                     ),
-                  ),
+                  ).translate(),
                   InkWell(
                     onTap: () {
                       Navigator.of(context).pushNamed(AuthScreen.routeName);
@@ -420,7 +421,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         fontSize: 17,
                         fontWeight: FontWeight.w400,
                       ),
-                    ),
+                    ).translate(),
                   ),
                 ],
               ),

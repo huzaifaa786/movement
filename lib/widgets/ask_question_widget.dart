@@ -1,9 +1,10 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/providers/course_forum.dart';
 import 'package:academy_app/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 
 import '../constants.dart';
@@ -104,7 +105,7 @@ class _AskQuestionWidgetState extends State<AskQuestionWidget> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    const Align(
+                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 5.0),
@@ -114,7 +115,7 @@ class _AskQuestionWidgetState extends State<AskQuestionWidget> {
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),
-                        ),
+                        ).translate(),
                       ),
                     ),
                     TextFormField(
@@ -133,7 +134,7 @@ class _AskQuestionWidgetState extends State<AskQuestionWidget> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Align(
+                     Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 5.0),
@@ -143,7 +144,7 @@ class _AskQuestionWidgetState extends State<AskQuestionWidget> {
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
                           ),
-                        ),
+                        ).translate(),
                       ),
                     ),
                     TextFormField(
@@ -183,7 +184,7 @@ class _AskQuestionWidgetState extends State<AskQuestionWidget> {
                               child: const Text(
                                 'Publish',
                                 style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
+                              ).translate(),
                             ),
                     )
                   ],

@@ -1,9 +1,10 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/models/update_user_model.dart';
 import 'package:academy_app/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import '../constants.dart';
 import 'package:http/http.dart' as http;
 
@@ -147,9 +148,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             fontSize: 22,
                             fontWeight: FontWeight.w400,
                           ),
-                        ),
+                        ).translate(),
                         const SizedBox(height: 20),
-                        const Align(
+                         Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -159,7 +160,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               ),
-                            ),
+                            ).translate(),
                           ),
                         ),
                         Padding(
@@ -188,7 +189,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         const Text(
                           'Provide your email address to reset password.',
                           style: TextStyle(color: kSecondaryColor),
-                        ),
+                        ).translate(),
                         SizedBox(
                           width: double.infinity,
                           child: _isLoading
@@ -207,7 +208,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                           BorderRadiusDirectional.circular(10),
                                       // side: const BorderSide(color: kPrimaryColor),
                                     ),
-                                    child: const Row(
+                                    child:  Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
@@ -218,7 +219,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
                                           ),
-                                        ),
+                                        ).translate(),
                                       ],
                                     ),
                                   ),
@@ -243,7 +244,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                     ),
-                  ),
+                  ).translate(),
                   InkWell(
                     onTap: () {
                       Navigator.of(context).pushNamed(AuthScreen.routeName);
@@ -254,7 +255,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         fontSize: 17,
                         fontWeight: FontWeight.w400,
                       ),
-                    ),
+                    ).translate(),
                   ),
                 ],
               ),

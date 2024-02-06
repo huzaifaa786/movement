@@ -7,6 +7,7 @@ import 'package:academy_app/providers/course_forum.dart';
 import 'package:academy_app/providers/shared_pref_helper.dart';
 import 'package:academy_app/screens/search_forum.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import '../constants.dart';
@@ -179,7 +180,7 @@ class _ForumTabWidgetState extends State<ForumTabWidget> {
                 : "Loading More Questions ...",
             style: const TextStyle(
               color: Colors.black,
-            )),
+            )).translate(),
       ),
     );
   }
@@ -315,7 +316,7 @@ class _ForumTabWidgetState extends State<ForumTabWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                              "${activeQuestions.length} Questions in this course."),
+                              "${activeQuestions.length} Questions in this course.").translate(),
                           TextButton(
                             onPressed: () async {
                               //Use await and then navigate to report page
@@ -326,7 +327,7 @@ class _ForumTabWidgetState extends State<ForumTabWidget> {
                               //After popped back from report page call refresh indicator to refresh page
                               refreshKey.currentState!.show();
                             },
-                            child: const Text('Ask a new question'),
+                            child: const Text('Ask a new question').translate(),
                           ),
                         ],
                       ),

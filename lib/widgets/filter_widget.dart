@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
 import 'dart:async';
 import 'package:academy_app/models/all_category.dart';
@@ -6,6 +6,7 @@ import 'package:academy_app/models/category.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 import '../constants.dart';
 import '../providers/misc_provider.dart';
@@ -190,19 +191,22 @@ class _FilterWidgetState extends State<FilterWidget> {
                       "assets/images/no_connection.png",
                       height: MediaQuery.of(context).size.height * .35,
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.all(4.0),
-                      child: Text('There is no Internet connection'),
+                      child:
+                          Text('There is no Internet connection').translate(),
                     ),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.all(4.0),
-                      child: Text('Please check your Internet connection'),
+                      child: Text('Please check your Internet connection')
+                          .translate(),
                     ),
                   ],
                 ),
               )
             : Center(
-                child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
+                child: CircularProgressIndicator(
+                    color: kPrimaryColor.withOpacity(0.7)),
               )
         : Scaffold(
             backgroundColor: kBackgroundColor,
@@ -222,7 +226,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         color: kTextColor,
                         fontWeight: FontWeight.w400,
                       ),
-                    ),
+                    ).translate(),
                     iconTheme: const IconThemeData(
                       color: kSecondaryColor, //change your color here
                     ),
@@ -263,6 +267,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 child: DropdownButton(
+                                  dropdownColor: kBackgroundColor,
                                   value: _selectedCategory,
                                   icon: const Card(
                                     elevation: 0.1,
@@ -294,7 +299,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                           color: kSecondaryColor,
                                           fontSize: 15,
                                         ),
-                                      ),
+                                      ).translate(),
                                     );
                                   }).toList(),
                                 ),
@@ -314,6 +319,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 child: DropdownButton(
+                                  dropdownColor: kBackgroundColor,
                                   value: _selectedSubCat,
                                   icon: const Card(
                                     elevation: 0.1,
@@ -332,7 +338,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       style: TextStyle(
                                         color: kSecondaryColor,
                                         fontSize: 15,
-                                      )),
+                                      )).translate(),
                                   items: allCategory[subIndex]
                                       .subCategory
                                       .map((cd) {
@@ -345,7 +351,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                           color: kSecondaryColor,
                                           fontSize: 15,
                                         ),
-                                      ),
+                                      ).translate(),
                                     );
                                   }).toList(),
                                 ),
@@ -365,6 +371,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 child: DropdownButton(
+                                  dropdownColor: kBackgroundColor,
                                   underline: const SizedBox(),
                                   icon: const Card(
                                     elevation: 0.1,
@@ -388,7 +395,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                           color: kSecondaryColor,
                                           fontSize: 15,
                                         ),
-                                      ),
+                                      ).translate(),
                                     );
                                   }).toList(),
                                 ),
@@ -408,6 +415,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 child: DropdownButton(
+                                  dropdownColor: kBackgroundColor,
                                   underline: const SizedBox(),
                                   icon: const Card(
                                     elevation: 0.1,
@@ -432,7 +440,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                           color: kSecondaryColor,
                                           fontSize: 15,
                                         ),
-                                      ),
+                                      ).translate(),
                                     );
                                   }).toList(),
                                 ),
@@ -452,6 +460,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 child: DropdownButton(
+                                  dropdownColor: kBackgroundColor,
                                   underline: const SizedBox(),
                                   icon: const Card(
                                     elevation: 0.1,
@@ -475,7 +484,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                           color: kSecondaryColor,
                                           fontSize: 15,
                                         ),
-                                      ),
+                                      ).translate(),
                                     );
                                   }).toList(),
                                 ),
@@ -495,6 +504,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 10),
                                 child: DropdownButton(
+                                  dropdownColor: kBackgroundColor,
                                   underline: const SizedBox(),
                                   icon: const Card(
                                     elevation: 0.1,
@@ -520,7 +530,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                                 color: kSecondaryColor,
                                                 fontSize: 15,
                                               ),
-                                            )
+                                            ).translate()
                                           : StarDisplayWidget(
                                               value: item,
                                               filledStar: const Icon(
@@ -563,7 +573,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 16),
-                                    ),
+                                    ).translate(),
                                   ),
                                 ),
                                 Expanded(flex: 2, child: Container()),
@@ -578,14 +588,15 @@ class _FilterWidgetState extends State<FilterWidget> {
                                     textColor: Colors.white,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(7.0),
-                                      side: const BorderSide(color: kPrimaryColor),
+                                      side: const BorderSide(
+                                          color: kPrimaryColor),
                                     ),
                                     child: const Text(
                                       'Filter',
                                       style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontSize: 16),
-                                    ),
+                                    ).translate(),
                                   ),
                                 ),
                               ],

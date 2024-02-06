@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:http/http.dart' as http;
 import 'package:academy_app/models/app_logo.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +83,7 @@ Page resource error:
         'Toaster',
         onMessageReceived: (JavaScriptMessage message) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(message.message)),
+            SnackBar(content: Text(message.message).translate()),
           );
         },
       )
@@ -106,7 +109,7 @@ Page resource error:
               return Container();
             } else {
               if (snapshot.error != null) {
-                return const Text("Error Occured");
+                return const Text("Error Occured").translate();
               } else {
                 return CachedNetworkImage(
                   imageUrl: snapshot.data!.darkLogo.toString(),
@@ -132,7 +135,7 @@ Page resource error:
         final String? url = await _controller.currentUrl();
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Favorited $url')),
+            SnackBar(content: Text('Favorited $url').translate()),
           );
         }
       },
@@ -158,7 +161,7 @@ class NavigationControls extends StatelessWidget {
             } else {
               if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('No back history item')),
+                   SnackBar(content: Text('No back history item').translate()),
                 );
               }
             }
@@ -172,7 +175,7 @@ class NavigationControls extends StatelessWidget {
             } else {
               if (context.mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('No forward history item')),
+                   SnackBar(content: Text('No forward history item').translate()),
                 );
               }
             }

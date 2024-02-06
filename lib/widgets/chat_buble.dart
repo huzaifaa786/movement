@@ -1,5 +1,6 @@
 import 'package:academy_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 
 class ChatBubble extends StatelessWidget {
   const ChatBubble({
@@ -37,7 +38,7 @@ class ChatBubble extends StatelessWidget {
               text,
               style: TextStyle(
                   color: isCurrentUser ? Colors.white : Colors.black87),
-            ),
+            ).translate(),
           ),
         ),
       ),

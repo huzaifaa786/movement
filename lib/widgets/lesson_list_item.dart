@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:academy_app/widgets/for_preview.dart';
 import 'package:academy_app/widgets/from_vimeo_id.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import '../constants.dart';
 import '../models/lesson.dart';
 import 'from_network.dart';
@@ -94,14 +97,14 @@ class _LessonListItemState extends State<LessonListItem> {
                 flex: 1,
                 child: Text(widget.lesson!.title.toString(),
                     style:
-                        const TextStyle(fontSize: 14, color: Colors.black45)),
+                        const TextStyle(fontSize: 14, color: Colors.black45)).translate(),
               ),
               if (widget.lesson!.isFree == '1')
                 InkWell(
                   onTap: () {
                     lessonAction(widget.lesson!);
                   },
-                  child: const Row(
+                  child:  Row(
                     children: [
                       Icon(
                         Icons.remove_red_eye_outlined,
@@ -113,7 +116,7 @@ class _LessonListItemState extends State<LessonListItem> {
                         style: TextStyle(
                           color: kBlueColor,
                         ),
-                      ),
+                      ).translate(),
                     ],
                   ),
                 ),

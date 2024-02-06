@@ -1,6 +1,7 @@
 import 'package:academy_app/constants.dart';
 import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:universal_html/html.dart' as html;
 
 class FileDataScreen extends StatefulWidget {
@@ -29,7 +30,7 @@ class _FileDataScreenState extends State<FileDataScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(textData),
+              Text(textData).translate(),
               Padding(
                 padding: const EdgeInsets.symmetric(
                   vertical: 10.0,
@@ -49,7 +50,7 @@ class _FileDataScreenState extends State<FileDataScreen> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
-                        ),
+                        ).translate(),
                         Text(
                           widget.note,
                           style: const TextStyle(
@@ -57,7 +58,7 @@ class _FileDataScreenState extends State<FileDataScreen> {
                             height: 1.5,
                             wordSpacing: 1,
                           ),
-                        ),
+                        ).translate(),
                       ],
                     ),
                   ),

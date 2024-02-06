@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
 import 'dart:io';
 
@@ -7,6 +7,7 @@ import 'package:academy_app/providers/auth.dart';
 import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:academy_app/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 
 import '../constants.dart';
@@ -113,7 +114,8 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
             ),
             _isLoading
                 ? Center(
-                    child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
+                    child: CircularProgressIndicator(
+                        color: kPrimaryColor.withOpacity(0.7)),
                   )
                 : Container(
                     width: double.infinity,
@@ -123,7 +125,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
                               padding: EdgeInsets.only(bottom: 5.0),
@@ -133,7 +135,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
                                 ),
-                              ),
+                              ).translate(),
                             ),
                           ),
                           TextFormField(
@@ -157,7 +159,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
                               padding: EdgeInsets.only(bottom: 5.0),
@@ -167,7 +169,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
                                 ),
-                              ),
+                              ).translate(),
                             ),
                           ),
                           TextFormField(
@@ -192,7 +194,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                           const SizedBox(
                             height: 10,
                           ),
-                          const Align(
+                          Align(
                             alignment: Alignment.centerLeft,
                             child: Padding(
                               padding: EdgeInsets.only(bottom: 5.0),
@@ -202,7 +204,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
                                 ),
-                              ),
+                              ).translate(),
                             ),
                           ),
                           TextFormField(
@@ -239,7 +241,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                               child: const Text(
                                 'Update Now',
                                 style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
+                              ).translate(),
                             ),
                           ),
                         ],

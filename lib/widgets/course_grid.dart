@@ -1,4 +1,5 @@
 import 'package:academy_app/widgets/custom_text.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 import '../screens/course_detail_screen.dart';
@@ -98,7 +99,7 @@ class _CourseGridState extends State<CourseGrid> {
                               : '${widget.title.toString().substring(0, 40)}...',
                           style: const TextStyle(
                               fontSize: 14, color: kTextLightColor),
-                        ),
+                        ).translate(),
                       ),
                       Row(
                         children: [
@@ -142,7 +143,7 @@ class _CourseGridState extends State<CourseGrid> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                                 color: kTextLightColor),
-                          ),
+                          ).translate(),
                         ],
                       )
                     ],
