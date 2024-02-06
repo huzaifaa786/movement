@@ -5,12 +5,13 @@ import 'package:academy_app/screens/edit_password_screen.dart';
 import 'package:academy_app/screens/edit_profile_screen.dart';
 import 'package:academy_app/screens/message_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 import '../constants.dart';
 import '../screens/account_remove_screen.dart';
 import './custom_text.dart';
 
-class AccountListTile extends StatelessWidget {
+class AccountListTile extends StatefulWidget {
   final String? titleText;
   final IconData? icon;
   final String? actionType;
@@ -24,9 +25,14 @@ class AccountListTile extends StatelessWidget {
     this.courseAccessibility,
   }) : super(key: key);
 
+  @override
+  State<AccountListTile> createState() => _AccountListTileState();
+}
+
+class _AccountListTileState extends State<AccountListTile> {
   void _actionHandler(BuildContext context) {
-    if (actionType == 'logout') {
-      if (courseAccessibility == 'publicly') {
+    if (widget.actionType == 'logout') {
+      if (widget.courseAccessibility == 'publicly') {
         Provider.of<Auth>(context, listen: false).logout().then((_) =>
             Navigator.pushNamedAndRemoveUntil(context, '/home', (r) => false));
       } else {
@@ -34,15 +40,15 @@ class AccountListTile extends StatelessWidget {
             Navigator.pushNamedAndRemoveUntil(
                 context, '/auth-private', (r) => false));
       }
-    } else if (actionType == 'my_messages') {
+    } else if (widget.actionType == 'my_messages') {
       Navigator.of(context).pushNamed(MessagesScreen.routeName);
-    } else if (actionType == 'edit') {
+    } else if (widget.actionType == 'edit') {
       Navigator.of(context).pushNamed(EditProfileScreen.routeName);
-    } else if (actionType == 'change_password') {
+    } else if (widget.actionType == 'change_password') {
       Navigator.of(context).pushNamed(EditPasswordScreen.routeName);
-    } else if (actionType == 'account_delete') {
+    } else if (widget.actionType == 'account_delete') {
       Navigator.of(context).pushNamed(AccountRemoveScreen.routeName);
-    } else if (actionType == 'language') {
+    } else if (widget.actionType == 'language') {
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const TranslateScreen()));
     } else {
@@ -60,18 +66,23 @@ class AccountListTile extends StatelessWidget {
           padding: const EdgeInsets.all(6),
           child: FittedBox(
             child: Icon(
-              icon,
+              widget.icon,
               color: Colors.white,
             ),
           ),
         ),
       ),
-      title: CustomText(
-        text: titleText,
-        colors: kTextColor,
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-      ),
+      title: Text(widget.titleText!,
+        style: TextStyle(
+            fontSize: 16,
+            color: kTextColor,
+            fontWeight: FontWeight.bold)).translate(),
+      // title: CustomText(
+      //   text: titleText,
+      //   colors: kTextColor,
+      //   fontSize: 16,
+      //   fontWeight: FontWeight.bold,
+      // ),
       trailing: Padding(
         padding: const EdgeInsets.only(right: 8.0),
         child: InkWell(

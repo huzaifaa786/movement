@@ -28,6 +28,12 @@ class _TranslateScreenState extends State<TranslateScreen> {
     });
   }
 
+  navigate() {
+    Navigator.pushNamedAndRemoveUntil(
+        context, '/home', ModalRoute.withName("/home"));
+    setState(() {});
+  }
+
   @override
   void initState() {
     GetStorage box = GetStorage();
@@ -60,16 +66,11 @@ class _TranslateScreenState extends State<TranslateScreen> {
                   await toggleplan(translateMethod.English);
                   GetStorage box = GetStorage();
                   await box.write('Locale', 'en');
-                  box.read('Locale');
                   GoogleTranslatorController.init(
                       'AIzaSyDbNMn6QSmOy3co3IaFXu09hJGBuNihHFI', Locale('ur'),
-                      cacheDuration: Duration(days: 7),
-                      translateTo: Locale('en'));
+                      cacheDuration: Duration(), translateTo: Locale('en'));
                   setState(() {});
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (context) => const TabsScreen()),
-                      (route) => false);
+                  navigate();
                 },
               ),
               TranslateMethod(
@@ -78,18 +79,14 @@ class _TranslateScreenState extends State<TranslateScreen> {
                 value: translateMethod.Swedish,
                 onchaged: () async {
                   await toggleplan(translateMethod.Swedish);
-                  GoogleTranslatorController.init(
-                      'AIzaSyDbNMn6QSmOy3co3IaFXu09hJGBuNihHFI', Locale('en'),
-                      cacheDuration: Duration(days: 7),
-                      translateTo: Locale('sv'));
                   GetStorage box = GetStorage();
                   await box.write('Locale', 'sv');
-                  box.read('Locale');
+                  GoogleTranslatorController.init(
+                      'AIzaSyDbNMn6QSmOy3co3IaFXu09hJGBuNihHFI', Locale('en'),
+                      cacheDuration: Duration(), translateTo: Locale('sv'));
+
                   setState(() {});
-                  Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                          builder: (context) => const TabsScreen()),
-                      (route) => false);
+                  navigate();
                 },
               ),
             ],

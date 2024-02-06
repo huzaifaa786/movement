@@ -100,102 +100,100 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     GetStorage box = GetStorage();
     box.read('Locale') == null ? box.write('Locale', 'en') : null;
-    String locale = box.read('Locale') ?? 'en';
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (ctx) => Auth(),
-        ),
-        ChangeNotifierProvider(
-          create: (ctx) => NotificationService(),
-        ),
-        ChangeNotifierProvider(
-          create: (ctx) => Categories(),
-        ),
-        ChangeNotifierProvider(
-          create: (ctx) => Messages(),
-        ),
-        ChangeNotifierProxyProvider<Auth, Courses>(
-          create: (ctx) => Courses([], []),
-          update: (ctx, auth, prevoiusCourses) => Courses(
-            prevoiusCourses == null ? [] : prevoiusCourses.items,
-            prevoiusCourses == null ? [] : prevoiusCourses.topItems,
-          ),
-        ),
-        ChangeNotifierProxyProvider<Auth, MyCourses>(
-          create: (ctx) => MyCourses([], []),
-          update: (ctx, auth, previousMyCourses) => MyCourses(
-            previousMyCourses == null ? [] : previousMyCourses.items,
-            previousMyCourses == null ? [] : previousMyCourses.sectionItems,
-          ),
-        ),
-        ChangeNotifierProvider(
-          create: (ctx) => Languages(),
-        ),
-        ChangeNotifierProvider(
-          create: (ctx) => Bundles(),
-        ),
-        ChangeNotifierProvider(
-          create: (ctx) => MyBundles(),
-        ),
-        ChangeNotifierProvider(
-          create: (ctx) => CourseForum(),
-        ),
-      ],
-      child: Consumer<Auth>(
-          builder: (ctx, auth, _) => GoogleTranslatorInit(
-                  'AIzaSyDbNMn6QSmOy3co3IaFXu09hJGBuNihHFI',
-                  translateFrom:
-                      box.read('Locale') == 'en' ? Locale('ur') : Locale('en'),
-                  translateTo: Locale(locale),
-                  automaticDetection: false, builder: () {
-                return MaterialApp(
-                  title: 'Academy App',
-                  theme: ThemeData(
-                    fontFamily: 'google_sans',
-                    colorScheme:
-                        ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple)
-                            .copyWith(secondary: kDarkButtonBg),
-                  ),
-                  debugShowCheckedModeBanner: false,
-                  home: const SplashScreen(),
-                  routes: {
-                    '/home': (ctx) => const TabsScreen(),
-                    AuthScreen.routeName: (ctx) => const AuthScreen(),
-                    MessagesScreen.routeName: (ctx) => const MessagesScreen(),
-                    StartChatScreen.routeName: (ctx) => const StartChatScreen(),
-                    AuthScreenPrivate.routeName: (ctx) =>
-                        const AuthScreenPrivate(),
-                    SignUpScreen.routeName: (ctx) => const SignUpScreen(),
-                    ForgotPassword.routeName: (ctx) => const ForgotPassword(),
-                    CoursesScreen.routeName: (ctx) => const CoursesScreen(),
-                    CourseDetailScreen.routeName: (ctx) =>
-                        const CourseDetailScreen(),
-                    EditPasswordScreen.routeName: (ctx) =>
-                        const EditPasswordScreen(),
-                    EditProfileScreen.routeName: (ctx) =>
-                        const EditProfileScreen(),
-                    VerificationScreen.routeName: (ctx) =>
-                        const VerificationScreen(),
-                    AccountRemoveScreen.routeName: (ctx) =>
-                        const AccountRemoveScreen(),
-                    DownloadedCourseList.routeName: (ctx) =>
-                        const DownloadedCourseList(),
-                    SubCategoryScreen.routeName: (ctx) =>
-                        const SubCategoryScreen(),
-                    MessageDetailScreen.routeName: (ctx) =>
-                        const MessageDetailScreen(),
-                    BundleListScreen.routeName: (ctx) =>
-                        const BundleListScreen(),
-                    BundleDetailsScreen.routeName: (ctx) =>
-                        const BundleDetailsScreen(),
-                    MyBundleCoursesListScreen.routeName: (ctx) =>
-                        const MyBundleCoursesListScreen(),
-                    DeviceVerificationScreen.routeName: (context) =>
-                        const DeviceVerificationScreen(),
-                  },
-                );
-              })),
-    );
+    String locale = box.read('Locale') == null ? 'en' : box.read('Locale');
+    return GoogleTranslatorInit('AIzaSyDbNMn6QSmOy3co3IaFXu09hJGBuNihHFI',
+        translateFrom: box.read('Locale') == 'en' ? Locale('ur') : Locale('en'),
+        translateTo: Locale(locale),
+        automaticDetection: false, builder: () {
+      return MultiProvider(
+          providers: [
+            ChangeNotifierProvider(
+              create: (ctx) => Auth(),
+            ),
+            ChangeNotifierProvider(
+              create: (ctx) => NotificationService(),
+            ),
+            ChangeNotifierProvider(
+              create: (ctx) => Categories(),
+            ),
+            ChangeNotifierProvider(
+              create: (ctx) => Messages(),
+            ),
+            ChangeNotifierProxyProvider<Auth, Courses>(
+              create: (ctx) => Courses([], []),
+              update: (ctx, auth, prevoiusCourses) => Courses(
+                prevoiusCourses == null ? [] : prevoiusCourses.items,
+                prevoiusCourses == null ? [] : prevoiusCourses.topItems,
+              ),
+            ),
+            ChangeNotifierProxyProvider<Auth, MyCourses>(
+              create: (ctx) => MyCourses([], []),
+              update: (ctx, auth, previousMyCourses) => MyCourses(
+                previousMyCourses == null ? [] : previousMyCourses.items,
+                previousMyCourses == null ? [] : previousMyCourses.sectionItems,
+              ),
+            ),
+            ChangeNotifierProvider(
+              create: (ctx) => Languages(),
+            ),
+            ChangeNotifierProvider(
+              create: (ctx) => Bundles(),
+            ),
+            ChangeNotifierProvider(
+              create: (ctx) => MyBundles(),
+            ),
+            ChangeNotifierProvider(
+              create: (ctx) => CourseForum(),
+            ),
+          ],
+          child: Consumer<Auth>(
+              builder: (ctx, auth, _) => MaterialApp(
+                    title: 'Academy App',
+                    theme: ThemeData(
+                      fontFamily: 'google_sans',
+                      colorScheme: ColorScheme.fromSwatch(
+                              primarySwatch: Colors.deepPurple)
+                          .copyWith(secondary: kDarkButtonBg),
+                    ),
+                    debugShowCheckedModeBanner: false,
+                    home: const SplashScreen(),
+                    routes: {
+                      '/home': (ctx) => const TabsScreen(),
+                      AuthScreen.routeName: (ctx) => const AuthScreen(),
+                      MessagesScreen.routeName: (ctx) => const MessagesScreen(),
+                      StartChatScreen.routeName: (ctx) =>
+                          const StartChatScreen(),
+                      AuthScreenPrivate.routeName: (ctx) =>
+                          const AuthScreenPrivate(),
+                      SignUpScreen.routeName: (ctx) => const SignUpScreen(),
+                      ForgotPassword.routeName: (ctx) => const ForgotPassword(),
+                      CoursesScreen.routeName: (ctx) => const CoursesScreen(),
+                      CourseDetailScreen.routeName: (ctx) =>
+                          const CourseDetailScreen(),
+                      EditPasswordScreen.routeName: (ctx) =>
+                          const EditPasswordScreen(),
+                      EditProfileScreen.routeName: (ctx) =>
+                          const EditProfileScreen(),
+                      VerificationScreen.routeName: (ctx) =>
+                          const VerificationScreen(),
+                      AccountRemoveScreen.routeName: (ctx) =>
+                          const AccountRemoveScreen(),
+                      DownloadedCourseList.routeName: (ctx) =>
+                          const DownloadedCourseList(),
+                      SubCategoryScreen.routeName: (ctx) =>
+                          const SubCategoryScreen(),
+                      MessageDetailScreen.routeName: (ctx) =>
+                          const MessageDetailScreen(),
+                      BundleListScreen.routeName: (ctx) =>
+                          const BundleListScreen(),
+                      BundleDetailsScreen.routeName: (ctx) =>
+                          const BundleDetailsScreen(),
+                      MyBundleCoursesListScreen.routeName: (ctx) =>
+                          const MyBundleCoursesListScreen(),
+                      DeviceVerificationScreen.routeName: (context) =>
+                          const DeviceVerificationScreen(),
+                    },
+                  )));
+    });
   }
 }

@@ -154,7 +154,7 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
     });
   }
 
-    String? reviewt;
+  String? reviewt;
 
   trans() async {
     reviewt = await translateText('Review');

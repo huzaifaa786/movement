@@ -12,6 +12,7 @@ import 'package:academy_app/widgets/custom_text.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
 import '../constants.dart';
@@ -93,6 +94,9 @@ class _AccountScreenState extends State<AccountScreen> {
     getVideos();
     getCourse();
     systemSettings();
+
+    GetStorage box = GetStorage();
+    print('${box.read('Locale')} ************************** locale dekho');
 
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
