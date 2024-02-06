@@ -324,7 +324,7 @@ class _DownloadListScreenState extends State<DownloadListScreen> {
                                                                   style: TextStyle(
                                                                       color: Colors
                                                                           .red),
-                                                                ),
+                                                                ).translate(),
                                                               ),
                                                               MaterialButton(
                                                                 onPressed:

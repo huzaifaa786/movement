@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:academy_app/models/lesson.dart';
 import 'package:academy_app/models/my_course.dart';
 import 'package:academy_app/models/section.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import '../constants.dart';
 import 'shared_pref_helper.dart';
@@ -172,6 +174,34 @@ class MyCourses with ChangeNotifier {
       }
 
       notifyListeners();
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  Future<void> addCourseRating(
+      String userId, String courseId, double rating, String review) async {
+    final authToken = await SharedPreferenceHelper().getAuthToken();
+
+    final url = '$BASE_URL/api/rate_course/$authToken';
+    print(url);
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        body: {
+          'user_id': userId,
+          'course_id': courseId,
+          'rating': rating.toString(),
+          'review': review,
+        },
+      );
+
+      final responseData = json.decode(response.body);
+      print(responseData);
+      if (responseData['status'] == 'failed') {
+        throw const HttpException('Course Rating Failed Try Again Later');
+      }
+      Fluttertoast.showToast(msg: 'You have successfully rated the course');
     } catch (error) {
       rethrow;
     }

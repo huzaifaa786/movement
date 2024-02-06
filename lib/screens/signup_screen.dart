@@ -2,6 +2,7 @@
 
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/models/update_user_model.dart';
+import 'package:academy_app/translate_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_translator/google_translator.dart';
 import 'package:http/http.dart' as http;
@@ -129,6 +130,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
+  String? name;
+  String? lname;
+  String? email;
+  String? password;
+
+  trans() async {
+    name = await translateText('First Name');
+    lname = await translateText('Last Name');
+    email = await translateText('Email');
+    password = await translateText('password');
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    trans();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,7 +194,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ),
                         ).translate(),
                         const SizedBox(height: 10),
-                         Align(
+                        Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -193,7 +213,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: TextFormField(
                             style: const TextStyle(fontSize: 14),
                             decoration:
-                                getInputDecoration('First Name', Icons.person),
+                                getInputDecoration(name ?? '', Icons.person),
                             keyboardType: TextInputType.name,
                             controller: _firstNameController,
                             // ignore: missing_return
@@ -209,7 +229,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             },
                           ),
                         ),
-                         Align(
+                        Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -228,7 +248,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: TextFormField(
                             style: const TextStyle(fontSize: 14),
                             decoration: getInputDecoration(
-                              'Last Name',
+                              lname ?? '',
                               Icons.person,
                             ),
                             keyboardType: TextInputType.name,
@@ -246,7 +266,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             },
                           ),
                         ),
-                         Align(
+                        Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -265,7 +285,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           child: TextFormField(
                             style: const TextStyle(fontSize: 14),
                             decoration: getInputDecoration(
-                              'Email',
+                              email ?? '',
                               Icons.email_outlined,
                             ),
                             controller: _emailController,
@@ -281,7 +301,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             },
                           ),
                         ),
-                         Align(
+                        Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -331,7 +351,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               filled: true,
                               hintStyle: const TextStyle(
                                   color: Colors.black54, fontSize: 14),
-                              hintText: "password",
+                              hintText: password ?? '',
                               fillColor: kBackgroundColor,
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 18, horizontal: 15),
@@ -374,7 +394,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           BorderRadiusDirectional.circular(10),
                                       // side: const BorderSide(color: kPrimaryColor),
                                     ),
-                                    child:  Row(
+                                    child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [

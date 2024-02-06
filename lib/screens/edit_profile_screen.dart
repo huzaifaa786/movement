@@ -5,6 +5,7 @@ import 'package:academy_app/constants.dart';
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/models/user.dart';
 import 'package:academy_app/providers/auth.dart';
+import 'package:academy_app/translate_helper.dart';
 import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:academy_app/widgets/user_image_picker.dart';
 import 'package:flutter/material.dart';
@@ -104,6 +105,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
+  String? name;
+  String? lname;
+  String? bio;
+  String? flink;
+  String? tlink;
+  String? llink;
+
+  trans() async {
+    name = await translateText('First Name');
+    lname = await translateText('Last Name');
+    bio = await translateText('Biography');
+    flink = await translateText('Facebook Link');
+    tlink = await translateText('Twitter Link');
+    llink = await translateText('LinkedIn Link');
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    trans();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -130,7 +154,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
+                        Padding(
                           padding:
                               EdgeInsets.only(left: 15, top: 10, bottom: 5.0),
                           child: Text(
@@ -139,7 +163,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               fontSize: 20,
                               fontWeight: FontWeight.w400,
                             ),
-                          ),
+                          ).translate(),
                         ),
                         SizedBox(
                           width: double.infinity,
@@ -157,7 +181,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                   Align(
+                                  Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
                                       padding: EdgeInsets.only(
@@ -178,7 +202,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       style: const TextStyle(fontSize: 14),
                                       initialValue: user.firstName,
                                       decoration: getInputDecoration(
-                                          'First Name', Icons.person),
+                                          name ?? '', Icons.person),
                                       keyboardType: TextInputType.name,
                                       // controller: _firstNameController,
                                       // ignore: missing_return
@@ -196,7 +220,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       },
                                     ),
                                   ),
-                                   Align(
+                                  Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
                                       padding: EdgeInsets.only(bottom: 5.0),
@@ -215,7 +239,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       style: const TextStyle(fontSize: 14),
                                       initialValue: user.lastName,
                                       decoration: getInputDecoration(
-                                        'Last Name',
+                                        lname ?? '',
                                         Icons.person,
                                       ),
                                       keyboardType: TextInputType.name,
@@ -235,7 +259,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       },
                                     ),
                                   ),
-                                   Align(
+                                  Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
                                       padding: EdgeInsets.only(bottom: 5.0),
@@ -252,7 +276,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     style: const TextStyle(fontSize: 16),
                                     initialValue: user.biography,
                                     decoration: getInputDecoration(
-                                      'Biography',
+                                      bio ?? '',
                                       Icons.edit,
                                     ),
                                     keyboardType: TextInputType.multiline,
@@ -261,7 +285,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       _userData['bio'] = value.toString();
                                     },
                                   ),
-                                   Align(
+                                  Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
                                       padding: EdgeInsets.only(bottom: 5.0),
@@ -278,7 +302,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     style: const TextStyle(fontSize: 16),
                                     initialValue: user.facebook,
                                     decoration: getInputDecoration(
-                                      'Facebook Link',
+                                      flink ?? '',
                                       MdiIcons.facebook,
                                     ),
                                     keyboardType: TextInputType.emailAddress,
@@ -286,7 +310,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       _userData['facebook'] = value.toString();
                                     },
                                   ),
-                                   Align(
+                                  Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
                                       padding: EdgeInsets.only(bottom: 5.0),
@@ -303,7 +327,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     style: const TextStyle(fontSize: 16),
                                     initialValue: user.twitter,
                                     decoration: getInputDecoration(
-                                      'Twitter Link',
+                                      tlink ?? '',
                                       MdiIcons.twitter,
                                     ),
                                     keyboardType: TextInputType.emailAddress,
@@ -311,7 +335,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                       _userData['twitter'] = value.toString();
                                     },
                                   ),
-                                   Align(
+                                  Align(
                                     alignment: Alignment.centerLeft,
                                     child: Padding(
                                       padding: EdgeInsets.only(bottom: 5.0),
@@ -328,7 +352,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                     style: const TextStyle(fontSize: 16),
                                     initialValue: user.linkedIn,
                                     decoration: getInputDecoration(
-                                      'LinkedIn Link',
+                                      llink ?? '',
                                       MdiIcons.linkedin,
                                     ),
                                     keyboardType: TextInputType.emailAddress,

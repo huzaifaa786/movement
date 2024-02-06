@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:academy_app/constants.dart';
 import 'package:academy_app/screens/courses_screen.dart';
+import 'package:academy_app/translate_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_translator/google_translator.dart';
 
@@ -16,8 +19,16 @@ class _SearchWidgetState extends State<SearchWidget> {
   final bool _isLoading = false;
   final searchController = TextEditingController();
 
+  String? search;
+
+  trans() async {
+    search = await translateText('Search here');
+    setState(() {});
+  }
+
   @override
   void initState() {
+    trans();
     super.initState();
   }
 
@@ -57,8 +68,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                 AppBar(
                   automaticallyImplyLeading: false,
                   title: TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Search Here',
+                    decoration: InputDecoration(
+                      labelText: search ?? '',
                       prefixIcon: Icon(
                         Icons.search,
                         color: Colors.grey,

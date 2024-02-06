@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:academy_app/translate_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
@@ -71,10 +72,17 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
     passwordController.clear();
   }
 
+  String? hint;
+  trans() async {
+    hint = await translateText('password');
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
     systemSettings();
+    trans();
   }
 
   InputDecoration getInputDecoration(String hintext, IconData iconData) {
@@ -150,13 +158,13 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
                       thickness: 1,
                     ),
                   ),
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     child: Text(
                       "When you delete your account you will lose accesss to your account services and we permanentlly delete your personal data.",
                       style:
                           TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-                    ),
+                    ).translate(),
                   ),
                   Align(
                     alignment: Alignment.bottomRight,
@@ -247,7 +255,7 @@ class _AccountRemoveScreenState extends State<AccountRemoveScreen> {
                     errorBorder: kDefaultFocusErrorBorder,
                     filled: true,
                     hintStyle: const TextStyle(color: kFormInputColor),
-                    hintText: 'password',
+                    hintText: hint ?? '',
                     fillColor: Colors.white70,
                     prefixIcon: const Icon(
                       Icons.key_outlined,

@@ -144,7 +144,7 @@ class MyApp extends StatelessWidget {
       ],
       child: Consumer<Auth>(
           builder: (ctx, auth, _) => GoogleTranslatorInit(
-                  'AIzaSyBOr3bXgN2bj9eECzSudyj_rgIFjyXkdn8',
+                  'AIzaSyDbNMn6QSmOy3co3IaFXu09hJGBuNihHFI',
                   translateFrom:
                       box.read('Locale') == 'en' ? Locale('ur') : Locale('en'),
                   translateTo: Locale(locale),

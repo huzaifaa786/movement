@@ -1,5 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 import 'package:academy_app/constants.dart';
+import 'package:academy_app/translate_helper.dart';
 import 'package:academy_app/widgets/app_bar.dart';
 import 'package:academy_app/widgets/filter_widget.dart';
 import 'package:flutter/material.dart';
@@ -29,9 +32,21 @@ class _TabsScreenState extends State<TabsScreen> {
   var _isInit = true;
 
   int _selectedPageIndex = 0;
+  String? home;
+  String? myCourse;
+  String? wishlist;
+  String? account;
+  trans() async {
+    home = await translateText('Home');
+    myCourse = await translateText('My Course');
+    wishlist = await translateText('Wishlist');
+    account = await translateText('Account');
+    setState(() {});
+  }
 
   @override
   void initState() {
+    trans();
     super.initState();
   }
 
@@ -101,37 +116,39 @@ class _TabsScreenState extends State<TabsScreen> {
       backgroundColor: kBackgroundColor,
       appBar: const CustomAppBar(),
       body: _pages[_selectedPageIndex],
-      floatingActionButton: _selectedPageIndex != 3 ? FloatingActionButton(
-        onPressed: () => _showFilterModal(context),
-        backgroundColor: kDarkButtonBg,
-        child: const Icon(Icons.filter_list),
-      ) : null,
+      floatingActionButton: _selectedPageIndex != 3
+          ? FloatingActionButton(
+              onPressed: () => _showFilterModal(context),
+              backgroundColor: kDarkButtonBg,
+              child: const Icon(Icons.filter_list),
+            )
+          : null,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
-        items: const [
+        items: [
           BottomNavigationBarItem(
             backgroundColor: kBackgroundColor,
             icon: Icon(Icons.home_outlined),
             activeIcon: Icon(Icons.home),
-            label: 'Home',
+            label: home ?? '',
           ),
           BottomNavigationBarItem(
             backgroundColor: kBackgroundColor,
             icon: Icon(Icons.school_outlined),
             activeIcon: Icon(Icons.school),
-            label: 'My Course',
+            label: myCourse ?? '',
           ),
           BottomNavigationBarItem(
             backgroundColor: kBackgroundColor,
             icon: Icon(Icons.favorite_border),
             activeIcon: Icon(Icons.favorite),
-            label: 'Wishlist',
+            label: wishlist ?? '',
           ),
           BottomNavigationBarItem(
             backgroundColor: kBackgroundColor,
             icon: Icon(Icons.account_circle_outlined),
             activeIcon: Icon(Icons.account_circle),
-            label: 'Account',
+            label: account ?? '',
           ),
         ],
         backgroundColor: Colors.white,

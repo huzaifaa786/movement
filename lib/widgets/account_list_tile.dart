@@ -1,4 +1,5 @@
 import 'package:academy_app/providers/auth.dart';
+import 'package:academy_app/screens/app_translate/translate.dart';
 import 'package:academy_app/screens/downloaded_course_list.dart';
 import 'package:academy_app/screens/edit_password_screen.dart';
 import 'package:academy_app/screens/edit_profile_screen.dart';
@@ -41,6 +42,9 @@ class AccountListTile extends StatelessWidget {
       Navigator.of(context).pushNamed(EditPasswordScreen.routeName);
     } else if (actionType == 'account_delete') {
       Navigator.of(context).pushNamed(AccountRemoveScreen.routeName);
+    } else if (actionType == 'language') {
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const TranslateScreen()));
     } else {
       Navigator.of(context).pushNamed(DownloadedCourseList.routeName);
     }
@@ -79,7 +83,8 @@ class AccountListTile extends StatelessWidget {
             ),
             color: iCardColor,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 2),
               child: ImageIcon(
                 const AssetImage("assets/images/long_arrow_right.png"),
                 color: kPrimaryColor.withOpacity(0.7),

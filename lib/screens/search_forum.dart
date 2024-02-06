@@ -4,6 +4,7 @@ import 'package:academy_app/constants.dart';
 import 'package:academy_app/models/forum_questions_model.dart';
 import 'package:academy_app/providers/course_forum.dart';
 import 'package:academy_app/providers/shared_pref_helper.dart';
+import 'package:academy_app/translate_helper.dart';
 import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:academy_app/widgets/ask_question_widget.dart';
 import 'package:academy_app/widgets/forum_question_grid.dart';
@@ -31,13 +32,23 @@ class _SearchForumState extends State<SearchForum> {
   var _isLoading = false;
   List<ForumQuestions> activeQuestions = [];
   dynamic userId;
+  String?  hint;
 
   final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
     super.initState();
     getUserInfo();
+    trans();
   }
+
+  trans()async{
+    hint = await translateText("Search questions...");
+    setState(() {
+      
+    });
+  }
+
 
   @override
   void didChangeDependencies() {
@@ -185,7 +196,7 @@ class _SearchForumState extends State<SearchForum> {
                           ),
                           filled: true,
                           hintStyle: const TextStyle(color: Color(0xFFB3B3B3)),
-                          hintText: "Search questions...",
+                          hintText: hint ?? '',
                           fillColor: Colors.white,
                           contentPadding: const EdgeInsets.only(left: 15),
                         ),

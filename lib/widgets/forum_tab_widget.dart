@@ -6,6 +6,7 @@ import 'package:academy_app/models/forum_questions_model.dart';
 import 'package:academy_app/providers/course_forum.dart';
 import 'package:academy_app/providers/shared_pref_helper.dart';
 import 'package:academy_app/screens/search_forum.dart';
+import 'package:academy_app/translate_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
@@ -39,9 +40,17 @@ class _ForumTabWidgetState extends State<ForumTabWidget> {
 
   final TextEditingController _controller = TextEditingController();
 
+
+  String? search;
+
+  trans() async {
+    search = await translateText('Search questions...');
+    setState(() {});
+  }
   @override
   void initState() {
     super.initState();
+    trans();
     updatedQuestionList();
     getUserInfo();
     _xcrollController.addListener(() {
@@ -306,7 +315,7 @@ class _ForumTabWidgetState extends State<ForumTabWidget> {
                             filled: true,
                             hintStyle:
                                 const TextStyle(color: Color(0xFFB3B3B3)),
-                            hintText: "Search questions...",
+                            hintText: search ?? '',
                             fillColor: Colors.white,
                             contentPadding: const EdgeInsets.only(left: 15),
                           ),

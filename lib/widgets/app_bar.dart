@@ -1,6 +1,9 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:academy_app/screens/courses_screen.dart';
+import 'package:academy_app/translate_helper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:google_translator/google_translator.dart';
 import 'package:http/http.dart' as http;
@@ -75,6 +78,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
     fetchMyLogo();
   }
 
+    String? search;
+
+  trans() async {
+    search = await translateText('Search here');
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -111,8 +121,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
           : Card(
               color: Colors.white,
               child: TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Search Here',
+                decoration: InputDecoration(
+                  labelText: search ?? '',
                   prefixIcon: Icon(
                     Icons.search,
                     color: Colors.grey,

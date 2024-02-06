@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/providers/auth.dart';
+import 'package:academy_app/translate_helper.dart';
 import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:academy_app/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +90,23 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
     );
   }
 
+  String? password;
+  String? newpassword;
+  String? cpassword;
+
+  trans() async {
+    password = await translateText('Current Password');
+    newpassword = await translateText('New Password');
+    cpassword = await translateText('Confirm Password');
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    trans();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,7 +159,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                           TextFormField(
                             style: const TextStyle(fontSize: 16),
                             decoration: getInputDecoration(
-                              'Current Password',
+                              password ?? '',
                               Icons.vpn_key,
                             ),
                             obscureText: hidePassword,
@@ -175,7 +193,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                           TextFormField(
                             style: const TextStyle(fontSize: 16),
                             decoration: getInputDecoration(
-                              'New Password',
+                              newpassword ?? '',
                               Icons.vpn_key,
                             ),
                             obscureText: hidePassword,
@@ -210,7 +228,7 @@ class _EditPasswordScreenState extends State<EditPasswordScreen> {
                           TextFormField(
                             style: const TextStyle(fontSize: 16),
                             decoration: getInputDecoration(
-                              'Confirm Password',
+                              cpassword ?? '',
                               Icons.vpn_key,
                             ),
                             obscureText: hidePassword,

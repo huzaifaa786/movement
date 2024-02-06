@@ -2,6 +2,7 @@
 
 import 'package:academy_app/constants.dart';
 import 'package:academy_app/screens/app_translate/translate_method.dart';
+import 'package:academy_app/screens/tabs_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -29,10 +30,8 @@ class _TranslateScreenState extends State<TranslateScreen> {
 
   @override
   void initState() {
-    // print(Get.locale);
     GetStorage box = GetStorage();
-    box.read('locale') == 'se';
-    _site = box.read('locale') != 'se'
+    _site = box.read('Locale') != 'sv'
         ? translateMethod.English
         : translateMethod.Swedish;
     super.initState();
@@ -63,10 +62,14 @@ class _TranslateScreenState extends State<TranslateScreen> {
                   await box.write('Locale', 'en');
                   box.read('Locale');
                   GoogleTranslatorController.init(
-                      'AIzaSyBu_8CphWVyqJjxDmhTr-DaEnFl7A1qGF0', Locale('ur'),
+                      'AIzaSyDbNMn6QSmOy3co3IaFXu09hJGBuNihHFI', Locale('ur'),
                       cacheDuration: Duration(days: 7),
                       translateTo: Locale('en'));
                   setState(() {});
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => const TabsScreen()),
+                      (route) => false);
                 },
               ),
               TranslateMethod(
@@ -76,13 +79,17 @@ class _TranslateScreenState extends State<TranslateScreen> {
                 onchaged: () async {
                   await toggleplan(translateMethod.Swedish);
                   GoogleTranslatorController.init(
-                      'AIzaSyBu_8CphWVyqJjxDmhTr-DaEnFl7A1qGF0', Locale('en'),
+                      'AIzaSyDbNMn6QSmOy3co3IaFXu09hJGBuNihHFI', Locale('en'),
                       cacheDuration: Duration(days: 7),
-                      translateTo: Locale('se'));
+                      translateTo: Locale('sv'));
                   GetStorage box = GetStorage();
-                  await box.write('Locale', 'se');
+                  await box.write('Locale', 'sv');
                   box.read('Locale');
                   setState(() {});
+                  Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                          builder: (context) => const TabsScreen()),
+                      (route) => false);
                 },
               ),
             ],

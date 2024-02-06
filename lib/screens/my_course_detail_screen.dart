@@ -5,16 +5,19 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/models/course_db_model.dart';
+import 'package:academy_app/models/my_course.dart';
 import 'package:academy_app/models/section_db_model.dart';
 import 'package:academy_app/models/video_db_model.dart';
 import 'package:academy_app/providers/database_helper.dart';
 import 'package:academy_app/screens/file_data_screen.dart';
+import 'package:academy_app/translate_helper.dart';
 import 'package:academy_app/widgets/custom_text.dart';
 import 'package:academy_app/widgets/forum_tab_widget.dart';
 import 'package:academy_app/widgets/live_class_tab_widget.dart';
 import 'package:background_downloader/background_downloader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_translator/google_translator.dart';
 import 'package:html_unescape/html_unescape.dart';
 import 'package:http/http.dart' as http;
@@ -27,6 +30,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/from_network.dart';
 import '../widgets/from_vimeo_id.dart';
@@ -60,6 +64,7 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
 
   var _isInit = true;
   var _isLoading = false;
+  var _isbtnLoading = false;
   int? selected;
 
   dynamic liveClassStatus;
@@ -115,6 +120,47 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
 //       debugPrint('Permission for $permissionType was $status');
 //     }
   }
+  TextEditingController review = TextEditingController();
+  double ratings = 1.0;
+  Future<void> _submit() async {
+    String? userId;
+    setState(() {
+      _isbtnLoading = true;
+    });
+    final prefs = await SharedPreferences.getInstance();
+    final userData = prefs.getString('userData');
+    if (userData != null) {
+      final decodedData = json.decode(userData);
+      userId = decodedData['user_id'];
+      print('User ID: $userId $userData');
+    } else {
+      print('No user data found');
+    }
+
+    print(widget.courseId);
+    print(ratings);
+    print(review.text);
+    await Provider.of<MyCourses>(context, listen: false).addCourseRating(
+        userId!, widget.courseId.toString(), ratings, review.text);
+    //     .then((_) {
+    setState(() {
+      _isbtnLoading = false;
+    });
+    Navigator.pop(context);
+    ratings = 1.0;
+    review.clear();
+    setState(() {
+      _isLoading = false;
+    });
+  }
+
+    String? reviewt;
+
+  trans() async {
+    reviewt = await translateText('Review');
+    setState(() {});
+  }
+
   @override
   void initState() {
     checkPermissions();
@@ -123,6 +169,7 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
     _tabController = TabController(length: widget.len, vsync: this);
     _tabController.addListener(_smoothScrollToTop);
     progressUpdateStream = StreamController.broadcast();
+    trans();
     super.initState();
     addonStatus('live-class');
     addonStatus('forum');
@@ -476,6 +523,24 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
     }
   }
 
+  InputDecoration getInputDecoration(String hintext, IconData iconData) {
+    return InputDecoration(
+      enabledBorder: kDefaultInputBorder,
+      focusedBorder: kDefaultFocusInputBorder,
+      focusedErrorBorder: kDefaultFocusErrorBorder,
+      errorBorder: kDefaultFocusErrorBorder,
+      filled: true,
+      hintStyle: const TextStyle(color: kFormInputColor),
+      hintText: hintext,
+      fillColor: Colors.white70,
+      prefixIcon: Icon(
+        iconData,
+        color: kFormInputColor,
+      ),
+      contentPadding: const EdgeInsets.symmetric(vertical: 4),
+    );
+  }
+
   Widget getLessonSubtitle(Lesson lesson) {
     if (lesson.lessonType == 'video') {
       return CustomText(
@@ -519,6 +584,110 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
     }
   }
 
+  Widget bottomsheet(myLoadedCourse) {
+    return Wrap(
+      children: [
+        Container(
+          padding: MediaQuery.of(context).viewInsets,
+          // height: 250,
+          color: Colors.white,
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "Rate '${myLoadedCourse.title}' Course",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(height: 15),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: TextFormField(
+                        style: const TextStyle(fontSize: 16),
+                        decoration: getInputDecoration(
+                          reviewt ?? '',
+                          Icons.reviews_outlined,
+                        ),
+                        controller: review,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Can not be empty';
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 15),
+                    child: RatingBar.builder(
+                      initialRating: 1,
+                      minRating: 1,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      glow: false,
+                      itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                      itemBuilder: (context, _) => Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                      onRatingUpdate: (rating) {
+                        setState(() {
+                          ratings = rating;
+                          print(ratings);
+                        });
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SizedBox(
+                    width: double.infinity,
+                    child: _isbtnLoading
+                        ? const Center(child: CircularProgressIndicator())
+                        : Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: MaterialButton(
+                              elevation: 0,
+                              color: kPrimaryColor,
+                              onPressed: _submit,
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(10),
+                                // side: const BorderSide(color: kPrimaryColor),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Submit',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ).translate(),
+                                ],
+                              ),
+                            ),
+                          ),
+                  ),
+                  SizedBox(height: 40)
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // final myCourseId = ModalRoute.of(context)!.settings.arguments as int;
@@ -537,56 +706,7 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
                   showModalBottomSheet<void>(
                     context: context,
                     builder: (BuildContext context) {
-                      return Container(
-                        height: 200,
-                        color: Colors.white,
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Text(
-                                  " Yoga Nidra's Course",
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: RatingBar.builder(
-                                    initialRating: 1,
-                                    minRating: 1,
-                                    direction: Axis.horizontal,
-                                    allowHalfRating: false,
-                                    itemCount: 5,
-                                    itemPadding:
-                                        EdgeInsets.symmetric(horizontal: 4.0),
-                                    itemBuilder: (context, _) => Icon(
-                                      Icons.star,
-                                      color: Colors.amber,
-                                    ),
-                                    onRatingUpdate: (rating) {
-                                      print(rating);
-                                    },
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 12),
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: kTimeBackColor,
-                                    ),
-                                    child: Text('Submit',
-                                        style: TextStyle(color: kTimeColor)),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
+                      return bottomsheet(myLoadedCourse);
                     },
                   );
                 },

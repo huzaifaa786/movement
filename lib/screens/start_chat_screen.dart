@@ -4,6 +4,7 @@ import 'package:academy_app/constants.dart';
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/models/instructor.dart';
 import 'package:academy_app/providers/messages.dart';
+import 'package:academy_app/translate_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_translator/google_translator.dart';
 import 'package:http/http.dart' as http;
@@ -71,6 +72,12 @@ class _StartChatScreenState extends State<StartChatScreen> {
     });
   }
 
+  String? msg;
+
+  trans() async {
+    msg = await translateText('Write your message...');
+    setState(() {});
+  }
   @override
   void initState() {
     getUsers();
@@ -157,7 +164,7 @@ class _StartChatScreenState extends State<StartChatScreen> {
                         style: const TextStyle(fontSize: 16),
                         initialValue: '',
                         decoration: getInputDecoration(
-                          'Write your message',
+                          msg ?? '',
                         ),
                         keyboardType: TextInputType.multiline,
                         maxLines: 5,

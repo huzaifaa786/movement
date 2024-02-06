@@ -3,6 +3,7 @@
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/models/update_user_model.dart';
 import 'package:academy_app/screens/auth_screen.dart';
+import 'package:academy_app/translate_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_translator/google_translator.dart';
 import '../constants.dart';
@@ -99,6 +100,19 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     );
   }
 
+  String? email;
+
+  trans() async {
+    email = await translateText('Email');
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    trans();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,7 +164,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           ),
                         ).translate(),
                         const SizedBox(height: 20),
-                         Align(
+                        Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -169,7 +183,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           child: TextFormField(
                             style: const TextStyle(fontSize: 14),
                             decoration: getInputDecoration(
-                              'Email',
+                              email ?? '',
                               Icons.email_outlined,
                             ),
                             controller: _emailController,
@@ -208,7 +222,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                           BorderRadiusDirectional.circular(10),
                                       // side: const BorderSide(color: kPrimaryColor),
                                     ),
-                                    child:  Row(
+                                    child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [

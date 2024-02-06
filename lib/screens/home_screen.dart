@@ -190,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               'Top Course',
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 18),
-                            ),
+                            ).translate(),
                             MaterialButton(
                               onPressed: () {
                                 Navigator.of(context).pushNamed(

@@ -8,6 +8,7 @@ import 'package:academy_app/providers/auth.dart';
 import 'package:academy_app/screens/forgot_password_screen.dart';
 import 'package:academy_app/screens/signup_screen.dart';
 import 'package:academy_app/screens/tabs_screen.dart';
+import 'package:academy_app/translate_helper.dart';
 import 'package:academy_app/widgets/string_extension.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -125,7 +126,21 @@ class _AuthScreenState extends State<AuthScreen> {
       _isLoading = false;
     });
   }
+  
+  String? password;
+  String? email;
+  trans() async {
+    password = await translateText('password');
+    email = await translateText('Email');
+    setState(() {});
+  }
 
+  @override
+  void initState() {
+    trans();
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -193,7 +208,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           child: TextFormField(
                             style: const TextStyle(fontSize: 14),
                             decoration: getInputDecoration(
-                              'Email',
+                              email ?? '',
                               Icons.email_outlined,
                             ),
                             controller: _emailController,
@@ -260,7 +275,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               filled: true,
                               hintStyle: const TextStyle(
                                   color: Colors.black54, fontSize: 14),
-                              hintText: "password",
+                              hintText: password ?? '',
                               fillColor: kBackgroundColor,
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 18, horizontal: 15),

@@ -8,6 +8,7 @@ import 'package:academy_app/models/message.dart';
 import 'package:academy_app/models/message_user.dart';
 
 import 'package:academy_app/providers/messages.dart';
+import 'package:academy_app/translate_helper.dart';
 
 import 'package:academy_app/widgets/chat_buble.dart';
 
@@ -83,7 +84,6 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
         _isLoading = false;
       });
       FlutterAppBadger.removeBadge();
-
     } catch (error) {
       const errorMsg = 'Could not refresh!';
       CommonFunctions.showErrorDialog(errorMsg, context);
@@ -93,7 +93,6 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
   }
 
   Future<void> refreshData() async {
-    
     try {
       instructor = widget.messageUser;
 
@@ -136,10 +135,17 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
     return;
   }
 
+  String? hint;
+
+  trans() async {
+    hint = await translateText('Type here ...');
+    setState(() {});
+  }
+
   @override
   void initState() {
     refreshList();
-
+    trans();
     timer = Timer.periodic(Duration(seconds: 5), (Timer t) => refreshData());
     super.initState();
   }
@@ -230,17 +236,16 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
                 decoration: BoxDecoration(
                     color: Colors.white70,
                     borderRadius: BorderRadius.circular(25)),
-                margin: EdgeInsets.fromLTRB(8,8,8,20),
+                margin: EdgeInsets.fromLTRB(8, 8, 8, 20),
                 padding: EdgeInsets.all(18),
                 child: TextField(
                   focusNode: focusNode,
                   controller: messageController,
                   style: TextStyle(color: Colors.black, fontSize: 15),
                   decoration: InputDecoration.collapsed(
-                    hintText: 'Type Here...',
+                    hintText: hint ?? '',
                     hintStyle: TextStyle(color: Colors.black),
                   ),
-                
                 ),
               ),
             ),

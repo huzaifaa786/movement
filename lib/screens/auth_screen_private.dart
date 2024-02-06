@@ -5,6 +5,7 @@ import 'package:academy_app/providers/auth.dart';
 import 'package:academy_app/screens/forgot_password_screen.dart';
 import 'package:academy_app/screens/signup_screen.dart';
 import 'package:academy_app/screens/tabs_screen.dart';
+import 'package:academy_app/translate_helper.dart';
 import 'package:academy_app/widgets/app_bar_two.dart';
 import 'package:academy_app/widgets/string_extension.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -97,12 +98,11 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
       _isLoading = true;
     });
 
-       String? firebase_token = await FirebaseMessaging.instance.getToken();
+    String? firebase_token = await FirebaseMessaging.instance.getToken();
 
     await Provider.of<Auth>(context, listen: false)
         .login(_authData['email'].toString(), _authData['password'].toString(),
-            firebase_token!
-    )
+            firebase_token!)
         .then((_) {
       setState(() {
         _isLoading = false;
@@ -121,6 +121,20 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
     setState(() {
       _isLoading = false;
     });
+  }
+
+  String? password;
+  String? email;
+  trans() async {
+    password = await translateText('password');
+    email = await translateText('Email');
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    trans();
+    super.initState();
   }
 
   @override
@@ -166,7 +180,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                           ),
                         ).translate(),
                         const SizedBox(height: 20),
-                         Align(
+                        Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -185,7 +199,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                           child: TextFormField(
                             style: const TextStyle(fontSize: 14),
                             decoration: getInputDecoration(
-                              'Email',
+                              email ?? '',
                               Icons.email_outlined,
                             ),
                             controller: _emailController,
@@ -202,7 +216,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                           ),
                         ),
                         const SizedBox(height: 10),
-                         Align(
+                        Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -252,7 +266,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                               filled: true,
                               hintStyle: const TextStyle(
                                   color: Colors.black54, fontSize: 14),
-                              hintText: "password",
+                              hintText: password ?? '',
                               fillColor: kBackgroundColor,
                               contentPadding: const EdgeInsets.symmetric(
                                   vertical: 18, horizontal: 15),
@@ -279,7 +293,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                             Navigator.of(context)
                                 .pushNamed(ForgotPassword.routeName);
                           },
-                          child:  Padding(
+                          child: Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 20, vertical: 5),
                             child: Align(
@@ -308,7 +322,7 @@ class _AuthScreenStatePrivate extends State<AuthScreenPrivate> {
                                           BorderRadiusDirectional.circular(10),
                                       // side: const BorderSide(color: kPrimaryColor),
                                     ),
-                                    child:  Row(
+                                    child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [

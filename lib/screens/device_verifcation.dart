@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, prefer_const_constructors
 
 import 'package:academy_app/models/common_functions.dart';
 import 'package:flutter/material.dart';
@@ -260,9 +260,9 @@ class _DeviceVerificationScreenState extends State<DeviceVerificationScreen> {
                             fontSize: 22,
                             fontWeight: FontWeight.w400,
                           ),
-                        ),
+                        ).translate(),
                         const SizedBox(height: 20),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 17.0, bottom: 5.0),
@@ -272,7 +272,7 @@ class _DeviceVerificationScreenState extends State<DeviceVerificationScreen> {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w400,
                               ),
-                            ),
+                            ).translate(),
                           ),
                         ),
                         Padding(
@@ -410,7 +410,7 @@ class _DeviceVerificationScreenState extends State<DeviceVerificationScreen> {
                                           BorderRadiusDirectional.circular(10),
                                       // side: const BorderSide(color: kPrimaryColor),
                                     ),
-                                    child: const Row(
+                                    child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
@@ -421,7 +421,7 @@ class _DeviceVerificationScreenState extends State<DeviceVerificationScreen> {
                                             color: Colors.white,
                                             fontWeight: FontWeight.w500,
                                           ),
-                                        ),
+                                        ).translate(),
                                       ],
                                     ),
                                   ),

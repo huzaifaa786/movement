@@ -2,6 +2,7 @@
 
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/providers/course_forum.dart';
+import 'package:academy_app/translate_helper.dart';
 import 'package:academy_app/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_translator/google_translator.dart';
@@ -25,8 +26,18 @@ class _AskQuestionWidgetState extends State<AskQuestionWidget> {
   dynamic title;
   dynamic description;
 
+    String? summary;
+  String? detail;
+
+  trans() async {
+    summary = await translateText('Title of summary');
+    detail = await translateText('Details');
+    setState(() {});
+  }
+
   @override
   void initState() {
+    trans();
     super.initState();
   }
 
@@ -121,7 +132,7 @@ class _AskQuestionWidgetState extends State<AskQuestionWidget> {
                     TextFormField(
                       style: const TextStyle(fontSize: 16),
                       decoration: getInputDecoration(
-                        'Title of summary',
+                        summary ?? '',
                         Icons.title,
                       ),
                       keyboardType: TextInputType.text,
@@ -150,7 +161,7 @@ class _AskQuestionWidgetState extends State<AskQuestionWidget> {
                     TextFormField(
                       style: const TextStyle(fontSize: 16),
                       decoration: getInputDecoration(
-                        'Details',
+                        detail ?? '',
                         Icons.edit,
                       ),
                       keyboardType: TextInputType.text,
