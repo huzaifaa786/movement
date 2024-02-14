@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             const Text(
-                              'Top Course',
+                              'Top Courses',
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 18),
                             ).translate(),

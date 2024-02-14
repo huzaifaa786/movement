@@ -2,13 +2,22 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'package:academy_app/screens/app_translate/translate.dart';
 import 'package:academy_app/screens/courses_screen.dart';
+import 'package:academy_app/screens/login_screen.dart';
+import 'package:academy_app/screens/main_login_screen.dart';
+import 'package:academy_app/screens/message_screen.dart';
+import 'package:academy_app/screens/start_chat_screen.dart';
 import 'package:academy_app/translate_helper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:circle_flags/circle_flags.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_translator/google_translator.dart';
 import 'package:http/http.dart' as http;
 import 'package:academy_app/models/app_logo.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../constants.dart';
 import 'search_widget.dart';
 
@@ -27,6 +36,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 
 class _CustomAppBarState extends State<CustomAppBar> {
   final bool _isSearching = false;
+  String locale = "en";
   final _controller = StreamController<AppLogo>();
   final searchController = TextEditingController();
 
@@ -72,17 +82,51 @@ class _CustomAppBarState extends State<CustomAppBar> {
     );
   }
 
+  initLanguage() {
+    GetStorage box = GetStorage();
+    setState(() {
+      locale = box.read('Locale');
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    initLanguage();
     fetchMyLogo();
   }
 
-    String? search;
+  String? search;
 
   trans() async {
     search = await translateText('Search here');
     setState(() {});
+  }
+
+  redirectToTranslation(context) {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => const TranslateScreen()));
+  }
+  
+  redirectToMessages(context) async{
+      dynamic userData;
+      dynamic response;
+      dynamic token;
+
+      final prefs = await SharedPreferences.getInstance();
+      setState(() {
+        userData = (prefs.getString('userData') ?? '');
+      });
+      if (userData != null && userData.isNotEmpty) {
+        response = json.decode(userData);
+        token = response['token'];
+      }
+      if (token != null && token.isNotEmpty) {
+            Navigator.of(context).pushNamed(MessagesScreen.routeName);
+      } else {
+        Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const MainLoginScreen()));
+      }
   }
 
   @override
@@ -134,12 +178,61 @@ class _CustomAppBarState extends State<CustomAppBar> {
             ),
       backgroundColor: Colors.white,
       actions: <Widget>[
+        locale == 'en'
+            ? GestureDetector(
+                onTap: () {
+                  redirectToTranslation(context);
+                },
+                child: CircleFlag(
+                  'gb',
+                  size: 23,
+                ))
+            : GestureDetector(
+                onTap: () {
+                  redirectToTranslation(context);
+                },
+                child: CircleFlag(
+                  'se',
+                  size: 23,
+                ),
+              ),
+        SizedBox(
+          width: 7,
+        ),
         IconButton(
           icon: const Icon(
             Icons.search,
             color: kSecondaryColor,
           ),
           onPressed: () => _showSearchModal(context),
+        ),
+        IconButton(
+          icon: const Icon(
+            Icons.message_outlined,
+            color: kSecondaryColor,
+          ),
+          onPressed: () => redirectToMessages(context),
+        ),
+        PopupMenuButton<String>(
+          onSelected: (value) async {
+            if (value == "Goto Website") {
+              final Uri url = Uri.parse('https://movementapp.se/');
+              if (!await launchUrl(url)) {
+                throw Exception('Could not launch $url');
+              }
+            }  
+            else if (value == "Support") {
+                Navigator.of(context).pushNamed(StartChatScreen.routeName);
+            }
+          },
+          itemBuilder: (BuildContext context) {
+            return {'Goto Website','Support'}.map((String choice) {
+              return PopupMenuItem<String>(
+                value: choice,
+                child: Text(choice),
+              );
+            }).toList();
+          },
         ),
       ],
     );

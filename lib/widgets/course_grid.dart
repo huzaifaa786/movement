@@ -99,7 +99,7 @@ class _CourseGridState extends State<CourseGrid> {
                               : '${widget.title.toString().substring(0, 40)}...',
                           style: const TextStyle(
                               fontSize: 14, color: kTextLightColor),
-                        ).translate(),
+                        ),
                       ),
                       Row(
                         children: [

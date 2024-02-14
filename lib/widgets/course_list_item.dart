@@ -96,7 +96,7 @@ class _CourseListItemState extends State<CourseListItem> {
                         fontSize: 14,
                         color: kTextColor,
                       ),
-                    ).translate(),
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -106,7 +106,7 @@ class _CourseListItemState extends State<CourseListItem> {
                         color: Colors.grey,
                         fontSize: 12,
                       ),
-                    ).translate(),
+                    ),
                     const SizedBox(
                       height: 5,
                     ),

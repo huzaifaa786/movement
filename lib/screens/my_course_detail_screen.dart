@@ -5,11 +5,13 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:academy_app/models/common_functions.dart';
 import 'package:academy_app/models/course_db_model.dart';
+import 'package:academy_app/models/instructor.dart';
 import 'package:academy_app/models/my_course.dart';
 import 'package:academy_app/models/section_db_model.dart';
 import 'package:academy_app/models/video_db_model.dart';
 import 'package:academy_app/providers/database_helper.dart';
 import 'package:academy_app/screens/file_data_screen.dart';
+import 'package:academy_app/screens/start_chat_screen.dart';
 import 'package:academy_app/translate_helper.dart';
 import 'package:academy_app/widgets/custom_text.dart';
 import 'package:academy_app/widgets/forum_tab_widget.dart';
@@ -353,6 +355,25 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
     }
     _isInit = false;
     super.didChangeDependencies();
+  }
+
+  Future<void> handleMessageInstructor(userId) async{
+    //  var url = '$BASE_URL/api/instructor_user?user_id=$userId';
+    // final response = await http.get(Uri.parse(url));
+    // var user = json.decode(response.body);
+
+    // print("***************user");
+    // print(user);
+
+    // Instructor inst = Instructor(
+    //           id: int.parse(user['id']),
+    //           name: user['first_name'],
+    //           email: user['email'],
+    //           image: user['image']);
+        
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) =>  StartChatScreen(instructorId: userId )));
+    // print('response: ' + response.body.toString());
   }
 
   void _initDownload(
@@ -701,25 +722,44 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
-              GestureDetector(
-                onTap: () {
-                  showModalBottomSheet<void>(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return bottomsheet(myLoadedCourse);
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: (){ 
+                      handleMessageInstructor(myLoadedCourse.userId);
                     },
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text('Rate this Course  '),
-                      Icon(CupertinoIcons.star),
-                    ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Icon(Icons.message_outlined),
+                          Text('  Message Instructor'),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
+                  GestureDetector(
+                    onTap: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return bottomsheet(myLoadedCourse);
+                        },
+                      );
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text('Rate this Course  '),
+                          Icon(CupertinoIcons.star),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
               Card(
                 elevation: 0.3,

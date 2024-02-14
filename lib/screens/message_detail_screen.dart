@@ -142,11 +142,17 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
     setState(() {});
   }
 
+  ScrollController _controller = ScrollController();
+
   @override
   void initState() {
     refreshList();
     trans();
     timer = Timer.periodic(Duration(seconds: 5), (Timer t) => refreshData());
+
+    Future.delayed(const Duration(milliseconds: 1300), () {
+      _controller.jumpTo(_controller.position.maxScrollExtent);
+    });
     super.initState();
   }
 
@@ -158,11 +164,6 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ScrollController _controller = ScrollController();
-
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      _controller.jumpTo(_controller.position.maxScrollExtent);
-    });
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

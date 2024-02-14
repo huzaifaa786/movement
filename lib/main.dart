@@ -2,6 +2,7 @@
 
 import 'dart:io';
 import 'package:academy_app/firebase_options.dart';
+import 'package:academy_app/models/instructor.dart';
 import 'package:academy_app/models/store_config.dart';
 import 'package:academy_app/providers/bundles.dart';
 import 'package:academy_app/providers/course_forum.dart';
@@ -102,7 +103,7 @@ class MyApp extends StatelessWidget {
     box.read('Locale') == null ? box.write('Locale', 'en') : null;
     String locale = box.read('Locale') == null ? 'en' : box.read('Locale');
     return GoogleTranslatorInit('AIzaSyDbNMn6QSmOy3co3IaFXu09hJGBuNihHFI',
-        translateFrom: box.read('Locale') == 'en' ? Locale('ur') : Locale('en'),
+        translateFrom: box.read('Locale') == 'en' ? Locale('en') : Locale('en'),
         translateTo: Locale(locale),
         automaticDetection: false, builder: () {
       return MultiProvider(
@@ -162,7 +163,7 @@ class MyApp extends StatelessWidget {
                       AuthScreen.routeName: (ctx) => const AuthScreen(),
                       MessagesScreen.routeName: (ctx) => const MessagesScreen(),
                       StartChatScreen.routeName: (ctx) =>
-                          const StartChatScreen(),
+                          const StartChatScreen(instructorId: null),
                       AuthScreenPrivate.routeName: (ctx) =>
                           const AuthScreenPrivate(),
                       SignUpScreen.routeName: (ctx) => const SignUpScreen(),

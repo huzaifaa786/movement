@@ -60,6 +60,7 @@ class MyCourses with ChangeNotifier {
         price: courseData['price'],
         instructor: courseData['instructor_name'],
         rating: courseData['rating'],
+        userId: courseData['user_id'],
         totalNumberRating: courseData['number_of_ratings'],
         numberOfEnrollment: courseData['total_enrollment'],
         shareableLink: courseData['shareable_link'],

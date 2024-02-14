@@ -7,6 +7,7 @@ class MyCourse {
   String? price;
   String? instructor;
   int? rating;
+  String? userId;
   int? totalNumberRating;
   int? numberOfEnrollment;
   String? shareableLink;
@@ -24,6 +25,7 @@ class MyCourse {
     @required this.price,
     @required this.instructor,
     @required this.rating,
+    @required this.userId,
     @required this.totalNumberRating,
     @required this.numberOfEnrollment,
     @required this.shareableLink,

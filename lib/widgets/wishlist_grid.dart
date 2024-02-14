@@ -1,3 +1,4 @@
+import 'package:academy_app/widgets/m_custom_text.dart';
 import 'package:academy_app/widgets/util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_translator/google_translator.dart';
@@ -55,7 +56,7 @@ class WishlistGrid extends StatelessWidget {
                           const EdgeInsets.only(top: 10, left: 15, right: 15),
                       child: SizedBox(
                         height: 42,
-                        child: CustomText(
+                        child: MCustomText(
                           text: course!.title!.length < 38
                               ? course!.title
                               : course!.title!.substring(0, 37),

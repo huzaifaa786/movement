@@ -14,7 +14,9 @@ import 'package:provider/provider.dart';
 
 class StartChatScreen extends StatefulWidget {
   static const routeName = '/start-chat';
-  const StartChatScreen({super.key});
+  const StartChatScreen({super.key, this.instructorId});
+   final instructorId;
+
 
   @override
   State<StartChatScreen> createState() => _StartChatScreenState();
@@ -58,10 +60,18 @@ class _StartChatScreenState extends State<StartChatScreen> {
               email: user['email'],
               image: user['image']));
         }
-        setState(() {
-          selectedInstructor =
-              allInstructors.isNotEmpty ? allInstructors.first : null;
-        });
+
+         if(widget.instructorId != null){
+          var defaultInstructor =  allInstructors.firstWhere((instructor) => instructor.id == int.parse(widget.instructorId));
+          selectedInstructor = defaultInstructor;
+         }
+         else{
+          setState(() {
+            selectedInstructor = allInstructors.isNotEmpty
+                ? allInstructors.first
+                : null;
+          });
+         }
       }
     } catch (e) {
       // Handle any exceptions that occur during the HTTP request or JSON decoding
@@ -84,6 +94,7 @@ class _StartChatScreenState extends State<StartChatScreen> {
 
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {

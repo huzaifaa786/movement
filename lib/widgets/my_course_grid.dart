@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:academy_app/widgets/m_custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_translator/google_translator.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -120,7 +121,7 @@ class _MyCourseGridState extends State<MyCourseGrid> {
                   children: <Widget>[
                     SizedBox(
                       height: 42,
-                      child: CustomText(
+                      child: MCustomText(
                         text: widget.myCourse!.title!.length < 38
                             ? widget.myCourse!.title
                             : widget.myCourse!.title!.substring(0, 37),
