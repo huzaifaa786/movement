@@ -1426,20 +1426,29 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
                                               if (lesson.lessonType == 'video')
                                                 Expanded(
                                                   flex: 2,
-                                                  child: IconButton(
-                                                    icon: const Icon(Icons
-                                                        .file_download_outlined),
-                                                    color: Colors.black45,
-                                                    onPressed: () =>
-                                                        _initDownload(
-                                                            lesson,
-                                                            widget.courseId,
-                                                            myLoadedCourse
-                                                                .title,
-                                                            myLoadedCourse
-                                                                .thumbnail,
-                                                            section.title,
-                                                            section.id),
+                                                  child: Row(
+                                                    children: [
+                                                      if(lesson.videoTypeWeb != 'Vimeo')
+                                                      IconButton(
+                                                        icon: const Icon(Icons
+                                                            .file_download_outlined),
+                                                        color: Colors.black45,
+                                                        onPressed: () =>
+                                                            _initDownload(
+                                                                lesson,
+                                                                widget.courseId,
+                                                                myLoadedCourse
+                                                                    .title,
+                                                                myLoadedCourse
+                                                                    .thumbnail,
+                                                                section.title,
+                                                                section.id),
+                                                      ),
+                                                       Icon(
+                                                        Icons.play_circle,
+                                                        color: kPrimaryColor,
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                             ],

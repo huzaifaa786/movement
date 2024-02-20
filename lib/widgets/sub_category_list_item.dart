@@ -48,7 +48,7 @@ class SubCategoryListItem extends StatelessWidget {
                 "${index! + 1}.",
               ).translate(),
             ),
-            Expanded(
+            Flexible(
               flex: 7,
               child: Container(
                 padding:
@@ -59,8 +59,8 @@ class SubCategoryListItem extends StatelessWidget {
                   children: <Widget>[
                     Align(
                       alignment: Alignment.centerLeft,
-                      child: FittedBox(
-                        fit: BoxFit.fitWidth,
+                      child: Container(
+                        width: MediaQuery.of(context).size.width  * 0.6,
                         child: Text(
                           HtmlUnescape().convert(title!),
                           style: const TextStyle(
@@ -82,7 +82,7 @@ class SubCategoryListItem extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
+            Flexible(
               flex: 2,
               child: Padding(
                 padding: const EdgeInsets.only(right: 8.0),

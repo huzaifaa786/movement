@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   var _isInit = true;
   var _isLoading = false;
   var topCourses = [];
+  var categories = [];
   var bundles = [];
   dynamic bundleStatus;
 
@@ -85,17 +86,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
       Provider.of<Courses>(context).fetchTopCourses().then((_) {
         setState(() {
-          _isLoading = false;
           topCourses = Provider.of<Courses>(context, listen: false).topItems;
+          categories = Provider.of<Categories>(context, listen: false).items;
+          _isLoading = false;
         });
       });
       Provider.of<Courses>(context)
           .filterCourses('all', 'all', 'all', 'all', 'all');
-      Provider.of<Bundles>(context).fetchBundle(true).then((_) {
-        setState(() {
-          bundles = Provider.of<Bundles>(context, listen: false).bundleItems;
-        });
-      });
+      // Provider.of<Bundles>(context).fetchBundle(true).then((_) {
+      //   setState(() {
+      //     bundles = Provider.of<Bundles>(context, listen: false).bundleItems;
+      //   });
+      // });
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -176,10 +178,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         // child: Text(dataSnapshot.error.toString()),
                       );
               } else {
-                return Column(
+                return 
+                   _isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                            color: kPrimaryColor.withOpacity(0.7)),
+                      )
+                    : Column(
                   children: [
                     if (topCourses.isNotEmpty)
-                      Container(
+                    Container(
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 20),
@@ -217,13 +225,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                       ),
-                    _isLoading
-                        ? Center(
-                            child: CircularProgressIndicator(
-                                color: kPrimaryColor.withOpacity(0.7)),
-                          )
-                        : topCourses.isNotEmpty
-                            ? Container(
+                     Container(
                                 margin:
                                     const EdgeInsets.symmetric(vertical: 0.0),
                                 padding:
@@ -247,8 +249,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   },
                                   itemCount: topCourses.length,
                                 ),
-                              )
-                            : const SizedBox(height: 0),
+                              ),
                     if (bundleStatus == true)
                       Column(
                         children: [
@@ -356,25 +357,24 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                    Consumer<Categories>(
-                      builder: (context, myCourseData, child) => Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (ctx, index) {
-                            return CategoryListItem(
-                              id: myCourseData.items[index].id,
-                              title: myCourseData.items[index].title,
-                              thumbnail: myCourseData.items[index].thumbnail,
-                              numberOfSubCategories: myCourseData
-                                  .items[index].numberOfSubCategories,
-                            );
-                          },
-                          itemCount: myCourseData.items.length,
-                        ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal : 16.0),
+                    child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (ctx, index) {
+                              return CategoryListItem(
+                                id: categories[index].id,
+                                title: categories[index].title,
+                                thumbnail: categories[index].thumbnail,
+                                numberOfSubCategories: categories[index].numberOfSubCategories,
+                              );
+                            },
+                            itemCount: categories.length,
+                          
+                        
                       ),
-                    ),
+                  ),
                   ],
                 );
               }

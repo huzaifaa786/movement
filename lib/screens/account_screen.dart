@@ -15,6 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_translator/google_translator.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../constants.dart';
 import '../providers/database_helper.dart';
 import 'downloaded_course_list.dart';
@@ -138,6 +139,13 @@ class _AccountScreenState extends State<AccountScreen> {
   void dispose() {
     _connectivitySubscription.cancel();
     super.dispose();
+  }
+
+  handleAboutusRedirect() async{
+    final Uri url = Uri.parse('https://movementapp.se/home/about_us');
+              if (!await launchUrl(url)) {
+                throw Exception('Could not launch $url');
+              }
   }
 
   @override

@@ -3,6 +3,8 @@
 import 'dart:async';
 import 'package:academy_app/constants.dart';
 import 'package:academy_app/providers/categories.dart';
+import 'package:academy_app/providers/courses.dart';
+import 'package:academy_app/widgets/course_list_item.dart';
 import 'package:academy_app/widgets/sub_category_list_item.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,8 @@ class SubCategoryScreen extends StatefulWidget {
 }
 
 class _SubCategoryScreenState extends State<SubCategoryScreen> {
+  var _isInit = true;
+  var _isLoading = false;
   ConnectivityResult _connectionStatus = ConnectivityResult.none;
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
@@ -64,8 +68,10 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
+
     final routeArgs =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
@@ -83,93 +89,210 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
       ),
       backgroundColor: kBackgroundColor,
       body: SingleChildScrollView(
-        child: FutureBuilder(
-          future: Provider.of<Categories>(context, listen: false)
-              .fetchSubCategories(categoryId),
-          builder: (ctx, dataSnapshot) {
-            if (dataSnapshot.connectionState == ConnectionState.waiting) {
-              return SizedBox(
-                height: MediaQuery.of(context).size.height * .5,
-                child: Center(
-                  child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
-                ),
-              );
-            } else {
-              if (dataSnapshot.error != null) {
-                //error
-                return _connectionStatus == ConnectivityResult.none
-                    ? Center(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * .15),
-                            Image.asset(
-                              "assets/images/no_connection.png",
-                              height: MediaQuery.of(context).size.height * .35,
-                            ),
-                             Padding(
-                              padding: EdgeInsets.all(4.0),
-                              child: Text('There is no Internet connection').translate(),
-                            ),
-                             Padding(
-                              padding: EdgeInsets.all(4.0),
-                              child:
-                                  Text('Please check your Internet connection').translate(),
-                            ),
-                          ],
-                        ),
-                      )
-                    :  Center(
-                        child: Text('Error Occured').translate(),
-                        // child: Text(dataSnapshot.error.toString()),
-                      );
-              } else {
-                return Consumer<Categories>(
-                  builder: (context, myCourseData, child) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 10,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: <Widget>[
-                              Text(
-                                'Showing ${myCourseData.subItems.length} Sub-Categories',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w300,
-                                  fontSize: 17,
-                                ),
-                              ).translate(),
-                            ],
-                          ),
-                        ),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: myCourseData.subItems.length,
-                          itemBuilder: (ctx, index) {
-                            return SubCategoryListItem(
-                              id: myCourseData.subItems[index].id,
-                              title: myCourseData.subItems[index].title,
-                              parent: myCourseData.subItems[index].parent,
-                              numberOfCourses:
-                                  myCourseData.subItems[index].numberOfCourses,
-                              index: index,
-                            );
-                          },
-                        ),
-                      ],
+        child: Column(
+          children: [
+            FutureBuilder(
+              future: Provider.of<Categories>(context, listen: false)
+                  .fetchSubCategories(categoryId),
+              builder: (ctx, dataSnapshot) {
+                if (dataSnapshot.connectionState == ConnectionState.waiting) {
+                  return SizedBox(
+                    height: MediaQuery.of(context).size.height * .5,
+                    child: Center(
+                      child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
                     ),
-                  ),
-                );
-              }
-            }
-          },
+                  );
+                } else {
+                  if (dataSnapshot.error != null) {
+                    //error
+                    return _connectionStatus == ConnectivityResult.none
+                        ? Center(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                    height:
+                                        MediaQuery.of(context).size.height * .15),
+                                Image.asset(
+                                  "assets/images/no_connection.png",
+                                  height: MediaQuery.of(context).size.height * .35,
+                                ),
+                                 Padding(
+                                  padding: EdgeInsets.all(4.0),
+                                  child: Text('There is no Internet connection').translate(),
+                                ),
+                                 Padding(
+                                  padding: EdgeInsets.all(4.0),
+                                  child:
+                                      Text('Please check your Internet connection').translate(),
+                                ),
+                              ],
+                            ),
+                          )
+                        :  Center(
+                            child: Text('Error Occured').translate(),
+                            // child: Text(dataSnapshot.error.toString()),
+                          );
+                  } else {
+                    print("else ma a gya ha");
+                    return Column(
+                      children: [
+                
+                        Consumer<Categories>(
+                          builder: (context, myCategoryData, child) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 10,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        'Showing ${myCategoryData.subItems.length} Sub-Categories',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 17,
+                                        ),
+                                      ).translate(),
+                                    ],
+                                  ),
+                                ),
+                                ListView.builder(
+                                  shrinkWrap: true,
+                                  // physics: const NeverScrollableScrollPhysics(),
+                                  itemCount: myCategoryData.subItems.length,
+                                  itemBuilder: (ctx, index) {
+                                    return 
+                                    SubCategoryListItem(
+                                      id: myCategoryData.subItems[index].id,
+                                      title: myCategoryData.subItems[index].title,
+                                      parent: myCategoryData.subItems[index].parent,
+                                      numberOfCourses:
+                                          myCategoryData
+                                          .subItems[index].numberOfCourses,
+                                      index: index,
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                          
+                      ],
+                    );
+                  }
+                }
+              },
+            ),
+            
+            FutureBuilder(
+              future: Provider.of<Courses>(context, listen: false)
+                  .fetchCoursesByCategory(categoryId),
+              builder: (ctx, dataSnapshot) {
+                  if (dataSnapshot.error != null) {
+                    //error
+                    return _connectionStatus == ConnectivityResult.none
+                        ? Center(
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                    height:
+                                        MediaQuery.of(context).size.height * .15),
+                                Image.asset(
+                                  "assets/images/no_connection.png",
+                                  height: MediaQuery.of(context).size.height * .35,
+                                ),
+                                 Padding(
+                                  padding: EdgeInsets.all(4.0),
+                                  child: Text('There is no Internet connection').translate(),
+                                ),
+                                 Padding(
+                                  padding: EdgeInsets.all(4.0),
+                                  child:
+                                      Text('Please check your Internet connection').translate(),
+                                ),
+                              ],
+                            ),
+                          )
+                        :  Center(
+                            child: Text('Error Occured').translate(),
+                            // child: Text(dataSnapshot.error.toString()),
+                          );
+                  } else {
+                    print("else ma a gya ha");
+                    return Column(
+                      children: [
+                
+                        Consumer<Courses>(
+                          builder: (context, courseData, child) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 15),
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 10,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: <Widget>[
+                                      Text(
+                                        'Showing ${courseData.items.length} Courses',
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          fontSize: 17,
+                                        ),
+                                      ).translate(),
+                                    ],
+                                  ),
+                                ),
+                                 ListView.builder(
+                                   shrinkWrap: true,
+                                   physics:
+                                       const NeverScrollableScrollPhysics(),
+                                   itemBuilder: (ctx, index) {
+                                     return Center(
+                                       child: CourseListItem(
+                                         id: courseData.items[index].id!.toInt(),
+                                         title: courseData.items[index]
+                                             .title
+                                             .toString(),
+                                         thumbnail: courseData.items[index]
+                                             .thumbnail
+                                             .toString(),
+                                         rating:
+                                             courseData.items[index].rating!.toInt(),
+                                         price: courseData.items[index]
+                                             .price
+                                             .toString(),
+                                         instructor: courseData.items[index]
+                                             .instructor
+                                             .toString(),
+                                         noOfRating: courseData.items[index]
+                                             .totalNumberRating!
+                                             .toInt(),
+                                         product_id:
+                                             courseData.items[index].productId,
+                                       ),
+                                     );
+                                   },
+                                   itemCount: courseData.items.length,
+                                 ),
+                              ],
+                            ),
+                          ),
+                        ),
+                          
+                      ],
+                    );
+                  }
+              },
+            ),
+          ],
         ),
       ),
     );

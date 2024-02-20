@@ -183,21 +183,7 @@ class _MyCoursesScreenState extends State<MyCoursesScreen>
               : SingleChildScrollView(
                   child: Column(
                     children: [
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
-                        child:  Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text(
-                              'My Courses',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400, fontSize: 20),
-                            ).translate(),
-                          ],
-                        ),
-                      ),
+                     
                       courseView(),
                     ],
                   ),
@@ -245,23 +231,42 @@ class _MyCoursesScreenState extends State<MyCoursesScreen>
                     child: Text(dataSnapshot.error.toString()).translate(),
                   );
           } else {
-            return Consumer<MyCourses>(
-              builder: (context, myCourseData, child) =>
-                  AlignedGridView.count(
-                padding: const EdgeInsets.all(10.0),
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                itemCount: myCourseData.items.length,
-                itemBuilder: (ctx, index) {
-                  return MyCourseGrid(
-                    myCourse: myCourseData.items[index],
-                  );
-                  // return Text(myCourseData.items[index].title);
-                },
-                mainAxisSpacing: 5.0,
-                crossAxisSpacing: 5.0,
-              ),
+            return Column(
+              children: [
+                 Container(
+                  width: double.infinity,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'My Courses',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, fontSize: 20),
+                      ).translate(),
+                    ],
+                  ),
+                ),
+                Consumer<MyCourses>(
+                  builder: (context, myCourseData, child) =>
+                      AlignedGridView.count(
+                    padding: const EdgeInsets.all(10.0),
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: 2,
+                    itemCount: myCourseData.items.length,
+                    itemBuilder: (ctx, index) {
+                      return MyCourseGrid(
+                        myCourse: myCourseData.items[index],
+                      );
+                      // return Text(myCourseData.items[index].title);
+                    },
+                    mainAxisSpacing: 5.0,
+                    crossAxisSpacing: 5.0,
+                  ),
+                ),
+              ],
             );
           }
         }

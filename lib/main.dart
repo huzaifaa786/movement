@@ -13,6 +13,7 @@ import 'package:academy_app/screens/auth_screen_private.dart';
 import 'package:academy_app/screens/downloaded_course_list.dart';
 import 'package:academy_app/screens/edit_password_screen.dart';
 import 'package:academy_app/screens/edit_profile_screen.dart';
+import 'package:academy_app/screens/intro_screen.dart';
 import 'package:academy_app/screens/message_detail_screen.dart';
 import 'package:academy_app/screens/message_screen.dart';
 import 'package:academy_app/screens/start_chat_screen.dart';
@@ -103,11 +104,10 @@ class MyApp extends StatelessWidget {
     box.read('Locale') == null ? box.write('Locale', 'en') : null;
     String locale = box.read('Locale') == null ? 'en' : box.read('Locale');
     return GoogleTranslatorInit('AIzaSyDbNMn6QSmOy3co3IaFXu09hJGBuNihHFI',
-        translateFrom: box.read('Locale') == 'en' ? Locale('en') : Locale('en'),
-        translateTo: Locale(locale),
-        automaticDetection: false, builder: () {
+        translateFrom: box.read('Locale') == 'en' ? Locale('ur') : Locale('en'),
+        translateTo: Locale(locale), builder: () {
       return MultiProvider(
-          providers: [
+          providers: [ 
             ChangeNotifierProvider(
               create: (ctx) => Auth(),
             ),
@@ -157,7 +157,7 @@ class MyApp extends StatelessWidget {
                           .copyWith(secondary: kDarkButtonBg),
                     ),
                     debugShowCheckedModeBanner: false,
-                    home: const SplashScreen(),
+                    home:  SplashScreen(),
                     routes: {
                       '/home': (ctx) => const TabsScreen(),
                       AuthScreen.routeName: (ctx) => const AuthScreen(),

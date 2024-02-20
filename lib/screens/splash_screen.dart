@@ -4,7 +4,9 @@ import 'dart:convert';
 
 import 'package:academy_app/constants.dart';
 import 'package:academy_app/screens/auth_screen_private.dart';
+import 'package:academy_app/screens/intro_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../providers/shared_pref_helper.dart';
 import 'tabs_screen.dart';
 import 'package:http/http.dart' as http;
@@ -36,9 +38,22 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    donLogin();
+    checkFirstSeen();
     systemSettings();
     super.initState();
+  }
+   Future checkFirstSeen() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool _seen = (prefs.getBool('seen') ?? false);
+
+    if (_seen) {
+      donLogin();
+    } else {
+      await prefs.setBool('seen', true);
+         Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) =>  IntroScreen()));
+      ;
+    }
   }
 
   void donLogin() {

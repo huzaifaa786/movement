@@ -54,6 +54,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
     }
   }
 
+    handleAboutusRedirect() async {
+    final Uri url = Uri.parse('https://movementapp.se/home/about_us');
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
   void _handleSubmitted(String value) {
     final searchText = searchController.text;
     if (searchText.isEmpty) {
@@ -224,9 +231,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
             else if (value == "Support") {
                 Navigator.of(context).pushNamed(StartChatScreen.routeName);
             }
+            
+            else if (value == "About Us") {
+               handleAboutusRedirect();
+            }
           },
           itemBuilder: (BuildContext context) {
-            return {'Goto Website','Support'}.map((String choice) {
+            return {'Goto Website','Support', 'About Us'}.map((String choice) {
               return PopupMenuItem<String>(
                 value: choice,
                 child: Text(choice),
