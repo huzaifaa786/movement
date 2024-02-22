@@ -2,7 +2,6 @@
 
 import 'dart:async';
 import 'dart:convert';
-import 'package:academy_app/providers/bundles.dart';
 import 'package:academy_app/widgets/bundle_grid.dart';
 import 'package:google_translator/google_translator.dart';
 import '../providers/categories.dart';
@@ -178,205 +177,207 @@ class _HomeScreenState extends State<HomeScreen> {
                         // child: Text(dataSnapshot.error.toString()),
                       );
               } else {
-                return 
-                   _isLoading
+                return _isLoading
                     ? Center(
                         child: CircularProgressIndicator(
                             color: kPrimaryColor.withOpacity(0.7)),
                       )
                     : Column(
-                  children: [
-                    if (topCourses.isNotEmpty)
-                    Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10, horizontal: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            const Text(
-                              'Top Courses',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600, fontSize: 18),
-                            ).translate(),
-                            MaterialButton(
-                              onPressed: () {
-                                Navigator.of(context).pushNamed(
-                                  CoursesScreen.routeName,
-                                  arguments: {
-                                    'category_id': null,
-                                    'seacrh_query': null,
-                                    'type': CoursesPageData.All,
-                                  },
-                                );
-                              },
-                              padding: const EdgeInsets.all(0),
-                              child: Row(
-                                children: [
-                                  const Text('All courses').translate(),
-                                  Icon(
-                                    Icons.arrow_forward_ios_rounded,
-                                    color: kPrimaryColor.withOpacity(0.7),
-                                    size: 18,
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                     Container(
-                                margin:
-                                    const EdgeInsets.symmetric(vertical: 0.0),
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                height: 260.0,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (ctx, index) {
-                                    return CourseGrid(
-                                      id: topCourses[index].id,
-                                      title: topCourses[index].title,
-                                      thumbnail: topCourses[index].thumbnail,
-                                      instructorName:
-                                          topCourses[index].instructor,
-                                      instructorImage:
-                                          topCourses[index].instructorImage,
-                                      rating: topCourses[index].rating,
-                                      price: topCourses[index].price,
-                                      product_id: topCourses[index].productId,
-                                    );
-                                  },
-                                  itemCount: topCourses.length,
-                                ),
-                              ),
-                    if (bundleStatus == true)
-                      Column(
                         children: [
-                          if (bundles.isNotEmpty)
+                          if (topCourses.isNotEmpty)
+                            // Container(
+                            //     width: double.infinity,
+                            //     padding: const EdgeInsets.symmetric(
+                            //         vertical: 10, horizontal: 20),
+                            //     child: Row(
+                            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            //       children: <Widget>[
+                            //         const Text(
+                            //           'Top Courses',
+                            //           style: TextStyle(
+                            //               fontWeight: FontWeight.w600, fontSize: 18),
+                            //         ).translate(),
+                            //         MaterialButton(
+                            //           onPressed: () {
+                            //             Navigator.of(context).pushNamed(
+                            //               CoursesScreen.routeName,
+                            //               arguments: {
+                            //                 'category_id': null,
+                            //                 'seacrh_query': null,
+                            //                 'type': CoursesPageData.All,
+                            //               },
+                            //             );
+                            //           },
+                            //           padding: const EdgeInsets.all(0),
+                            //           child: Row(
+                            //             children: [
+                            //               const Text('All courses').translate(),
+                            //               Icon(
+                            //                 Icons.arrow_forward_ios_rounded,
+                            //                 color: kPrimaryColor.withOpacity(0.7),
+                            //                 size: 18,
+                            //               ),
+                            //             ],
+                            //           ),
+                            //         )
+                            //       ],
+                            //     ),
+                            //   ),
                             Container(
-                              width: double.infinity,
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10, horizontal: 20),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  const Text(
-                                    'Bundles',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18),
-                                  ).translate(),
-                                  MaterialButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushNamed(
-                                        BundleListScreen.routeName,
-                                      );
-                                    },
-                                    padding: const EdgeInsets.all(0),
+                              margin:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              height: 360.0,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (ctx, index) {
+                                  return CourseGrid(
+                                    id: topCourses[index].id,
+                                    title: topCourses[index].title,
+                                    thumbnail: topCourses[index].thumbnail,
+                                    instructorName:
+                                        topCourses[index].instructor,
+                                    instructorImage:
+                                        topCourses[index].instructorImage,
+                                    rating: topCourses[index].rating,
+                                    price: topCourses[index].price,
+                                    product_id: topCourses[index].productId,
+                                  );
+                                },
+                                itemCount: topCourses.length,
+                              ),
+                            ),
+                          if (bundleStatus == true)
+                            Column(
+                              children: [
+                                if (bundles.isNotEmpty)
+                                  Container(
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 20),
                                     child: Row(
-                                      children: [
-                                        const Text('All bundles').translate(),
-                                        Icon(
-                                          Icons.arrow_forward_ios_rounded,
-                                          color: kPrimaryColor.withOpacity(0.7),
-                                          size: 18,
-                                        ),
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: <Widget>[
+                                        const Text(
+                                          'Bundles',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600,
+                                              fontSize: 18),
+                                        ).translate(),
+                                        MaterialButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pushNamed(
+                                              BundleListScreen.routeName,
+                                            );
+                                          },
+                                          padding: const EdgeInsets.all(0),
+                                          child: Row(
+                                            children: [
+                                              const Text('All bundles')
+                                                  .translate(),
+                                              Icon(
+                                                Icons.arrow_forward_ios_rounded,
+                                                color: kPrimaryColor
+                                                    .withOpacity(0.7),
+                                                size: 18,
+                                              ),
+                                            ],
+                                          ),
+                                        )
                                       ],
                                     ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          bundles.isNotEmpty
-                              ? Container(
-                                  margin:
-                                      const EdgeInsets.symmetric(vertical: 0.0),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 20),
-                                  height: 240.0,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (ctx, index) {
-                                      return BundleGrid(
-                                        id: bundles[index].id,
-                                        title: bundles[index].title,
-                                        banner:
-                                            // ignore: prefer_interpolation_to_compose_strings
-                                            '$BASE_URL/uploads/course_bundle/banner/' +
-                                                bundles[index].banner,
-                                        averageRating:
-                                            bundles[index].averageRating,
-                                        numberOfRatings:
-                                            bundles[index].numberOfRatings,
-                                        price: bundles[index].price,
-                                      );
-                                    },
-                                    itemCount: bundles.length,
                                   ),
-                                )
-                              : const SizedBox(height: 0),
-                        ],
-                      ),
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 10, horizontal: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          const Text(
-                            'Course Categories',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600, fontSize: 18),
-                          ).translate(),
-                          MaterialButton(
-                            onPressed: () {
-                              Navigator.of(context).pushNamed(
-                                CoursesScreen.routeName,
-                                arguments: {
-                                  'category_id': null,
-                                  'seacrh_query': null,
-                                  'type': CoursesPageData.All,
-                                },
-                              );
-                            },
-                            padding: const EdgeInsets.all(0),
-                            child: Row(
-                              children: [
-                                const Text('All courses').translate(),
-                                Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  color: kPrimaryColor.withOpacity(0.7),
-                                  size: 18,
-                                ),
+                                bundles.isNotEmpty
+                                    ? Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 0.0),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 20),
+                                        height: 240.0,
+                                        child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          itemBuilder: (ctx, index) {
+                                            return BundleGrid(
+                                              id: bundles[index].id,
+                                              title: bundles[index].title,
+                                              banner:
+                                                  // ignore: prefer_interpolation_to_compose_strings
+                                                  '$BASE_URL/uploads/course_bundle/banner/' +
+                                                      bundles[index].banner,
+                                              averageRating:
+                                                  bundles[index].averageRating,
+                                              numberOfRatings: bundles[index]
+                                                  .numberOfRatings,
+                                              price: bundles[index].price,
+                                            );
+                                          },
+                                          itemCount: bundles.length,
+                                        ),
+                                      )
+                                    : const SizedBox(height: 0),
                               ],
                             ),
-                          )
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 10, horizontal: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                const Text(
+                                  'Course Categories',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18),
+                                ).translate(),
+                                MaterialButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pushNamed(
+                                      CoursesScreen.routeName,
+                                      arguments: {
+                                        'category_id': null,
+                                        'seacrh_query': null,
+                                        'type': CoursesPageData.All,
+                                      },
+                                    );
+                                  },
+                                  padding: const EdgeInsets.all(0),
+                                  child: Row(
+                                    children: [
+                                      const Text('All courses').translate(),
+                                      Icon(
+                                        Icons.arrow_forward_ios_rounded,
+                                        color: kPrimaryColor.withOpacity(0.7),
+                                        size: 18,
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemBuilder: (ctx, index) {
+                                return CategoryListItem(
+                                  id: categories[index].id,
+                                  title: categories[index].title,
+                                  thumbnail: categories[index].thumbnail,
+                                  numberOfSubCategories:
+                                      categories[index].numberOfSubCategories,
+                                );
+                              },
+                              itemCount: categories.length,
+                            ),
+                          ),
                         ],
-                      ),
-                    ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal : 16.0),
-                    child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (ctx, index) {
-                              return CategoryListItem(
-                                id: categories[index].id,
-                                title: categories[index].title,
-                                thumbnail: categories[index].thumbnail,
-                                numberOfSubCategories: categories[index].numberOfSubCategories,
-                              );
-                            },
-                            itemCount: categories.length,
-                          
-                        
-                      ),
-                  ),
-                  ],
-                );
+                      );
               }
             }
           },

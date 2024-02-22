@@ -58,14 +58,15 @@ class _CourseGridState extends State<CourseGrid> {
             .pushNamed(CourseDetailScreen.routeName, arguments: widget.id);
       },
       child: SizedBox(
-        width: 200,
+        width: 275,
         child: Padding(
-          padding: const EdgeInsets.only(right: 5.0),
+          padding: const EdgeInsets.only(right: 5.0, top: 10),
           child: Card(
+            surfaceTintColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
-            elevation: 0,
+            elevation: 2,
             child: Column(
               children: <Widget>[
                 Stack(
@@ -77,8 +78,8 @@ class _CourseGridState extends State<CourseGrid> {
                         child: FadeInImage.assetNetwork(
                           placeholder: 'assets/images/loading_animated.gif',
                           image: widget.thumbnail.toString(),
-                          height: 130,
-                          width: 200,
+                          height: 215,
+                          width: 230,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -98,7 +99,7 @@ class _CourseGridState extends State<CourseGrid> {
                               ? widget.title.toString()
                               : '${widget.title.toString().substring(0, 40)}...',
                           style: const TextStyle(
-                              fontSize: 14, color: kTextLightColor),
+                              fontSize: 16, color: kTextLightColor),
                         ),
                       ),
                       Row(
@@ -113,7 +114,7 @@ class _CourseGridState extends State<CourseGrid> {
                             padding: const EdgeInsets.only(left: 5.0),
                             child: CustomText(
                               text: widget.instructorName,
-                              fontSize: 13,
+                              fontSize: 15,
                             ),
                           ),
                         ],
@@ -129,12 +130,12 @@ class _CourseGridState extends State<CourseGrid> {
                             filledStar: const Icon(
                               Icons.star,
                               color: kStarColor,
-                              size: 18,
+                              size: 20,
                             ),
                             unfilledStar: const Icon(
                               Icons.star_border,
                               color: kStarColor,
-                              size: 18,
+                              size: 20,
                             ),
                           ),
                           Text(
