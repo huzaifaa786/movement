@@ -124,6 +124,9 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
         setState(() {
           _isLoading = false;
         });
+         Future.delayed(const Duration(milliseconds: 500), () {
+          _controller.jumpTo(_controller.position.maxScrollExtent);
+        });
       } else {
         CommonFunctions.showErrorDialog('Message cannot be empty', context);
       }
@@ -150,7 +153,7 @@ class _MessageDetailScreenState extends State<MessageDetailScreen> {
     trans();
     timer = Timer.periodic(Duration(seconds: 5), (Timer t) => refreshData());
 
-    Future.delayed(const Duration(milliseconds: 1300), () {
+    Future.delayed(const Duration(milliseconds: 1800), () {
       _controller.jumpTo(_controller.position.maxScrollExtent);
     });
     super.initState();

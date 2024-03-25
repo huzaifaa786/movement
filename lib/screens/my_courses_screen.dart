@@ -28,22 +28,29 @@ class _MyCoursesScreenState extends State<MyCoursesScreen>
   late TabController _tabController;
   late ScrollController _scrollController;
 
-  ConnectivityResult _connectionStatus = ConnectivityResult.none;
+  ConnectivityResult _connectionStatus = ConnectivityResult.wifi;
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 
-  bool _isLoading = true;
+  bool _isLoading = false;
   dynamic bundleStatus = false;
 
   @override
   void initState() {
+    setState(() {
+      _isLoading = true;
+    });
     _scrollController = ScrollController();
     _scrollController.addListener(_scrollListener);
     _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(_smoothScrollToTop);
+    Provider.of<MyCourses>(context, listen: false).fetchMyCourses();
+    setState(() {
+      _isLoading = false;
+    });
     super.initState();
 
-    addonStatus();
+    // addonStatus();
 
     initConnectivity();
 
@@ -106,172 +113,83 @@ class _MyCoursesScreenState extends State<MyCoursesScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kBackgroundColor,
-      body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
-            )
-          : bundleStatus == true
-              ? NestedScrollView(
-                  controller: _scrollController,
-                  headerSliverBuilder: (context, value) {
-                    return [
-                      SliverToBoxAdapter(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15.0, vertical: 10),
-                          child: TabBar(
-                            controller: _tabController,
-                            isScrollable: false,
-                            indicatorColor: kPrimaryColor,
-                            indicatorSize: TabBarIndicatorSize.tab,
-                            indicator: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: kPrimaryColor),
-                            unselectedLabelColor: Colors.black87,
-                            labelColor: Colors.white,
-                            tabs:  [
-                              Tab(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.play_lesson,
-                                      size: 15,
-                                    ),
-                                    Text(
-                                      'My Courses',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
-                                      ),
-                                    ).translate(),
-                                  ],
-                                ),
-                              ),
-                              Tab(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.all_inbox,
-                                      size: 15,
-                                    ),
-                                    Text(
-                                      'My Bundles',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12,
-                                      ),
-                                    ).translate(),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ];
-                  },
-                  body: TabBarView(
-                    controller: _tabController,
-                    children: [
-                      courseView(),
-                      bundleView(),
-                    ],
-                  ),
-                )
-              : SingleChildScrollView(
-                  child: Column(
-                    children: [
-                     
-                      courseView(),
-                    ],
-                  ),
-                ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            courseView(),
+          ],
+        ),
+      ),
     );
   }
 
   Widget courseView() {
-    return FutureBuilder(
-      future: Provider.of<MyCourses>(context, listen: false).fetchMyCourses(),
-      builder: (ctx, dataSnapshot) {
-        if (dataSnapshot.connectionState == ConnectionState.waiting) {
-          return SizedBox(
-            height: MediaQuery.of(context).size.height * .7,
-            child: Center(
-              child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
-            ),
-          );
-        } else {
-          if (dataSnapshot.error != null) {
-            //error
-            return _connectionStatus == ConnectivityResult.none
-                ? Center(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                            height: MediaQuery.of(context).size.height * .15),
-                        Image.asset(
-                          "assets/images/no_connection.png",
-                          height: MediaQuery.of(context).size.height * .35,
-                        ),
-                         Padding(
-                          padding: EdgeInsets.all(4.0),
-                          child: Text('There is no Internet connection').translate(),
-                        ),
-                         Padding(
-                          padding: EdgeInsets.all(4.0),
-                          child: Text('Please check your Internet connection').translate(),
-                        ),
-                      ],
-                    ),
-                  )
-                : Center(
-                    // child: Text('Error Occured'),
-                    child: Text(dataSnapshot.error.toString()).translate(),
-                  );
-          } else {
-            return Column(
+    return _connectionStatus == ConnectivityResult.none
+        ? Center(
+            child: Column(
               children: [
-                 Container(
-                  width: double.infinity,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        'My Courses',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 20),
-                      ).translate(),
-                    ],
-                  ),
+                SizedBox(height: MediaQuery.of(context).size.height * .15),
+                Image.asset(
+                  "assets/images/no_connection.png",
+                  height: MediaQuery.of(context).size.height * .35,
                 ),
-                Consumer<MyCourses>(
-                  builder: (context, myCourseData, child) =>
-                      AlignedGridView.count(
-                    padding: const EdgeInsets.all(10.0),
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 2,
-                    itemCount: myCourseData.items.length,
-                    itemBuilder: (ctx, index) {
-                      return MyCourseGrid(
-                        myCourse: myCourseData.items[index],
-                      );
-                      // return Text(myCourseData.items[index].title);
-                    },
-                    mainAxisSpacing: 5.0,
-                    crossAxisSpacing: 5.0,
-                  ),
+                Padding(
+                  padding: EdgeInsets.all(4.0),
+                  child: Text('There is no Internet connection').translate(),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(4.0),
+                  child:
+                      Text('Please check your Internet connection').translate(),
                 ),
               ],
-            );
-          }
-        }
-      },
-    );
+            ),
+          )
+        : _isLoading
+            ? SizedBox(
+                height: 150,
+                child: Center(
+                  child: CircularProgressIndicator(
+                      color: kPrimaryColor.withOpacity(0.7)),
+                ),
+              )
+            : Column(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text(
+                          'My Courses',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w400, fontSize: 20),
+                        ).translate(),
+                      ],
+                    ),
+                  ),
+                  Consumer<MyCourses>(
+                    builder: (context, myCourseData, child) =>
+                        AlignedGridView.count(
+                      padding: const EdgeInsets.all(10.0),
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      crossAxisCount: 2,
+                      itemCount: myCourseData.items.length,
+                      itemBuilder: (ctx, index) {
+                        return MyCourseGrid(
+                          myCourse: myCourseData.items[index],
+                        );
+                        // return Text(myCourseData.items[index].title);
+                      },
+                      mainAxisSpacing: 5.0,
+                      crossAxisSpacing: 5.0,
+                    ),
+                  ),
+                ],
+              );
   }
 
   Widget bundleView() {
@@ -281,7 +199,8 @@ class _MyCoursesScreenState extends State<MyCoursesScreen>
         builder: (ctx, dataSnapshot) {
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
             return Center(
-              child: CircularProgressIndicator(color: kPrimaryColor.withOpacity(0.7)),
+              child: CircularProgressIndicator(
+                  color: kPrimaryColor.withOpacity(0.7)),
             );
           } else {
             if (dataSnapshot.error != null) {
@@ -296,14 +215,15 @@ class _MyCoursesScreenState extends State<MyCoursesScreen>
                             "assets/images/no_connection.png",
                             height: MediaQuery.of(context).size.height * .35,
                           ),
-                           Padding(
+                          Padding(
                             padding: EdgeInsets.all(4.0),
-                            child: Text('There is no Internet connection').translate(),
+                            child: Text('There is no Internet connection')
+                                .translate(),
                           ),
-                           Padding(
+                          Padding(
                             padding: EdgeInsets.all(4.0),
-                            child:
-                                Text('Please check your Internet connection').translate(),
+                            child: Text('Please check your Internet connection')
+                                .translate(),
                           ),
                         ],
                       ),

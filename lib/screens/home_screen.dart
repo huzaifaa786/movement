@@ -40,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    addonStatus();
+    // addonStatus();
     initConnectivity();
 
     _connectivitySubscription =
@@ -70,15 +70,20 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
-  Future<void> addonStatus() async {
-    var url = '$BASE_URL/api/addon_status?unique_identifier=course_bundle';
-    final response = await http.get(Uri.parse(url));
-    bundleStatus = json.decode(response.body)['status'];
-  }
+  // Future<void> addonStatus() async {
+  //   var url = '$BASE_URL/api/addon_status?unique_identifier=course_bundle';
+  //   final response = await http.get(Uri.parse(url));
+  //   bundleStatus = json.decode(response.body)['status'];
+  // }
 
   @override
   void didChangeDependencies() {
-    if (_isInit) {
+      initHomeScreen();
+    super.didChangeDependencies();
+  }
+
+  void initHomeScreen() {
+       if (_isInit) {
       setState(() {
         _isLoading = true;
       });
@@ -92,14 +97,8 @@ class _HomeScreenState extends State<HomeScreen> {
       });
       Provider.of<Courses>(context)
           .filterCourses('all', 'all', 'all', 'all', 'all');
-      // Provider.of<Bundles>(context).fetchBundle(true).then((_) {
-      //   setState(() {
-      //     bundles = Provider.of<Bundles>(context, listen: false).bundleItems;
-      //   });
-      // });
     }
     _isInit = false;
-    super.didChangeDependencies();
   }
 
   Future<void> refreshList() async {
@@ -173,7 +172,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       )
                     : Center(
-                        child: Text('Error Occured').translate(),
+                        child: Column(
+                          children: [
+                            Text('Error Occured').translate(),
+                            SizedBox(height: 20),
+                            ElevatedButton(
+                              onPressed: () {
+                               initHomeScreen();
+                              },
+                              child: Text('Refresh'),
+                            ),
+                          ],
+                        ),
                         // child: Text(dataSnapshot.error.toString()),
                       );
               } else {

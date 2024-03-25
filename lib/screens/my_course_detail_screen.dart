@@ -16,6 +16,7 @@ import 'package:academy_app/translate_helper.dart';
 import 'package:academy_app/widgets/custom_text.dart';
 import 'package:academy_app/widgets/forum_tab_widget.dart';
 import 'package:academy_app/widgets/live_class_tab_widget.dart';
+import 'package:academy_app/widgets/m_custom_text.dart';
 import 'package:background_downloader/background_downloader.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -888,7 +889,7 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
                               padding: const EdgeInsets.symmetric(
                                 vertical: 5.0,
                               ),
-                              child: CustomText(
+                              child: MCustomText(
                                 text: HtmlUnescape()
                                     .convert(section.title.toString()),
                                 colors: kDarkGreyColor,
@@ -913,7 +914,7 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
                                     ),
                                     child: Align(
                                       alignment: Alignment.center,
-                                      child: CustomText(
+                                      child: MCustomText(
                                         text: section.totalDuration,
                                         fontSize: 10,
                                         colors: kTimeColor,
@@ -942,7 +943,7 @@ class _MyCourseDetailScreenState extends State<MyCourseDetailScreen>
                                           borderRadius:
                                               BorderRadius.circular(3),
                                         ),
-                                        child: CustomText(
+                                        child: MCustomText(
                                           text:
                                               '${section.mLesson!.length} Lessons',
                                           fontSize: 10,

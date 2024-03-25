@@ -66,7 +66,7 @@ class _CourseGridState extends State<CourseGrid> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12),
             ),
-            elevation: 2,
+            elevation: 0,
             child: Column(
               children: <Widget>[
                 Stack(

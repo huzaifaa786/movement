@@ -32,13 +32,19 @@ class AccountScreen extends StatefulWidget {
 }
 
 class _AccountScreenState extends State<AccountScreen> {
-  ConnectivityResult _connectionStatus = ConnectivityResult.none;
+  ConnectivityResult _connectionStatus = ConnectivityResult.wifi;
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+
+  bool _isLoading = true;
 
   dynamic courseAccessibility;
 
   systemSettings() async {
+    setState(() {
+      _isLoading = true;
+    });
+    Provider.of<Auth>(context, listen: false).getUserInfo();
     var url = "$BASE_URL/api/system_settings";
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -51,53 +57,20 @@ class _AccountScreenState extends State<AccountScreen> {
         courseAccessibility = '';
       });
     }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   List<int> courseArr = [];
-
-  Future<List<Map<String, dynamic>>?> getVideos() async {
-    // List<Map<String, dynamic>> listMap =
-    //     await DatabaseHelper.instance.queryAllRows('video_list');
-    // setState(() {
-    //   for (var map in listMap) {
-    //     File checkPath = File("${map['path']}/${map['title']}");
-    //     if(checkPath.existsSync()) {
-    //       courseArr.add(map['course_id']);
-    //     } else {
-    //       DatabaseHelper.instance.removeVideo(map['id']);
-    //     }
-    //   }
-    // });
-    return null;
-  }
-
-  Future<List<Map<String, dynamic>>?> getCourse() async {
-    // List<Map<String, dynamic>> listMap =
-    //     await DatabaseHelper.instance.queryAllRows('course_list');
-
-    // for (var map in listMap) {
-    //   print('map');
-    //   print(courseArr);
-    //   print(courseArr.contains(map['course_id']));
-    // if(!courseArr.contains(map['course_id'])){
-    //   await DatabaseHelper.instance.removeCourse(map['course_id']);
-    //   await DatabaseHelper.instance.removeCourseSection(map['course_id']);
-    // }
-    // }
-
-    return null;
-  }
 
   @override
   void initState() {
     super.initState();
     initConnectivity();
-    getVideos();
-    getCourse();
     systemSettings();
 
     GetStorage box = GetStorage();
-    print('${box.read('Locale')} ************************** locale dekho');
 
     _connectivitySubscription =
         _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
@@ -150,18 +123,7 @@ class _AccountScreenState extends State<AccountScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-        future: Provider.of<Auth>(context, listen: false).getUserInfo(),
-        builder: (ctx, dataSnapshot) {
-          if (dataSnapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(
-                  color: kPrimaryColor.withOpacity(0.7)),
-            );
-          } else {
-            if (dataSnapshot.error != null) {
-              //error
-              return _connectionStatus == ConnectivityResult.none
+    return _connectionStatus == ConnectivityResult.none
                   ? Center(
                       child: Column(
                         children: [
@@ -204,24 +166,7 @@ class _AccountScreenState extends State<AccountScreen> {
                         ],
                       ),
                     )
-                  : Row(
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.logout),
-                          onPressed: () {
-                            Provider.of<Auth>(context, listen: false)
-                                .logout()
-                                .then((_) => Navigator.pushNamedAndRemoveUntil(
-                                    context, '/home', (r) => false));
-                          },
-                        ),
-                        Center(
-                          child: Text('Error Occurred').translate(),
-                        ),
-                      ],
-                    );
-            } else {
-              return Consumer<Auth>(builder: (context, authData, child) {
+                  : Consumer<Auth>(builder: (context, authData, child) {
                 final user = authData.user;
                 return SingleChildScrollView(
                   child: SizedBox(
@@ -232,12 +177,22 @@ class _AccountScreenState extends State<AccountScreen> {
                         const SizedBox(
                           height: 60,
                         ),
-                        CircleAvatar(
-                          radius: 55,
-                          backgroundImage: NetworkImage(user.image.toString()),
-                          backgroundColor: kLightBlueColor,
-                        ),
-                        Padding(
+                        _isLoading  ? SizedBox(
+                          height: 150,
+                          child: Center(
+                              child: CircularProgressIndicator(
+                                  color: kPrimaryColor.withOpacity(0.7)),
+                            ),
+                        )
+                        : 
+                         Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 55,
+                              backgroundImage: NetworkImage(user.image.toString()),
+                              backgroundColor: kLightBlueColor,
+                            ),
+                             Padding(
                           padding: const EdgeInsets.all(10),
                           child: CustomText(
                             text: '${user.firstName} ${user.lastName}',
@@ -246,6 +201,9 @@ class _AccountScreenState extends State<AccountScreen> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+                          ],
+                        ),
+                       
                         const SizedBox(
                           height: 15,
                         ),
@@ -431,9 +389,7 @@ class _AccountScreenState extends State<AccountScreen> {
                     ),
                   ),
                 );
-              });
-            }
-          }
-        });
+              }
+              );
   }
 }

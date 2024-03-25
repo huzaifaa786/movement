@@ -104,7 +104,7 @@ class MyApp extends StatelessWidget {
     box.read('Locale') == null ? box.write('Locale', 'en') : null;
     String locale = box.read('Locale') == null ? 'en' : box.read('Locale');
     return GoogleTranslatorInit('AIzaSyDbNMn6QSmOy3co3IaFXu09hJGBuNihHFI',
-        translateFrom: box.read('Locale') == 'en' ? Locale('ur') : Locale('en'),
+        translateFrom: box.read('Locale') == 'en' ? Locale('en') : Locale('en'),
         translateTo: Locale(locale), builder: () {
       return MultiProvider(
           providers: [ 
