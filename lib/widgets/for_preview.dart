@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:pod_player/pod_player.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart';
+import 'package:vimeo_player_flutter/vimeo_player_flutter.dart';
 // import 'package:http/http.dart' as http;
 
 class PreviewPlayVideoFromVimeoId extends StatefulWidget {
@@ -32,15 +33,15 @@ class _PreviewPlayVideoFromVimeoIdState
 
   @override
   void initState() {
-    controller = PodPlayerController(
-      playVideoFrom: PlayVideoFrom.vimeo(widget.vimeoVideoId),
-    )..initialise();
+    // controller = PodPlayerController(
+    //   playVideoFrom: PlayVideoFrom.vimeo(widget.vimeoVideoId),
+    // )..initialise();
     super.initState();
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    // controller.dispose();
     super.dispose();
   }
 
@@ -57,7 +58,10 @@ class _PreviewPlayVideoFromVimeoIdState
       backgroundColor: kBackgroundColor,
       body: SafeArea(
         child: Center(
-          child: PodVideoPlayer(controller: controller),
+          child:  VimeoPlayer(
+                videoId: widget.vimeoVideoId,
+              ), 
+          // PodVideoPlayer(controller: controller),
         ),
       ),
     );

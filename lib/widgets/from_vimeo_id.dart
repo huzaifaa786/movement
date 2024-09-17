@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:pod_player/pod_player.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:vimeo_player_flutter/vimeo_player_flutter.dart';
 import '../constants.dart';
 import '../providers/my_courses.dart';
 import '../providers/shared_pref_helper.dart';
@@ -34,9 +35,9 @@ class _PlayVideoFromVimeoIdState extends State<PlayVideoFromVimeoId> {
 
   @override
   void initState() {
-    controller = PodPlayerController(
-      playVideoFrom: PlayVideoFrom.vimeo(widget.vimeoVideoId),
-    )..initialise();
+    // controller = PodPlayerController(
+    //   playVideoFrom: PlayVideoFrom.vimeo(widget.vimeoVideoId),
+    // )..initialise();
     super.initState();
 
     if (widget.lessonId != null) {
@@ -89,7 +90,7 @@ class _PlayVideoFromVimeoIdState extends State<PlayVideoFromVimeoId> {
 
   @override
   void dispose() {
-    controller.dispose();
+    // controller.dispose();
     if (widget.lessonId != null) {
       timer!.cancel();
     }
@@ -109,9 +110,10 @@ class _PlayVideoFromVimeoIdState extends State<PlayVideoFromVimeoId> {
       backgroundColor: kBackgroundColor,
       body: SafeArea(
         child: Center(
-          child: Column(
-            children: [
-              PodVideoPlayer(controller: controller),
+          child: 
+              VimeoPlayer(
+                videoId: widget.vimeoVideoId,
+              ), 
               // Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //   children: [
               //     OutlinedButton(
@@ -128,10 +130,8 @@ class _PlayVideoFromVimeoIdState extends State<PlayVideoFromVimeoId> {
               //         child: Icon(Icons.skip_next_outlined)),
               //   ],
               // ),
-            ],
           ),
         ),
-      ),
     );
   }
 }

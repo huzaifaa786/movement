@@ -24,6 +24,7 @@ class LessonListItem extends StatefulWidget {
 
 class _LessonListItemState extends State<LessonListItem> {
   void lessonAction(Lesson lesson) async {
+    print(lesson.lessonType);
     if (lesson.lessonType == 'video') {
       if (lesson.videoTypeWeb == 'system' ||
           lesson.videoTypeWeb == 'html5' ||

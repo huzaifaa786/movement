@@ -155,7 +155,7 @@ class _LiveClassTabWidgetState extends State<LiveClassTabWidget> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(7.0),
                     ),
-                    primary: kPrimaryColor,
+                    // primary: kPrimaryColor,
                   ),
                   icon: const Icon(
                     Icons.videocam_rounded,
